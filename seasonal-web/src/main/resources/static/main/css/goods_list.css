@@ -1,0 +1,352 @@
+
+a:hover {
+    cursor: pointer;
+}
+
+.goods_block_main:hover {
+    background-color: #f5f5f5;
+}
+
+/**控制单品得整体**#f5f5f5;*/
+.goods_block_main {
+    float: left;
+    background-color: #fff;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-bottom: 28px;
+    width: 220px;
+    height: 350px;
+}
+
+.glc_rt_gds {
+    width: 208px;
+    height: 345px;
+    margin-left: 5px;
+    margin-bottom: 28px;
+    margin-top: 0px;
+    border: 1px solid;
+rgb(255, 255, 255);
+    text-align: center;
+}
+
+/**图片**/
+.glc_rt_gds_img {
+    width: 200px;
+    height: 200px;
+    margin-right: 4px;
+    margin-left: 4px;
+    margin-top: 3px;
+
+}
+
+/*价格显示*/
+.glc_rt_gds_pri clear {
+    width: 190px;
+    height: 23px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+/*添加收藏*/
+a.grgp_op {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
+    float: right;
+    margin-right: 10px;
+    /*空心得-15*/
+    background: url("../../img/inner.png") no-repeat 0 -15px;
+}
+
+span.grgp_np_grgp_npri {
+    margin-left: 1px;
+    font-size: 20px;
+    color: #bb3221;
+}
+
+.glc_rt_gds_des {
+    width: 190px;
+    height: 52px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 1px;
+    margin-left: 4px;
+    margin-right: 4px;
+    font-family: "Microsoft";
+    font-size: 12px;
+
+}
+
+.glc_rt_gds_des a:link {
+    color: #666;
+    width: 190px;
+    height: 20px;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.glc_rt_gds_des a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+.glc_rt_gds_des div {
+    width: 190px;
+    height: 12px;
+    color: #666;
+}
+
+/**商品控制**/
+.goods_control_div {
+    width: 200px;
+    height: 26px;
+}
+
+.goods_control_ul {
+    width: 190px;
+    height: 29px;
+    list-style-type: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+li.goods_control_ul_li1 {
+    width: 76px;
+    height: 25px;
+    float: left;
+}
+
+li.goods_control_ul_li1 .delete_goods {
+    margin-top: 2px;
+    width: 18px;
+    text-align: center;
+    padding: 2px 0px;
+    background: #f5f5f5;
+    color: #666;
+    display: block;
+    float: left;
+    text-decoration: none;
+}
+
+li.goods_control_ul_li1 .add_goods {
+    float: right;
+    margin-top: 2px;
+    width: 18px;
+    text-align: center;
+    padding: 2px 0px;
+    background: #f5f5f5;
+    color: #666;
+    display: block;
+    text-decoration: none;
+}
+
+/*输入数量文本框*/
+.goods_control_ul_li1_input {
+    width: 38px;
+    text-align: center;
+    margin-top: 3px;
+    border: solid 1px #bebebf;
+    display: block;
+    float: left;
+}
+
+li.goods_control_ul_li2 {
+    float: right;
+}
+
+li.goods_control_ul_li2 a:hover {
+    background-color: #e51e13;
+    color: white;
+}
+
+li.goods_control_ul_li2 a:hover i {
+    background: url("../../img/inner.png") no-repeat 0 -56px;
+}
+
+li.goods_control_ul_li2 a {
+    margin-right: 2px;
+    width: 96px;
+    height: 26px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 26px;
+    border: solid 1px #e51e13;
+    color: #e51e13;
+}
+
+li.goods_control_ul_li2 i {
+    width: 30px;
+    height: 23px;
+    display: block;
+    float: left;
+    background: url("../../img/inner.png") no-repeat 0 -32px;
+}
+
+body, ul, div, li, a {
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+
+}
+
+ul.sort_ul {
+    padding-top: 6px;
+    height: 34px;
+    display: block;
+
+}
+
+ul.sort_ul li {
+    list-style-type: none;
+    text-align: center;
+    width: 64px;
+    height: 22px;
+    border: solid 1px #ddd;
+    cursor: pointer;
+    float: left;
+    background: white url("../../img/inner.png") no-repeat 50px -82px;
+    color: #666666;
+}
+
+/*初始*/
+#sort_type_1 {
+    color: white;
+    background: #e51e13 url('../../img/inner.png') no-repeat 48px -99px;
+}
+
+
+/*a:active {*/
+    /*display: block;*/
+    /*background-color: white;*/
+/*}*/
+
+/*最大的框0*/
+.goods_list_max {
+    width: 1100px;
+    height: 1092px;
+    margin: 0 auto;
+}
+
+/*左侧得人气商品列表*/
+.people_goods_left_list {
+    float: left;
+    height: 1090px;
+    width: 200px;
+}
+
+#goods_left_title {
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    background: #e51e13;
+    border-bottom: solid 1px #ddd;
+    font-size: 14px;
+    color: #fff;
+}
+
+.people_goods_left_list_div {
+    width: 208px;
+    height: 1045px;
+    padding-bottom: 10px;
+}
+
+/*右侧得人气商品列表*/
+.people_goods_right_list {
+    float: left;
+    height: 861px;
+    width: 850px;
+    margin-left: 10px;
+}
+
+/*商品*/
+.goods_right_list {
+    width: 980px;
+    height: 750px;
+    margin-top: 20px;
+}
+
+.sort_top {
+    width: 980px;
+    height: 34px;
+    border: solid 1px #ddd;
+    background: #f5f5f5;
+}
+
+/* Float 可服用 */
+.goods img {
+    margin-left: 25px;
+    border: 1px;
+    width: 150px;
+    height: 150px;
+    display: block;
+}
+
+.goods_info {
+    display: block;
+    height: 22px;
+    padding-top: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    width: 200px;
+    margin: auto;
+}
+
+.goods_price {
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    color: #e51e13;
+}
+
+.goods {
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    position: relative;
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.goods:before {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 90%;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+    transition-duration: 0.3s;
+    transition-property: transform, opacity;
+}
+
+.goods:hover, .goods:focus, .goods:active {
+    transform: translateY(-5px);
+}
+
+.goods:hover:before, .goods:focus:before, .goods:active:before {
+    opacity: 1;
+    transform: translateY(5px);
+}
+
+/*页数选择*/
+#pageGo {
+    float: right;
+}
+
+#pageGo li {
+    display: inline;
+    float: left
+}

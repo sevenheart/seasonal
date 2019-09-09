@@ -1,0 +1,45 @@
+@keyframes out {
+  from {
+    transform: scale(1.15);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+#slideshow {
+
+  overflow: hidden;
+}
+#slideshow .slide, #slideshow span, #slideshow .static-content {
+  display: block;
+  width: 100%;
+  height: 550px;
+}
+
+#slideshow .slide span {
+  background-size: cover;
+  background-position: center;
+}
+
+#slideshow .slide span.animate.right, #slideshow .slide span.animate.left {
+  left: calc((-4vw + -4vh + -4%)/3);
+  right: calc((-4vw + -4vh + -4%)/3);
+}
+
+#slideshow .slide span.animate.up, #slideshow .slide span.animate.down {
+  top: calc((-4vw + -4vh + -4%)/3);
+  bottom: calc((-4vw + -4vh + -4%)/3);
+}
+
+#slideshow span.animate {
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+#slideshow span.animate.out {
+  animation-name: out;
+}
+
+#slideshow span.animate.paused {
+  animation-play-state: paused;
+}
