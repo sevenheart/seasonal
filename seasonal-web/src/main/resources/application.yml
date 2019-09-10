@@ -3,13 +3,6 @@ spring:
   output:
     ansi:
       enabled: always
-  #    #热部署启动
-  #  thymeleaf:
-  #    cache: true
-  #    devtools:
-  #      restart:
-  #        enabled: true
-  #        additional-paths: src/main/java
   #配置MySQL
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

@@ -27,7 +27,6 @@ public class GoodsListServiceImpl implements GoodsListService {
         pageInfoResult.setOrderName(orderName);
         pageInfoResult.setCurrPage(currPage);
         pageInfoResult.setKeyPage((currPage - 1) * pageInfoResult.getPageSize());
-        System.out.println(orderName);
         return composeGoodMapper.findAllComposeGoodByClassifyIdForPage(id, pageInfoResult,likeName);
     }
 }
