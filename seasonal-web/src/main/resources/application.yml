@@ -3,19 +3,19 @@ spring:
   output:
     ansi:
       enabled: always
-  #    #热部署启动
-  #  thymeleaf:
-  #    cache: true
-  #    devtools:
-  #      restart:
-  #        enabled: true
-  #        additional-paths: src/main/java
+      #热部署启动
+    thymeleaf:
+      cache: true
+      devtools:
+        restart:
+          enabled: true
+          additional-paths: src/main/java
   #配置MySQL
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://49.235.249.18:3306/seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: 980502
+    password: Guo_19980502
     driverClassName: com.mysql.cj.jdbc.Driver
   #配置Redis
   redis:
@@ -34,6 +34,6 @@ logging:
     com:
       seasonal: debug
 mybatis:
-  type-aliases-package: com.seasonal.rear.pojo
+  type-aliases-package: com.seasonal.pojo
   configuration:
     map-underscore-to-camel-case: true
