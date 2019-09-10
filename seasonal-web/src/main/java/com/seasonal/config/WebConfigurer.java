@@ -23,7 +23,11 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截 除了 excludePathList方法中页面的 其他请求
+<<<<<<< HEAD
 //        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(excludePathList());
+=======
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(excludePathList());
+>>>>>>> 5b3fdbdfe71b6d48974c501e34cd420ccb5956a2
     }
 
     @Override
@@ -31,6 +35,7 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     }
 
+<<<<<<< HEAD
 //    public List<String> excludePathList() {
 //        List<String> listUrls = new ArrayList<String>();
 //
@@ -45,4 +50,20 @@ public class WebConfigurer implements WebMvcConfigurer {
 //        listUrls.add("/images/**");
 //        return listUrls;
 //    }
+=======
+    public List<String> excludePathList() {
+        List<String> listUrls = new ArrayList<String>();
+
+        listUrls.add("/login");      //登录页
+        listUrls.add("/login.html");      //登录页
+        listUrls.add("/register");   // 注册页
+
+        //网站静态资源
+        listUrls.add("/css/**");
+        listUrls.add("/js/**");
+        listUrls.add("/fonts/**");
+        listUrls.add("/images/**");
+        return listUrls;
+    }
+>>>>>>> 5b3fdbdfe71b6d48974c501e34cd420ccb5956a2
 }
