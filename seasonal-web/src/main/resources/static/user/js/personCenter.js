@@ -16,11 +16,7 @@ $(".main_right_function_order_menu li").click(function(){
 * 3.地址管理页
 * */
 $(".main_left_function a").click(function () {
-    var num = $(this).attr("name")
-    /*先隐藏右侧的页面在显示*/
-    $(".main_right_function_order").css("display","none")
-    /*找到第几个显示它*/
-    $(".main_right_function_order").eq(num).css("display","block")
+
 })
 /*选项卡切换*/
 /*表单的js代码*/

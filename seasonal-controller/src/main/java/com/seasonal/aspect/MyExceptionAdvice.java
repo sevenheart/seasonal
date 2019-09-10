@@ -12,15 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 全局异常捕获处理
  */
+
 @ControllerAdvice
 public class MyExceptionAdvice {
 
-    /**
+ /*
+/**
      * 最大的异常Exception捕获
      * @param request
      * @param e
      * @return
-     */
+     *//*
+
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultData defaultException(HttpServletRequest request, Exception e){
@@ -28,13 +31,15 @@ public class MyExceptionAdvice {
         return  new ResultData(ResultEnum.EXCEPTION.getCode(),ResultEnum.EXCEPTION.getMsg());
     }
 
-    /**
+    */
+/**
      * 自定义异常的捕获
      *
      * @param request
      * @param e
      * @return
-     */
+     *//*
+
     public ResultData MyException(HttpServletRequest request, MyException e){
         e.printStackTrace();
         Integer code = e.getCode();
@@ -47,6 +52,7 @@ public class MyExceptionAdvice {
         }
         return new ResultData(code,message);
     }
+*/
 
 
 }

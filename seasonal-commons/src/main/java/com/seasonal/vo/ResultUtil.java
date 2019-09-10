@@ -77,4 +77,5 @@ public class ResultUtil {
     public static ResultData fail(ResultEnum resultEnum){
         return fail(resultEnum.getCode(),resultEnum.getMsg());
     }
+
 }

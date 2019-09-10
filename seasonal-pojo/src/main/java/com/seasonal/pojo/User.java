@@ -9,6 +9,7 @@ public class User {
     private Long id;
     private String userId;
     private String userName;
+    private String userImg;
     private Byte isVip;
     private Byte userAge;
     private Byte userSex;
