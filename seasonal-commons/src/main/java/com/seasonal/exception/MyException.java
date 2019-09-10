@@ -1,10 +1,16 @@
 package com.seasonal.exception;
-import lombok.Getter;
-import lombok.Setter;
-@Getter
-@Setter
+import lombok.Data;
 
+@Data
 public class MyException extends RuntimeException {
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
 
     private Integer code;
 
