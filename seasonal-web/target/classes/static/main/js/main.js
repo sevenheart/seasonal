@@ -2,7 +2,7 @@ $(function () {
     // showAD();
     setInterval("showAD()", 4000);
 });
-var t = 1;
+let t = 1;
 
 function showAD() {
     if (t == 1) {
@@ -31,17 +31,6 @@ function showAD() {
     }
 
 }
-
-var f = 1;
-$('#main_nav_goods_nav').hover(function () {
-    // 鼠标移入时添加hover类
-    $("#main_sub_nav").show();
-}, function () {
-    // 鼠标移出时移出hover类
-    $("#main_sub_nav").hide();
-
-});
-
 
 
 $(".goods_show_nav_ul_li").hover(function () {

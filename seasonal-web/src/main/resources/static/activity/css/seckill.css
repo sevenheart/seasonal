@@ -21,10 +21,14 @@
     background-size: 35px;
 }
 
+.topinfo {
+    padding-top: 120px;
+}
+
 .text {
-    padding-top: 170px;
     height: 36px;
     line-height: 36px;
+    margin-top: -50px;
     color: #FFFFFF;
     font: 36px "Microsoft YaHei", Helvetica Neue, tahoma, Arial, Verdana, "Hiragino Sans GB", "\5b8b\4f53";
 }
@@ -34,7 +38,7 @@
     background-repeat: no-repeat;
     background-size: 100%;
     width: 80%;
-    height: 1000px;
+    height: auto;
     position: relative;
     margin: 40px auto;
 }
@@ -86,15 +90,9 @@
     margin-top: 30px;
     margin-left: 20px;
     float: left;
+    border-radius: 15px;
 }
 
-.ckiill_good_img {
-    width: 100%;
-    height: 250px;
-    background-image: url("../../img/goods/1.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
 
 .ckill_good_name {
     font-size: 20px;
@@ -107,6 +105,15 @@
     color: #e51e13;
     margin-top: 3px;
     display: inline-block;
+}
+
+.topinfo span {
+    color: red;
+    display: block;
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    font: 36px "Microsoft YaHei", Helvetica Neue, tahoma, Arial, Verdana, "Hiragino Sans GB", "\5b8b\4f53";
 
 }
 
@@ -116,14 +123,44 @@
     text-decoration: line-through
 }
 
-.ckill_good_count {
-    display: block;
-    margin-top: 3px;
+.ckill_time {
+    padding-top: 20px;
 }
 
-.ckill_good_time {
+.ckill_good_count {
     display: block;
     margin-top: 3px;
     font-size: 20px;
     color: #e51e13;
+}
+
+.ckill_good_shopping:hover {
+    background-color: #e51e13;
+    color: white;
+}
+
+.ckill_good_shopping:hover i {
+    background: url("../../img/inner.png") no-repeat 0 -56px;
+}
+
+.ckill_good_shopping {
+    width: 96px;
+    height: 26px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 26px;
+    border: solid 1px #e51e13;
+    color: #e51e13;
+    margin: 10px auto 0;
+    cursor:pointer;
+
+}
+
+.ckill_good_shopping i {
+    width: 30px;
+    height: 23px;
+    display: block;
+    float: left;
+    background: url("../../img/inner.png") no-repeat 0 -32px;
 }
