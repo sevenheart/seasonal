@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="shortcut icon" href="../../img/icon.ico"/>
+    <title>时令果惠</title>
+    <!--    清除样式CSS-->
+    <link rel='stylesheet' href='../../css/style.css' type='text/css'/>
+    <!--    外部模板样式-->
+    <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
+    <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/personcenter.css">
+</head>
+<body>
+<div class="wrap">
+    <!--    顶部所有信息，注意所有class别与顶部信息重叠-->
+    <div class="header">
+        <div class="header_main">
+            <form action="" class="parent">
+                <input type="text" class="search" placeholder="搜索">
+                <input type="button" name="" id="" class="search_button">
+            </form>
+            <a href="#"><img alt="" src="../../img/s_03.png" id="logo"></a>
+            <div class="header_nav">
+                <ul>
+                    <li><a href="#" name="首 页">HOME</a></li>
+                    <li><a href="#" name="闪购促销">SALES</a>
+                    </li>
+                    <li><a href="#" name="最新活动">ACTIVITY</a>
+                    </li>
+                    <li><a href="#" name="申请试吃">TASTE</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr id="header_hr">
+    </div>
+    <div class="main_center_context">
+        <div class="main_left_function" style="text-align: center">
+            <div class="user_left_title">操作菜单</div>
+            <div ><img id="userbigimg" src="../../img/person.png "  ></div>
+            <span style="font-size: 14px">用户姓名：杀马特</span>
+            <a class="button" href="#" id="function1" name="0">订单中心</a>
+            <a class="button" href="#" id="function2" name="1">个人信息</a>
+            <a class="button" href="#" id="function3" name="2">地址管理</a>
+            <a class="button" href="#" id="function4" name="1">我的收藏</a>
+            <a class="button" href="#" id="function5" name="2">我的通知</a>
+        </div>
+        <div class="main_right_function" >
+            <!--订单信息-->
+            <div  class="main_right_function_order"  >
+               <div>
+                <ul class="main_right_function_order_menu">
+                    <li class="currentmenu1">
+                        <a href="javascript:" >全部</a>
+                    </li>
+                    <li><a href="javascript:"  >待支付</a></li>
+                    <li><a href="javascript:" >支付完成</a></li>
+                    <li><a href="javascript:" >已使用</a></li>
+
+                </ul>
+               </div>
+                <!--选项卡1-->
+                <div class="detailemessage basic-grey" style="display:block;max-width: 800px;">
+
+              <!--          <h1>选项卡1
+                            <span>此处可查看订单信息.</span>
+                        </h1>-->
+                    <table class="detailmessagecontext">
+
+                        <tr>
+                            <td> <span>收货人姓名:</span></td>
+                            <td> <span>收货人电话:</span></td>
+                            <td><span>省:</span></td>
+                            <td><span>市:</span></td>
+                            <td><span>区:</span></td>
+                            <td><span>详细信息:</span></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+                <!--选项卡2-->
+                <div class="detailemessage" >
+                    <form action="" method="post" class="basic-grey">
+
+                        <label>
+                            <span>个性签名 :</span>
+                            <textarea  name="message" placeholder="Your Message to Us"></textarea>
+                        </label>
+                        <label>
+                            <span>瞎几把说:</span><select name="selection">
+                            <option value="Job Inquiry">Job Inquiry</option>
+                            <option value="General Question">General Question</option>
+                        </select>
+                        </label>
+                        <label>
+                            <span>&nbsp;</span>
+                            <input type="button" class="button" value="提交修改" />
+                        </label>
+                    </form>
+                </div>
+                <!--选项卡3-->
+                <div class="detailemessage">
+                    <form action="" method="post" class="basic-grey">
+                            <span>个性签名 :</span>
+                            <textarea  name="message" placeholder="Your Message to Us"></textarea>
+                        </label>
+                        <label>
+                            <span>瞎几把说:</span><select name="selection">
+                            <option value="Job Inquiry">Job Inquiry</option>
+                            <option value="General Question">General Question</option>
+                        </select>
+                        </label>
+                        <label>
+                            <span>&nbsp;</span>
+                            <input type="button" class="button" value="提交修改" />
+                        </label>
+                    </form>
+                </div>
+
+            </div>
+            <!--用户信息-->
+            <div class="main_right_function_order" style="display: none" >
+                <div><ul class="main_right_function_order_menu">
+                    <li class="currentmenu1">
+                        <a href="javascript:" >基本资料</a>
+                    </li>
+                </ul>
+                </div>
+                <!--个人信息-->
+                <div class="detailemessage" style="display: block">
+                    <form action="" method="post" class="basic-grey">
+                        <h1>个人资料
+                            <span>此处可编辑个人资料.</span>
+                        </h1>
+                        <label id="userimg">
+                            <span>点击修改头像</span>
+                            <img src="../../img/icon_goods_1.png" >
+                            <input type="file"  hidden >
+                        </label>
+                        <label>
+                            <span>姓名:</span>
+                            <input  type="text" name="name" placeholder="Your Full Name" />
+                        </label>
+                        <label>
+                            <span>Y邮箱 :</span>
+                            <input id="email" type="email" name="email" placeholder="Valid Email Address" />
+                        </label>
+
+                        <label>
+                            <span>个性签名 :</span>
+                            <textarea id="message" name="message" placeholder="Your Message to Us"></textarea>
+                        </label>
+                        <label>
+                            <span>瞎几把说:</span><select name="selection">
+                            <option value="Job Inquiry">Job Inquiry</option>
+                            <option value="General Question">General Question</option>
+                        </select>
+                        </label>
+                        <label>
+                            <span>&nbsp;</span>
+                            <input type="button" class="button" value="提交修改" />
+                        </label>
+                    </form>
+
+                </div>
+
+            </div>
+            <!--收货信息-->
+            <div class="main_right_function_order" style="display: none" >
+                <div><ul class="main_right_function_order_menu">
+                    <li class="currentmenu1">
+                        <a href="javascript:">查看地址</a>
+                    </li>
+                    <li >
+                        <a href="javascript:">添加地址</a>
+                    </li>
+                </ul>
+                </div>
+
+                <!--查看地址-->
+                <div class="detailemessage basic-grey" style="display: block;max-width: 800px">
+                    <table class="detailmessagecontext">
+
+                        <tr>
+                            <td> <span>收货人姓名:</span></td>
+                            <td> <span>收货人电话:</span></td>
+                            <td><span>省:</span></td>
+                            <td><span>市:</span></td>
+                            <td><span>区:</span></td>
+                            <td><span>详细信息:</span></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+                        <tr>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td> <input  type="text" name="name" placeholder="Your Full Name" /></td>
+                            <td><input type="button" class="button" value="编辑" /></td>
+                        </tr>
+
+                    </table>
+
+
+               <!--     <form action="" method="post" class="basic-grey">
+                        <h1>已有地址
+                            <span>此处可查看已存在地址信息</span>
+                        </h1>
+                        <label >
+                            &lt;!&ndash;  <span>选择:</span>
+                              <select id="template" name="themplate" onchange="changeStyle();">
+                                  <option value="basic-grey">basic-grey</option>
+                                  <option value="elegant-aero">elegant-aero</option>
+                                  <option value="smart-green">smart-green</option>
+                                  <option value="white-pink">white-pink</option>
+                                  <option value="bootstrap-frm">bootstrap-frm</option>
+                                  <option value="dark-matter">dark-matter</option>
+                              </select>&ndash;&gt;
+                        </label>
+                        <label>
+                            <span>收货人姓名:</span>
+                            <input id="name" type="text" name="name" placeholder="Your Full Name" />
+                        </label>
+                        <label>
+                            <span>省 :</span>
+                            <input id="province" type="email" name="email" placeholder="请输入省份" />
+                            <span>市 :</span>
+                            <input id="city" type="email" name="email" placeholder="请输入市" />
+                            <span>区 :</span>
+                            <input id="district" type="email" name="email" placeholder="请输入区" />
+                        </label>
+
+                        <label>
+                            <span>详细地址 :</span>
+                            <textarea id="detailaddress" name="message" placeholder="Your Message to Us"></textarea>
+                        </label>
+                        <label>
+                            <span>联系电话：</span>
+                            <input id="phonenumber" type="email" name="email" placeholder="请输入电话" />
+                        </label>
+                        <label>
+                            <span>&nbsp;</span>
+                            <input type="button" class="button" value="提交修改" />
+                        </label>
+                    </form>-->
+
+                </div>
+                <!--添加地址-->
+                <div class="detailemessage">
+
+                    <form action="" method="post" class="basic-grey">
+                        <label>
+                            <span>收货人姓名:</span>
+                            <input id="name" type="text" name="name" placeholder="Your Full Name" />
+                        </label>
+                        <label>
+                            <span>省 :</span>
+                            <input id="province" type="email" name="email" placeholder="请输入省份" />
+                            <span>市 :</span>
+                            <input id="city" type="email" name="email" placeholder="请输入市" />
+                            <span>区 :</span>
+                            <input id="district" type="email" name="email" placeholder="请输入区" />
+                        </label>
+
+                        <label>
+                            <span>详细地址 :</span>
+                            <textarea id="detailaddress" name="message" placeholder="Your Message to Us"></textarea>
+                        </label>
+                        <label>
+                            <span>联系电话：</span>
+                            <input id="phonenumber" type="email" name="email" placeholder="请输入电话" />
+                        </label>
+                        <label>
+                            <span>&nbsp;</span>
+                            <input type="button" class="button" value="提交修改" />
+                        </label>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer" style="margin-top: 50px">
+        <img alt="" src="../../img/foot_logo.jpg"/>
+    </div>
+</div>
+</body>
+
+<script src = ../../jquery/jquery-3.4.1.js></script>
+<script src="../js/personCenter.js"></script>
+
+
+</html>
