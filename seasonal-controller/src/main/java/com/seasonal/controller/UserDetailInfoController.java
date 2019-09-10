@@ -8,10 +8,12 @@ import jdk.internal.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller("user")
+@Controller
+@RequestMapping("user")
 public class UserDetailInfoController {
     private final UserInfoServer userInfoServer;
     @Autowired
@@ -27,7 +29,8 @@ public class UserDetailInfoController {
      * @return
      */
     @RequestMapping("finduserbyid")
-    public ResultData findUserById(Integer id) {
+    @ResponseBody
+    public ResultData findUserById(String id) {
         List<User> userList = userInfoServer.findUserById(id);
         if(userList==null||userList.size()==0){
             return  ResultUtil.fail(2,"未查到该用户");

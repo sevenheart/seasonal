@@ -5,5 +5,5 @@ import com.seasonal.pojo.User;
 import java.util.List;
 
 public interface UserInfoServer {
-    List<User> findUserById(Integer id);
+    List<User> findUserById(String id);
 }

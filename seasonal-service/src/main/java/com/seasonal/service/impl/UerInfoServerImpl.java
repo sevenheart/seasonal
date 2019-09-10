@@ -20,7 +20,8 @@ public class UerInfoServerImpl implements UserInfoServer {
 
 
     @Override
-    public List<User> findUserById(Integer id) {
-        return null;
+    public List<User> findUserById(String id) {
+
+        return userInfoMapper.findUserById(id);
     }
 }

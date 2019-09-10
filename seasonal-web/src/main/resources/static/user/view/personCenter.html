@@ -350,24 +350,28 @@
     /*点击提交修改信息*/
     /*点击按钮查找信息*/
     $('#update_userinfo_button').click(function () {
+        var num = $(this).attr("name")
         $.post({
-            url:"/finduserbyid",
+            url:"/user/finduserbyid",
             data:{id:'001'},
             dataType:"json",
             success:function (data) {
-                console.log("sdjsj")
+                console.log(data.code)
                 if (data.code == 0) {
-                    $('#userimg ').attr("src",data.data[0].userImg);
+                    $('#userimg').attr("src",data.data[0].userImg);
+                    console.log(data.data[0].userImg)
                     $('#userId').val(data.data[0].userId);
+                    console.log("id是"+data.data[0].userId)
                     $('#userName').val(data.data[0].userName);
+                    console.log(data.data[0].userName)
                     $('#isVip').val(data.data[0].isVip);
+                    console.log(data.data[0].isVip)
                     $('#userAge').val(data.data[0].userAge);
+                    console.log(data.data[0].userAge)
                     $('#userType').val(data.data[0].userType);
                     /*$('#updateTime').val(data.data[0].updateTime);*/
                 }
-
-
-                var num = $(this).attr("name")
+                console.log(num)
                 /*先隐藏右侧的页面在显示*/
                 $(".main_right_function_order").css("display","none")
                 /*找到第几个显示它*/

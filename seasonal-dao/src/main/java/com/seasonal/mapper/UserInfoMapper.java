@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface UserInfoMapper {
 
-    List<User> findUserById (Integer id);
+    List<User> findUserById (String id);
 }

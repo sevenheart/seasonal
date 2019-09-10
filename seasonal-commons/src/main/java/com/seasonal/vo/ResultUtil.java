@@ -27,7 +27,7 @@ public class ResultUtil {
     public static ResultData success(Integer code,String msg){
         if (null==msg) msg=ResultEnum.SUCCESS.getMsg();
         if (null==code) code=ResultEnum.SUCCESS.getCode();
-        return new ResultData(ResultEnum.SUCCESS.getCode(),ResultEnum.SUCCESS.getMsg());
+        return new ResultData(code,msg);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ResultUtil {
     public static ResultData fail(Integer code,String msg){
         if (null==msg) msg=ResultEnum.FAIL.getMsg();
         if (null==code) code=ResultEnum.FAIL.getCode();
-        return new ResultData(ResultEnum.FAIL.getCode(),msg);
+        return new ResultData(code,msg);
     }
 
     /**
