@@ -20,7 +20,7 @@ public class MyExceptionAdvice {
     @ResponseBody
     public ResultData defaultException(HttpServletRequest request, Exception e){
         e.printStackTrace();
-        return  new ResultData(ResultUtil.fail(ResultEnum.EXCEPTION));
+        return  new ResultData(ResultEnum.EXCEPTION.getCode(),ResultEnum.EXCEPTION.getMsg());
     }
 
 
