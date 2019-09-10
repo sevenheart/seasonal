@@ -7,6 +7,7 @@
     text-align: center;
     position: relative;
     background-color: #eeeeee;
+    min-width: 1500px;
 }
 
 .clock {
@@ -153,7 +154,7 @@
     border: solid 1px #e51e13;
     color: #e51e13;
     margin: 10px auto 0;
-    cursor:pointer;
+    cursor: pointer;
 
 }
 

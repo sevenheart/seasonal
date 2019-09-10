@@ -10,15 +10,18 @@ import org.springframework.http.HttpStatus;
 @Configuration
 public class ErrorCustomlizer {
 
-    @Bean
+    /**
+     * 拦截网络请求错误！都跳转到首页
+     * @return
+     */
+/*    @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory>  webServerFactoryCustomizer(){
         return (container -> {
-            ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/401.html");
-            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/error/404.html");
-            ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/error/500.html");
-
+            ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/index.html");
+            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/index.html");
+            ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/index.html");
             container.addErrorPages(error401Page, error404Page, error500Page);
         });
-    }
+    }*/
 
 }
