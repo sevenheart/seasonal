@@ -6,12 +6,10 @@ import java.sql.Date;
 
 
 @Data
-public class OrderInfoForm {
+public class SecKillRedis {
     private Long id;
-    private String orderId;
-    private String payPlatform;
+    private Date secKillTime;
+    private String secKillKey;
     private Date createTime;
     private Date updateTime;
-
-
 }

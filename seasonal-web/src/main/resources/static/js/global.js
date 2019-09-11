@@ -18,3 +18,12 @@ $(".ct_tit").mouseover(function () {
     $(".ct_dv").children("div").hide();
     $(this).next().next().children("div").show();
 });
+
+$('#main_nav_goods_nav').hover(function () {
+    // 鼠标移入时添加hover类
+    $("#main_sub_nav").show();
+}, function () {
+    // 鼠标移出时移出hover类
+    $("#main_sub_nav").hide();
+
+});
