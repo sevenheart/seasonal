@@ -1,0 +1,14 @@
+${AnsiColor.BRIGHT_MAGENTA}/***
+${AnsiColor.BRIGHT_MAGENTA} *  .--,       .--,
+${AnsiColor.BRIGHT_MAGENTA} * ( (  \.---./  ) )
+${AnsiColor.BRIGHT_MAGENTA} *  '.__/o   o\__.'
+${AnsiColor.BRIGHT_MAGENTA} *     {=  ^  =}
+${AnsiColor.BRIGHT_MAGENTA} *      >  -  <
+${AnsiColor.BRIGHT_MAGENTA} *     /       \
+${AnsiColor.BRIGHT_MAGENTA} *    //       \\
+${AnsiColor.BRIGHT_MAGENTA} *   //|   .   |\\
+${AnsiColor.BRIGHT_MAGENTA} *   "'\       /'"_.-~^`'-.
+${AnsiColor.BRIGHT_MAGENTA} *      \  _  /--'         `
+${AnsiColor.BRIGHT_MAGENTA} *    ___)( )(___
+${AnsiColor.BRIGHT_MAGENTA} *   (((__) (__)))    高山仰止,景行行止.虽不能至,然心向往之。
+${AnsiColor.BRIGHT_MAGENTA} */

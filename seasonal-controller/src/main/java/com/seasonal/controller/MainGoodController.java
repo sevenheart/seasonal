@@ -1,10 +1,10 @@
 package com.seasonal.controller;
 
 import com.seasonal.pojo.ComposeGood;
-import com.seasonal.pojo.SecKillRedis;
-import com.seasonal.redis.RedisUtil;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
+import com.seasonal.pojo.SecKillRedis;
+import com.seasonal.redis.RedisUtil;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,9 @@ import java.util.List;
 public class MainGoodController {
 
     private final MainService mainService;
+
     private final GoodsListService goodsListService;
+
     private final RedisUtil redisUtil;
 
     @Autowired
