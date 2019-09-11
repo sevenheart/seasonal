@@ -4,10 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seasonal.mapper.ClassifyMapper">
     <resultMap id="pc" type="com.seasonal.pojo.Classify">
-        <id column="id" property="id"></id>
-        <!-- 配置1对1的关系  select查询 workCard这个对象的值来自于一个查询-->
-        <!--<association property="workCard" column="id" select="day.day22.mapper.WorkCardMapper.findWorkCardByEmpId"></association>-->
-        <collection property="composeGood" column="id" select="com.seasonal.mapper.ComposeGoodMapper.findMainComposeGoodByClassifyId"></collection>
+        <id column="id" property="id"/>
+        <collection property="composeGood" column="id"
+                    select="com.seasonal.mapper.ComposeGoodMapper.findMainComposeGoodByClassifyId"/>
+    </resultMap>
+    <resultMap id="pc1" type="com.seasonal.pojo.Classify">
+        <id column="id" property="id"/>
+        <association property="generalities" column="generalities_id"
+                     select="com.seasonal.mapper.GeneralitiesMapper.findGeneralitiesByClassifyId"/>
     </resultMap>
 
     <select id="findAllByGeneralitiesId" resultMap="pc">
@@ -16,6 +20,10 @@
 
     <select id="findComposeGoodById" resultMap="pc">
         select * from classify where id=#{id}
+    </select>
+
+    <select id="findClassifyByComposeGoodById" resultMap="pc1">
+        select * from classify where id = #{id}
     </select>
 
 </mapper>

@@ -3,41 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seasonal.mapper.ComposeGoodMapper">
-    <resultMap id="pcg" type="com.seasonal.pojo.ComposeGood">
-        <id column="id" property="id"></id>
-        <!-- 配置1对1的关系  select查询 workCard这个对象的值来自于一个查询-->
-        <!--<association property="workCard" column="id" select="day.day22.mapper.WorkCardMapper.findWorkCardByEmpId"></association>-->
-        <!--<collection property="taskList" column="id"  select="day.day22.mapper.EmployeeTaskMapper.findEmpTaskByEmpId" fetchType="eager"></collection>-->
+    <resultMap id="cspc" type="com.seasonal.pojo.ComposeGood">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="cspc1" type="com.seasonal.pojo.ComposeGood">
+        <id column="id" property="id"/>
+        <association property="classify" column="compose_good_type"
+                     select="com.seasonal.mapper.ClassifyMapper.findClassifyByComposeGoodById"/>
+        <collection property="composeGoodImgs" column="id"
+                    select="com.seasonal.mapper.ComposeGoodImgMapper.findComposeGoodImgByComposeGoodIdAndType"/>
     </resultMap>
 
-    <select id="findComposeGoodByComposeGood" resultMap="pcg">
-        select *
-        from compose_good
-        <where>
-            <choose>
-                <when test="composeGoodName!=null and composeGoodName!=''">
-                    <bind name="composeGoodName_pattern" value="'%'+composeGoodName+'%'"></bind>
-                    and compose_good_name like #{composeGoodName_pattern}
-                </when>
-                <when test="composeGoodType!=null and composeGoodType!=''">
-                    and compose_good_type=#{composeGoodType}
-                </when>
-                <when test="composeGoodStatus==1 or composeGoodStatus==0">
-                    and compose_good_type=#{composeGoodStatus}
-                </when>
-                <otherwise>
-                    and id is not null
-                </otherwise>
-            </choose>
-        </where>
-
-    </select>
-
-    <select id="findMainComposeGoodByClassifyId" resultMap="pcg">
-        select * from compose_good where compose_good_type = #{classifyId} and compose_good_status=1 order by compose_good_sales DESC limit 0,6
-    </select>
-
-    <select id="findAllComposeGoodByClassifyIdForPage" resultMap="pcg">
+    <select id="findAllComposeGoodByClassifyIdForPage" resultMap="cspc">
         select *
         from compose_good
         where compose_good_status=1
@@ -48,4 +25,9 @@
         order by ${pageInfoResult.orderName} DESC
         limit #{pageInfoResult.keyPage},#{pageInfoResult.pageSize}
     </select>
+
+    <select id="findComposeGoodByID" resultMap="cspc1">
+        select * from compose_good where id=#{id}
+    </select>
+
 </mapper>
