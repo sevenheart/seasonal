@@ -35,11 +35,7 @@ public class ResultData implements Serializable {
     /**
      * 响应的状态码：自己指定
      * 0：成功响应
-     * 1: 用户名或密码错误
-     * 2：响应...错误
-     * 3:没有数据
-     * 4:删除失败
-     *
+     * 1: 响应失败
      */
     private Integer code;
     /**
@@ -56,6 +52,8 @@ public class ResultData implements Serializable {
      */
     private Object data;
 
+    public ResultData() {
+    }
 
     public ResultData(Integer code, String msg, Object data) {
         this.code = code;

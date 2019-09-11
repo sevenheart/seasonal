@@ -1,4 +1,7 @@
 package com.seasonal.vo;
+
+import lombok.Data;
+
 /*
 * 所有的状态吗和状态信息的枚举类
 * */
