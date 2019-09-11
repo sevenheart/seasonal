@@ -31,7 +31,7 @@ public class MainGoodController {
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
-    @ResponseBody
+
     public Object showMainGood() {
         return mainService.mainGoodsInitialize();
     }

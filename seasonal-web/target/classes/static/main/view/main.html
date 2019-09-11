@@ -38,7 +38,7 @@
             <div class="header_nav">
                 <ul>
                     <li><a href="../../index.html" name="首 页">HOME</a></li>
-                    <li><a href="../../index.html" name="闪购促销">SALES</a>
+                    <li><a href="../../activity/view/seckill.html" name="闪购促销">SALES</a>
                     </li>
                     <li><a href="../../index.html" name="最新活动">ACTIVITY</a>
                     </li>
@@ -56,7 +56,7 @@
                 <li id="main_nav_goods_nav" style="width: 200px;height: 40px;margin-left: 15%;"><a href="#">全部商品分类 ❤</a>
                 </li>
                 <li class="main_nav_li"><a href="../../index.html">首页</a></li>
-                <li class="main_nav_li" style="width: 200px;"><a href="../../index.html">闪购促销</a>
+                <li class="main_nav_li" style="width: 200px;"><a href="../../activity/view/seckill.html">闪购促销</a>
                 </li>
                 <li class="main_nav_li" style="width: 130px;"><a href="../../index.html">最新活动</a>
                 </li>
@@ -231,8 +231,6 @@
     $(".search_button").click(function () {
         console.log($(".search").val());
         $(location).attr('href', "http://localhost:8080/main/view/getGoodsList.html?likeName=" + $(".search").val());
-        // $(window).attr('location',"http://localhost:8080/main/view/getGoodsList.html?likeName=" + $(".search").val());
-        // $(location).prop('href', "http://localhost:8080/main/view/getGoodsList.html?likeName=" + $(".search").val())
     });
 </script>
 </html>
