@@ -16,8 +16,6 @@ public class MerchantAddress {
     private String address;
     private String merchantPhone;
     private String merchantName;
-    private BigDecimal longitude;
-    private BigDecimal latitude;
     private Date createTime;
-
+    private Date updateTime;
 }

@@ -10,11 +10,12 @@ function ajax_test(id, orderName, currPage, likeName) {
             console.log(data);
             $.each(data, function (k, v) {
                 let html;
+                console.log(v);
                 html = '' +
                     '                    <div class="goods_block_main">\n' +
                     '                        <div class="glc_rt_gds" style="border: 1px solid rgb(255, 255, 255);background: #fff;">\n' +
                     '                            <div class="glc_rt_gds_img">\n' +
-                    '                                <a target="_blank" href="#">\n' +
+                    '                                <a target="_blank" href="http://localhost:8080/main/view/detailGoods.html?id='+v.id+'">\n' +
                     '                                    <img alt="" src="' + v.composeGoodIcon + '"\n' +
                     '                                         style="height: 100%;width:100%">\n' +
                     '                                </a>\n' +
@@ -26,7 +27,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '                                <a href="" class="grgp_op"></a>\n' +
                     '                            </div>\n' +
                     '                            <div class="glc_rt_gds_des">\n' +
-                    '                                <a href="#" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
+                    '                                <a href="http://localhost:8080/main/view/detailGoods.html?id='+v.id+'" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
                     '                                <div>规格：' + v.composeGoodWeight + 'g</div>\n' +
                     '                            </div>\n' +
                     '                            <div class="goods_control_div">\n' +
