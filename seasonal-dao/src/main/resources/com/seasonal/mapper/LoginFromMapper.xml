@@ -14,6 +14,7 @@
     <select id="findLoginByIdentifier" resultMap="pl">
        select count(*) as type from login_from where identifier=#{identifier}
     </select>
+<<<<<<< HEAD
     <select id="findRegistrationPhone" resultMap="pl">
        select * from login_from where identifier=#{identifier}
     </select>
@@ -29,4 +30,10 @@
     <update id="updateMessage">
         update login_from set  login_ip=#{loginIp},update_time=#{currentTime} where identifier=#{identifier}
     </update>
+=======
+    <insert id="insertLoginFrom">
+        insert into login_from (user_id,identifier,identity_type,credential,login_ip,create_time,update_time) values (#{userId},#{identifier},#{identityType},#{credential},#{loginIp},#{createTime},#{updateTime})
+    </insert>
+
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 </mapper>

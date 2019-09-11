@@ -2,7 +2,11 @@ $(function () {
     // showAD();
     setInterval("showAD()", 4000);
 });
+<<<<<<< HEAD
 var t = 1;
+=======
+let t = 1;
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 
 function showAD() {
     if (t == 1) {
@@ -32,6 +36,7 @@ function showAD() {
 
 }
 
+<<<<<<< HEAD
 var f = 1;
 $('#main_nav_goods_nav').hover(function () {
     // 鼠标移入时添加hover类
@@ -43,6 +48,8 @@ $('#main_nav_goods_nav').hover(function () {
 });
 
 
+=======
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 
 $(".goods_show_nav_ul_li").hover(function () {
     $(this).parent().children(".goods_show_nav_ul_li").css("background-color", "white");

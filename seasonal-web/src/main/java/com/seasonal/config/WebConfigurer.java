@@ -22,8 +22,11 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+<<<<<<< HEAD
         //拦截 除了 excludePathList方法中页面的 其他请求
 //        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(excludePathList());
+=======
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
     }
 
     @Override
@@ -31,6 +34,7 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     }
 
+<<<<<<< HEAD
 //    public List<String> excludePathList() {
 //        List<String> listUrls = new ArrayList<String>();
 //
@@ -45,4 +49,6 @@ public class WebConfigurer implements WebMvcConfigurer {
 //        listUrls.add("/images/**");
 //        return listUrls;
 //    }
+=======
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 }

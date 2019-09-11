@@ -10,5 +10,9 @@ ${AnsiColor.BRIGHT_MAGENTA} *   //|   .   |\\
 ${AnsiColor.BRIGHT_MAGENTA} *   "'\       /'"_.-~^`'-.
 ${AnsiColor.BRIGHT_MAGENTA} *      \  _  /--'         `
 ${AnsiColor.BRIGHT_MAGENTA} *    ___)( )(___
+<<<<<<< HEAD
 ${AnsiColor.BRIGHT_MAGENTA} *   (((__) (__)))    高山仰止,景行行止.虽不能至,心向往之。
+=======
+${AnsiColor.BRIGHT_MAGENTA} *   (((__) (__)))    高山仰止,景行行止.虽不能至,然心向往之。
+>>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 ${AnsiColor.BRIGHT_MAGENTA} */
