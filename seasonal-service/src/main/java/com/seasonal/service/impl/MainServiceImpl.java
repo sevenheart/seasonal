@@ -27,10 +27,6 @@ public class MainServiceImpl implements MainService {
         }
         JSONArray jsonArray = JSONArray.fromObject(mainGoodRefresh.findAllGeneralities());
         redisUtil.set("main", jsonArray.toString());
-<<<<<<< HEAD
-        return mainGoodRefresh.findAllGeneralities();
-=======
         return jsonArray;
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
     }
 }

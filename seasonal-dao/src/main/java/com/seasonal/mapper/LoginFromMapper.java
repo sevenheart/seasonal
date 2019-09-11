@@ -1,13 +1,8 @@
 package com.seasonal.mapper;
 
 import com.seasonal.pojo.LoginFrom;
-<<<<<<< HEAD
-import javafx.scene.input.DataFormat;
 import org.springframework.stereotype.Repository;
 import java.util.Date;
-=======
-import org.springframework.stereotype.Repository;
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 
 @Repository
 public interface LoginFromMapper {
@@ -35,7 +30,6 @@ public interface LoginFromMapper {
      */
     int insertLoginFrom(LoginFrom loginFrom);
 
-<<<<<<< HEAD
     /**
      *注册手机号查重
      *
@@ -67,7 +61,5 @@ public interface LoginFromMapper {
      * @return
      */
     int insertUser();
-=======
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 
 }

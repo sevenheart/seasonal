@@ -1,41 +1,26 @@
 package com.seasonal.controller;
 
 import com.seasonal.pojo.ComposeGood;
-<<<<<<< HEAD
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
-=======
 import com.seasonal.pojo.SecKillRedis;
 import com.seasonal.redis.RedisUtil;
-import com.seasonal.service.GoodsListService;
-import com.seasonal.service.MainService;
 import com.seasonal.vo.ResultUtil;
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-<<<<<<< HEAD
-=======
 import java.util.Calendar;
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 import java.util.List;
 
 @Controller
 public class MainGoodController {
 
     private final MainService mainService;
-<<<<<<< HEAD
 
     private final GoodsListService goodsListService;
 
-    @Autowired
-    public MainGoodController(MainService mainService, GoodsListService goodsListService) {
-        this.mainService = mainService;
-        this.goodsListService = goodsListService;
-=======
-    private final GoodsListService goodsListService;
     private final RedisUtil redisUtil;
 
     @Autowired
@@ -43,7 +28,6 @@ public class MainGoodController {
         this.mainService = mainService;
         this.goodsListService = goodsListService;
         this.redisUtil = redisUtil;
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
@@ -58,8 +42,6 @@ public class MainGoodController {
         likeName = "%" + likeName + "%";
         return goodsListService.showGoodsList((long) id, orderName, currPage, likeName);
     }
-<<<<<<< HEAD
-=======
 
     @RequestMapping(value = "ShowSecKillGood")
     @ResponseBody
@@ -100,5 +82,4 @@ public class MainGoodController {
         }
         return ResultUtil.fail("Redis中没有秒杀商品");
     }
->>>>>>> 505e4b3610889e049814d844c8490d97d4e49dfe
 }
