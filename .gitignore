@@ -1,3 +1,6 @@
 .idea
 /target/
+target
+/target
+target/
 .git
