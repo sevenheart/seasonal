@@ -229,7 +229,6 @@
         enableLog: false      // Enable log messages to the console. Useful for debugging.
     });
     $(".search_button").click(function () {
-        console.log($(".search").val());
         $(location).attr('href', "http://localhost:8080/main/view/getGoodsList.html?likeName=" + $(".search").val());
     });
 </script>
