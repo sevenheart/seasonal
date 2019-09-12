@@ -18,7 +18,7 @@ public class LogAspect {
     }
 
     @Before("log()")
-    public void beforeLog(JoinPoint joinPoint){
+    public void requestLog(JoinPoint joinPoint){
         LOGGER.debug("********打印请求开始********");
         LOGGER.debug("REQUEST: " + joinPoint.getSignature().getName());
         LOGGER.debug("********打印请求结束********");
