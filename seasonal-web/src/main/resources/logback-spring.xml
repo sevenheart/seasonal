@@ -3,7 +3,7 @@
 <configuration  scan="true" scanPeriod="10 seconds">
     <contextName>logback</contextName>
 
-    <property name="log.path" value="D:/logs/seasonal" />
+    <property name="log.path" value="D:/myLogs/seasonal" />
 
     <!--0. 日志格式和颜色渲染 -->
     <!-- 彩色日志依赖的渲染类 -->
