@@ -2,6 +2,7 @@ $(function () {
     // showAD();
     setInterval("showAD()", 4000);
 });
+
 let t = 1;
 
 function showAD() {
@@ -31,7 +32,6 @@ function showAD() {
     }
 
 }
-
 
 $(".goods_show_nav_ul_li").hover(function () {
     $(this).parent().children(".goods_show_nav_ul_li").css("background-color", "white");

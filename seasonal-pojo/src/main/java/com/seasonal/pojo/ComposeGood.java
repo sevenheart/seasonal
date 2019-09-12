@@ -2,6 +2,8 @@ package com.seasonal.pojo;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ComposeGood {
     private Long id;
@@ -13,7 +15,8 @@ public class ComposeGood {
     private Integer composeGoodStatus;
     private String composeGoodIcon;
     private Integer composeGoodWeight;
-
+    private List<ComposeGoodImg>  composeGoodImgs;
+    private Classify classify;
 //    private Date createTime;
 //    private Date updateTime;
 

@@ -1,10 +1,11 @@
 package com.seasonal.controller;
 
 import com.seasonal.pojo.ComposeGood;
-import com.seasonal.pojo.SecKillRedis;
-import com.seasonal.redis.RedisUtil;
+import com.seasonal.service.DetailGoodService;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
+import com.seasonal.pojo.SecKillRedis;
+import com.seasonal.redis.RedisUtil;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,14 +19,19 @@ import java.util.List;
 public class MainGoodController {
 
     private final MainService mainService;
+
     private final GoodsListService goodsListService;
+
     private final RedisUtil redisUtil;
 
+    private final DetailGoodService detailGoodService;
+
     @Autowired
-    public MainGoodController(MainService mainService, GoodsListService goodsListService, RedisUtil redisUtil) {
+    public MainGoodController(MainService mainService, GoodsListService goodsListService, RedisUtil redisUtil, DetailGoodService detailGoodService) {
         this.mainService = mainService;
         this.goodsListService = goodsListService;
         this.redisUtil = redisUtil;
+        this.detailGoodService = detailGoodService;
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
@@ -51,8 +57,10 @@ public class MainGoodController {
             return secKillGoodsList(key);
         }
     }
+
     /**
      * 根据当前时间的小时数查询在数据库中加一小时对应的秒杀集合key
+     *
      * @param flag 查询现在正在秒杀 true 和 即将秒杀 false
      * @return 集合的key
      */
@@ -67,6 +75,7 @@ public class MainGoodController {
         }
         return secKillRedis.getSecKillKey();
     }
+
     /**
      * 根据Key获取Redis中的秒杀信息
      *
@@ -79,5 +88,12 @@ public class MainGoodController {
             return ResultUtil.success(redisUtil.get(key));
         }
         return ResultUtil.fail("Redis中没有秒杀商品");
+    }
+
+    @RequestMapping(value = "ShowDetailGood")
+    @ResponseBody
+    public Object showDetailGood(Long id) {
+        System.out.println(id);
+        return detailGoodService.findComposeGoodById(id);
     }
 }

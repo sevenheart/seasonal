@@ -25,5 +25,4 @@ $('#main_nav_goods_nav').hover(function () {
 }, function () {
     // 鼠标移出时移出hover类
     $("#main_sub_nav").hide();
-
 });

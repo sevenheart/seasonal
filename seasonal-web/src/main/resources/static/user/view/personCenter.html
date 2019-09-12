@@ -161,35 +161,35 @@
                         <label id="userimg">
                             <span>点击修改头像</span>
                             <img src="../../img/icon_goods_1.png" >
-                            <input type="file"  name="multipartFile" id="bookimg" enctype="multipart/form-data" hidden >
+                           <!-- <input type="file"  name="multipartFile" id="bookimg" enctype="multipart/form-data" hidden >-->
                         </label>
                         <label>
                             <span>账号:</span>
-                            <input id="userId" type="text" name="name" placeholder="你的账号" readonly/>
+                            <input id="userId" type="text" name="userId"  value="dshkasd" placeholder="你的账号" readonly/>
                         </label>
                         <label>
                             <span>昵称:</span>
-                            <input id="userName" type="text" name="user_id"  />
+                            <input id="userName" type="text" name="userName"  />
                         </label>
                         <label>
                             <span>会员状态:</span>
-                            <input id="isVip" type="text" name="user_id"  />
+                            <input id="isVip" type="text" name="isVip"  />
                         </label>
                         <label>
                             <span>年龄:</span>
-                            <input id="userAge" type="text" name="user_id"  />
+                            <input id="userAge" type="text" name="userAge"  />
                         </label>
                         <label style="display: none;">
                             <span>用户群体:</span>
-                            <input id="userType" type="text" name="user_id"  />
+                            <input id="userType" type="text" name="userType"  />
                         </label>
                         <label style="display: none;">
                             <span>修改时间:</span>
-                            <input id="updateTime" name="update_time" />
+                        <!--    <input id="updateTime" name="updateTime" />-->
                         </label>
                         <label>
                             <span>性别：</span>
-                            <select name="selection" id="userSex">
+                            <select name="selection" id="userSex" name="userSex">
                             <option value="0">男</option>
                             <option value="1">女</option>
                         </select>
@@ -346,11 +346,22 @@
 <script src = ../../jquery/jquery-3.4.1.js></script>
 <script src="../js/personCenter.js"></script>
 <script>
-
     /*点击提交修改信息*/
+    $('#user_info_form .button').click(function () {
+        var data= $("#user_info_form").serialize();
+        $.post({
+            url:"/user/updateUserInfo",
+            data:data,
+            dataType:"json",
+            success:function (data) {
+                alert(data.message)
+            }
+        })
+    })
     /*点击按钮查找信息*/
     $('#update_userinfo_button').click(function () {
         var num = $(this).attr("name")
+        console.log(num)
         $.post({
             url:"/user/finduserbyid",
             data:{id:'001'},

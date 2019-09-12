@@ -10,6 +10,7 @@ public class Classify {
     private Long generalitiesId;
     private String classifyName;
     private List<ComposeGood> composeGood;
+    private Generalities generalities;
 //    private Date createTime;
 //    private Date updateTime;
 
