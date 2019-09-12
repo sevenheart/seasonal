@@ -12,14 +12,14 @@ function ajax_test() {
             $.each(data, function (k, v) {//所有goods_show的kv对(如专利分格：value)
                 $goodsAllShow.append('<div class="goods_show">\n' +
                     '                            <div class="goods_show_nav">\n' +
-                    '                                <img src="' + v.generalitiesIcon + '" class="goods_show_nav_img1"></img>\n' +
+                    '                                <img alt="" src="' + v.generalitiesIcon + '" class="goods_show_nav_img1"/>\n' +
                     '                                <span class="goods_show_nav_img2">》' + v.generalitiesName + '</span>\n' +
                     '                                <ul class="goods_show_nav_ul">\n' +
                     '                                </ul>\n' +
                     '                            </div>\n' +
                     '                            <div class="goods_show_frame">\n' +
                     '                                <div class="main_left">\n' +
-                    '                                    <img class="main_left_img" src="' + v.generalitiesImg + '"/>\n' +
+                    '                                    <img alt="" class="main_left_img" src="' + v.generalitiesImg + '"/>\n' +
                     '                                    <div class="main_left_div">\n' +
                     '                                        <button class="main_left_div_button">立即查看</button>\n' +
                     '                                    </div>\n' +
@@ -32,7 +32,7 @@ function ajax_test() {
 
                     //添加并控制分类商品栏是否隐藏
                     const $goodsShowFrame = $(".goods_show_frame").eq(goodsShowNavUlIndex);
-                    if (rightIndex == 0) {
+                    if (rightIndex === 0) {
                         $goodsShowNavUl.append('<li class="goods_show_nav_ul_li" style="background-color:#e51e13;"><a href="getGoodsList.html?classifyId=' + goodsShowNavItem.id + '">' + goodsShowNavItem.classifyName + '</a></li><li>|</li>');//添加商品导航
                         $goodsShowNavUl.children(".goods_show_nav_ul_li").children("a").css("color", "white");
                         $goodsShowFrame.append('<div class="main_right" style="display: block;"></div>');
@@ -45,7 +45,7 @@ function ajax_test() {
                         //添加商品
                         const $mainRight = $('.main_right').eq(mainRightIndex);
                         $mainRight.append('<a href="#" class="goods">\n' +
-                            '                                    <img src="' + mainRightItem.composeGoodIcon + '"/>\n' +
+                            '                                    <img alt="" src="' + mainRightItem.composeGoodIcon + '"/>\n' +
                             '                                    <span class="goods_info">' + mainRightItem.composeGoodName + '</span>\n' +
                             '                                    <span class="goods_price">￥' + mainRightItem.composeGoodPrice + '.00</span>\n' +
                             '                                </a>')
@@ -58,4 +58,5 @@ function ajax_test() {
         }
     });
 }
+
 ajax_test(); //执行函数
