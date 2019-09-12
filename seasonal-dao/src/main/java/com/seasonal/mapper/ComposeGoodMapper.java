@@ -8,28 +8,20 @@ import java.util.List;
 
 @Repository
 public interface ComposeGoodMapper {
-    /**
-     * 根据ComposeGood中的参数动态查询
-     *
-     * @param composeGood
-     * @return 所有符合查询结果数据
-     */
-    List<ComposeGood> findComposeGoodByComposeGood(ComposeGood composeGood);
 
     /**
-     * 根据小分类id查询所有符合的商品
-     *
-     * @param classifyId 小分类id
-     * @return 商品列表
-     */
-    List<ComposeGood> findMainComposeGoodByClassifyId(Long classifyId);
-
-    /**
-     * 根据小类id 和分页排序信息查询
-     *
-     * @param classifyId     id
+     * 根据小类id 和分页排序信息查询 和模糊查找
+     * @param classifyId id
      * @param pageInfoResult 分页类信息
-     * @return
+     * @param likeName 模糊查找
+     * @return composeGood类对象
      */
     List<ComposeGood> findAllComposeGoodByClassifyIdForPage(Long classifyId, PageInfoResult pageInfoResult, String likeName);
+
+    /**
+     * 根据id查询商品详细信息
+     * @param id id
+     * @return 商品详细信息
+     */
+    ComposeGood findComposeGoodByID(Long id);
 }

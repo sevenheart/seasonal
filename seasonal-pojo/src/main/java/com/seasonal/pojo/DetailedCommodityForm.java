@@ -11,6 +11,8 @@ public class DetailedCommodityForm {
     private String goodId;
     private Byte goodCount;
     private BigDecimal commodityMoney;
+    private String orderId;
+    private String goodType;
     private Date createTime;
     private Date updateTime;
 

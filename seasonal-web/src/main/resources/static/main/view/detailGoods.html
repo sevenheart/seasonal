@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>炫果❤商品页</title>
     <link rel="shortcut icon" href="../../img/icon.ico"/>
+    <title>时令果惠</title>
+    <style>
+
+    </style>
 
     <!--    清除样式CSS-->
     <link rel='stylesheet' href='../../css/style.css' type='text/css'/>
     <!--    外部模板样式-->
     <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
-    <link rel="stylesheet" href="../css/goods_list.css" type="text/css">
+    <link rel="stylesheet" href="../css/main.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/detailGoods.css">
 
-    <style>
-        #main_sub_nav {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body>
+
+
 <div class="wrap">
     <div class="header">
         <div class="login_bar">
@@ -187,51 +188,113 @@
 
         </div>
         <br>
-        <div class="goods_list_max">
-            <div class="people_goods_left_list">
-                <div id="goods_left_title">人气商品</div>
-                <div class="people_goods_left_list_div">
-                    <a class="goods">
-                        <img alt="" src="../../img/5e562f13488e40008a3ab848c2318d62.jpg"/>
-                        <span class="goods_info">三分果盒:古北</span>
-                        <span class="goods_price">￥14.00</span>
-                    </a>
+        <div style="margin-left: 200px">
+            <!--内容处-->
+            <div class="goods_detail_max">
+                <div class="page_url">
+                    <a class="hover_a" href="../../index.html">首页</a>>
+                    <a class="hover_a" id="generalities_name" href=""></a>>
+                    <a class="hover_a" id="classify_name" href=""></a>
                 </div>
             </div>
-            <div class="people_goods_right_list">
-                <div class="sort_top">
-                    <ul class="sort_ul">
-                        <li class="sort_ul_li" id="sort_type_1">综合</li>
-                        <li class="sort_ul_li" id="sort_type_2">价格</li>
-                        <li class="sort_ul_li" id="sort_type_3">热度</li>
-                    </ul>
+            <div class="goods_detail">
+                <div class="goods_big_image">
+                    <img id='bigimg'
+                         src="">
+                    <div class="goods_small_image_scoll">
+                        <a class="goods_small_image_scoll_left"><</a>
+                        <a class="goods_small_image_scoll_right">> </a>
+                        <div class="goods_small_image_scoll_itme">
+                            <div class="goods_small_image_scoll_rongqi">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="goods_right_list">
+                <div class="goods_describe">
+                    <div class="goods_describe_name">
+                    </div>
+                    <ul class="goods_describe_price">
+                        <li>商品价格：
+                            <span id="goods_describe_pc"></span>
+                        </li>
+                    </ul>
 
-                </div>
-                <div style="width: 980px;height: 55px">
-                    <ul id="pageGo" class="clear">
-                        <li class="pgo_li">共1页&nbsp;&nbsp;</li>
-                        <li class="pgo_li">到第</li>
-                        <li>&nbsp;<input id="pageGo_inp" style="width: 30px" type="text">&nbsp;</li>
-                        <li class="pgo_li">页</li>
-                        <li class="pgo_li"><a id="pageGo_a" href="">确定</a></li>
+                    <div>
+                        <p class="goods_product_p">选择品类：</p>
+                        <ul class="goods_compose_fruit">
+                            <li><a>福建红心柚+海南西州蜜+海南黑美人西瓜+四川红提+河北水果黄瓜</a></li>
+                        </ul>
+                    </div>
+                    <ul class="goods_describe_ds">
+
                     </ul>
+                    <ul class="goods_control_ul">
+                        <li class="goods_num">数量</li>
+                        <li class="goods_control_ul_li1">
+                            <a class="delete_goods">-</a>
+                            <input class="goods_control_ul_li1_input" type="text" name="num" readonly unselectable="on"
+                                   value="1">
+                            <a class="add_goods">+</a>
+                        </li>
+                    </ul>
+                    <ul class="goods_describe_option">
+                        <li><a>立刻购买</a></li>
+                        <li>
+                            <a>
+                                <i></i>
+                                <span>加入购物车</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="goods_advertisement">
+                <div class="goods_signal">
+                    <div class="goods_signal_title">商品推荐</div>
+                    <div class="goods_signal_paddingtop">
+
+                        <a class="goods">
+                            <img src="http://img.guocool.com/800X800/product/2017/06/22/a9371d115c9f462a83925c9180a65631.jpg"/>
+                            <span class="goods_info">三分果盒:古北</span>
+                            <span class="goods_price">￥14.00</span>
+                        </a>
+                        <a class="goods">
+                            <img src="http://img.guocool.com/800X800/product/2017/06/22/a9371d115c9f462a83925c9180a65631.jpg"/>
+                            <span class="goods_info">三分果盒:古北</span>
+                            <span class="goods_price">￥14.00</span>
+                        </a>
+                        <a class="goods">
+                            <img src="http://img.guocool.com/800X800/product/2017/06/22/a9371d115c9f462a83925c9180a65631.jpg"/>
+                            <span class="goods_info">三分果盒:古北</span>
+                            <span class="goods_price">￥14.00</span>
+                        </a>
+                        <a class="goods">
+                            <img src="http://img.guocool.com/800X800/product/2017/06/22/a9371d115c9f462a83925c9180a65631.jpg"/>
+                            <span class="goods_info">三分果盒:古北</span>
+                            <span class="goods_price">￥14.00</span>
+                        </a>
+                        <a class="goods">
+                            <img src="http://img.guocool.com/800X800/product/2017/06/22/a9371d115c9f462a83925c9180a65631.jpg"/>
+                            <span class="goods_info">三分果盒:古北</span>
+                            <span class="goods_price">￥14.00</span>
+                        </a>
+                    </div>
+                    <div class="goods_signal_title">商品介绍</div>
+                </div>
+                <div class="goods_signal_describe goods_signal">
                 </div>
             </div>
         </div>
     </div>
     <div class="footer">
-        <img alt="" src="../../img/foot_logo.jpg" style="width: 100%"/>
+        <img alt="" src="../../img/foot_logo.jpg" style="width: 100%;margin-top: 150px"/>
     </div>
 </div>
+
 </body>
 <script src="../../jquery/jquery-3.4.1.js"></script>
 <script src="../../js/global.js"></script>
 <script src="../js/main.js"></script>
-<script src="../js/getGoodsList.js"></script>
-<script>
-
-
-</script>
+<script src="../js/detailGoods.js"></script>
 </html>
