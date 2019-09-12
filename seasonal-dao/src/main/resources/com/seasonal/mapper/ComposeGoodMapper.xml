@@ -13,7 +13,9 @@
         <collection property="composeGoodImgs" column="id"
                     select="com.seasonal.mapper.ComposeGoodImgMapper.findComposeGoodImgByComposeGoodIdAndType"/>
     </resultMap>
-
+    <select id="findMainComposeGoodByClassifyId" resultMap="cspc">
+        select * from compose_good where compose_good_type = #{classifyId} and compose_good_status=1 order by compose_good_sales DESC limit 0,6
+    </select>
     <select id="findAllComposeGoodByClassifyIdForPage" resultMap="cspc">
         select *
         from compose_good

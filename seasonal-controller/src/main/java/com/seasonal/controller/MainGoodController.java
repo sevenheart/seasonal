@@ -37,6 +37,7 @@ public class MainGoodController {
     @RequestMapping(value = "MainGoodsRefresh")
     @ResponseBody
     public Object showMainGood() {
+        System.out.println(mainService.mainGoodsInitialize());
         return mainService.mainGoodsInitialize();
     }
 

@@ -43,3 +43,5 @@ mybatis:
   type-aliases-package: com.seasonal.pojo
   configuration:
     map-underscore-to-camel-case: true
+
+
