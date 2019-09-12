@@ -2,7 +2,7 @@ package com.seasonal.mapper;
 
 import com.seasonal.pojo.LoginFrom;
 import org.springframework.stereotype.Repository;
-import java.util.Date;
+import java.sql.Date;
 
 @Repository
 public interface LoginFromMapper {
@@ -54,12 +54,6 @@ public interface LoginFromMapper {
      * @param loginIp
      * @return
      */
-    LoginFrom updateMessage(String identifier, Date currentTime, String loginIp);
-
-    /**
-     * 用户注册
-     * @return
-     */
-    int insertUser();
+    int updateMessage(String identifier, Date currentTime, String loginIp);
 
 }

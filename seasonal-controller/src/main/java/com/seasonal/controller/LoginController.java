@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.InetAddress;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -24,29 +25,20 @@ public class LoginController {
     @RequestMapping(value = "registrationPhone")
     @ResponseBody
     public Object userPhone(String identifier) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.findRegistrationPhone(identifier));
         return loginService.findRegistrationPhone(identifier);
     }
-
-//    @RequestMapping(value = "registration")
-//    @ResponseBody
-//    public Object registration(String userName, String phone, String password) {
-//        JSONObject jsonObject = JSONObject.fromObject(loginService.insertUser(userName,phone,password));
-//        return loginService.insertUser();
-//    }
 
     @RequestMapping(value = "login")
     @ResponseBody
     public Object userMessage(String identifier, String credential) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.findLogin(identifier, credential));
         return loginService.findLogin(identifier, credential);
     }
 
-    @RequestMapping(value = "Login")
+    @RequestMapping(value = "loginIp")
     @ResponseBody
-    public Object insertMessage(String userName,String password) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.updateMessage(userName));
-        return "index.html";
+    public String updateMessage(String identifier) {
+        System.out.println("Controller:" +identifier);
+        return loginService.updateMessage(identifier);
     }
 
 }
