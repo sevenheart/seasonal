@@ -17,6 +17,10 @@ public class LogAspect {
 
     }
 
+    /**
+     * 打印请求日志
+     * @param joinPoint
+     */
     @Before("log()")
     public void requestLog(JoinPoint joinPoint){
         LOGGER.debug("********打印请求开始********");
@@ -24,6 +28,10 @@ public class LogAspect {
         LOGGER.debug("********打印请求结束********");
     }
 
+    /**
+     * 打印异常日志
+     * @param joinPoint
+     */
     @AfterThrowing("log()")
     public void exceptionLog(JoinPoint joinPoint){
         LOGGER.debug("********打印异常开始********");
@@ -31,10 +39,14 @@ public class LogAspect {
         LOGGER.debug("********打印异常结束********");
     }
 
-    @AfterReturning("log()")
-    public void resultLog(JoinPoint joinPoint){
+    /**
+     * 打印结果日志
+     * @param object
+     */
+    @AfterReturning(returning = "object", pointcut = "log()")
+    public void resultLog(Object object){
         LOGGER.debug("********打印结果开始********");
-        LOGGER.debug("RESULT: " + joinPoint.getSignature().getName());
+        LOGGER.debug("RESULT: " + object);
         LOGGER.debug("********打印结果结束********");
     }
 
