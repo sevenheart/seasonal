@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.UserAddressMapper">
+    <insert id="insertUserAddress" parameterType="userAddress">
+        insert into
+        user_address(
+        <trim suffixOverrides=",">
+            <if test="userId!=null and userId!=''">
+                user_id,
+            </if>
+            <if test="province!=null and province!=''">
+                province,
+            </if>
+            <if test="city!=null and city!=''">
+                city,
+            </if>
+            <if test="district!=null and district!=''">
+                district,
+            </if>
+            <if test="address!=null and address!=''">
+                address,
+            </if>
+            <if test="userPhone!=null and userPhone!=''">
+                user_phone,
+            </if>
+            <if test="userName!=null and userName!=''">
+                user_name,
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                create_time,
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                update_time,
+            </if>
+        </trim>
+
+        ) values(
+        <trim suffixOverrides=",">
+            <if test="userId!=null and userId!=''">
+                #{userId},
+            </if>
+            <if test="province!=null and province!=''">
+                #{province},
+            </if>
+            <if test="city!=null and city!=''">
+                #{city},
+            </if>
+            <if test="district!=null and district!=''">
+                #{district},
+            </if>
+            <if test="address!=null and address!=''">
+                #{address},
+            </if>
+            <if test="userPhone!=null and userPhone!=''">
+                #{userPhone},
+            </if>
+            <if test="userName!=null and userName!=''">
+                #{userName},
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                #{updateTime},
+            </if>
+        </trim>
+        )
+    </insert>
+
+</mapper>

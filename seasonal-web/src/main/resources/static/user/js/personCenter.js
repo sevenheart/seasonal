@@ -24,9 +24,6 @@ $(".main_left_function a").click(function () {
 })
 /*选项卡切换*/
 /*表单的js代码*/
-$("#userimg img").click(function () {
-    $("#userimg input").click()
-})
 function changeStyle() {
     var template = document.getElementById("template");
     var index = template.selectedIndex;

@@ -37,9 +37,10 @@ public class MyExceptionAdvice {
      *
      * @param request
      * @param e
-     * @return
-     *//*
+     * @return*/
 
+    @ExceptionHandler(value = MyException.class)
+    @ResponseBody
     public ResultData MyException(HttpServletRequest request, MyException e){
         e.printStackTrace();
         Integer code = e.getCode();
@@ -52,7 +53,7 @@ public class MyExceptionAdvice {
         }
         return new ResultData(code,message);
     }
-*/
+
 
 
 }
