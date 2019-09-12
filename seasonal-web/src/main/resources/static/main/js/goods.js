@@ -29,7 +29,6 @@ function ajax_test() {
                 const $goodsShowNavUl = $(".goods_show_nav_ul").eq(goodsShowNavUlIndex);//每一个goods_show中导航对象
                 let rightIndex = 0;//控制每一个goods_show中第一个导航对应商品默认不隐藏
                 $.each(v.classify, function (j, goodsShowNavItem) {//遍历所有商品类导航
-
                     //添加并控制分类商品栏是否隐藏
                     const $goodsShowFrame = $(".goods_show_frame").eq(goodsShowNavUlIndex);
                     if (rightIndex === 0) {
