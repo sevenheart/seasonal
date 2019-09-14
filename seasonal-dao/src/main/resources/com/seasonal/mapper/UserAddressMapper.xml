@@ -68,5 +68,34 @@
         </trim>
         )
     </insert>
+    <select id="findAllUserAddress" parameterType="String" resultType="userAddress">
+        select * from user_address where  user_id = #{userId}
+    </select>
+    <delete id="delteUserAddressById" parameterType="Long">
+        delete from user_address where id = #{id}
+    </delete>
+    <update id="updateUserAddressById" parameterType="userAddress">
+        update user_address
+        <set>
+            <if test="userName!=null">
+                user_name=#{userName},
+            </if><if test="userPhone!=null">
+            user_phone=#{userPhone},
+            </if>
+            <if test="province!=null">
+                province=#{province},
+            </if>
+            <if test="city!=null">
+                city=#{city},
+            </if>
+            <if test="district!=null">
+                district=#{district},
+            </if>
+            <if test="address!=null">
+                address=#{address},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 
 </mapper>

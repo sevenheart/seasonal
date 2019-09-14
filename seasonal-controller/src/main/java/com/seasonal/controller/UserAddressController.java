@@ -2,14 +2,17 @@ package com.seasonal.controller;
 
 import com.seasonal.pojo.UserAddress;
 import com.seasonal.service.UserAddressServer;
-import com.seasonal.service.UserInfoServer;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultEnum;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+
 /**
  * 用户地址管理
  * author:陆旭
@@ -45,8 +48,60 @@ public class UserAddressController {
      */
     @RequestMapping("selectalladdress")
     @ResponseBody
-    public ResultData findAllAddress(){
+    public ResultData findAllAddress(String userId){
+         List<UserAddress> userAddressesList = userAddressServer.findAllUserAdreess(userId);
+         //判断查中用户信息是否成功
+        //返回ResultDate
+         if(userAddressesList.size()>0&&userAddressesList!=null) {
+             ResultData resultData ;
+             resultData = ResultUtil.success(0,"查找信息成功");
+             resultData.setData(userAddressesList);
+             return  resultData;
+         }
+         return ResultUtil.fail(1,"查询用户地址失败");
+    }
+    @RequestMapping("deleteuseraddressByid")
+    @ResponseBody
+    public ResultData deleteUserAddress(Long id){
+        int flag = userAddressServer.delteUserAddressById(id);
+        if(flag<=0){
+            return  ResultUtil.fail(1,"删除失败");
+        }
+        return  ResultUtil.success(0,"删除成功");
 
+    }
+
+    @RequestMapping("updateuseraddress")
+    @ResponseBody
+    public ResultData updateUserAddress(UserAddress userAddress){
+        int flag = userAddressServer.updateUserAddressById(userAddress);
+        if(flag<=0){
+            return ResultUtil.fail(1,"修改信息失败");
+        }
+        return ResultUtil.success(0,"修改信息成功");
+    }
+
+    @RequestMapping("deletecheckeduseraddress")
+    @ResponseBody
+    public ResultData deleteCheckedUserAddressById(@RequestParam(value = "check",required = false) String[] check){
+        if(check==null){
+            System.out.println("没穿火来");
+        }else {
+            System.out.println("获取到的长度是"+check.length);
+            //判断是否有删除失败的
+            boolean flag = true;
+            int failDelete=0;
+            for(int i = 0; i< check.length;i++){
+                //删除返回值
+                int num = userAddressServer.delteUserAddressById((long)Integer.parseInt(check[i]));
+                if(num<=0){
+                    flag = false;
+                }
+            }
+            if(!flag){
+                return ResultUtil.fail(1,"有"+failDelete+"条数据删除失败");
+            }
+        }
         return ResultUtil.success(ResultEnum.SUCCESS);
     }
 }
