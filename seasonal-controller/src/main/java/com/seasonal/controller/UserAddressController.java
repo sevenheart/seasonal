@@ -100,6 +100,7 @@ public class UserAddressController {
             }
             if(!flag){
                 return ResultUtil.fail(1,"有"+failDelete+"条数据删除失败");
+
             }
         }
         return ResultUtil.success(ResultEnum.SUCCESS);
