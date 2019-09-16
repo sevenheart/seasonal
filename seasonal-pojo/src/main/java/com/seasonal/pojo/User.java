@@ -4,9 +4,6 @@ import lombok.Data;
 
 
 import java.sql.Date;
-
-
-
 @Data
 public class User {
     private Long id;
