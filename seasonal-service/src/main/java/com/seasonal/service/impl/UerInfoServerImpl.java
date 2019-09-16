@@ -24,4 +24,9 @@ public class UerInfoServerImpl implements UserInfoServer {
 
         return userInfoMapper.findUserById(id);
     }
+
+    @Override
+    public int updateUserInfo(User user) {
+        return userInfoMapper.updateUserInfo(user);
+    }
 }

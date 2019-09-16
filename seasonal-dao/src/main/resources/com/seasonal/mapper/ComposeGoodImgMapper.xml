@@ -6,8 +6,6 @@
     <resultMap id="cspc" type="com.seasonal.pojo.ComposeGoodImg">
         <id column="id" property="id"/>
     </resultMap>
-
-
     <select id="findComposeGoodImgByComposeGoodIdAndType" resultMap="cspc">
         select * from compose_good_img where compose_good_id = #{composeGoodId}
     </select>
