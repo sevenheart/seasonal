@@ -7,6 +7,7 @@ import com.seasonal.vo.ResultEnum;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -83,23 +84,26 @@ public class UserAddressController {
 
     @RequestMapping("deletecheckeduseraddress")
     @ResponseBody
-    public ResultData deleteCheckedUserAddressById(@RequestParam(value = "check",required = false) String[] check){
+    public ResultData deleteCheckedUserAddressById(@RequestBody List<Integer> check){
+        System.out.println("接到的haha是"+check.get(0));
         if(check==null){
             System.out.println("没穿火来");
         }else {
-            System.out.println("获取到的长度是"+check.length);
+
             //判断是否有删除失败的
             boolean flag = true;
             int failDelete=0;
-            for(int i = 0; i< check.length;i++){
+            for(int i = 0; i< check.size();i++){
                 //删除返回值
-                int num = userAddressServer.delteUserAddressById((long)Integer.parseInt(check[i]));
+                int num = userAddressServer.delteUserAddressById((long)check.get(i));
                 if(num<=0){
                     flag = false;
+                }else {
+                    failDelete++;
                 }
             }
             if(!flag){
-                return ResultUtil.fail(1,"有"+failDelete+"条数据删除失败");
+                return ResultUtil.fail(1,"共有"+check.size()+"条数据，有"+failDelete+"条数据删除失败");
 
             }
         }

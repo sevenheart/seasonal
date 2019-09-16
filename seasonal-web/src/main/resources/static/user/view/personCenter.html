@@ -216,7 +216,7 @@
 
                 <!--查看地址-->
                 <div class="detailemessage basic-grey" style="display: block;max-width: 800px">
-                    <from id="useraddressfrom">
+                    <from id="useraddressform">
                     <table id="alladdresstable" class="detailmessagecontext">
 
                        <!-- <tr>
@@ -350,7 +350,7 @@ function showaddress(data){
     //循环拼接得到的地址信息
     for(var i = 0;i< data.data.length;i++) {
         html += '    <tr>\n' +
-            '                            <td> <input  type="checkbox" name="check" value="1"/></td>\n' +
+            '                            <td> <input  type="checkbox" name="check" value="'+data.data[i].id+'"/></td>\n' +
             '                            <td> <input  type="text" readonly  value=' + data.data[i].userName + ' /></td>\n' +
             '                            <td> <input  type="text"  readonly value=' + data.data[i].userPhone + ' /></td>\n' +
             '                            <td> <input  type="text" readonly  value=' + data.data[i].province + ' /></td>\n' +
@@ -382,15 +382,22 @@ function showaddress(data){
     })
     /*批量删除地址*/
     $("#alladdresstable .delete_all").click(function () {
+        var check = new Array();
+        $("#alladdresstable tr td input[type=checkbox]:checked").each(function(){
+           check.push($(this).val())
+        })
+
+
         $.post({
             url: "/address/deletecheckeduseraddress",
-            data: $("#useraddressfrom").serialize(),
+            data: JSON.stringify(check),
+            contentType:"application/json",
             dataType: "json",
             success: function (data) {
                 alert(data.message);
+                window.location.href="personCenter.html"
             }
         })
-
     })
     /*修改用户的地址信息*/
     $("#alladdresstable .update_address").click(function () {
@@ -425,7 +432,6 @@ function showaddress(data){
     })
 }
         /*查找用户的地址信息*/
-
     $('#addressManage').click(function () {
         var num = $(this).attr("name")
         $.post({
