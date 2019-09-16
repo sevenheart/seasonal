@@ -27,7 +27,7 @@
 }
 
 #cart-flow #c-f-img {
-    background: url("../img/index.png") no-repeat 0px -280px;
+    background: url("../../img/cart/cart_main.png") no-repeat 0px -280px;
     height: 23px;
     width: 483px;
 }
@@ -298,10 +298,6 @@
     width: 64px;
 }
 
-#cart-tf .ctf-r {
-    float: right;
-}
-
 #ctf-js {
     width: 145px;
     display: block;
@@ -310,6 +306,7 @@
     color: #fff;
     font-size: 18px;
     margin-left: 4px;
+    text-decoration: none;
 }
 
 #cart-tf .ctf-r {
@@ -329,7 +326,9 @@
     padding: 0px 5px 0px 5px;
 }
 
-
+.hover-a{
+    text-decoration: none;
+}
 
 
 
