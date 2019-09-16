@@ -70,17 +70,12 @@ public class LoginServiceImpl implements LoginService {
         String loginIpNow = getIp.publicip();
         //获取当前时间
         Date currentTime = new Date(System.currentTimeMillis());
-        System.out.println(currentTime);
 
         List<String> list = new ArrayList<String>();
         list.add(loginIpNow);
 
         int num = loginFrom.updateMessage(identifier, currentTime, loginIpNow);
-
-
-        System.out.println("num:" + num);
         return num;
-
     }
 
     @Override

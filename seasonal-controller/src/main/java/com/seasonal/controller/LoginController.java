@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
@@ -34,16 +35,13 @@ public class LoginController {
 
     @RequestMapping(value = "login")
     @ResponseBody
-    public Object userMessage(String identifier, String credential, HttpServletRequest request) {
-        LoginFrom loginFrom = (LoginFrom) loginService.findLogin(identifier, credential);
-        request.getSession().setAttribute("user",loginFrom);
-        return loginFrom;
+    public Object userMessage(String identifier, String credential) {
+        return loginService.findLogin(identifier, credential);
     }
 
     @RequestMapping(value = "loginIp")
     @ResponseBody
     public String updateMessage(String identifier) {
-        System.out.println("loginIp->Controller:" + identifier);
         int num = loginService.updateMessage(identifier);
         return "redirect:index.html";
     }

@@ -39,7 +39,6 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
         data: {"identifier": identifier},
         async: false,
         success: function (data) {
-            console.log("login")
             ipsearch(data.loginIp)
         },
         error: function (data) {
@@ -70,7 +69,7 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
 //多次错误验证码显示，判断输入信息
 var num = 0
 $(document).on('submit', '.pass-form-normal', function () {
-    var flag
+    var flag = false
     var identifier = $('.pass-form-normal .pass-text-input-userName').val()
     var credential = $('.pass-form-normal .pass-text-input-password').val()
     if (identifier == null || identifier == '') {
@@ -112,7 +111,6 @@ function login(identifier, credential, flag) {
                 flag = false
             } else {
                 flag = true
-                console.log("ddd:"+flag)
             }
         },
         error: function (data) {
