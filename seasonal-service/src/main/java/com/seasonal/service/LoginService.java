@@ -24,5 +24,7 @@ public interface LoginService {
      * @param identifier
      * @return
      */
-    String updateMessage(String identifier);
+    int updateMessage(String identifier);
+
+    String getIpNow();
 }

@@ -1,58 +1,3 @@
-//用户名
-$(document).on('click', '.pass-text-input-userName', function () {
-    $('#userName-span').text('')
-    if ($('#userName-span').text() == null || $('#userName-span').text() == '') {
-        $('#userName-span').append("设置后不可更改" + "<br/>" + "中英文均可，最长7个汉字或14个英文")
-    }
-    $(this).css('border-color', '#F69')
-})
-$(document).on('blur', '.pass-text-input-userName', function () {
-    $('#userName-span').text('')
-    var username = $('.pass-text-input-userName').val()
-    var len = 0;
-    // 计算用户名长度
-    for (var i = 0; i < username.length; i++) {
-        var a = username.charAt(i);
-        if (a.match(/[^\x00-\xff]/ig) != null) {
-            len += 2;
-        } else {
-            len += 1;
-        }
-    }
-    if (len > 0 && len <= 14) {
-        $('#userName-span-div').remove()
-        html = '<div id="userName-span-div"></div>'
-        $('#userName-span').html(html)
-        $('#userName-span-div').css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat')
-        $('#userName-span-div').css('float', 'left')
-        $('#userName-span-div').css('position', 'relative')
-        $('#userName-span-div').css('width', '250px')
-        $('#userName-span-div').css('top', '12px')
-        $('#userName-span-div').css('color', '#fc4343')
-        $('#userName-span-div').css('height', '16px')
-        $('#userName-span-div').css('line-height', '14px')
-        $('#userName-span-div').css('padding-left', '20px')
-    } else if (len > 14) {
-        $('#userName-span-div').remove()
-        html = '<div id="userName-span-div"></div>'
-        $('#userName-span').html(html)
-        $('#userName-span-div').append("最长7个汉字或14个英文")
-        $('#userName-span-div').css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat')
-        $('#userName-span-div').css('float', 'left')
-        $('#userName-span-div').css('position', 'relative')
-        $('#userName-span-div').css('width', '250px')
-        $('#userName-span-div').css('top', '12px')
-        $('#userName-span-div').css('color', '#fc4343')
-        $('#userName-span-div').css('height', '16px')
-        $('#userName-span-div').css('line-height', '14px')
-        $('#userName-span-div').css('padding-left', '20px')
-    } else {
-        $('#userName-span-div').remove()
-    }
-    $(this).css('border-color', '')
-})
-
-
 //手机号
 $(document).on('click', '.pass-text-input-phone', function () {
     $('#phone-span').text('')
@@ -182,7 +127,7 @@ $(document).on('blur', '.pass-text-input-password', function () {
 })
 
 
-//验证码
+//短信验证码
 $(document).on('click', '.pass-text-input-verifyCode', function () {
     $(this).css('border-color', '#F69')
 })
@@ -195,6 +140,11 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
 
 
 //注册
+
+// $(document).on('submit', '.form', function () {
+//
+// }
+
 $(document).on('click', '.pass-button-submit', function () {
     var username = $('.pass-text-input-userName').val()
     var phone = $('.pass-text-input-phone').val()
