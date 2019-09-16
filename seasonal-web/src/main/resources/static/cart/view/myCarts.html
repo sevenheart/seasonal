@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的购物车</title>
+    <link rel="shortcut icon" href="../../img/icon.ico"/>
+
+    <!--    清除样式CSS-->
+    <link rel='stylesheet' href='../../css/style.css' type='text/css'/>
+    <!--    外部模板样式-->
+    <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
+    <link rel="stylesheet" href="../css/mycarts.css" type="text/css">
+
+
+</head>
+<body>
+<!--    顶部所有信息，注意所有class别与顶部信息重叠-->
+    <div class="header">
+    <div class="login_bar">
+        <ul>
+            <li>
+                <img alt="" src="../../img/common/login_icon.jpg"><a href="#">请登录</a>
+            </li>
+            <li>
+                <img alt="" src="../../img/common/register_icon.jpg"><a href="#">免费注册</a>
+            </li>
+            <li>
+                <img alt="" src="../../img/common/order_icon.jpg"><a href="#">我的订单</a>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div class="header_main">
+        <form class="parent">
+            <input type="text" class="search" placeholder="搜索">
+            <input type="button" class="search_button">
+        </form>
+        <a href="../../index.html"><img alt="" src="../../img/s_03.png" id="logo"></a>
+        <div class="header_nav">
+            <ul>
+                <li><a href="../../index.html" name="首 页">HOME</a></li>
+                <li><a href="../../activity/view/seckill.html" name="闪购促销">SALES</a>
+                </li>
+                <li><a href="../../index.html" name="最新活动">ACTIVITY</a>
+                </li>
+                <li><a href="../../index.html" name="申请试吃">TASTE</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr id="header_hr">
+</div>
+    <div id="cart">
+        <div id="cart-tit" class="clear">
+            <span id="cart-tit-txt">我的购物车</span>
+            <ul id="cart-flow" class="clear">
+                <li id="c-f-img"></li>
+                <li class="c-f-li c-f-li-cur">1.我的购物车</li>
+                <li class="c-f-li">2.填写核对订单信息</li>
+                <li class="c-f-li">3.成功提交订单</li>
+            </ul>
+        </div>
+        <ul id="cart-th" class="clear">
+            <li id="ct-inp">
+                <input type="checkbox" name="all">
+            </li>
+            <li id="ct-all">全选</li>
+            <li id="ct-name">商品信息</li>
+            <li id="ct-sj">市场价(元)</li>
+            <li id="ct-dj">单价(元)</li>
+            <li id="ct-sl">数量</li>
+            <li id="ct-je">金额(元)</li>
+            <li id="ct-op">操作</li>
+        </ul>
+        <ul id="cart-con">
+            <!-- 无商品时 -->
+            <!--<div id="mc-msg">
+                <span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span>
+                <a href="#" onclick="">登录</a>
+                <a href="#">去购物</a>
+            </div>-->
+
+            <!--<li class="cart-con-li">
+                <ul class="cart-obj clear">
+                    <li class="co-inp">
+                        <input type="checkbox" name="goods" value="1">
+                    </li>
+                    <li class="co-img">
+                        <a href="#" target="_blank">
+                            <img src="../img/common/goods.jpg" width="100" height="100">
+                        </a>
+                    </li>
+                    <li class="co-name">
+                        <a href="#" title="迷你果盒：高级赏味" class="hover-a" target="_blank">迷你果盒：高级赏味+越南龙眼</a>
+                    </li>
+                    <li class="co-dj">10.00</li>
+                    <li class="co-dj" id="price-one">10.00</li>
+                    <li class="co-sl">
+                        <span class="co-sl-span">
+                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>
+                            <input type="text" value="1" class="num-inp" onchange="isInteger(this)" maxlength="4">
+                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>
+                        </span>
+                        <span class="co-sl-remark" title></span>
+                    </li>
+                    <li class="co-je">10.00</li>
+                    <li class="co-del">
+                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="cart-con-li">
+                <ul class="cart-obj clear">
+                    <li class="co-inp">
+                        <input type="checkbox" name="goods" value="2">
+                    </li>
+                    <li class="co-img">
+                        <a href="#" target="_blank">
+                            <img src="../img/common/goods.jpg" width="100" height="100">
+                        </a>
+                    </li>
+                    <li class="co-name">
+                        <a href="#" title="迷你果盒：高级赏味" class="hover-a" target="_blank">迷你果盒：高级赏味+越南龙眼</a>
+                    </li>
+                    <li class="co-dj">10.00</li>
+                    <li class="co-dj" id="price-two">10.00</li>
+                    <li class="co-sl">
+                        <span class="co-sl-span">
+                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>
+                            <input type="text" value="1" class="num-inp" onchange="isInteger(this)" maxlength="4">
+                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>
+                        </span>
+                        <span class="co-sl-remark" title></span>
+                    </li>
+                    <li class="co-je">10.00</li>
+                    <li class="co-del">
+                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>
+                    </li>
+                </ul>
+            </li>-->
+        </ul>
+        <ul id="cart-tf" class="clear">
+            <li id="ctf-inp">
+                <input type="checkbox" name="all">
+            </li>
+            <li id="ctf-all">全选</li>
+            <li>
+                <a href="#" onclick="" class="hover-a">删除</a>
+            </li>
+            <li class="ctf-r">
+                <a href="#" id="ctf-js">结算</a>
+            </li>
+            <li class="ctf-r" id="total">￥0.00</li>
+            <li class="ctf-r" style="padding-left: 75px;">总计(不含运费)</li>
+            <li class="ctf-r">
+                已选商品
+                <span id="count">0</span>
+                件
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        <img alt="" src="../../img/foot_logo.jpg" style="width: 100%"/>
+    </div>
+</body>
+<script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../js/modify_number.js"></script>
+<script type="text/javascript" src="../js/mycarts.js"></script>
+<script src="../../js/global.js"></script>
+</html>
