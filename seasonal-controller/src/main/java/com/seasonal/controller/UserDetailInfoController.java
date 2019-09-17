@@ -57,7 +57,7 @@ public class UserDetailInfoController {
             String oldName = multipartFile.getOriginalFilename();
             //通过UUID随机生成一个新的文件名
             String newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
-            File file = new File("E:\\img\\"+newName);
+            File file = new File("E:\\"+newName);
             //将图片进行存储
             multipartFile.transferTo(file);
             //这里将图片上传到云然后保存地址
