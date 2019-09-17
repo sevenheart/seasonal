@@ -52,6 +52,7 @@
 	//输出
 
 	out.println("汭序看这里结果是神"+result);
+
 %>
 <body>
 </body>

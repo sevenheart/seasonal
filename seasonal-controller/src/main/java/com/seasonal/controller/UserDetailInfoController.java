@@ -47,7 +47,7 @@ public class UserDetailInfoController {
         resultData.setData(userList);
         return resultData;
     }
-    @RequestMapping("updateUserInfo")
+       @RequestMapping("updateUserInfo")
     @ResponseBody
     public ResultData updateUserInfoById(User user,@RequestParam(value = "multipartFile",required = false) MultipartFile multipartFile) throws  IOException {
         //获取上传的文件
@@ -57,14 +57,13 @@ public class UserDetailInfoController {
             String oldName = multipartFile.getOriginalFilename();
             //通过UUID随机生成一个新的文件名
             String newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
-            File file = new File("E:\\img\\"+newName);
+            File file = new File("E:\\"+newName);
             //将图片进行存储
             multipartFile.transferTo(file);
             //这里将图片上传到云然后保存地址
             TencentUploadUtil.uploadFile("img/user/"+newName+"",file);
-
+            file.delete();
             System.out.println(file.getAbsolutePath());
-
             user.setUserImg(TencentUploadUtil.imgUrl+"/img/user/" + newName);
             System.out.println("图片地址是"+user.getUserImg());
 
@@ -73,7 +72,7 @@ public class UserDetailInfoController {
         int flag =userInfoServer.updateUserInfo(user);
         if (flag<=0){
             //修改信息失败
-           return ResultUtil.fail(1,"修改信息失败");
+            return ResultUtil.fail(1,"修改信息失败");
         }
         return ResultUtil.success(0,"修改成功") ;
     }
