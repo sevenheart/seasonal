@@ -1,5 +1,7 @@
 package com.seasonal.service;
 
+import java.util.List;
+
 public interface LoginService {
     /**
      * 用户注册手机号码查重
@@ -9,12 +11,6 @@ public interface LoginService {
     Object findRegistrationPhone(String identifier);
 
     /**
-     * 用户注册信息添加
-     *
-     * @return
-     */
-    int insertUser();
-    /**
      * 登录验证
      * @param identifier
      * @param credential
@@ -23,10 +19,12 @@ public interface LoginService {
     Object findLogin(String identifier, String credential);
 
     /**
-     * 登录存储信息
+     * 登录信息修改
      *
      * @param identifier
      * @return
      */
-    Object updateMessage(String identifier);
+    int updateMessage(String identifier);
+
+    String getIpNow();
 }
