@@ -6,7 +6,10 @@
     <resultMap id="cart" type="com.seasonal.pojo.CartForm">
 
     </resultMap>
-    <select id="findGoodById" resultMap="cart">
-        select * from cart_form where user_id=#{userId}
+    <select id="findCartFormById" resultMap="cart">
+        select compose_good_icon,compose_good_name,compose_good_price,good_count
+        from cart_form,compose_good
+        where user_id=#{userId}
+        and good_id=compose_good.id
     </select>
 </mapper>

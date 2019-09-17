@@ -1,9 +1,5 @@
 package com.seasonal.service;
 
-import com.seasonal.pojo.CartForm;
-
-import java.util.List;
-
 public interface CartFormService {
 
     /**
@@ -11,6 +7,6 @@ public interface CartFormService {
      * @param userId
      * @return
      */
-    List<CartForm> findCartFormById(String userId);
+    Object findCartFormById(String userId);
 
 }

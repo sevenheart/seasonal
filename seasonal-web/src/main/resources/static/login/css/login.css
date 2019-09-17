@@ -28,6 +28,15 @@ body {
     color: #666;
 }
 
+button{
+    text-transform: none;
+    line-height: normal;
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    text-align: center;
+}
+
 .p-login .header {
     height: 78px;
     border-bottom: 1px solid #DBDBDB;
@@ -47,7 +56,8 @@ body {
 .p-login .header .logo, .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-userName,
 .p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn,
 .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-password,
-.p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn{
+.p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn,
+.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone{
     background-image: url(../../img/login/user.png);
 }
 
@@ -139,10 +149,6 @@ body {
 
 .p-login .body .login-area .tang-pass-login .pass-generalErrorWrapper {
     margin-bottom: 0;
-    color: #F69;
-}
-
-.p-login .body .login-area .tang-pass-login .pass-generalErrorWrapper {
     color: #F69;
     height: auto;
     min-height: 24px;
@@ -381,14 +387,130 @@ body {
 
 
 
+.p-login .body .login-area .tang-pass-sms .tang-pass-sms-title,
+.p-login .body .login-area .tang-pass-sms .tang-pass-sms-tip {
+    display: none;
+}
 
+.tang-pass-sms .tang-pass-sms-title {
+    height: 30px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 700;
+}
 
+.tang-pass-sms .tang-pass-sms-title {
+    height: 30px;
+    line-height: 30px;
+    color: #666;
+    font-weight: 700;
+}
 
+.tang-pass-login a, .tang-pass-login label, .tang-pass-login p, .tang-pass-login li, .tang-pass-login input {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 
+.tang-pass-sms .tang-pass-sms-tip {
+    line-height: 18px;
+    color: #999;
+    font-weight: 400;
+}
 
+.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone {
+    background-position: -370px -179px;
+}
 
+.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone {
+    top: 10px;
+    left: 10px;
+    height: 21px;
+    background-repeat: no-repeat;
+}
 
+.tang-pass-login label.pass-label-smsPhone {
+    background-position: 4px -91px;
+}
 
+.p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn {
+    width: 10px;
+    height: 10px;
+    top: 16px;
+    right: 10px;
+    background-repeat: no-repeat;
+}
 
+.p-login .body .login-area .tang-pass-sms .pass-form-item-smsVerifyCode {
+    height: 40px;
+}
 
+.tang-pass-sms p.pass-form-item-smsVerifyCode, .tang-pass-login p.pass-form-item-verifyCode {
+    position: relative;
+    height: 28px;
+    margin-bottom: 15px;
+}
 
+.p-login .body .login-area .tang-pass-sms .pass-form-item-smsVerifyCode input.pass-text-input-smsVerifyCode {
+    padding-left: 10px;
+    width: 127px;
+}
+
+.p-login .body .login-area .tang-pass-login .pass-form-item span.pass-clearbtn-smsVerifyCode {
+    left: 140px;
+}
+
+.p-login .body .login-area .tang-pass-sms .pass-item-timer, .p-login .body .login-area .tang-pass-sms .pass-item-time-timing {
+    margin-left: 10px;
+    width: 108px;
+    height: 38px;
+}
+
+.tang-pass-login .pass-item-timer {
+    display: block;
+    padding: 0;
+    float: left;
+    font-size: 12px;
+    color: #666;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+.tang-pass-sms-agreement {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #969696;
+}
+
+.tang-pass-sms .pass-form-item .pass-sms-link-back {
+    cursor: pointer;
+    display: block;
+    text-align: right;
+    float: right;
+    padding-top: 10px;
+}
+
+.tang-pass-login a {
+    text-decoration: none;
+    color: #1b66c7;
+}
+
+.tang-pass-sms .pass-form-item input.pass-text-input-smsVerifyCode {
+    width: 90px;
+    float: left;
+    margin-right: 10px;
+}
+
+.tang-pass-login .pass-form-item .pass-clearbtn {
+    position: absolute;
+    z-index: 20;
+    top: 7px;
+    right: 6px;
+    height: 16px;
+    width: 16px;
+    background: url(https://passport.baidu.com/passApi/img/pass_login_icons.png) no-repeat 0 0;
+    cursor: pointer;
+}

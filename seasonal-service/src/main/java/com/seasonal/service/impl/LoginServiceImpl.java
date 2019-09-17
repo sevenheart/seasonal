@@ -2,15 +2,21 @@ package com.seasonal.service.impl;
 
 import com.seasonal.ip.GetIp;
 import com.seasonal.mapper.LoginFromMapper;
+import com.seasonal.pojo.LoginFrom;
 import com.seasonal.redis.RedisUtil;
 import com.seasonal.service.LoginService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParsePosition;
+import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -29,48 +35,54 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Object findRegistrationPhone(String identifier) {
-        redisUtil.setHash();
-        if (redisUtil.get("registration") == loginFrom.findRegistrationPhone(identifier)) {
-            return redisUtil.get("registration");
-        }
-        JSONObject jsonObject = JSONObject.fromObject(loginFrom.findRegistrationPhone(identifier));
-        redisUtil.set("registration", jsonObject.toString());
         return loginFrom.findRegistrationPhone(identifier);
     }
 
     @Override
-    public int insertUser() {
-        JSONObject jsonObject = JSONObject.fromObject(loginFrom.insertUser());
-        redisUtil.set("registration", jsonObject.toString());
-        return 0;
-    }
-
-    @Override
     public Object findLogin(String identifier, String credential) {
+        //Json对sql.data的转换器
+        JsonConfig config = new JsonConfig();
+        config.registerJsonValueProcessor(java.sql.Date.class, new JsonValueProcessor() {
+            private SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+            @Override
+            public Object processArrayValue(Object arg0, JsonConfig arg1) {
+                return null;
+            }
+            @Override
+            public Object processObjectValue(String arg0, Object arg1, JsonConfig arg2) {
+                return arg1 == null ? "" : sd.format(arg1);
+            }
+        });
+
         redisUtil.setHash();
-        if (redisUtil.get("login") == loginFrom.findLogin(identifier, credential)) {
-            return redisUtil.get("login");
+        if (redisUtil.get("findLogin") == loginFrom.findLogin(identifier, credential)) {
+            return redisUtil.get("findLogin");
         }
-        JSONObject jsonObject = JSONObject.fromObject(loginFrom.findLogin(identifier, credential));
-        redisUtil.set("login", jsonObject.toString());
+        JSONArray jsonArray = JSONArray.fromObject(loginFrom.findLogin(identifier, credential),config);
+        redisUtil.set("findLogin", jsonArray.toString());
         return loginFrom.findLogin(identifier, credential);
     }
 
     @Override
-    public Object updateMessage(String identifier) {
+    public int updateMessage(String identifier) {
         //获取当前ip地址
-        String loginIp = getIp.publicip();
-        System.out.println(loginIp);
+        GetIp getIp = new GetIp();
+        String loginIpNow = getIp.publicip();
         //获取当前时间
-        Date date = new Date();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
-        String datastr = dateFormat.format(date);
-        ParsePosition pos = new ParsePosition(8);
-        Date currentTime = dateFormat.parse(datastr,pos);
+        Date currentTime = new Date(System.currentTimeMillis());
 
-        redisUtil.setHash();
-        JSONObject jsonObject2 = JSONObject.fromObject(loginFrom.updateMessage(identifier, currentTime, loginIp));
-        redisUtil.set("login", jsonObject2.toString());
-        return loginFrom.updateMessage(identifier, currentTime, loginIp);
+        List<String> list = new ArrayList<String>();
+        list.add(loginIpNow);
+
+        int num = loginFrom.updateMessage(identifier, currentTime, loginIpNow);
+        return num;
+    }
+
+    @Override
+    public String getIpNow() {
+        //获取当前ip地址
+        String loginIpNow = getIp.publicip();
+        System.out.println(loginIpNow);
+        return loginIpNow;
     }
 }
