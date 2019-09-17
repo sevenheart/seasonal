@@ -1,6 +1,7 @@
 package com.seasonal.controller;
 
 
+import com.seasonal.pojo.LoginFrom;
 import com.seasonal.service.LoginService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -24,29 +30,26 @@ public class LoginController {
     @RequestMapping(value = "registrationPhone")
     @ResponseBody
     public Object userPhone(String identifier) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.findRegistrationPhone(identifier));
         return loginService.findRegistrationPhone(identifier);
     }
-
-//    @RequestMapping(value = "registration")
-//    @ResponseBody
-//    public Object registration(String userName, String phone, String password) {
-//        JSONObject jsonObject = JSONObject.fromObject(loginService.insertUser(userName,phone,password));
-//        return loginService.insertUser();
-//    }
 
     @RequestMapping(value = "login")
     @ResponseBody
     public Object userMessage(String identifier, String credential) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.findLogin(identifier, credential));
         return loginService.findLogin(identifier, credential);
     }
 
-    @RequestMapping(value = "Login")
+    @RequestMapping(value = "loginIp")
     @ResponseBody
-    public Object insertMessage(String userName,String password) {
-        JSONObject jsonObject = JSONObject.fromObject(loginService.updateMessage(userName));
-        return "index.html";
+    public String updateMessage(String identifier) {
+        int num = loginService.updateMessage(identifier);
+        return "redirect:index.html";
+    }
+
+    @RequestMapping(value = "getIpNow")
+    @ResponseBody
+    public String getIpNow() {
+        return loginService.getIpNow();
     }
 
 }

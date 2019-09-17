@@ -61,7 +61,7 @@ public class UserDetailInfoController {
             //将图片进行存储
             multipartFile.transferTo(file);
             //这里将图片上传到云然后保存地址
-           // TencentUploadUtil.uploadFile("img/user",file);
+            TencentUploadUtil.uploadFile("img/user/"+newName+"",file);
 
             System.out.println(file.getAbsolutePath());
 
