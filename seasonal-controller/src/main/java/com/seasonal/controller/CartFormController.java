@@ -1,10 +1,13 @@
 package com.seasonal.controller;
 
+import com.seasonal.pojo.CartForm;
 import com.seasonal.service.CartFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 
 @Controller
@@ -19,7 +22,19 @@ public class CartFormController {
 
     @RequestMapping(value = "showCartList")
     @ResponseBody
-    public Object findCartFormById(String userId){
+    public List<CartForm> findCartFormById(String userId){
         return cartFormService.findCartFormById(userId);
+    }
+
+    @RequestMapping(value = "addCart")
+    @ResponseBody
+    public int addGoodsToCart(String userId, String goodId, Integer goodCount){
+        return cartFormService.addGoodsToCart(userId, goodId, goodCount);
+    }
+
+    @RequestMapping(value = "updateGoodCount")
+    @ResponseBody
+    public int updateGoodsCount(String userId, String goodId, Integer goodCount){
+        return cartFormService.updateGoodsCount(userId, goodId, goodCount);
     }
 }
