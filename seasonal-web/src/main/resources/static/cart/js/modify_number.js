@@ -37,7 +37,4 @@ function isInteger(obj){
     if(value > max){
         $(obj).val($(obj).attr("tmp"));
     }
-    /*if(typeof modifyNumberCallback != 'undefined'){
-        modifyNumberCallback($(obj));
-    }*/
 }

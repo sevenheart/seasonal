@@ -62,25 +62,43 @@ $(document).on('click', "input[name='goods']",function(){
 })
 
 function minusOneCallback(_input){
-    //changeNumber(_input);
     console.log('-1')
-
+    console.log(_input.parents('ul').children('li').children(':checkbox').val())
+    var userId = '002'
+    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
+    var goodCount = _input.val()
+    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
+    updateGoods(userId, goodId, goodCount, _input)
 }
 
 function plusOneCallback(_input){
-    //changeNumber(_input);
     console.log('+1')
     console.log(_input.parents('ul').children('li').children(':checkbox').val())
+    var userId = '002'
+    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
+    var goodCount = _input.val()
+    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
+    updateGoods(userId, goodId, goodCount, _input)
 }
 
-function modifyNumberCallback(_input){
-    //changeNumber(_input);
-}
-
-function changeNumber(_input){
-    var _row = _input.parents("ul");
-    var id = _row.children("li").children(":checkbox").val();
-
+// 修改商品数量
+function updateGoods(userId, goodId, goodCount, _input) {
+    $.ajax({
+        url:'/updateGoodCount',
+        type:'post',
+        data:{'userId':userId, 'goodId':goodId, 'goodCount':goodCount},
+        dataType:'json',
+        success:function (data) {
+            console.log('success:'+data)
+            var unitPrice = _input.parents('ul').children('li .co-dj').text()
+            var lastPrice = parseFloat(unitPrice) * goodCount
+            _input.parents('ul').children('li .co-je').text(Number(lastPrice).toFixed(2))
+            sumAllPrice()
+        },
+        error:function (data) {
+            console.log('error:'+data)
+        }
+    })
 }
 
 var goodHtml = ''
@@ -95,7 +113,7 @@ $.ajax({
             goodHtml = goodHtml + '<li class="cart-con-li">\n' +
                 '                <ul class="cart-obj clear">\n' +
                 '                    <li class="co-inp">\n' +
-                '                        <input type="checkbox" name="goods" value="' + i + '">\n' +
+                '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
                 '                    </li>\n' +
                 '                    <li class="co-img">\n' +
                 '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
@@ -105,7 +123,7 @@ $.ajax({
                 '                    <li class="co-name">\n' +
                 '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
                 '                    </li>\n' +
-                '                    <li class="co-dj" id="price-one">' + value.composeGood.composeGoodPrice + '</li>\n' +
+                '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
                 '                    <li class="co-sl">\n' +
                 '                        <span class="co-sl-span">\n' +
                 '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
