@@ -65,7 +65,6 @@ $(document).on('click', "input[name='goods']",function(){
     sumAllPrice()
 })
 
-// 商品减少数量回调函数
 function minusOneCallback(_input){
     console.log('-1')
     console.log(_input.parents('ul').children('li').children(':checkbox').val())
@@ -76,7 +75,6 @@ function minusOneCallback(_input){
     updateGoods(userId, goodId, goodCount, _input)
 }
 
-// 商品添加数量回调函数
 function plusOneCallback(_input){
     console.log('+1')
     console.log(_input.parents('ul').children('li').children(':checkbox').val())
@@ -188,3 +186,26 @@ $.ajax({
     }
 })
 
+$("#ctf-js").click(function () {
+    $("#cart-flow").children("li").eq(1).removeClass("c-f-li-cur");
+    $("#cart-flow").children("li").eq(2).addClass("c-f-li-cur");
+    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
+    $("#cart").children("ul").css("display", "none");
+});
+$("#pick_up").click(function () {
+    //自提按钮点击事件
+    $("#allot_price").text("配送费：￥0");
+    $("#allot_address").css("display", "none");
+});
+$("#delivery").click(function () {
+    //配送按钮点击事件
+    $("#allot_price").text("配送费：￥10");
+    $("#allot_address").css("display", "block");
+});
+$("#allot_address_x").click(function () {
+});
+
+function allotAddressX(value) {
+    //value为下拉时option 的value值
+    $("#allot_price").text("配送费：￥20");
+}
