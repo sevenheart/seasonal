@@ -40,4 +40,12 @@ public interface CartFormMapper {
      * @return
      */
     CartForm findGoodById(String userId, String goodId);
+
+    /**
+     * 从购物车中移除商品
+     * @param userId
+     * @param goodIdList
+     * @return
+     */
+    int deleteGoodsOfCart(String userId, List<String> goodIdList);
 }

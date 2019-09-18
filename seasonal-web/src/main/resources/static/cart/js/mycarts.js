@@ -1,6 +1,9 @@
 
+// 已选商品数量
+var chooseGoodsNum = 0
+
 //已选商品数量插入
-function chooseNum(chooseGoodsNum){
+function chooseNum(){
     $('#count').text(chooseGoodsNum) //已选商品数量插入
 }
 
@@ -23,13 +26,15 @@ $("input[name='all']").click(function () {
         console.log('.goodsTrue:'+$("input[name='goods']").val())
         $("input[name='all']").prop('checked',true)
         $("input[name='goods']").prop('checked',true)
-        chooseNum($("input[name='goods']").length)
+        chooseGoodsNum = $("input[name='goods']").length
+        chooseNum()
         sumAllPrice()
     }else{
         console.log('.goodsFalse:'+$("input[name='goods']").val())
         $("input[name='all']").prop('checked', false)
         $("input[name='goods']").prop('checked', false)
-        chooseNum(0)
+        chooseGoodsNum = 0
+        chooseNum()
         sumAllPrice()
     }
 })
@@ -37,7 +42,6 @@ $("input[name='all']").click(function () {
 //商品勾选
 $(document).on('click', "input[name='goods']",function(){
     var allGoods = true //判断所有商品是否已勾选
-    var chooseGoodsNum = 0
 
     if($(this).is(':checked')){
         chooseGoodsNum++
@@ -57,10 +61,11 @@ $(document).on('click', "input[name='goods']",function(){
         $("input[name='all']").prop('checked', false)
     }
 
-    chooseNum(chooseGoodsNum)
+    chooseNum()
     sumAllPrice()
 })
 
+// 商品减少数量回调函数
 function minusOneCallback(_input){
     console.log('-1')
     console.log(_input.parents('ul').children('li').children(':checkbox').val())
@@ -71,6 +76,7 @@ function minusOneCallback(_input){
     updateGoods(userId, goodId, goodCount, _input)
 }
 
+// 商品添加数量回调函数
 function plusOneCallback(_input){
     console.log('+1')
     console.log(_input.parents('ul').children('li').children(':checkbox').val())
@@ -101,7 +107,36 @@ function updateGoods(userId, goodId, goodCount, _input) {
     })
 }
 
+// 从购物车中删除商品
+/*function deleteProducts(obj){
+    var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
+    var userId = '002'
+    var goodDataList = new Array()
+    goodDataList.push(userId)
+    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+        if($(this).is(':checked')){
+            goodDataList.push($(this).val())
+        }
+    })
+    console.log(goodDataList)
+    $.ajax({
+        url:'/deleteGood',
+        type:'post',
+        data:JSON.stringify(goodDataList),
+        dataType:'json',
+        contentType:"application/json",
+        success:function (data) {
+            console.log('success:'+data)
+            $(obj).parents('ul').parents('li').remove()
+        },
+        error:function (data) {
+            console.log('error:'+data)
+        }
+    })
+}*/
+
 var goodHtml = ''
+var goodsData
 
 $.ajax({
     url:'/showCartList',
@@ -109,8 +144,9 @@ $.ajax({
     data:{'userId':'002'},
     dataType:'json',
     success:function (data) {
+        goodsData = data
         $.each(data,function (i, value) {
-            goodHtml = goodHtml + '<li class="cart-con-li">\n' +
+            goodHtml = goodHtml + '<li class="cart-con-li" value="bink">\n' +
                 '                <ul class="cart-obj clear">\n' +
                 '                    <li class="co-inp">\n' +
                 '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
