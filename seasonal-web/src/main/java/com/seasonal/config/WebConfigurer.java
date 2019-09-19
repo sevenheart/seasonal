@@ -1,8 +1,10 @@
 package com.seasonal.config;
 
+import com.seasonal.dataconverter.DateConverter;
 import com.seasonal.filter.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,6 +20,12 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Autowired
     public WebConfigurer(LoginInterceptor loginInterceptor) {
         this.loginInterceptor = loginInterceptor;
+    }
+
+    //配置日期转换器
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new DateConverter());
     }
 
     @Override

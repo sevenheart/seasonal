@@ -35,7 +35,6 @@
 	
 	//请求
 	String result = alipayClient.execute(alipayRequest).getBody();
-	
 	//输出
 	out.println(result);
 %>
