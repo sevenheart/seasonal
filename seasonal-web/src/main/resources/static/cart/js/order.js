@@ -1,25 +1,30 @@
-// let good_id_arary = new Array(10);
-// good_id_arary.put("1");
-// good_id_arary.put("2");
-// let good_price_array = new Array(10);
-// good_price_array.put("22");
-// good_price_array.put("20");
-// let good_count_array = new Array(10);
-// good_count_array.put("3");
-// good_count_array.put("2");
+//订单商品列表
+var good_id_arrary = new Array(10);
+good_id_arrary.unshift("1");
+good_id_arrary.unshift("2");
+//订单商品价格列表
+var good_price_array = new Array(10);
+good_price_array.unshift("22");
+good_price_array.unshift("20");
+//订单商品数量列表
+var good_count_array = new Array(10);
+good_count_array.unshift("3");
+good_count_array.unshift("2");
 let html = "";
 let order_money = 50;//订单金额
 const order_user_id = "001";//用户id
 const order_name = "春野樱";
-let delivery_way = "0";//配送方式
-let delivery_money = "20"//配送费
-let good_type = "0";//商品类型
+// let delivery_way = "0";//配送方式
+// let delivery_money = "20"//配送费
+// let good_type = "0";//商品类型
 //保存查到后拼接完成的地址信息
 let address_array = new Array(10);
 //将拼接完成的地址信息继续拼接成html要用的代码
 let html_address = new Array(10);
 let html_address_sum = 0;
-
+let html_address_name = new Array(10);
+let html_address_phone = new Array(10);
+let delivery_way = 0;
 
 //订单号生成 j位随机数
 function random_No(j) {
@@ -30,7 +35,8 @@ function random_No(j) {
     }
     random_no = new Date().getTime() + random_no;
     return random_no;
-};
+}
+
 $("#ctf-js").click(function () {
     const cart_flow = $("#cart-flow");
     const cart = $("#cart");
@@ -49,7 +55,6 @@ $("#ctf-js").click(function () {
         dataType: "json",
         async: false,
         success: function (data) {
-            console.log(data);
             $.each(data.data, function (k, v) {
                 let user_address = "";
                 user_address += v.province;
@@ -57,6 +62,8 @@ $("#ctf-js").click(function () {
                 user_address += v.district;
                 user_address += v.address;
                 address_array[k] = (user_address);
+                html_address_name[k] = v.userName;
+                html_address_phone[k] = v.userPhone;
                 html_address[k] = '<option value="' + user_address + '">' + user_address + '</option>';
                 html_address_sum += 1;
             });
@@ -78,19 +85,12 @@ $("#ctf-js").click(function () {
         '            <span class="og" id="allot_price">配送费：￥0</span><br>\n' +
         '            <span class="og" id="allot_address" style="display: none;">选择配送地址:\n' +
         '    \t    <select onchange="allotAddressX(this.options[this.options.selectedIndex].value)" id="allot_address_x">';
-    for (let j = 0; j < html_address_sum; j++) {
-        console.log(j);
-        console.log(html_address);
+    for (let j = 0; html_address_sum > j; j++) {
         html += html_address[j];
     }
     html += '</select></span><br>\n' +
-        '            <span class="og">支付方式：</span>\n' +
-        '            <span class="og"><input id="wxpay" name="pay" type="radio" value="微信支付"\n' +
-        '                                    style="vertical-align:middle;"/><label for="wxpay"><img\n' +
-        '                    style="vertical-align:middle;" src="../../img/pc_wxqrpay.png"></label></span>\n' +
-        '            <span class="og"><input checked="true" id="alipay" name="pay" type="radio" value="支付宝支付" style="vertical-align:middle;"/><label\n' +
-        '                    for="alipay"><img style="vertical-align:middle;" src="../../img/alipaypcnew.png"></label></span>\n' +
-        '            <a href="#" id="og-f">结算</a>\n' +
+        '            <div id="og_shou" style="display: none"><span class="og">收货人姓名：</span><span class="og_sp" id="og_name"></span><span class="og">收货人联系方式：</span><span class="og_sp" id="og_phone"></span></div><br>\n' +
+        '            <a href="#" id="og-f">生成订单</a>\n' +
         '        </div>\n' +
         '        <div style="width: 400px;height: 400px;border: #0000cc 1px solid;float: right"></div>\n' +
         '        <br>\n' +
@@ -101,13 +101,19 @@ $("#ctf-js").click(function () {
 
     $("#pick_up").click(function () {
         //自提按钮点击事件
+        delivery_way = 0;
         $("#allot_price").text("配送费：￥0");
         $("#allot_address").css("display", "none");
+        $("#og_shou").css("display", "none")
     });
     $("#delivery").click(function () {
         //配送按钮点击事件
+        delivery_way = 1;
         $("#allot_price").text("配送费：￥10");
         $("#allot_address").css("display", "block");
+        $("#og_shou").css("display", "block")
+        $("#og_name").text(html_address_name[0]);
+        $("#og_phone").text(html_address_phone[0]);
     });
     // $("#allot_address_x").click(function () {
     // });
@@ -117,9 +123,35 @@ $("#ctf-js").click(function () {
     //         data:{"WIdout_trade_no":orderId,"good_id":id,"good_count":count,}
     //     })
     // });
+    $("#og-f").click(function () {
+        var orderData = {
+            "orderId": orderId,
+            "userId": order_user_id,
+            "orderMoney": order_money,
+            "goodIdArray": good_id_arrary,
+            "goodPriceArray": good_price_array,
+            "goodCountArray": good_count_array
+        };
+        if (delivery_way === 0) {
+            $.ajax({
+                url: "/ProvideOrderForm",
+                type: "post",
+                data: JSON.stringify(orderData),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        } else {
+
+        }
+
+    });
 });
 
 function allotAddressX(value) {
     //value为下拉时option 的value值
+    $("#og_name").text(html_address_name[$("#allot_address_x ").get(0).selectedIndex]);
+    $("#og_phone").text(html_address_phone[$("#allot_address_x ").get(0).selectedIndex]);
     $("#allot_price").text("配送费：￥20");
 }

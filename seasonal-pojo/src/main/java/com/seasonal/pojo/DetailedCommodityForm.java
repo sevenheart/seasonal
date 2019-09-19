@@ -9,7 +9,7 @@ import java.util.Date;
 public class DetailedCommodityForm {
     private Long id;
     private String goodId;
-    private Byte goodCount;
+    private Integer goodCount;
     private BigDecimal commodityMoney;
     private String orderId;
     private String goodType;
