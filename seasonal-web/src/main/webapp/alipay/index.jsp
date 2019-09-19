@@ -204,7 +204,7 @@ h2 {
 			<h2 id="tab5" name="tab">交 易 关 闭</h2>
 		</div>
 		<form name=alipayment action=/pay method=post
-			  target="_blank">
+			  >
 			<div id="body1" class="show" name="divcontent">
 				<dl class="content">
 					<dt>商户订单号 ：</dt>

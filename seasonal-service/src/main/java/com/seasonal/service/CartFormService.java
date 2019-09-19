@@ -29,4 +29,12 @@ public interface CartFormService {
      * @return
      */
     int updateGoodsCount(String userId, String goodId, Integer goodCount);
+
+    /**
+     * 从购物车中移除商品
+     * @param userId
+     * @param goodIdList
+     * @return
+     */
+    int deleteGoodsOfCart(String userId, List<String> goodIdList);
 }
