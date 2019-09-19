@@ -112,4 +112,24 @@ $('.goods_describe_option li').click(function () {
     $(this).children("a").css("color", "white")
 });
 
+//添加入购物车
+$('.goods_describe_option span').click(function () {
+    var goodCount = $('#good_count').val()
+    var goodId = getQueryVariable("id")
+    $.ajax({
+        url:'/addCart',
+        type:'post',
+        dataType:'json',
+        data:{'userId':'002', 'goodId': goodId, 'goodCount': goodCount},
+        success:function (data) {
+            console.log('success:'+data)
+            alert('添加入购物车成功')
+        },
+        error:function (data) {
+            console.log('error:'+data)
+            alert('添加入购物车失败')
+        }
+    })
+})
+
 

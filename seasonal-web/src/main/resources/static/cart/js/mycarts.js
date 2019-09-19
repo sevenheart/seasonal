@@ -1,10 +1,15 @@
-//计算已选上的商品数量
+
+// 已选商品数量
 var chooseGoodsNum = 0
 
-//已选商品数量插入以及计算已选商品的所有总价格
-function chooseNumAndSum(){
-    var sumPrice = 0.00
+//已选商品数量插入
+function chooseNum(){
     $('#count').text(chooseGoodsNum) //已选商品数量插入
+}
+
+//计算已选商品的所有总价格
+function sumAllPrice(){
+    var sumPrice = 0.00
     $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
         if($(this).is(':checked')){
             sumPrice = sumPrice + parseFloat($('#price'+i).text())
@@ -22,13 +27,15 @@ $("input[name='all']").click(function () {
         $("input[name='all']").prop('checked',true)
         $("input[name='goods']").prop('checked',true)
         chooseGoodsNum = $("input[name='goods']").length
-        chooseNumAndSum()
+        chooseNum()
+        sumAllPrice()
     }else{
         console.log('.goodsFalse:'+$("input[name='goods']").val())
         $("input[name='all']").prop('checked', false)
         $("input[name='goods']").prop('checked', false)
         chooseGoodsNum = 0
-        chooseNumAndSum()
+        chooseNum()
+        sumAllPrice()
     }
 })
 
@@ -54,28 +61,80 @@ $(document).on('click', "input[name='goods']",function(){
         $("input[name='all']").prop('checked', false)
     }
 
-    chooseNumAndSum()
+    chooseNum()
+    sumAllPrice()
 })
 
 function minusOneCallback(_input){
-    changeNumber(_input);
+    console.log('-1')
+    console.log(_input.parents('ul').children('li').children(':checkbox').val())
+    var userId = '002'
+    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
+    var goodCount = _input.val()
+    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
+    updateGoods(userId, goodId, goodCount, _input)
 }
 
 function plusOneCallback(_input){
-    changeNumber(_input);
+    console.log('+1')
+    console.log(_input.parents('ul').children('li').children(':checkbox').val())
+    var userId = '002'
+    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
+    var goodCount = _input.val()
+    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
+    updateGoods(userId, goodId, goodCount, _input)
 }
 
-function modifyNumberCallback(_input){
-    changeNumber(_input);
+// 修改商品数量
+function updateGoods(userId, goodId, goodCount, _input) {
+    $.ajax({
+        url:'/updateGoodCount',
+        type:'post',
+        data:{'userId':userId, 'goodId':goodId, 'goodCount':goodCount},
+        dataType:'json',
+        success:function (data) {
+            console.log('success:'+data)
+            var unitPrice = _input.parents('ul').children('li .co-dj').text()
+            var lastPrice = parseFloat(unitPrice) * goodCount
+            _input.parents('ul').children('li .co-je').text(Number(lastPrice).toFixed(2))
+            sumAllPrice()
+        },
+        error:function (data) {
+            console.log('error:'+data)
+        }
+    })
 }
 
-function changeNumber(_input){
-    var _row = _input.parents("ul");
-    var id = _row.children("li").children(":checkbox").val();
-
-}
+// 从购物车中删除商品
+/*function deleteProducts(obj){
+    var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
+    var userId = '002'
+    var goodDataList = new Array()
+    goodDataList.push(userId)
+    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+        if($(this).is(':checked')){
+            goodDataList.push($(this).val())
+        }
+    })
+    console.log(goodDataList)
+    $.ajax({
+        url:'/deleteGood',
+        type:'post',
+        data:JSON.stringify(goodDataList),
+        dataType:'json',
+        contentType:"application/json",
+        success:function (data) {
+            console.log('success:'+data)
+            $(obj).parents('ul').parents('li').remove()
+        },
+        error:function (data) {
+            console.log('error:'+data)
+        }
+    })
+}*/
 
 var goodHtml = ''
+var goodsData
 
 $.ajax({
     url:'/showCartList',
@@ -83,22 +142,22 @@ $.ajax({
     data:{'userId':'002'},
     dataType:'json',
     success:function (data) {
-        console.log('cartGoods:' + data[0].goodCount)
+        goodsData = data
         $.each(data,function (i, value) {
-            goodHtml = goodHtml + '<li class="cart-con-li">\n' +
+            goodHtml = goodHtml + '<li class="cart-con-li" value="bink">\n' +
                 '                <ul class="cart-obj clear">\n' +
                 '                    <li class="co-inp">\n' +
-                '                        <input type="checkbox" name="goods" value="' + i + '">\n' +
+                '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
                 '                    </li>\n' +
                 '                    <li class="co-img">\n' +
-                '                        <a href="#" target="_blank">\n' +
-                '                            <img src="' + value.composeGoodIcon + '" width="100" height="100">\n' +
+                '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
+                '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100">\n' +
                 '                        </a>\n' +
                 '                    </li>\n' +
                 '                    <li class="co-name">\n' +
-                '                        <a href="#" title="' + value.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGoodName + '</a>\n' +
+                '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
                 '                    </li>\n' +
-                '                    <li class="co-dj" id="price-one">' + value.composeGoodPrice + '</li>\n' +
+                '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
                 '                    <li class="co-sl">\n' +
                 '                        <span class="co-sl-span">\n' +
                 '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
@@ -107,7 +166,7 @@ $.ajax({
                 '                        </span>\n' +
                 '                        <span class="co-sl-remark" title></span>\n' +
                 '                    </li>\n' +
-                '                    <li class="co-je" id="price' + i + '">' + Number(value.composeGoodPrice * value.goodCount).toFixed(2) + '</li>\n' +
+                '                    <li class="co-je" id="price' + i + '">' + Number(value.composeGood.composeGoodPrice * value.goodCount).toFixed(2) + '</li>\n' +
                 '                    <li class="co-del">\n' +
                 '                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>\n' +
                 '                    </li>\n' +
@@ -127,3 +186,26 @@ $.ajax({
     }
 })
 
+$("#ctf-js").click(function () {
+    $("#cart-flow").children("li").eq(1).removeClass("c-f-li-cur");
+    $("#cart-flow").children("li").eq(2).addClass("c-f-li-cur");
+    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
+    $("#cart").children("ul").css("display", "none");
+});
+$("#pick_up").click(function () {
+    //自提按钮点击事件
+    $("#allot_price").text("配送费：￥0");
+    $("#allot_address").css("display", "none");
+});
+$("#delivery").click(function () {
+    //配送按钮点击事件
+    $("#allot_price").text("配送费：￥10");
+    $("#allot_address").css("display", "block");
+});
+$("#allot_address_x").click(function () {
+});
+
+function allotAddressX(value) {
+    //value为下拉时option 的value值
+    $("#allot_price").text("配送费：￥20");
+}
