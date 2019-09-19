@@ -15,7 +15,7 @@ public interface UserAddressMapper {
     int insertUserAddress(UserAddress userAddress);
 
     /**
-     * 根据用户的id查找所有用户的地址信息
+     * 根据用户的id查找用户的地址信息
      * @param userId
      * @return
      */
