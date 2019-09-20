@@ -16,7 +16,7 @@ function sumAllPrice(){
         }
     })
     console.log('sumPrice:'+sumPrice)
-    $('#total').text(Number(sumPrice).toFixed(2))
+    $('#total').text('￥'+Number(sumPrice).toFixed(2))
 }
 
 //商品全选
@@ -186,14 +186,5 @@ $.ajax({
     }
 });
 
-$("#ctf-js").click(function () {
-    $("#cart-flow").children("li").eq(1).removeClass("c-f-li-cur");
-    $("#cart-flow").children("li").eq(2).addClass("c-f-li-cur");
-    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
-    $("#cart").children("ul").css("display", "none");
-});
 
-$("#allot_address_x").click(function () {
-
-});
 

@@ -43,7 +43,7 @@ function ajax_test() {
                     $.each(goodsShowNavItem.composeGood, function (n, mainRightItem) {//遍历商品栏
                         //添加商品
                         const $mainRight = $('.main_right').eq(mainRightIndex);
-                        $mainRight.append('<a href="#" class="goods">\n' +
+                        $mainRight.append('<a href="detailGoods.html?id=' + mainRightItem.id + '" class="goods">\n' +
                             '                                    <img alt="" src="' + mainRightItem.composeGoodIcon + '"/>\n' +
                             '                                    <span class="goods_info">' + mainRightItem.composeGoodName + '</span>\n' +
                             '                                    <span class="goods_price">￥' + mainRightItem.composeGoodPrice + '.00</span>\n' +

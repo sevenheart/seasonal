@@ -61,18 +61,19 @@
             <li class="c-f-li">3.成功提交订单</li>
         </ul>
     </div>
-    <ul id="cart-th" class="clear" style="display: none">
+    <ul id="cart-th" class="clear">
         <li id="ct-inp">
             <input type="checkbox" name="all">
         </li>
         <li id="ct-all">全选</li>
         <li id="ct-name">商品信息</li>
+        <!--<li id="ct-sj">市场价(元)</li>-->
         <li id="ct-dj">单价(元)</li>
         <li id="ct-sl">数量</li>
         <li id="ct-je">金额(元)</li>
         <li id="ct-op">操作</li>
     </ul>
-    <ul id="cart-con" style="display: none">
+    <ul id="cart-con">
         <!-- 无商品时 -->
         <!--<div id="mc-msg">
             <span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span>
@@ -139,7 +140,7 @@
             </ul>
         </li>-->
     </ul>
-    <ul id="cart-tf" class="clear" style="display: none">
+    <ul id="cart-tf" class="clear">
         <li id="ctf-inp">
             <input type="checkbox" name="all">
         </li>
@@ -158,34 +159,35 @@
             件
         </li>
     </ul>
-    <div style="width: 80%;height: 400px;margin: 50px auto">
-        <div style="width: 58%;height: 380px;float: left;padding-top: 20px">
-            <span class="of">订单编号：</span><span class="of_sp">2019091814312601012414</span><br>
-            <span class="of">用户ID：</span><span class="of_sp">0180925241</span><br>
-            <span class="of">用户名：</span><span class="of_sp">春野樱</span><br>
-            <span class="og">商品一：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>
-            <span class="og">商品二：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>
-            <span class="og">商品三：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>
-            <span class="og">总价格：</span><span class="og_sp">￥380 </span><br>
-            <span class="og">请选择配送方式(配送按每公里1元收取配送费用，自提无费用)：</span><br>
-            <span class="og"><input id="pick_up" name="allot" type="radio" value="自提"/><label
-                    for="pick_up">自提</label></span>
-            <span class="og"><input id="delivery" name="allot" type="radio" value="配送"/><label for="delivery">配送</label></span>
-            <span class="og" id="allot_price">配送费：￥0</span><br>
-            <span class="og" id="allot_address" style="display: none;">选择配送地址:
-            <select onchange="allotAddressX(this.options[this.options.selectedIndex].value, this.options[this.options.selectedIndex].text)" id="allot_address_x">
-            </select></span><br>
-            <span class="og">支付方式：</span>
-            <span class="og"><input id="wxpay" name="allot" type="radio" value="微信支付"
-                                    style="vertical-align:middle;"/><label for="wxpay"><img
-                    style="vertical-align:middle;" src="../../img/pc_wxqrpay.png"></label></span>
-            <span class="og"><input id="alipay" name="allot" type="radio" value="支付宝支付" style="vertical-align:middle;"/><label
-                    for="alipay"><img style="vertical-align:middle;" src="../../img/alipaypcnew.png"></label></span>
-            <a href="#" id="og-f">结算</a>
-        </div>
-        <div style="width: 400px;height: 400px;border: #000000 1px solid;float: right" id="container"></div>
-        <br>
-    </div>
+    <!--<div style="width: 80%;height: 400px;margin: 50px auto">-->
+    <!--<div style="width: 58%;height: 380px;float: left;padding-top: 20px">-->
+    <!--<span class="of">订单编号：</span><span class="of_sp">2019091814312601012414</span><br>-->
+    <!--<span class="of">用户ID：</span><span class="of_sp">0180925241</span><br>-->
+    <!--<span class="of">用户名：</span><span class="of_sp">春野樱</span><br>-->
+    <!--<span class="og">商品一：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>-->
+    <!--<span class="og">商品二：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>-->
+    <!--<span class="og">商品三：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>-->
+    <!--<span class="og">总价格：</span><span class="og_sp">￥380 </span><br>-->
+    <!--<span class="og">请选择配送方式(配送按每公里1元收取配送费用，自提无费用)：</span><br>-->
+    <!--<span class="og"><input id="pick_up" name="allot" type="radio" value="自提"/><label-->
+    <!--for="pick_up">自提</label></span>-->
+    <!--<span class="og"><input id="delivery" name="allot" type="radio" value="配送"/><label for="delivery">配送</label></span>-->
+    <!--<span class="og" id="allot_price">配送费：￥0</span><br>-->
+    <!--<span class="og" id="allot_address" style="display: none;">选择配送地址:-->
+    <!--<select onchange="allotAddressX(this.options[this.options.selectedIndex].value)" id="allot_address_x">-->
+    <!--<option value="江苏省苏州市工业园区创意产业园大圆球">江苏省苏州市工业园区创意产业园大圆球</option>-->
+    <!--<option value="吉林省松原市文化康城小区4号楼408室">吉林省松原市文化康城小区4号楼408室</option>-->
+    <!--<option value="大连市甘井子区中心商贸">大连市甘井子区中心商贸</option>-->
+    <!--<option value="江苏省苏州市世贸中心">江苏省苏州市世贸中心</option>-->
+    <!--</select></span><br>-->
+    <!--<div><span class="og">收货人姓名：</span><span class="og_sp" id="og_name">小樱</span><span-->
+    <!--class="og">收货人联系方式：</span><span class="og_sp" id="og_phone">13812124545</span></div>-->
+    <!--<br>-->
+    <!--<a href="#" id="og-f">结算</a>-->
+    <!--</div>-->
+    <!--<div style="width: 400px;height: 400px;border: #0000cc 1px solid;float: right"></div>-->
+    <!--<br>-->
+    <!--</div>-->
 </div>
 <div class="footer">
     <img alt="" src="../../img/foot_logo.jpg" style="width: 100%"/>
@@ -194,6 +196,7 @@
 <script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../js/modify_number.js"></script>
 <script type="text/javascript" src="../js/mycarts.js"></script>
+<script type="text/javascript" src="../js/order.js"></script>
 <script type="text/javascript" src="../js/address.js"></script>
 <script src="../../js/global.js"></script>
 </html>

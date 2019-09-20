@@ -51,14 +51,15 @@
 	
 		//付款金额
 		String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"),"UTF-8");
-		
 		out.println("trade_no:"+trade_no+"<br/>out_trade_no:"+out_trade_no+"<br/>total_amount:"+total_amount);
+
 	}else {
 		out.println("验签失败");
 	}
 	//——请在这里编写您的程序（以上代码仅作参考）——
 %>
 <body>
+
 <h1>这里是同步通知页面</h1>
 </body>
 </html>
