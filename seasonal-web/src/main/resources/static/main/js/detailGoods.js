@@ -41,6 +41,12 @@ function ajax_test(id) {
                     $(".goods_signal_describe").append('<img src="' + v.composeGoodImg + '" alt="" />\n')
                 }
                 index += 1;
+
+            })
+            //选择查看用户评论时隐藏商品介绍
+            $('#goods_discribe').click(function () {
+                console.log("jhiuh")
+                $('#goods_discribe_div').hide();
             })
         }
     });

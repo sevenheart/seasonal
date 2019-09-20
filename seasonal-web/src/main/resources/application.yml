@@ -1,7 +1,7 @@
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/jsp
+      prefix: /WEB-INF/jsp/
       suffix: .jsp
   #加载banner
   output:
@@ -32,6 +32,19 @@ spring:
     # Redis服务器连接密码（默认为空）
     password:
     # 连接池最大连接数（使用负值表示没有限制）
+
+  #配置mongodb
+  data:
+    mongodb:
+      database: seasonal
+      host: localhost
+      port: 27017
+      username:
+      password:
+      uri: mongodb://localhost
+
+
+
 #logging:
 #  file: E:/boot.log
 #  level:

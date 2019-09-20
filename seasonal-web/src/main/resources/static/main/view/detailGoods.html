@@ -295,10 +295,22 @@
                             <span class="goods_price">￥14.00</span>
                         </a>
                     </div>
-                    <div class="goods_signal_title">商品介绍</div>
+                    <div class="goods_signal_title" >
+                        <ul style="text-decoration: none">
+                        <li id="goods_discribe" style="border: 0px solid #CCC; cursor: pointer; float: left;color: #bbb;">商品介绍</li>
+                        <li style="float: left;">|</li>
+                            <li id="goods_comment" style="float: left;">商品评论</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="goods_signal_describe goods_signal">
+
+                <!--    <div class="goods_signal_title"  >商品评价</div>-->
                 </div>
+            <div class="goods_signal_describe goods_signal" id="goods_discribe_div" >
+            </div>
+
+            <div class="goods_signal " id="goods_comment_div">
+                //评论处
             </div>
         </div>
     </div>
@@ -312,4 +324,10 @@
 <script src="../../js/global.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/detailGoods.js"></script>
+<script>
+ /*   $('#goods_discribe').click(function () {
+         console.log("jhiuh")
+         $('#goods_discribe_div').hide();
+     })*/
+</script>
 </html>
