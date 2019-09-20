@@ -3,7 +3,6 @@ package com.seasonal.service.impl;
 import com.seasonal.mapper.CartFormMapper;
 import com.seasonal.pojo.CartForm;
 import com.seasonal.service.CartFormService;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,10 +40,9 @@ public class CartFormServiceImpl implements CartFormService {
     public int updateGoodsCount(String userId, String goodId, Integer goodCount) {
         return cartFormMapper.updateGoodsCount(userId, goodId, goodCount);
     }
-
     @Override
-    public int deleteGoodsOfCart(String userId, List<String> goodIdList) {
-        return cartFormMapper.deleteGoodsOfCart(userId, goodIdList);
+    public int deleteGoodsOfCart(String userId,String GoodId) {
+        return cartFormMapper.deleteGoodsOfCart(userId, GoodId);
     }
 
 }

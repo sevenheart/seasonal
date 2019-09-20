@@ -65,7 +65,7 @@ button {
 
 body {
     background: 0 0;
-    font-family: Tahoma, Helvetica, "Microsoft Yahei", "寰蒋闆呴粦", Arial, STHeiti
+    font-family: Tahoma, Helvetica, "Microsoft Yahei", Arial, STHeiti
 }
 
 #head {
@@ -249,7 +249,7 @@ body {
     background-color: #fa6790;
 }
 
-.login-link .login-btn{
+.login-link .login-btn {
     display: inline-block;
     margin-left: 5px;
     width: 62px;
@@ -260,4 +260,35 @@ body {
     font-weight: 700;
     border: 1px solid #DDD;
     border-radius: 3px;
+}
+
+#isAgreeError {
+    margin-left: 76px;
+    top: 0;
+    float: none;
+}
+
+.pass-item-error, #verifyCodeSend-span {
+    top: 12px;
+    float: left;
+    display: none;
+    position: relative;
+    width: 250px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+    background: url(../../img/registration/err_small.png) 0 0 no-repeat;
+}
+
+#verifyCode-span, #verifyCodeError-span, #verifyCodeExpiration-span {
+    background: url(../../img/registration/err_small.png) 0 0 no-repeat;
+    float: left;
+    position: relative;
+    width: 250px;
+    top: 12px;
+    color: #fc4343;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
 }

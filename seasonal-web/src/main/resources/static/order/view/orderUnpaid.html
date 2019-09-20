@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/order_header.css">
+    <link rel="stylesheet" type="text/css" href="../css/order_footer.css">
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+</head>
+<body>
+<div class="app">
+    <div id="header" class="mtgroup-header-container">
+        <header class="com-header">
+            <div class="login_bar">
+                <ul>
+                    <li>
+                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg"><a
+                            href="#">请登录</a>
+                    </li>
+                    <li>
+                        <img alt=""
+                             src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/register_icon.jpg"><a
+                            href="#">免费注册</a>
+                    </li>
+                    <li>
+                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/order_icon.jpg"><a
+                            href="#">我的订单</a>
+                    </li>
+                </ul>
+            </div>
+            <hr style="width: 100%;display: inline-block;margin-top: 1px;">
+            <div class="header-content clearfix">
+                <div class="header-title-module">
+                    <div class="header-title"><a href="../../index.html"><img
+                            src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" alt="果酷"></a>
+                    </div>
+                </div>
+                <div class="hd" style="width: 250px">
+                    <a class="hd_m" href="../../user/view/personCenter.html">
+                        <span id="hd_ms_i"></span>
+                        <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
+                    </a>
+                    <a class="hd_m" href="../../cart/view/myCarts.html">
+                        <span id="hd_mc_i"></span>
+                        <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
+                    </a>
+                </div>
+
+            </div>
+        </header>
+    </div>
+    <div id="body" class="container clear-fix">
+        <div class="right right-widen">
+            <div class="order clear-fix"><span class="block-left"><div class="order-name" id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price" id="order-money"></span></div></span>
+            </div>
+            <div class="payment-container">
+                <div class="payment payment-0">
+                    <div class="payment-type">
+                        <ul class="payment-menu">
+                            <li class="payment-tab payment-tab-0" data-target="0">支付宝/微信</li>
+                        </ul>
+                        <div class="payment-list payment-list-0">
+                            <ul class="clear-fix">
+                                <li>
+                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">
+                                    <label class="payment-icon" for="thirdpart_pay_wxqrpay">
+                                        <img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">
+                                    </label>
+                                    <span class="payment-weak-tip" style="visibility:visible;"></span>
+                                </li>
+                                <li>
+                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_alipay">
+                                    <label class="payment-icon" for="thirdpart_pay_alipay">
+                                        <img src="https://p0.meituan.net/pay/alipaypcnew.png" alt="支付宝">
+                                    </label>
+                                    <span class="payment-weak-tip" style="visibility:hidden;"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="payment-submit-area clear-fix">
+                        <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
+                        <div class="payment-submit"><a class="btn">去付款</a></div>
+                        <div class="payment-back"><a>删除订单</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%">
+        <img alt="" style="width: 100%"
+             src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
+    </div>
+</div>
+
+</body>
+<script src="../../jquery/jquery-3.4.1.js"></script>
+<script src="../js/orderUnpaid.js"></script>
+</html>

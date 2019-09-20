@@ -20,6 +20,7 @@ public class UserAddressServiceImpl implements UserAddressServer {
     public UserAddressServiceImpl(UserAddressMapper userAdressMapper) {
         this.userAdressMapper = userAdressMapper;
     }
+
     @Override
     public int insertUserAddress(UserAddress userAddress) {
         return userAdressMapper.insertUserAddress(userAddress);

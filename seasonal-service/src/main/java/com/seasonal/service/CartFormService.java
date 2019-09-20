@@ -8,6 +8,7 @@ public interface CartFormService {
 
     /**
      * 根据用户id查找其购物车清单
+     *
      * @param userId
      * @return
      */
@@ -15,6 +16,7 @@ public interface CartFormService {
 
     /**
      * 加入购物车
+     *
      * @param userId
      * @param goodId
      * @return
@@ -23,6 +25,7 @@ public interface CartFormService {
 
     /**
      * 更改购物车中某商品的购买数量
+     *
      * @param userId
      * @param goodId
      * @param goodCount
@@ -31,10 +34,11 @@ public interface CartFormService {
     int updateGoodsCount(String userId, String goodId, Integer goodCount);
 
     /**
-     * 从购物车中移除商品
+     * 删除购物车商品
+     *
      * @param userId
-     * @param goodIdList
+     * @param GoodId
      * @return
      */
-    int deleteGoodsOfCart(String userId, List<String> goodIdList);
+    int deleteGoodsOfCart(String userId, String GoodId);
 }

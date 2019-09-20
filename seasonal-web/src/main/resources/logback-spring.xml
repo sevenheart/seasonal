@@ -137,6 +137,7 @@
     <!-- 4.1 开发环境:打印控制台-->
     <springProfile name="dev">
         <logger name="com.seasonal" level="debug"/>
+        <logger name="com.seasonal.mapper" level="info"/>
     </springProfile>
 
     <root level="DEBUG">
@@ -147,5 +148,8 @@
         <appender-ref ref="ERROR_FILE" />
     </root>
 
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
 
 </configuration>

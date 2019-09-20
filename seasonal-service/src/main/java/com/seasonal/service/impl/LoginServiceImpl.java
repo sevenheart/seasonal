@@ -1,22 +1,26 @@
 package com.seasonal.service.impl;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
+import com.seasonal.cookie.MyCookie;
 import com.seasonal.ip.GetIp;
 import com.seasonal.mapper.LoginFromMapper;
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.redis.RedisUtil;
 import com.seasonal.service.LoginService;
+import com.seasonal.verification.ShortMessageVerification;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -24,17 +28,22 @@ public class LoginServiceImpl implements LoginService {
     private final LoginFromMapper loginFrom;
     private final RedisUtil redisUtil;
     private final GetIp getIp;
+    private final ShortMessageVerification shortMessageVerification;
+    private final MyCookie myCookie;
 
     @Autowired
-    public LoginServiceImpl(LoginFromMapper loginFrom, RedisUtil redisUtil, GetIp getIp) {
+    public LoginServiceImpl(LoginFromMapper loginFrom, RedisUtil redisUtil, GetIp getIp, ShortMessageVerification shortMessageVerification, MyCookie myCookie) {
         this.loginFrom = loginFrom;
         this.redisUtil = redisUtil;
         this.getIp = getIp;
+        this.shortMessageVerification = shortMessageVerification;
+        this.myCookie = myCookie;
     }
 
 
     @Override
-    public Object findRegistrationPhone(String identifier) {
+    public LoginFrom findRegistrationPhone(String identifier) {
+        System.out.println("serviceimpl:"+identifier);
         return loginFrom.findRegistrationPhone(identifier);
     }
 
@@ -82,7 +91,58 @@ public class LoginServiceImpl implements LoginService {
     public String getIpNow() {
         //获取当前ip地址
         String loginIpNow = getIp.publicip();
-        System.out.println(loginIpNow);
         return loginIpNow;
     }
+
+    @Override
+    public String sendShortMessage(String identifier) {
+
+        //生成一个验证码
+        shortMessageVerification.setNewcode();
+        //获取
+        String code = Integer.toString(shortMessageVerification.getNewcode());
+        System.out.println("发送的验证码为：" + code);
+
+        SendSmsResponse sendSmsResponse = null;
+
+        //发短信
+        try {
+            sendSmsResponse = shortMessageVerification.sendSms(identifier, code);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        System.out.println("短信接口返回的数据----------------");
+        System.out.println("Code=" + sendSmsResponse.getCode());
+        System.out.println("Message=" + sendSmsResponse.getMessage());
+        System.out.println("RequestId=" + sendSmsResponse.getRequestId());
+        System.out.println("BizId=" + sendSmsResponse.getBizId());
+        return code;
+    }
+
+    @Override
+    public String insertUserMessage(String identifier, String credential) {
+        //当前时间
+        Date currentTime = new Date(System.currentTimeMillis());
+
+        String userId = UUID.randomUUID().toString().replace("-","").substring(17);
+
+        String identityType = "Phone";
+
+        //获取当前ip地址
+        String loginIp = getIp.publicip();
+        int num = loginFrom.insertUserMessage(userId, identityType, credential, identifier, loginIp, currentTime);
+        if (num > 0){
+            return userId;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean setCookie(String identifier, String credential, String check) {
+        myCookie.saveCookie(identifier, credential, check);
+        System.out.println();
+        return false;
+    }
+
+
 }

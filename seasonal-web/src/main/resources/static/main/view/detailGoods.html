@@ -23,14 +23,20 @@
     <div class="header">
         <div class="login_bar">
             <ul>
-                <li>
-                    <img alt="" src="../../img/common/login_icon.jpg"><a href="#">请登录</a>
+                <li class="login">
+                    <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg">
+                    <span class="login-span" style="display: none">用户ID：</span>
+                    <a href="../../login/view/login.html" class="already-login" style="display: none"></a>
+                    <a href="../../login/view/login.html" class="not-login" style="display: inline">请登录</a>
+                </li>
+                <li class="registration">
+                    <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/register_icon.jpg" style="display: inline">
+                    <a href="../../login/view/registration.html">免费注册</a>
+                    <a href="#" class="cancellation" style="display: none">退出账号</a>
                 </li>
                 <li>
-                    <img alt="" src="../../img/common/register_icon.jpg"><a href="#">免费注册</a>
-                </li>
-                <li>
-                    <img alt="" src="../../img/common/order_icon.jpg"><a href="#">我的订单</a>
+                    <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/order_icon.jpg"><a
+                        href="#">我的订单</a>
                 </li>
             </ul>
         </div>
@@ -295,22 +301,10 @@
                             <span class="goods_price">￥14.00</span>
                         </a>
                     </div>
-                    <div class="goods_signal_title" >
-                        <ul style="text-decoration: none">
-                        <li id="goods_discribe" style="border: 0px solid #CCC; cursor: pointer; float: left;color: #bbb;">商品介绍</li>
-                        <li style="float: left;">|</li>
-                            <li id="goods_comment" style="float: left;">商品评论</li>
-                        </ul>
-                    </div>
+                    <div class="goods_signal_title">商品介绍</div>
                 </div>
-
-                <!--    <div class="goods_signal_title"  >商品评价</div>-->
+                <div class="goods_signal_describe goods_signal">
                 </div>
-            <div class="goods_signal_describe goods_signal" id="goods_discribe_div" >
-            </div>
-
-            <div class="goods_signal " id="goods_comment_div">
-                //评论处
             </div>
         </div>
     </div>
@@ -322,12 +316,6 @@
 </body>
 <script src="../../jquery/jquery-3.4.1.js"></script>
 <script src="../../js/global.js"></script>
-<script src="../js/main.js"></script>
 <script src="../js/detailGoods.js"></script>
-<script>
- /*   $('#goods_discribe').click(function () {
-         console.log("jhiuh")
-         $('#goods_discribe_div').hide();
-     })*/
-</script>
+<script src="../js/main.js"></script>
 </html>

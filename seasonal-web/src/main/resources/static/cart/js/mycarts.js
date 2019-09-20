@@ -1,3 +1,50 @@
+var userId
+window.onload = function () {
+    $.ajax({
+        url: "/getsessionUserId",
+        type: "post",
+        dataType: "text",
+        success: function (data) {
+            userId = data
+            console.log('userid:' + userId)
+            if (data){
+                console.log("success->userId:" + userId)
+                $('.already-login').text('')
+                $('.already-login').text(userId)
+                $('.login-span').css('display', 'inline')
+                $('.already-login').css('display','inline')
+                $('.registration img').css('display', 'none')
+                $('.registration a').css('display', 'none')
+                $('.not-login').css('display','none')
+                $('.cancellation').css('display', 'inline')
+            } else{
+                $('.already-login').text('')
+                $('.login-span').css('display', 'none')
+                $('.already-login').css('display','none')
+                $('.registration img').css('display', 'inline')
+                $('.registration a').css('display', 'inline')
+                $('.not-login').css('display','inline')
+                $('.cancellation').css('display', 'none')
+            }
+        },
+        error: function (data) {
+            console.log('error:' + data)
+        }
+    })
+}
+
+$(document).on('click','.cancellation',function () {
+
+    $.ajax({
+        url:"/cancellation",
+        type:"post",
+        dataType: "text",
+        success:function (data) {
+            alert("退出成功")
+            window.location.reload();
+        }
+    })
+})
 
 // 已选商品数量
 var chooseGoodsNum = 0
@@ -16,7 +63,7 @@ function sumAllPrice(){
         }
     })
     console.log('sumPrice:'+sumPrice)
-    $('#total').text(Number(sumPrice).toFixed(2))
+    $('#total').text('￥'+Number(sumPrice).toFixed(2))
 }
 
 //商品全选
@@ -144,7 +191,7 @@ $.ajax({
     success:function (data) {
         goodsData = data
         $.each(data,function (i, value) {
-            goodHtml = goodHtml + '<li class="cart-con-li" value="bink">\n' +
+            goodHtml = goodHtml + '<li class="cart-con-li">\n' +
                 '                <ul class="cart-obj clear">\n' +
                 '                    <li class="co-inp">\n' +
                 '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
@@ -161,7 +208,7 @@ $.ajax({
                 '                    <li class="co-sl">\n' +
                 '                        <span class="co-sl-span">\n' +
                 '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
-                '                            <input type="text" value="'+ value.goodCount +'" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
+                '                            <input type="text" id="good_count' + i + '" value="'+ value.goodCount +'" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
                 '                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>\n' +
                 '                        </span>\n' +
                 '                        <span class="co-sl-remark" title></span>\n' +
@@ -184,28 +231,7 @@ $.ajax({
             '            </div>'
         $('#cart-con').html(goodHtml)
     }
-})
-
-$("#ctf-js").click(function () {
-    $("#cart-flow").children("li").eq(1).removeClass("c-f-li-cur");
-    $("#cart-flow").children("li").eq(2).addClass("c-f-li-cur");
-    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
-    $("#cart").children("ul").css("display", "none");
-});
-$("#pick_up").click(function () {
-    //自提按钮点击事件
-    $("#allot_price").text("配送费：￥0");
-    $("#allot_address").css("display", "none");
-});
-$("#delivery").click(function () {
-    //配送按钮点击事件
-    $("#allot_price").text("配送费：￥10");
-    $("#allot_address").css("display", "block");
-});
-$("#allot_address_x").click(function () {
 });
 
-function allotAddressX(value) {
-    //value为下拉时option 的value值
-    $("#allot_price").text("配送费：￥20");
-}
+
+
