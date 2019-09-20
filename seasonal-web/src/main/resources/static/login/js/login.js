@@ -1,24 +1,34 @@
+var callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
+var url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl;
+var jsapi = document.createElement('script');
+var map
+jsapi.charset = 'utf-8';
+jsapi.src = url;
+document.head.appendChild(jsapi);
+
 //获取当前IP地址
 var nowCity;
-//初始化地图
-var map = new AMap.Map('container', {
-    resizeEnable: true
-});
-AMap.plugin('AMap.Geolocation', function () {
-    var geolocation = new AMap.Geolocation({
-        enableHighAccuracy: true,//是否使用高精度定位，默认:true
-        timeout: 10000,          //超过10秒后停止定位，默认：5s
-    });
-    map.addControl(geolocation);
-    geolocation.getCityInfo(function (status, result) {
-        if (status == 'complete') {
-            nowCity = result.city
-        } else {
-            console.log('loc-error' + result)
-        }
-    });
-});
 
+window.onLoad = function () {
+    //初始化地图
+    map = new AMap.Map('container', {
+        resizeEnable: true
+    });
+    AMap.plugin('AMap.Geolocation', function () {
+        var geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：5s
+        });
+        map.addControl(geolocation);
+        geolocation.getCityInfo(function (status, result) {
+            if (status == 'complete') {
+                nowCity = result.city
+            } else {
+                console.log('loc-error' + result)
+            }
+        });
+    });
+}
 
 //账号
 $(document).on('click', '.pass-form-normal .pass-text-input-userName', function () {
@@ -47,10 +57,6 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
     })
 })
 
-function a() {
-
-}
-
 
 //密码
 $(document).on('click', '.pass-form-normal .pass-text-input-password', function () {
@@ -66,7 +72,7 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
 })
 
 
-//多次错误验证码显示，判断输入信息
+//表单提交，多次错误验证码显示，判断输入信息
 var num = 0
 $(document).on('submit', '.pass-form-normal', function () {
     var flag = false
@@ -85,7 +91,8 @@ $(document).on('submit', '.pass-form-normal', function () {
     } else {
         $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove()
         $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        flag = login(identifier, credential, flag)
+        var check = document.getElementById("memberPass").checked
+        flag = login(identifier, credential, flag, check)
     }
     if (flag == true) {
         updatelogin(identifier)
@@ -93,8 +100,8 @@ $(document).on('submit', '.pass-form-normal', function () {
     return flag;
 })
 
-//登录判断
-function login(identifier, credential, flag) {
+//账号登录判断
+function login(identifier, credential, flag, check) {
     $.ajax({
         url: "/login",
         type: "post",
@@ -108,8 +115,10 @@ function login(identifier, credential, flag) {
                 $('#j-login').css('visibility', 'hidden')
                 $('#sms').css('display', 'block')
                 $('#sms').css('visibility', 'visible')
+                $('.pass-sms-link-back').css('visibility','hidden')
                 flag = false
             } else {
+                saveCookie(data, check)//保存cookie
                 flag = true
             }
         },
@@ -132,8 +141,71 @@ function login(identifier, credential, flag) {
     return flag
 }
 
-var beforeCity
+//获取短信动态密码
+$(document).on('click','.pass-item-timer',function () {
+    var identifier = $('.pass-text-input-smsPhone').val()
+    if (identifier == null || identifier == '') {
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机号")
+    } else {
+        $.ajax({
+            url: "/shortMessageSend",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier},
+            async: false,
+            success: function (data) {
+                console.log("获取验证码：" + data)
+            }
+        })
+    }
+})
 
+//短信登录表单提交
+$(document).on('submit', '#smsForm', function () {
+    var smsflag = false
+    var identifier = $('.pass-text-input-smsPhone').val()
+    var smsVerifyCode = $('.pass-text-input-smsVerifyCode').val()
+    if (identifier == null || identifier == ""){
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机号")
+    }
+    if (smsVerifyCode == null || smsVerifyCode == ""){
+        $('#verifyCode-span').css('display', 'inline')
+        $('#verifyCode-span').css('display', 'none')
+        $('#verifyCodeSend-span').css('display', 'none')
+    }
+    $.ajax({
+        url:"smsLogin",
+        type:"post",
+        dataType:"json",
+        data:{"identifier":identifier, "smsVerifyCode":smsVerifyCode},
+        async:false,
+        success:function (data) {
+            if (data == "ture"){
+                smsflag = true
+            } else if(data = "false"){
+                smsflag = false
+                $('#verifyCode-span').css('display','none')
+                $('#verifyCodeError-span').css('display','none')
+                $('#verifyCodeExpiration-span').css('display','inline')
+            } else{
+                smsflag = false
+                $('#verifyCode-span').css('display','none')
+                $('#verifyCodeError-span').css('display','inline')
+                $('#verifyCodeExpiration-span').css('display','none')
+            }
+        },
+        error:function (data) {
+            console.log("出错了")
+        }
+    })
+    return smsflag
+})
+
+
+
+var beforeCity
 //判断是否异地登录
 function ipsearch(ip) {
     AMap.plugin('AMap.CitySearch', function () {
@@ -182,3 +254,47 @@ $(document).on('click', '#sms #smsForm #smsSubmitWrapper #sms_btn_back', functio
     $('#j-login').css('visibility', 'visible')
 })
 
+//Cookie保存，自动登录
+function saveCookie(data, check) {
+    var date = new Date()
+    date.setTime(date.getTime()+(7*24*60*60*1000));
+    document.cookie = "identifier=" + data.identifier
+    document.cookie = "credential=" + data.credential
+    document.cookie = "check=" + check
+    document.cookie = "expires=" + date.toGMTString()
+}
+function getCookie(user){
+    console.log(user)
+    var arrCookie = document.cookie.split('; ');
+    for(var i=0; i<arrCookie.length; i++) {
+        var arr = arrCookie[i].split('=')
+        if (arr[0] == user) {
+            return arr[1];
+        }
+    }
+    return "";
+}
+function checkCookie(){
+    console.log("======" +document.cookie.split(";")+ "======")
+    var identifier=getCookie("identifier");
+    var credential = getCookie("credential")
+    console.log("identifier:" + identifier +"，credential"+credential)
+    var check = getCookie("check")
+    if (identifier!="" && check == "true"){
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier, "credential": credential},
+            async: false,
+            success: function (data) {
+                saveCookie(data, check)//保存cookie
+                alert("自动登录成功")
+                window.location.href='http://localhost:8080/index.html'
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+}

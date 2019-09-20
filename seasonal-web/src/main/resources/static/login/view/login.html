@@ -5,10 +5,9 @@
     <title>用户登录</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e&plugin=AMap.Driving"></script>
     <script type="text/javascript" src="../js/login.js"></script>
 </head>
-<body>
+<body onload="checkCookie()">
 <div class="p-login">
     <div class="header">
         <div class="wrap clearfix">
@@ -17,7 +16,7 @@
             </div>
             <div class="login-text">登录</div>
             <div class="reg-area">
-                还没有百度糯米帐号
+                还没有时令果慧帐号
                 <a href="registration.html" class="reg-btn">注册</a></div>
         </div>
     </div>
@@ -25,10 +24,9 @@
         <div class="wrap clearfix">
             <div class="login-logo"></div>
             <div class="login-area" id="j-loginArea">
-                <div class="title">登录百度糯米</div>
+                <div class="title">登录时令果慧</div>
                 <div class="login tang-pass-login" id="j-login" style="display: block; visibility: visible; opacity: 1;">
-                    <form id="form" action="/index.html" class="pass-form pass-form-normal" method="get"
-                          autocomplete="off">
+                    <form id="form" action="/index.html" class="pass-form pass-form-normal" method="get" autocomplete="off">
                         <p id="errorWrapper" class="pass-generalErrorWrapper">
                             <span id="error" class="pass-generalError pass-generalError-error"></span>
                         </p>
@@ -37,11 +35,11 @@
                         </p>
                         <p id="userNameWrapper" class="pass-form-item pass-form-item-userName">
                             <label id="userNameLabel" class="pass-label pass-label-userName">
-                                手机/邮箱/用户名/糯米帐号
+                                手机号
                             </label>
                             <input id="userName" type="text" name="userName"
                                    class="pass-text-input pass-text-input-userName" autocomplete="off"
-                                   placeholder="手机/邮箱/用户名/糯米帐号">
+                                   placeholder="手机号">
                             <span id="userName_clearbtn" class="pass-clearbtn pass-clearbtn-userName"
                                   style="display: none; visibility: hidden; opacity: 1;"></span>
                             <span class="pass-item-selectbtn pass-item-selectbtn-userName"
@@ -78,7 +76,7 @@
                         </p>
                         <p id="memberPassWrapper" class="pass-form-item pass-form-item-memberPass">
                             <input id="memberPass" type="checkbox" name="memberPass"
-                                   class="pass-checkbox-input pass-checkbox-memberPass" checked="checked">
+                                   class="pass-checkbox-input pass-checkbox-memberPass" checked="true">
                             <label id="memberPassLabel" class="">下次自动登录</label>
                             <a class="pass-fgtpwd" href="#" target="_blank">
                                 登录遇到问题
@@ -91,7 +89,7 @@
                 </div>
                 <div id="sms" class="tang-pass-login tang-pass-sms" style="display: none; visibility: hidden; opacity: 1;">
                     <p class="tang-pass-sms-title">短信登录</p>
-                    <p class="tang-pass-sms-tip">验证即登录，未注册将自动创建百度帐号</p>
+                    <p class="tang-pass-sms-tip">验证即登录，未注册将自动创建时令果惠帐号</p>
                     <form id="smsForm" method="POST">
                         <p id="smsErrorWrapper" class="pass-generalErrorWrapper">
                             <span id="smsError" class="pass-generalError"></span>
@@ -100,7 +98,7 @@
                             <label id="smsPhoneLabel" class="pass-label pass-label-smsPhone" data-countrycode="">
                                 手机号
                             </label>
-                            <input id="smsPhone" type="text" name="username" class="pass-text-input pass-text-input-smsPhone" placeholder="手机号">
+                            <input id="smsPhone" type="text" name="username" class="pass-text-input pass-text-input-smsPhone" maxlength="11" placeholder="手机号">
                             <span id="smsPhone_clearbtn" class="pass-clearbtn pass-clearbtn-smsPhone" style="display:none;"></span>
                             <span id="smsPhoneTip" class="pass-item-tip pass-item-tip-smsPhone" style="display:none">
                                 <span id="smsPhoneTipText"></span>
@@ -108,14 +106,14 @@
                         </div>
                         <p id="smsVerifyCodeWrapper" class="pass-form-item pass-form-item-smsVerifyCode">
                             <label id="smsVerifyCodeLabel" class="pass-label pass-label-smsVerifyCode">
-                                动态密码
+                                验证码
                             </label>
-                            <input id="smsVerifyCode" type="text" name="password" class="pass-text-input pass-text-input-smsVerifyCode" placeholder="动态密码">
+                            <input id="smsVerifyCode" type="text" name="password" class="pass-text-input pass-text-input-smsVerifyCode" placeholder="验证码">
                             <span id="smsVerifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-smsVerifyCode" style="display:none;"></span>
-                            <button id="smsTimer" class="pass-item-timer">发送动态密码</button>
-                            <span id="smsVerifyCodeTip" class="pass-item-tip pass-item-tip-smsVerifyCode" style="display:none">
-                                <span id="smsVerifyCodeTipText"></span>
-                            </span>
+                            <button id="smsTimer" class="pass-item-timer">发送验证码</button>
+                            <span id="verifyCode-span" style="display: none">请您输入验证码</span>
+                            <span id="verifyCodeError-span" style="display: none">验证码错误，请确认后再输入</span>
+                            <span id="verifyCodeExpiration-span" style="display: none">验证码已过期，请重新获取</span>
                         </p>
                         <p id="smsUnReceiveWrapper" class="pass-form-item pass-form-item-unrecevie" style="display: none; visibility: hidden;">
                             <span id="smsUnReceiveTipWrapper" class="pass-sms-unreceive-tips">收不到短信验证码?</span>
@@ -124,7 +122,7 @@
                             <input id="smsSubmit" type="submit" value="登录" class="pass-button pass-button-submit">
                             <span class="tang-pass-sms-agreement">
                                 阅读并接受
-                                <a target="_blank" href="http://passport.baidu.com/static/passpc-account/html/protocal.html">《百度用户协议》</a>
+                                <a target="_blank" href="http://passport.baidu.com/static/passpc-account/html/protocal.html">《用户协议》</a>
                             </span>
                             <a id="sms_btn_back" class="pass-sms-link pass-sms-link-back">帐号密码登录</a>
                         </p>
