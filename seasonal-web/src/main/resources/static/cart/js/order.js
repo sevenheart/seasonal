@@ -1,15 +1,15 @@
 //订单商品列表
 var good_id_arrary = new Array(10);
-good_id_arrary.unshift("1");
-good_id_arrary.unshift("2");
+/*good_id_arrary.unshift("1");
+good_id_arrary.unshift("2");*/
 //订单商品价格列表
 var good_price_array = new Array(10);
-good_price_array.unshift("22");
-good_price_array.unshift("20");
+/*good_price_array.unshift("22");
+good_price_array.unshift("20");*/
 //订单商品数量列表
 var good_count_array = new Array(10);
-good_count_array.unshift("3");
-good_count_array.unshift("2");
+/*good_count_array.unshift("3");
+good_count_array.unshift("2");*/
 let html = "";
 let order_money = 50;//订单金额
 const order_user_id = "001";//用户id
@@ -37,7 +37,24 @@ function random_No(j) {
     return random_no;
 }
 
+// 订单生成前，遍历已选择的商品，获取要购买的商品信息
+function orderGoods(){
+    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+        if($(this).is(':checked')){
+            console.log('已选id:' + $(this).val())
+            good_id_arrary.unshift($(this).val()); //填入商品id
+            console.log('已选商品的价钱:' + $('#price'+i).text())
+            good_price_array.unshift($('#price'+i).text()); //填入商品价钱
+            console.log('已选商品的数量:' + $('#good_count'+i).val())
+            good_count_array.unshift($('#good_count'+i).val()); //填入商品数量
+        }
+    })
+}
+
 $("#ctf-js").click(function () {
+
+    orderGoods()
+
     const cart_flow = $("#cart-flow");
     const cart = $("#cart");
     cart_flow.children("li").eq(1).removeClass("c-f-li-cur");
@@ -115,12 +132,14 @@ $("#ctf-js").click(function () {
             })
         }else{
             map.add(markers)
+            map.add(markerOptions)
             map.setFitView(personAddress.location);
         }
     });
 
     $("#delivery").click(function () {
         map.remove(markers);
+        map.remove(markerOptions);
         driving = new AMap.Driving({
             map: map
         });
@@ -175,7 +194,6 @@ $("#ctf-js").click(function () {
     map.add(markerOptions)
 
     if($('#pick_up').is(':checked')){
-        console.log('hello world')
         $.each(addressAndDistance, function (i, value) {
             if (Number(value.distance*0.001).toFixed(2) > 5.0){
                 return true
@@ -190,5 +208,6 @@ function allotAddressX(city, address) {
     $("#og_name").text(html_address_name[$("#allot_address_x ").get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$("#allot_address_x ").get(0).selectedIndex]);
     $("#allot_price").text("配送费：￥20");
+    //calDistance(city, address)
     planningRoute(city, address)
 }

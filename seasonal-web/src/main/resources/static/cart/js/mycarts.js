@@ -144,7 +144,7 @@ $.ajax({
     success:function (data) {
         goodsData = data
         $.each(data,function (i, value) {
-            goodHtml = goodHtml + '<li class="cart-con-li" value="bink">\n' +
+            goodHtml = goodHtml + '<li class="cart-con-li">\n' +
                 '                <ul class="cart-obj clear">\n' +
                 '                    <li class="co-inp">\n' +
                 '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
@@ -161,7 +161,7 @@ $.ajax({
                 '                    <li class="co-sl">\n' +
                 '                        <span class="co-sl-span">\n' +
                 '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
-                '                            <input type="text" value="'+ value.goodCount +'" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
+                '                            <input type="text" id="good_count' + i + '" value="'+ value.goodCount +'" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
                 '                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>\n' +
                 '                        </span>\n' +
                 '                        <span class="co-sl-remark" title></span>\n' +
