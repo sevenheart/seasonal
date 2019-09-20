@@ -32,8 +32,18 @@
             <div class="header-content clearfix">
                 <div class="header-title-module">
                     <div class="header-title"><a href="../../index.html"><img
-                            src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" alt="美团"></a>
+                            src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" alt="果酷"></a>
                     </div>
+                </div>
+                <div class="hd" style="width: 250px">
+                    <a class="hd_m" href="../../user/view/personCenter.html">
+                        <span id="hd_ms_i"></span>
+                        <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
+                    </a>
+                    <a class="hd_m" href="../../cart/view/myCarts.html">
+                        <span id="hd_mc_i"></span>
+                        <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
+                    </a>
                 </div>
 
             </div>
@@ -41,8 +51,8 @@
     </div>
     <div id="body" class="container clear-fix">
         <div class="right right-widen">
-            <div class="order clear-fix"><span class="block-left"><div class="order-name">项目：天安瑞嘉烤鸭6人餐</div></span><span
-                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price">398.00</span></div></span>
+            <div class="order clear-fix"><span class="block-left"><div class="order-name" id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price" id="order-money"></span></div></span>
             </div>
             <div class="payment-container">
                 <div class="payment payment-0">
@@ -70,7 +80,7 @@
                         </div>
                     </div>
                     <div class="payment-submit-area clear-fix">
-                        <div class="amount">支付 ¥ <span class="amount-price">398.00</span></div>
+                        <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
                         <div class="payment-submit"><a class="btn">去付款</a></div>
                         <div class="payment-back"><a>删除订单</a></div>
                     </div>
@@ -85,4 +95,6 @@
 </div>
 
 </body>
+<script src="../../jquery/jquery-3.4.1.js"></script>
+<script src="../js/orderUnpaid.js"></script>
 </html>

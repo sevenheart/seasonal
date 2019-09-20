@@ -3,7 +3,6 @@ package com.seasonal.service.impl;
 import com.seasonal.mapper.CartFormMapper;
 import com.seasonal.mapper.DetailedCommodityFormMapper;
 import com.seasonal.mapper.OrderFormMapper;
-import com.seasonal.mapper.OrderInfoFormMapper;
 import com.seasonal.pojo.DetailedCommodityForm;
 import com.seasonal.pojo.OrderForm;
 import com.seasonal.service.OrderFormService;
@@ -36,5 +35,10 @@ public class OrderFormServiceImpl implements OrderFormService {
             detailedCommodityFormMapper.insertDetailCommodityForm(detailed);
         }
         return 1;
+    }
+
+    @Override
+    public OrderForm findOrderFormByOrderId(String orderId) {
+        return orderFormMapper.findOrderFormByOrderId(orderId);
     }
 }
