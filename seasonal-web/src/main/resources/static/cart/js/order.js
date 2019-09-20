@@ -64,7 +64,7 @@ $("#ctf-js").click(function () {
                 address_array[k] = (user_address);
                 html_address_name[k] = v.userName;
                 html_address_phone[k] = v.userPhone;
-                html_address[k] = '<option value="' + user_address + '">' + user_address + '</option>';
+                html_address[k] = '<option value="' + v.city + '">' + user_address + '</option>';
                 html_address_sum += 1;
             });
         }
@@ -84,7 +84,7 @@ $("#ctf-js").click(function () {
         '            <span class="og"><input  id="delivery" name="allot" type="radio" value="配送"/><label for="delivery">配送</label></span>\n' +
         '            <span class="og" id="allot_price">配送费：￥0</span><br>\n' +
         '            <span class="og" id="allot_address" style="display: none;">选择配送地址:\n' +
-        '    \t    <select onchange="allotAddressX(this.options[this.options.selectedIndex].value)" id="allot_address_x">';
+        '    \t    <select onchange="allotAddressX(this.options[this.options.selectedIndex].value, this.options[this.options.selectedIndex].text)" id="allot_address_x">';
     for (let j = 0; html_address_sum > j; j++) {
         html += html_address[j];
     }
@@ -97,7 +97,6 @@ $("#ctf-js").click(function () {
         '\n' +
         '    </div>';
     cart.append(html);
-
 
     $("#pick_up").click(function () {
         driving.clear()
@@ -168,25 +167,28 @@ $("#ctf-js").click(function () {
 
         }
     });
+
     map = new AMap.Map('container', {
         resizeEnable: true
     });
-    //构造路线导航类
-    driving = new AMap.Driving({
-    });
 
-    //地理编码
-    geocoder = new AMap.Geocoder({
-        city: "", // 城市默认：“全国”
-    });
+    map.add(markerOptions)
 
-    personLoction()
+    if($('#pick_up').is(':checked')){
+        console.log('hello world')
+        $.each(addressAndDistance, function (i, value) {
+            if (Number(value.distance*0.001).toFixed(2) > 5.0){
+                return true
+            }
+            getGeoCode(value)
+        })
+    }
 });
 
-/*function allotAddressX(value) {
+function allotAddressX(city, address) {
     //value为下拉时option 的value值
     $("#og_name").text(html_address_name[$("#allot_address_x ").get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$("#allot_address_x ").get(0).selectedIndex]);
     $("#allot_price").text("配送费：￥20");
     planningRoute(city, address)
-}*/
+}
