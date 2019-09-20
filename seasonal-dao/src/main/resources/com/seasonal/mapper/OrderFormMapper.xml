@@ -23,7 +23,7 @@
         <if test="orderUserId!=null and orderUserId!=''">
             order_user_id,
         </if>
-        <if test="orderStatus!=null and orderStatus!=''">
+        <if test="1!=0">
             order_status,
         </if>
         <if test="payPlatform!=null and payPlatform!=''">
@@ -35,7 +35,7 @@
         <if test="deliveryTime!=null and deliveryTime!=''">
             delivery_time,
         </if>
-        <if test="deliveryMoney!=null and deliveryMoney!=''">
+        <if test="1!=0">
             delivery_money,
         </if>
         <if test="getPassword!=null and getPassword!=''">
@@ -44,10 +44,10 @@
         <if test="getAccount!=null and getAccount!=''">
             get_account,
         </if>
-        <if test="createTime!=null and createTime!=''">
+        <if test="createTime!=null">
             create_time,
         </if>
-        <if test="updateTime!=null and updateTime!=''">
+        <if test="updateTime!=null">
             update_time,
         </if>
 
@@ -64,7 +64,7 @@
         <if test="orderUserId!=null and orderUserId!=''">
             #{orderUserId},
         </if>
-        <if test="orderStatus!=null and orderStatus!=''">
+        <if test="1!=0">
             #{orderStatus},
         </if>
         <if test="payPlatform!=null and payPlatform!=''">
@@ -76,7 +76,7 @@
         <if test="deliveryTime!=null and deliveryTime!=''">
             #{deliveryTime},
         </if>
-        <if test="deliveryMoney!=null and deliveryMoney!=''">
+        <if test="1!=0">
             #{deliveryMoney},
         </if>
         <if test="getPassword!=null and getPassword!=''">
@@ -85,10 +85,10 @@
         <if test="getAccount!=null and getAccount!=''">
             #{getAccount},
         </if>
-        <if test="createTime!=null and createTime!=''">
+        <if test="createTime!=null">
             #{createTime},
         </if>
-        <if test="updateTime!=null and updateTime!=''">
+        <if test="updateTime!=null">
             #{updateTime},
         </if>
     </trim>

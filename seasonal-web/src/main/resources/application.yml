@@ -1,7 +1,7 @@
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/jsp
+      prefix: /WEB-INF/jsp/
       suffix: .jsp
   #加载banner
   output:
@@ -47,6 +47,8 @@ mybatis:
   type-aliases-package: com.seasonal.pojo
   configuration:
     map-underscore-to-camel-case: true
-#路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
+  #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
+
+
 
 

@@ -5,6 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 import java.sql.Date;
+
 @Data
 public class OrderForm {
     private Long id;
@@ -17,6 +18,9 @@ public class OrderForm {
     private Integer deliveryWay;
     private Date deliveryTime;
     private BigDecimal deliveryMoney;
+
+    private String getPassword;
+    private String getAccount;
     private Date createTime;
     private Date updateTime;
 }

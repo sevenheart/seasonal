@@ -107,14 +107,14 @@ $("#ctf-js").click(function () {
         $("#allot_address").css("display", "none");
         $("#og_shou").css("display", "none")
 
-        if(markers.length == 0){
+        if (markers.length == 0) {
             $.each(addressAndDistance, function (i, value) {
-                if (Number(value.distance*0.001).toFixed(2) > 5.0){
+                if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
                     return true
                 }
                 getGeoCode(value)
             })
-        }else{
+        } else {
             map.add(markers)
             map.setFitView(personAddress.location);
         }
@@ -159,6 +159,7 @@ $("#ctf-js").click(function () {
                 url: "/ProvideOrderForm",
                 type: "post",
                 data: JSON.stringify(orderData),
+                dataType: "json",
                 contentType: "application/json",
                 success: function (data) {
                     console.log(data);
@@ -172,8 +173,7 @@ $("#ctf-js").click(function () {
         resizeEnable: true
     });
     //构造路线导航类
-    driving = new AMap.Driving({
-    });
+    driving = new AMap.Driving({});
 
     //地理编码
     geocoder = new AMap.Geocoder({
