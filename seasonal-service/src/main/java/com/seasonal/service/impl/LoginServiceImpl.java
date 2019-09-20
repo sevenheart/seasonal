@@ -43,7 +43,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginFrom findRegistrationPhone(String identifier) {
         System.out.println("serviceimpl:"+identifier);
-        System.out.println(loginFrom.findRegistrationPhone(identifier));
         return loginFrom.findRegistrationPhone(identifier);
     }
 

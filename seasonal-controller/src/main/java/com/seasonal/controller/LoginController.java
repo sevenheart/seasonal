@@ -83,10 +83,12 @@ public class LoginController {
     @ResponseBody
     public String registrationInsert(String identifier,String credential, String verifyCode, HttpSession session){
         String code = (String)session.getAttribute("code");
+        System.out.println("Controller->verifyCode:"+verifyCode);
+        System.out.println("Controller->code:"+code);
         if (code == null || code == ""){
             System.out.println("验证码已过期，请重新发送");
             return "false";
-        } else if (code == verifyCode) {
+        } else if (code.equals(verifyCode)) {
             String userId = loginService.insertUserMessage(identifier, credential);
             if (userId != null){
                 System.out.println("注册成功");

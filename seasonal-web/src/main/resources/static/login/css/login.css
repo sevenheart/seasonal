@@ -515,3 +515,16 @@ button{
     background: url(https://passport.baidu.com/passApi/img/pass_login_icons.png) no-repeat 0 0;
     cursor: pointer;
 }
+
+#verifyCodeSend-button {
+    border-radius: 0;
+    border: 1px solid #ddd;
+    height: 40px;
+    background: #f7f7f7;
+    color: #666;
+    font-weight: 400;
+    width: 110px;
+    float: left;
+    margin-left: 10px;
+    font-size: 14px;
+}
