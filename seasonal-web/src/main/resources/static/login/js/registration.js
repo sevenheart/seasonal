@@ -1,14 +1,24 @@
 //手机号
 $(document).on('click', '.pass-text-input-phone', function () {
     $('#phone-span').text('')
+    html = ''
     if ($('#phone-span').text() == null || $('#phone-span').text() == '') {
-        $('#phone-span').append("请输入中国大陆手机号，其他用户不可见")
+        html = '<div id="phone-span-div"></div>'
+        $('#phone-span').html(html)
+        $('#phone-span-div').append("请输入中国大陆手机号，其他用户不可见")
+        $('#phone-span-div').css('float', 'left')
+        $('#phone-span-div').css('position', 'relative')
+        $('#phone-span-div').css('width', '250px')
+        $('#phone-span-div').css('top', '12px')
+        $('#phone-span-div').css('height', '16px')
+        $('#phone-span-div').css('line-height', '14px')
     }
     $(this).css('border-color', '#F69')
 })
 $(document).on('blur', '.pass-text-input-phone', function () {
     $('#phone-span').text('')
     var phone = $('.pass-text-input-phone').val()
+    console.log(phone)
     if (phone.length > 0) {
         if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
             $('#phone-span-div').remove()
@@ -29,12 +39,11 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                 url: "/registrationPhone",
                 type: "post",
                 dataType: "json",
-                data: {"identifier":phone},
+                data: {"identifier": phone},
                 async: true,
                 success: function (data) {
                     var identifier = data.identifier
                     if (identifier == phone) {
-                        $('#phone-span-div').remove()
                         html = '<div id="phone-span-div"></div>'
                         $('#phone-span').html(html)
                         $('#phone-span-div').append("此号码已注册")
@@ -49,8 +58,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                         $('#phone-span-div').css('padding-left', '20px')
                     }
                 },
-                error:function (data) {
-                    $('#phone-span-div').remove()
+                error: function (data) {
                     html = '<div id="phone-span-div"></div>'
                     $('#phone-span').html(html)
                     $('#phone-span-div').css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat')
@@ -95,7 +103,6 @@ $(document).on('blur', '.pass-text-input-password', function () {
     var pwd = $('.pass-text-input-password').val()
     if (pwd.length > 0) {
         if (!(/^\S{8,14}$/.test(pwd))) {
-            console.log("error:" + pwd)
             html = '<div id="password-span-div"></div>'
             $('#password-span').html(html)
             $('#password-span-div').append("密码格式不正确")
@@ -129,40 +136,125 @@ $(document).on('blur', '.pass-text-input-password', function () {
 
 //短信验证码
 $(document).on('click', '.pass-text-input-verifyCode', function () {
+    $('#verifyCodeSend-span').css('display', 'none')
+    $('#verifyCode-span').css('display', 'none')
     $(this).css('border-color', '#F69')
 })
 $(document).on('blur', '.pass-text-input-verifyCode', function () {
     $(this).css('border-color', '')
 })
+//发送短信验证码
 $(document).on('click', '.pass-button-verifyCodeSend', function () {
-
+    var identifier = $('.pass-text-input-phone').val()
+    if (identifier == null || identifier == '') {
+        $('#phone-span-div').remove()
+        html = '<div id="phone-span-div"></div>'
+        $('#phone-span').html(html)
+        $('#phone-span-div').append("请您输入手机号")
+        $('#phone-span-div').css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat')
+        $('#phone-span-div').css('float', 'left')
+        $('#phone-span-div').css('position', 'relative')
+        $('#phone-span-div').css('width', '250px')
+        $('#phone-span-div').css('top', '12px')
+        $('#phone-span-div').css('color', '#fc4343')
+        $('#phone-span-div').css('height', '16px')
+        $('#phone-span-div').css('line-height', '14px')
+        $('#phone-span-div').css('padding-left', '20px')
+    } else {
+        $.ajax({
+            url: "/shortMessageSend",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier},
+            async: false,
+            success: function (data) {
+                console.log("获取验证码：" + data)
+            }
+        })
+    }
 })
 
-
-//注册
-
-// $(document).on('submit', '.form', function () {
-//
-// }
-
-$(document).on('click', '.pass-button-submit', function () {
-    var username = $('.pass-text-input-userName').val()
-    var phone = $('.pass-text-input-phone').val()
-    console.log(username)
-    console.log(phone)
-    console.log($('.pass-checkbox-isAgree').is(':checked'))
-
+//用户协议
+$(document).on('click', '.pass-checkbox-isAgree', function () {
+    var isAgree = document.getElementById("isAgree-checkbox").checked
+    if (isAgree == true) {
+        $('#isAgreeError').css('display', 'none')
+    }
 })
-
 
 //注册
 $(document).on('submit', '#form', function () {
-    var userName = $('.pass-text-input-userName').val()
     var identifier = $('.pass-text-input-phone').val()
-    var credenntial = $('.pass-text-input-password').val()
-    if (userName == null || userName == ''){
+    var credential = $('.pass-text-input-password').val()
+    var verifyCode = $('.pass-text-input-verifyCode').val()
+    var isAgree = document.getElementById("isAgree-checkbox").checked
+    var flag = false
 
+    if (identifier == null || identifier == '') {
+        $('#phone-span-div').remove()
+        html = '<div id="phone-span-div"></div>'
+        $('#phone-span').html(html)
+        $('#phone-span-div').append("请您输入手机号")
+        $('#phone-span-div').css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat')
+        $('#phone-span-div').css('float', 'left')
+        $('#phone-span-div').css('position', 'relative')
+        $('#phone-span-div').css('width', '250px')
+        $('#phone-span-div').css('top', '12px')
+        $('#phone-span-div').css('color', '#fc4343')
+        $('#phone-span-div').css('height', '16px')
+        $('#phone-span-div').css('line-height', '14px')
+        $('#phone-span-div').css('padding-left', '20px')
     }
+
+    if (credential == null || credential == '') {
+        html = '<div id="password-span-div"></div>'
+        $('#password-span').html(html)
+        $('#password-span-div').append("请您输入密码")
+        $('#password-span-div').css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat')
+        $('#password-span-div').css('float', 'left')
+        $('#password-span-div').css('position', 'relative')
+        $('#password-span-div').css('width', '250px')
+        $('#password-span-div').css('top', '12px')
+        $('#password-span-div').css('color', '#fc4343')
+        $('#password-span-div').css('height', '16px')
+        $('#password-span-div').css('line-height', '14px')
+        $('#password-span-div').css('padding-left', '20px')
+    }
+
+    if (verifyCode == null || verifyCode == '') {
+        $('#verifyCode-span').css('display', 'inline')
+        $('#verifyCode-span').css('display', 'none')
+        $('#verifyCodeSend-span').css('display', 'none')
+    }
+
+    if (isAgree == false) {
+        $('#isAgreeError').css('display', 'inline')
+    } else {
+        $('#isAgreeError').css('display', 'none')
+    }
+    $.ajax({
+        url:"/registrationInsert",
+        type:"post",
+        data:{"identifier":identifier,"credential":credential,"verifyCode":verifyCode},
+        dataType:"json",
+        async: false,
+        success:function (data) {
+            if (data == "ture"){
+                flag = true
+            } else if(data = "false"){
+                flag = false
+                $('#verifyCode-span').css('display','none')
+                $('#verifyCodeError-span').css('display','none')
+                $('#verifyCodeExpiration-span').css('display','inline')
+            } else{
+                flag = false
+                $('#verifyCode-span').css('display','none')
+                $('#verifyCodeError-span').css('display','inline')
+                $('#verifyCodeExpiration-span').css('display','none')
+            }
+        }
+    })
+    return flag
 })
 
 

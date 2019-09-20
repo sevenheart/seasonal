@@ -1,5 +1,7 @@
 package com.seasonal.service;
 
+import com.seasonal.pojo.LoginFrom;
+
 import java.util.List;
 
 public interface LoginService {
@@ -8,7 +10,7 @@ public interface LoginService {
      * @param identifier
      * @return
      */
-    Object findRegistrationPhone(String identifier);
+    LoginFrom findRegistrationPhone(String identifier);
 
     /**
      * 登录验证
@@ -26,5 +28,28 @@ public interface LoginService {
      */
     int updateMessage(String identifier);
 
+    /**
+     * 获取当前IP地址
+     * @return
+     */
     String getIpNow();
+
+    /**
+     * 发送短信验证码
+     * @param identifier
+     * @return
+     */
+    String sendShortMessage(String identifier);
+
+    /**
+     * 用户注册信息添加
+     * @param identifier
+     * @param credential
+     * @return
+     */
+    String insertUserMessage(String identifier,String credential);
+
+    boolean setCookie(String identifier,String credential,String check);
+
+//    Object getCookie();
 }
