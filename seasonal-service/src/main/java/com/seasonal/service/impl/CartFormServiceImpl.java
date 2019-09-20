@@ -43,7 +43,13 @@ public class CartFormServiceImpl implements CartFormService {
 
     @Override
     public int deleteGoodsOfCart(String userId, List<String> goodIdList) {
-        return cartFormMapper.deleteGoodsOfCart(userId, goodIdList);
+        int row = 0;
+        for (String goodId: goodIdList) {
+            if (cartFormMapper.deleteGoodsOfCart(userId, goodId) > 0) {
+                row++;
+            }
+        }
+        return row;
     }
 
 }

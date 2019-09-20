@@ -36,10 +36,6 @@
     </update>
 
     <delete id="deleteGoodsOfCart">
-        delete from cart_form where user_id=#{userId}
-        and good_id in
-        <foreach collection="list" item="goodId" index="index" open="(" separator="," close=")">
-            #{goodId}
-        </foreach>
+        delete from cart_form where user_id=#{userId} and good_id=#{goodId}
     </delete>
 </mapper>

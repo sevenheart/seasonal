@@ -44,8 +44,8 @@ public interface CartFormMapper {
     /**
      * 从购物车中移除商品
      * @param userId
-     * @param goodIdList
+     * @param goodId
      * @return
      */
-    int deleteGoodsOfCart(String userId, List<String> goodIdList);
+    int deleteGoodsOfCart(String userId, String goodId);
 }

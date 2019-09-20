@@ -2,6 +2,10 @@
 var good_id_arrary = new Array(10);
 /*good_id_arrary.unshift("1");
 good_id_arrary.unshift("2");*/
+//订单商品名列表
+var good_name_arrary = new Array(10);
+/*good_name_arrary.unshift("1");
+good_name_arrary.unshift("2");*/
 //订单商品价格列表
 var good_price_array = new Array(10);
 /*good_price_array.unshift("22");
@@ -43,6 +47,8 @@ function orderGoods(){
         if($(this).is(':checked')){
             console.log('已选id:' + $(this).val())
             good_id_arrary.unshift($(this).val()); //填入商品id
+            console.log('已选商品名:' + $('#good_name'+i).text())
+            good_id_arrary.unshift($('#good_name'+i).text()); //填入商品id
             console.log('已选商品的价钱:' + $('#price'+i).text())
             good_price_array.unshift($('#price'+i).text()); //填入商品价钱
             console.log('已选商品的数量:' + $('#good_count'+i).val())

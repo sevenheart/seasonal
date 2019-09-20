@@ -53,13 +53,14 @@ public class CartFormController {
         return cartFormService.updateGoodsCount(userId, goodId, goodCount);
     }
 
-    /*@RequestMapping(value = "deleteGood")
+    @RequestMapping(value = "deleteGood")
     @ResponseBody
-    public int deleteGoodsOfCart(@RequestBody List<String> goodDataList){
-        String userId = goodDataList.get(0);
-        goodDataList.remove(0);
-        return cartFormService.deleteGoodsOfCart(userId, goodDataList);
-    }*/
+    public int deleteGoodsOfCart(@RequestBody Map<String, Object> goodDataList){
+        String userId = (String)goodDataList.get("userId");
+        List<String> goodIdList = (List<String>)goodDataList.get("goodIdList");
+        return cartFormService.deleteGoodsOfCart(userId, goodIdList);
+    }
+
     //String orderId, String userId, Double orderMoney, String[] goodIdArray, Double[] goodPriceArray, Integer[] goodCountArray
     @RequestMapping(value = "ProvideOrderForm")
     @ResponseBody
