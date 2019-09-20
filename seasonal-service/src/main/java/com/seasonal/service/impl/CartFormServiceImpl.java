@@ -40,10 +40,9 @@ public class CartFormServiceImpl implements CartFormService {
     public int updateGoodsCount(String userId, String goodId, Integer goodCount) {
         return cartFormMapper.updateGoodsCount(userId, goodId, goodCount);
     }
-
     @Override
-    public int deleteGoodsOfCart(String userId, List<String> goodIdList) {
-        return cartFormMapper.deleteGoodsOfCart(userId, goodIdList);
+    public int deleteGoodsOfCart(String userId,String GoodId) {
+        return cartFormMapper.deleteGoodsOfCart(userId, GoodId);
     }
 
 }

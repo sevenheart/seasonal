@@ -34,9 +34,9 @@ public class LogAspect {
      */
     @AfterThrowing("log()")
     public void exceptionLog(JoinPoint joinPoint){
-        LOGGER.debug("********打印异常开始********");
-        LOGGER.debug("EXCEPTION: " + joinPoint.getSignature().getName());
-        LOGGER.debug("********打印异常结束********");
+        LOGGER.error("********打印异常开始********");
+        LOGGER.error("EXCEPTION: " + joinPoint.getSignature().getName());
+        LOGGER.error("********打印异常结束********");
     }
 
     /**

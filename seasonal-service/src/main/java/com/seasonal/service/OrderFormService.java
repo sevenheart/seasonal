@@ -13,4 +13,11 @@ public interface OrderFormService {
      * @return 0失败 1成功
      */
     int insertOrderForm(OrderForm orderForm, List<DetailedCommodityForm> detailedCommodityForms);
+
+    /**
+     * 根据订单id 返回订单
+     * @param orderId   订单id
+     * @return 订单
+     */
+    OrderForm findOrderFormByOrderId(String orderId);
 }

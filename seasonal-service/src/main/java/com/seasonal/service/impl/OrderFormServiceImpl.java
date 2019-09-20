@@ -1,8 +1,8 @@
 package com.seasonal.service.impl;
 
+import com.seasonal.mapper.CartFormMapper;
 import com.seasonal.mapper.DetailedCommodityFormMapper;
 import com.seasonal.mapper.OrderFormMapper;
-import com.seasonal.mapper.OrderInfoFormMapper;
 import com.seasonal.pojo.DetailedCommodityForm;
 import com.seasonal.pojo.OrderForm;
 import com.seasonal.service.OrderFormService;
@@ -15,13 +15,13 @@ import java.util.List;
 @Service
 public class OrderFormServiceImpl implements OrderFormService {
 
-    private final OrderInfoFormMapper orderInfoFormMapper;
     private final OrderFormMapper orderFormMapper;
     private final DetailedCommodityFormMapper detailedCommodityFormMapper;
+    private final CartFormMapper cartFormMapper;
 
     @Autowired
-    public OrderFormServiceImpl(OrderInfoFormMapper orderInfoFormMapper, OrderFormMapper orderFormMapper, DetailedCommodityFormMapper detailedCommodityFormMapper) {
-        this.orderInfoFormMapper = orderInfoFormMapper;
+    public OrderFormServiceImpl(CartFormMapper cartFormMapper, OrderFormMapper orderFormMapper, DetailedCommodityFormMapper detailedCommodityFormMapper) {
+        this.cartFormMapper = cartFormMapper;
         this.orderFormMapper = orderFormMapper;
         this.detailedCommodityFormMapper = detailedCommodityFormMapper;
     }
@@ -31,8 +31,14 @@ public class OrderFormServiceImpl implements OrderFormService {
     public int insertOrderForm(OrderForm orderForm, List<DetailedCommodityForm> detailedCommodityForms) {
         orderFormMapper.insertOrderForm(orderForm);
         for (DetailedCommodityForm detailed : detailedCommodityForms) {
+            cartFormMapper.deleteGoodsOfCart(orderForm.getOrderUserId(), detailed.getGoodId());
             detailedCommodityFormMapper.insertDetailCommodityForm(detailed);
         }
-        return 0;
+        return 1;
+    }
+
+    @Override
+    public OrderForm findOrderFormByOrderId(String orderId) {
+        return orderFormMapper.findOrderFormByOrderId(orderId);
     }
 }
