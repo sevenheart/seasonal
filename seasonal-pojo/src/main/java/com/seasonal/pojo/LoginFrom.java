@@ -16,7 +16,7 @@ public class LoginFrom {
     private String loginIp;
     private Date createTime;
     private Date updateTime;
-    private Integer type;
+    //private Integer type;
 
 
 }

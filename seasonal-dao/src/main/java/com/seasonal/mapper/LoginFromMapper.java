@@ -23,14 +23,6 @@ public interface LoginFromMapper {
     LoginFrom findLoginByIdentifier(LoginFrom loginFrom);
 
     /**
-     * 插入账号信息
-     *
-     * @param loginFrom
-     * @return
-     */
-    int insertLoginFrom(LoginFrom loginFrom);
-
-    /**
      *注册手机号查重
      *
      * @param identifier
@@ -56,4 +48,15 @@ public interface LoginFromMapper {
      */
     int updateMessage(String identifier, Date currentTime, String loginIp);
 
+    /**
+     * 注册添加用户信息
+     * @param userId
+     * @param identityType
+     * @param credential
+     * @param identifier
+     * @param loginIp
+     * @param currentTime
+     * @return
+     */
+    int insertUserMessage(String userId, String identityType, String credential, String identifier, String loginIp, Date currentTime);
 }
