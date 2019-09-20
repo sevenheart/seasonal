@@ -1,18 +1,14 @@
 //订单商品列表
 var good_id_arrary = new Array(10);
-/*good_id_arrary.unshift("1");
-good_id_arrary.unshift("2");*/
+
 //订单商品价格列表
 var good_price_array = new Array(10);
-/*good_price_array.unshift("22");
-good_price_array.unshift("20");*/
+
 //订单商品数量列表
 var good_count_array = new Array(10);
-/*good_count_array.unshift("3");
-good_count_array.unshift("2");*/
+let order_money = 0;//订单金额
 let html = "";
-let order_money = 50;//订单金额
-const order_user_id = "001";//用户id
+const order_user_id = "002";//用户id
 const order_name = "春野樱";
 // let delivery_way = "0";//配送方式
 // let delivery_money = "20"//配送费
@@ -38,22 +34,19 @@ function random_No(j) {
 }
 
 // 订单生成前，遍历已选择的商品，获取要购买的商品信息
-function orderGoods(){
+function orderGoods() {
     $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
-        if($(this).is(':checked')){
-            console.log('已选id:' + $(this).val())
+        if ($(this).is(':checked')) {
             good_id_arrary.unshift($(this).val()); //填入商品id
-            console.log('已选商品的价钱:' + $('#price'+i).text())
-            good_price_array.unshift($('#price'+i).text()); //填入商品价钱
-            console.log('已选商品的数量:' + $('#good_count'+i).val())
-            good_count_array.unshift($('#good_count'+i).val()); //填入商品数量
+            good_price_array.unshift($('#price' + i).text()); //填入商品价钱
+            good_count_array.unshift($('#good_count' + i).val()); //填入商品数量
         }
     })
 }
 
 $("#ctf-js").click(function () {
 
-    orderGoods()
+    orderGoods();
 
     const cart_flow = $("#cart-flow");
     const cart = $("#cart");
@@ -92,10 +85,14 @@ $("#ctf-js").click(function () {
         '            <span class="of">订单编号：</span><span class="of_sp">' + orderId + '</span><br>\n' +
         '            <span class="of">用户ID：</span><span class="of_sp">' + order_user_id + '</span><br>\n' +
         '            <span class="of">用户名：</span><span class="of_sp">' + order_name + '</span><br>';
-    for (let i = 0; i < 3; i++) {
-        html += '<span class="og">商品一：</span><span class="og_sp">三分果盒：超级精选 单价：￥22 数量：3 </span><br>';
+    for (let i = 0; i < good_id_arrary.length; i++) {
+        if (good_id_arrary[i] !== undefined) {
+            order_money += Number(good_price_array[i]);
+            console.log(order_money);
+            html += '<span class="og">商品一：</span><span class="og_sp">三分果盒：超级精选 总价：￥' + good_price_array[i] + ' 数量：' + good_count_array[i] + ' </span><br>';
+        }
     }
-    html += '<span class="og">总价格：</span><span class="og_sp">￥' + order_money + ' </span><br>\n' +
+    html += '<span class="og">总价格：￥</span><span class="og_sp" id="order_money">' + order_money + ' </span><br>\n' +
         '            <span class="og">请选择配送方式(配送按每公里1元收取配送费用，自提无费用)：</span><br>\n' +
         '            <span class="og"><input checked="true" id="pick_up" name="allot" type="radio" value="自提"/><label for="pick_up">自提</label></span>\n' +
         '            <span class="og"><input  id="delivery" name="allot" type="radio" value="配送"/><label for="delivery">配送</label></span>\n' +
@@ -116,21 +113,22 @@ $("#ctf-js").click(function () {
     cart.append(html);
 
     $("#pick_up").click(function () {
-        driving.clear()
+        driving.clear();
         //自提按钮点击事件
         delivery_way = 0;
         $("#allot_price").text("配送费：￥0");
         $("#allot_address").css("display", "none");
         $("#og_shou").css("display", "none")
+        $("#order_money").text(order_money);
 
-        if(markers.length == 0){
+        if (markers.length == 0) {
             $.each(addressAndDistance, function (i, value) {
-                if (Number(value.distance*0.001).toFixed(2) > 5.0){
+                if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
                     return true
                 }
                 getGeoCode(value)
             })
-        }else{
+        } else {
             map.add(markers)
             map.add(markerOptions)
             map.setFitView(personAddress.location);
@@ -193,9 +191,9 @@ $("#ctf-js").click(function () {
 
     map.add(markerOptions)
 
-    if($('#pick_up').is(':checked')){
+    if ($('#pick_up').is(':checked')) {
         $.each(addressAndDistance, function (i, value) {
-            if (Number(value.distance*0.001).toFixed(2) > 5.0){
+            if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
                 return true
             }
             getGeoCode(value)
@@ -207,7 +205,6 @@ function allotAddressX(city, address) {
     //value为下拉时option 的value值
     $("#og_name").text(html_address_name[$("#allot_address_x ").get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$("#allot_address_x ").get(0).selectedIndex]);
-    $("#allot_price").text("配送费：￥20");
-    //calDistance(city, address)
+
     planningRoute(city, address)
 }
