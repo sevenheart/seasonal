@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.DetailedCommodityFormMapper">
+    <!--根据订单id查找订单详细信息-->
+    <select id="findDetailFormBy" resultType="detailedCommodityForm">
+       select * from user where order_id=#{orderId}
+    </select>
+    <!--插入订单详细信息-->
+    <insert id="insertDetailCommodityForm" parameterType="detailedCommodityForm">
+        insert into
+        detailed_commodity_form(
+        <trim suffixOverrides=",">
+            <if test="goodId!=null and goodId!=''">
+                good_id,
+            </if>
+            <if test="goodCount!=null and goodCount!=''">
+                good_count,
+            </if>
+            <if test="commodityMoney!=null and commodityMoney!=''">
+                commodity_money,
+            </if>
+            <if test="orderId!=null and orderId!=''">
+                order_id,
+            </if>
+            <if test="goodType!=null and goodType!=''">
+                good_type,
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                create_time,
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                update_time,
+            </if>
+
+        </trim>
+
+        ) values(
+        <trim suffixOverrides=",">
+            <if test="goodId!=null and goodId!=''">
+                #{goodId},
+            </if>
+            <if test="goodCount!=null and goodCount!=''">
+                #{goodCount},
+            </if>
+            <if test="commodityMoney!=null and userOrderId!=''">
+                #{commodityMoney},
+            </if>
+            <if test="orderId!=null and userOrderId!=''">
+                #{orderId},
+            </if>
+            <if test="goodType!=null and goodType!=''">
+                #{goodType},
+            </if>
+            <if test="createTime!=null and createTime!=''">
+                #{createTime},
+            </if>
+            <if test="updateTime!=null and updateTime!=''">
+                #{updateTime},
+            </if>
+
+        </trim>
+        )
+    </insert>
+
+</mapper>

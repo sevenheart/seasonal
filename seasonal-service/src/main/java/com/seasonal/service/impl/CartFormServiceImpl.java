@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class CartFormServiceImpl implements CartFormService {
 
@@ -22,4 +23,27 @@ public class CartFormServiceImpl implements CartFormService {
     public List<CartForm> findCartFormById(String userId) {
         return cartFormMapper.findCartFormById(userId);
     }
+
+    @Override
+    public int addGoodsToCart(String userId, String goodId, Integer goodCount) {
+        CartForm cartForm = cartFormMapper.findGoodById(userId, goodId);
+        int row = 0;
+        if(null != cartForm){
+            row = cartFormMapper.updateGoodsCount(userId, goodId, cartForm.getGoodCount() + goodCount);
+        } else{
+            row = cartFormMapper.addGoodsToCart(userId, goodId, goodCount);
+        }
+        return row;
+    }
+
+    @Override
+    public int updateGoodsCount(String userId, String goodId, Integer goodCount) {
+        return cartFormMapper.updateGoodsCount(userId, goodId, goodCount);
+    }
+
+    @Override
+    public int deleteGoodsOfCart(String userId, List<String> goodIdList) {
+        return cartFormMapper.deleteGoodsOfCart(userId, goodIdList);
+    }
+
 }

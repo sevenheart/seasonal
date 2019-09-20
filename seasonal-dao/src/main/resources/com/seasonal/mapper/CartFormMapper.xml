@@ -3,10 +3,43 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seasonal.mapper.CartFormMapper">
+    <resultMap id="carts" type="com.seasonal.pojo.CartForm">
+        <result column="good_id" property="goodId"></result>
+        <result column="good_count" property="goodCount"></result>
+        <association property="composeGood" column="good_id" select="getCompose"/>
+    </resultMap>
+
     <resultMap id="cart" type="com.seasonal.pojo.CartForm">
 
     </resultMap>
-    <select id="findGoodById" resultMap="cart">
-        select * from cart_form where user_id=#{userId}
+
+    <select id="getCompose" resultType="com.seasonal.pojo.ComposeGood">
+        select * from compose_good where id=#{goodId}
     </select>
+
+    <select id="findCartFormById" resultMap="carts">
+        select user_id,good_id,good_count
+        from cart_form
+        where user_id=#{userId}
+    </select>
+
+    <insert id="addGoodsToCart">
+        insert into cart_form (user_id, good_id, good_count) values(#{userId}, #{goodId}, #{goodCount})
+    </insert>
+
+    <select id="findGoodById" resultMap="cart">
+        select * from cart_form where user_id=#{userId} and good_id=#{goodId}
+    </select>
+
+    <update id="updateGoodsCount">
+        update cart_form set good_count=#{goodCount} where user_id=#{userId} and good_id=#{goodId}
+    </update>
+
+    <delete id="deleteGoodsOfCart">
+        delete from cart_form where user_id=#{userId}
+        and good_id in
+        <foreach collection="list" item="goodId" index="index" open="(" separator="," close=")">
+            #{goodId}
+        </foreach>
+    </delete>
 </mapper>

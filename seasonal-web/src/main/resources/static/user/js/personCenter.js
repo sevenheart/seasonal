@@ -35,7 +35,16 @@ function changeStyle() {
     templatecss.setAttribute("href","css/" + templatevalue + ".css");
     document.getElementsByTagName("form")[0].setAttribute("class",templatevalue);
 }
+/*修改头像*/
+function preview(obj){
 
+    //获取点击的文本框userimg
+    var file =document.getElementById("bookimg");
+    var imgUrl =window.URL.createObjectURL(file.files[0]);
+    console.log(imgUrl)
+    $('#userimg img').attr('src',imgUrl); // 修改img标签src属性值
+
+}
 /*展示地址信息*/
 function showaddress(data){
     var html='  <tr>\n' +

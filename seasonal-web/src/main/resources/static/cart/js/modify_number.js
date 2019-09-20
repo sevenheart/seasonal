@@ -1,5 +1,5 @@
 var min = 1;
-var max = 200;
+var max = 100;
 //数量选择的数字减1
 function minusOne(obj){
     var _input = $(obj).siblings("input");
@@ -37,7 +37,4 @@ function isInteger(obj){
     if(value > max){
         $(obj).val($(obj).attr("tmp"));
     }
-    /*if(typeof modifyNumberCallback != 'undefined'){
-        modifyNumberCallback($(obj));
-    }*/
 }

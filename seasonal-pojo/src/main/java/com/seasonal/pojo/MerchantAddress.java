@@ -16,6 +16,6 @@ public class MerchantAddress {
     private String address;
     private String merchantPhone;
     private String merchantName;
-    private Date createTime;
-    private Date updateTime;
+//    private Date createTime;
+//    private Date updateTime;
 }

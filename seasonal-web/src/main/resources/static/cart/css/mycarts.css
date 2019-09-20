@@ -8,7 +8,7 @@
     border-bottom: solid 1px #bbb;
 }
 
-#cart-tit-txt{
+#cart-tit-txt {
     font-size: 28px;
     color: #999;
     margin-left: 8px;
@@ -309,6 +309,10 @@
     text-decoration: none;
 }
 
+#ctf-js:hover {
+    cursor: pointer;
+}
+
 #cart-tf .ctf-r {
     float: right;
 }
@@ -326,19 +330,47 @@
     padding: 0px 5px 0px 5px;
 }
 
-.hover-a{
+.hover-a {
     text-decoration: none;
 }
 
 
+.of {
+    font-size: 18px;
+    color: #888;
+    display: inline-block;
+    margin: 0 0 0 30px;
+}
+
+.of_sp {
+    font-size: 18px;
+    color: #888;
+}
+
+.og {
+    font-size: 18px;
+    color: #888;
+    display: inline-block;
+    margin: 0 0 0 30px;
+}
+
+.og_sp {
+    font-size: 18px;
+    color: #888;
+}
 
 
-
-
-
-
-
-
-
-
+#og-f {
+    width: 145px;
+    display: block;
+    text-align: center;
+    background: #e51e13;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    float: right;
+    position: absolute;
+    left: 600px;
+    top: 640px;
+}
 
