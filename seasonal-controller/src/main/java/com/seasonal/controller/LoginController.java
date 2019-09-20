@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.*;
 
@@ -62,8 +64,10 @@ public class LoginController {
     @ResponseBody
     public boolean shortMessageSend(String identifier, HttpSession session) {
         boolean flag = false;
-        String code = loginService.sendShortMessage(identifier);
+        //String code = loginService.sendShortMessage(identifier);
+        String code = "1234";
         if (code != null || code == ""){
+            System.out.println("code:"+code);
             session.setAttribute("code",code);
             final Timer timer=new Timer();
             timer.schedule(new TimerTask() {
@@ -87,14 +91,14 @@ public class LoginController {
         System.out.println("Controller->code:"+code);
         if (code == null || code == ""){
             System.out.println("验证码已过期，请重新发送");
-            return "false";
+            return "False";
         } else if (code.equals(verifyCode)) {
             String userId = loginService.insertUserMessage(identifier, credential);
             if (userId != null){
                 System.out.println("注册成功");
                 session.setAttribute("userId",userId);
             }
-            return "true";
+            return "True";
         } else {
             System.out.println("验证码错误，请重新输入");
             return "error";
@@ -108,7 +112,7 @@ public class LoginController {
         if (code == null || code == ""){
             System.out.println("验证码已过期，请重新发送");
             return "false";
-        } else if (code == smsVerifyCode) {
+        } else if (code.equals(smsVerifyCode)) {
             LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
             String userId = loginFrom.getUserId();
             if (userId != null){
@@ -146,6 +150,11 @@ public class LoginController {
     @ResponseBody
     public void cancellation(HttpSession session) {
         session.invalidate();
+    }
+
+    @RequestMapping(value = "isLogin")
+    public String isLogin(){
+        return "redirect:/index.html";
     }
 
 }

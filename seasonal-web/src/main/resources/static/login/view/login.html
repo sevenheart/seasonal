@@ -26,7 +26,7 @@
             <div class="login-area" id="j-loginArea">
                 <div class="title">登录时令果慧</div>
                 <div class="login tang-pass-login" id="j-login" style="display: block; visibility: visible; opacity: 1;">
-                    <form id="form" action="/index.html" class="pass-form pass-form-normal" method="get" autocomplete="off">
+                    <form id="form" action="/isLogin" class="pass-form pass-form-normal" method="post" autocomplete="off">
                         <p id="errorWrapper" class="pass-generalErrorWrapper">
                             <span id="error" class="pass-generalError pass-generalError-error"></span>
                         </p>
@@ -39,7 +39,7 @@
                             </label>
                             <input id="userName" type="text" name="userName"
                                    class="pass-text-input pass-text-input-userName" autocomplete="off"
-                                   placeholder="手机号">
+                                   maxlength="11" placeholder="手机号">
                             <span id="userName_clearbtn" class="pass-clearbtn pass-clearbtn-userName"
                                   style="display: none; visibility: hidden; opacity: 1;"></span>
                             <span class="pass-item-selectbtn pass-item-selectbtn-userName"
@@ -90,7 +90,7 @@
                 <div id="sms" class="tang-pass-login tang-pass-sms" style="display: none; visibility: hidden; opacity: 1;">
                     <p class="tang-pass-sms-title">短信登录</p>
                     <p class="tang-pass-sms-tip">验证即登录，未注册将自动创建时令果惠帐号</p>
-                    <form id="smsForm" method="POST">
+                    <form id="smsForm" action="/isLogin" method="POST">
                         <p id="smsErrorWrapper" class="pass-generalErrorWrapper">
                             <span id="smsError" class="pass-generalError"></span>
                         </p>
@@ -108,7 +108,7 @@
                             <label id="smsVerifyCodeLabel" class="pass-label pass-label-smsVerifyCode">
                                 验证码
                             </label>
-                            <input id="smsVerifyCode" type="text" name="password" class="pass-text-input pass-text-input-smsVerifyCode" disabled="disabled" placeholder="验证码">
+                            <input id="smsVerifyCode" type="text" name="password" class="pass-text-input pass-text-input-smsVerifyCode" placeholder="验证码">
                             <span id="smsVerifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-smsVerifyCode" style="display:none;"></span>
                             <input id="verifyCodeSend-button" type="button" value="获取短信验证码" class="pass-button pass-button-verifyCodeSend" autocomplete="off">
                         </p>

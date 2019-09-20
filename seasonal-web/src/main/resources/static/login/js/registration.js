@@ -144,6 +144,7 @@ $(document).on('blur', '.pass-text-input-verifyCode', function () {
     $(this).css('border-color', '')
 })
 //发送短信验证码
+var time = 60
 $(document).on('click', '.pass-button-verifyCodeSend', function () {
     var identifier = $('.pass-text-input-phone').val()
     if (identifier == null || identifier == '') {
@@ -169,10 +170,28 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
             async: false,
             success: function (data) {
                 console.log("获取验证码：" + data)
+                sendCode()
             }
         })
     }
 })
+
+function sendCode(){
+    if(time==0){//重新获取验证码
+        $(".pass-button-verifyCodeSend").attr("disabled",false);
+        $(".pass-button-verifyCodeSend").val("获取短信验证码");
+        time = 60;
+        return false;//清除定时器
+    }else{
+        $(".pass-button-verifyCodeSend").attr("disabled",true);
+        $(".pass-button-verifyCodeSend").val("重新发送("+time+")");
+        time--;
+    }
+    //设置一个定时器
+    setTimeout(function(){
+        sendCode()
+    },1000)
+}
 
 //用户协议
 $(document).on('click', '.pass-checkbox-isAgree', function () {
@@ -223,37 +242,37 @@ $(document).on('submit', '#form', function () {
 
     if (verifyCode == null || verifyCode == '') {
         $('#verifyCode-span').css('display', 'inline')
-        $('#verifyCode-span').css('display', 'none')
-        $('#verifyCodeSend-span').css('display', 'none')
+        $('#verifyCodeError-span').css('display', 'none')
+        $('#verifyCodeExpiration-span').css('display', 'none')
     }
 
     if (isAgree == false) {
         $('#isAgreeError').css('display', 'inline')
     } else {
         $('#isAgreeError').css('display', 'none')
-    }
-    $.ajax({
-        url:"/registrationInsert",
-        type:"post",
-        data:{"identifier":identifier,"credential":credential,"verifyCode":verifyCode},
-        dataType:"json",
-        async: false,
-        success:function (data) {
-            if (data == "ture"){
-                flag = true
-            } else if(data = "false"){
-                flag = false
-                $('#verifyCode-span').css('display','none')
-                $('#verifyCodeError-span').css('display','none')
-                $('#verifyCodeExpiration-span').css('display','inline')
-            } else{
-                flag = false
-                $('#verifyCode-span').css('display','none')
-                $('#verifyCodeError-span').css('display','inline')
-                $('#verifyCodeExpiration-span').css('display','none')
+        $.ajax({
+            url:"/registrationInsert",
+            type:"post",
+            data:{"identifier":identifier,"credential":credential,"verifyCode":verifyCode},
+            dataType:"text",
+            async: false,
+            success:function (data) {
+                if (data == "True"){
+                    flag = true
+                } else if(data == "False"){
+                    flag = false
+                    $('#verifyCode-span').css('display','inline')
+                    $('#verifyCodeError-span').css('display','none')
+                    $('#verifyCodeExpiration-span').css('display','none')
+                } else{
+                    flag = false
+                    $('#verifyCode-span').css('display','none')
+                    $('#verifyCodeError-span').css('display','inline')
+                    $('#verifyCodeExpiration-span').css('display','none')
+                }
             }
-        }
-    })
+        })
+    }
     return flag
 })
 

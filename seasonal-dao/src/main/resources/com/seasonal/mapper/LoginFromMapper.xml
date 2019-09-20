@@ -26,7 +26,7 @@
     <update id="updateMessage">
         update login_from set  login_ip=#{loginIp},update_time=#{currentTime} where identifier=#{identifier}
     </update>
-    <insert id="insertLoginFrom">
+    <insert id="insertUserMessage">
         insert into login_from (user_id,identifier,identity_type,credential,login_ip,create_time,update_time) values (#{userId},#{identifier},#{identityType},#{credential},#{loginIp},#{currentTime},#{currentTime})
     </insert>
 

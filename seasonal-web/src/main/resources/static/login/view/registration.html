@@ -26,7 +26,7 @@
     <div id="content">
         <div class="mod-reg clearfix mod-reg-pink">
             <div class="reg-content tang-pass-reg" id="reg_content">
-                <form action="registration" autocomplete="off" id="form" method="POST">
+                <form action="/isLogin" autocomplete="off" id="form" method="post">
                     <p id="phone" class="pass-form-item pass-form-item-phone">
                         <label id="phone-label" class="pass-label pass-label-phone">手机号</label>
                         <input id="phone-input" type="text" name="phone" class="pass-text-input pass-text-input-phone" maxlength="11" autocomplete="off" placeholder="可用于登录和找回密码">
@@ -46,7 +46,7 @@
                         <span id="verifyCodeExpiration-span" style="display: none">验证码已过期，请重新获取</span>
                     </p>
                     <p id="isAgree" class="pass-form-item pass-form-item-isAgree">
-                        <input name="isAgree" id="isAgree-checkbox" type="checkbox" class="pass-checkbox-input pass-checkbox-isAgree" autocomplete="off">
+                        <input name="isAgree" id="isAgree-checkbox" type="checkbox" class="pass-checkbox-input pass-checkbox-isAgree" checked="checked" autocomplete="off">
                         <label>阅读并接受</label>
                         <a target="_blank" href="http://passport.baidu.com/static/passpc-account/html/protocal.html">《用户协议》</a>及
                         <a target="_blank" href="http://privacy.baidu.com/mdetail?id=288">《隐私权保护声明》</a>
