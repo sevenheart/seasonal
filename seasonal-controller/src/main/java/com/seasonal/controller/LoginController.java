@@ -3,6 +3,7 @@ package com.seasonal.controller;
 
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.service.LoginService;
+import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -66,10 +67,10 @@ public class LoginController {
         boolean flag = false;
         //String code = loginService.sendShortMessage(identifier);
         String code = "1234";
-        if (code != null || code == ""){
-            System.out.println("code:"+code);
-            session.setAttribute("code",code);
-            final Timer timer=new Timer();
+        if (code != null || code == "") {
+            System.out.println("code:" + code);
+            session.setAttribute("code", code);
+            final Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -77,7 +78,7 @@ public class LoginController {
                     System.out.println("code删除成功");
                     timer.cancel();
                 }
-            },5*60*1000);
+            }, 5 * 60 * 1000);
             flag = true;
         }
         return flag;
@@ -85,18 +86,18 @@ public class LoginController {
 
     @RequestMapping(value = "registrationInsert")
     @ResponseBody
-    public String registrationInsert(String identifier,String credential, String verifyCode, HttpSession session){
-        String code = (String)session.getAttribute("code");
-        System.out.println("Controller->verifyCode:"+verifyCode);
-        System.out.println("Controller->code:"+code);
-        if (code == null || code == ""){
+    public String registrationInsert(String identifier, String credential, String verifyCode, HttpSession session) {
+        String code = (String) session.getAttribute("code");
+        System.out.println("Controller->verifyCode:" + verifyCode);
+        System.out.println("Controller->code:" + code);
+        if (code == null || code == "") {
             System.out.println("验证码已过期，请重新发送");
             return "False";
         } else if (code.equals(verifyCode)) {
             String userId = loginService.insertUserMessage(identifier, credential);
-            if (userId != null){
+            if (userId != null) {
                 System.out.println("注册成功");
-                session.setAttribute("userId",userId);
+                session.setAttribute("userId", userId);
             }
             return "True";
         } else {
@@ -107,17 +108,16 @@ public class LoginController {
 
     @RequestMapping(value = "smsLogin")
     @ResponseBody
-    public String smsLogin(String identifier, String smsVerifyCode, HttpSession session){
-        String code = (String)session.getAttribute("code");
-        if (code == null || code == ""){
-            System.out.println("验证码已过期，请重新发送");
+    public String smsLogin(String identifier, String smsVerifyCode, HttpSession session) {
+        String code = (String) session.getAttribute("code");
+        if (code == null || code == "") {
             return "false";
         } else if (code.equals(smsVerifyCode)) {
             LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
             String userId = loginFrom.getUserId();
-            if (userId != null){
+            if (userId != null) {
                 System.out.println("登录成功");
-                session.setAttribute("userId",userId);
+                session.setAttribute("userId", userId);
             }
             return "true";
         } else {
@@ -129,20 +129,18 @@ public class LoginController {
     @RequestMapping(value = "getsessionUserId")
     @ResponseBody
     public Object getsessionUserId(HttpSession session) {
-        String userId = (String)session.getAttribute("userId");
-        System.out.println(userId);
-        if (userId != null){
-            System.out.println("userId != null");
-            return userId;
-        } else{
-            System.out.println("userId = null");
-            return null;
+        String userId = (String) session.getAttribute("userId");
+
+        if (userId != null) {
+            return ResultUtil.success(userId);
+        } else {
+            return ResultUtil.fail("获取失败");
         }
     }
 
     @RequestMapping(value = "setCookie")
     @ResponseBody
-    public void setCookie(String identifier,String credential,String check){
+    public void setCookie(String identifier, String credential, String check) {
         boolean flag = loginService.setCookie(identifier, credential, check);
     }
 
@@ -153,7 +151,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "isLogin")
-    public String isLogin(){
+    public String isLogin() {
         return "redirect:/index.html";
     }
 
