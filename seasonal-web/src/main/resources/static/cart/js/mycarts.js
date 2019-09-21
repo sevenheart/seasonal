@@ -153,32 +153,45 @@ function updateGoods(userId, goodId, goodCount, _input) {
 }
 
 // 从购物车中删除商品
-/*function deleteProducts(obj){
-    var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
+function deleteProducts(obj){
+    //var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
+    //console.log('obj:'+ $(obj).attr('value'))
     var userId = '002'
-    var goodDataList = new Array()
-    goodDataList.push(userId)
-    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
-        if($(this).is(':checked')){
-            goodDataList.push($(this).val())
-        }
-    })
-    console.log(goodDataList)
+    var goodIdList = new Array()
+    if($(obj).attr('value') === 'batchDeletion') {
+        $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+            if ($(this).is(':checked')) {
+                goodIdList.push($(this).val())
+            }
+        })
+    }else {
+        goodIdList.push($(obj).parents('ul').children('li').children(':checkbox').val())
+    }
+    var delGoods = {
+        'userId': userId,
+        'goodIdList': goodIdList
+    }
+    console.log(goodIdList)
     $.ajax({
         url:'/deleteGood',
         type:'post',
-        data:JSON.stringify(goodDataList),
+        data:JSON.stringify(delGoods),
         dataType:'json',
         contentType:"application/json",
         success:function (data) {
             console.log('success:'+data)
-            $(obj).parents('ul').parents('li').remove()
+            if(data > 0){
+                $.each(goodIdList, function (i, value) {
+                    //console.log($("input[value='" + value + "']").attr('name'))
+                    $("input[value='" + value + "']").parents('ul').parents('li').remove()
+                })
+            }
         },
         error:function (data) {
             console.log('error:'+data)
         }
     })
-}*/
+}
 
 var goodHtml = ''
 var goodsData
@@ -202,7 +215,7 @@ $.ajax({
                 '                        </a>\n' +
                 '                    </li>\n' +
                 '                    <li class="co-name">\n' +
-                '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
+                '                        <a id="good_name' + i + '" href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
                 '                    </li>\n' +
                 '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
                 '                    <li class="co-sl">\n' +

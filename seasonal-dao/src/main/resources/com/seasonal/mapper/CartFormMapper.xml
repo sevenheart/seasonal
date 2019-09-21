@@ -36,6 +36,6 @@
     </update>
 
     <delete id="deleteGoodsOfCart">
-        delete from cart_form where user_id=#{userId} and good_id =#{goodId}
+        delete from cart_form where user_id=#{userId} and good_id=#{goodId}
     </delete>
 </mapper>

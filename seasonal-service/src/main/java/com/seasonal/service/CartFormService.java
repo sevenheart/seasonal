@@ -37,8 +37,8 @@ public interface CartFormService {
      * 删除购物车商品
      *
      * @param userId
-     * @param GoodId
+     * @param goodIdList
      * @return
      */
-    int deleteGoodsOfCart(String userId, String GoodId);
+    int deleteGoodsOfCart(String userId, List<String> goodIdList);
 }

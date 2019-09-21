@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @MapperScan(basePackages = "com.seasonal.mapper")
 @ServletComponentScan
-@SpringBootApplication(exclude = MongoAutoConfiguration.class)
+@SpringBootApplication/*(exclude = MongoAutoConfiguration.class)*/
 public class SeasonalApplication {
     public static void main(String[] args) {
         SpringApplication.run(SeasonalApplication.class, args);
