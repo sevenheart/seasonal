@@ -87,9 +87,8 @@ public class UserAddressController {
     @RequestMapping("deletecheckeduseraddress")
     @ResponseBody
     public ResultData deleteCheckedUserAddressById(@RequestBody List<Integer> check) {
-        System.out.println("接到的haha是" + check.get(0));
         if (check == null) {
-            System.out.println("没穿火来");
+            System.out.println("没接收到checkbox得值");
         } else {
 
             //判断是否有删除失败的
