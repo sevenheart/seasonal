@@ -9,13 +9,10 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
 
-    private final LoginInterceptor loginInterceptor;
+    public LoginInterceptor loginInterceptor;
 
     @Autowired
     public WebConfigurer(LoginInterceptor loginInterceptor) {
@@ -31,7 +28,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截 除了 excludePathList方法中页面的 其他请求
-//        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(excludePathList());
+        //registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns();
     }
 
     @Override

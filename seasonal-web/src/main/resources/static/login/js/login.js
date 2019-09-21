@@ -1,7 +1,8 @@
 var callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
 var url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl;
 var jsapi = document.createElement('script');
-var map
+var map;
+var beforeCity;
 jsapi.charset = 'utf-8';
 jsapi.src = url;
 document.head.appendChild(jsapi);
@@ -21,27 +22,26 @@ window.onLoad = function () {
         });
         map.addControl(geolocation);
         geolocation.getCityInfo(function (status, result) {
-            if (status == 'complete') {
-                nowCity = result.city
+            if (status === 'complete') {
+                nowCity = result.city;
             } else {
-                console.log('loc-error' + result)
+                console.log('loc-error' + result);
             }
         });
     });
-}
+};
 
 //账号
 $(document).on('click', '.pass-form-normal .pass-text-input-userName', function () {
-    $(this).css('color', '#F69')
-    $(this).css('border-color', '#F69')
-    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -116px')
-
-})
+    $(this).css('color', '#F69');
+    $(this).css('border-color', '#F69');
+    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -116px');
+});
 $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function () {
-    var identifier = $('.pass-form-normal .pass-text-input-userName').val()
-    $(this).css('color', '')
-    $(this).css('border-color', '')
-    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -97px')
+    var identifier = $('.pass-form-normal .pass-text-input-userName').val();
+    $(this).css('color', '');
+    $(this).css('border-color', '');
+    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -97px');
     $.ajax({
         url: "/login",
         type: "post",
@@ -49,67 +49,71 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
         data: {"identifier": identifier},
         async: false,
         success: function (data) {
-            ipsearch(data.loginIp)
+            ipsearch(data.loginIp);
         },
         error: function (data) {
 
         }
     })
-})
+});
 
 
 //密码
 $(document).on('click', '.pass-form-normal .pass-text-input-password', function () {
-    $(this).css('color', '#F69')
-    $(this).css('border-color', '#F69')
-    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -157px')
-
-})
+    $(this).css('color', '#F69');
+    $(this).css('border-color', '#F69');
+    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -157px');
+});
 $(document).on('blur', '.pass-form-normal .pass-text-input-password', function () {
-    $(this).css('color', '')
-    $(this).css('border-color', '')
-    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -135px')
-})
+    $(this).css('color', '');
+    $(this).css('border-color', '');
+    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -135px');
+});
 
 
 //表单提交，多次错误验证码显示，判断输入信息
-var num = 0
+var num = 0;
 $(document).on('submit', '.pass-form-normal', function () {
-    var flag = false
-    var identifier = $('.pass-form-normal .pass-text-input-userName').val()
-    var credential = $('.pass-form-normal .pass-text-input-password').val()
-    if (identifier == null || identifier == '') {
-        console.log("username")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机/邮箱/用户名")
-        flag = false
-    } else if (credential == null || credential == '') {
-        console.log("password")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入密码")
-        flag = false
+    var flag = false;
+    var identifierError = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
+    var identifier = $('.pass-form-normal .pass-text-input-userName').val();
+    var credential = $('.pass-form-normal .pass-text-input-password').val();
+    if (identifier === null || identifier === '') {
+        console.log("username");
+        identifierError.text('');
+        identifierError.append("请您输入手机/邮箱/用户名");
+        flag = false;
+    } else if (credential === null || credential === '') {
+        console.log("password");
+        identifierError.text('');
+        identifierError.append("请您输入密码");
+        flag = false;
     } else {
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove()
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        var check = document.getElementById("memberPass").checked
-        flag = login(identifier, credential, flag, check)
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove();
+        identifierError.text('');
+        var check = document.getElementById("memberPass").checked;
+        flag = login(identifier, credential, flag, check);
     }
-    if (flag == true) {
-        updatelogin(identifier)
+    if (flag === true) {
+        updatelogin(identifier);
     }
     return flag;
-})
+});
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
-    if (nowCity != beforeCity) {
-        alert("异地登录，请使用短信登录")
-        $('#j-login').css('display', 'none')
-        $('#j-login').css('visibility', 'hidden')
-        $('#sms').css('display', 'block')
-        $('#sms').css('visibility', 'visible')
-        $('.pass-sms-link-back').css('visibility', 'hidden')
-        flag = false
+    var j_login = $('#j-login');
+    var sms = $('#sms');
+    var text_VerifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
+    var form_VerifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
+    if (nowCity !== beforeCity) {
+        alert("异地登录，请使用短信登录");
+        j_login.css('display', 'none');
+        j_login.css('visibility', 'hidden');
+        sms.css('display', 'block');
+        sms.css('visibility', 'visible');
+        $('.pass-sms-link-back').css('visibility', 'hidden');
+        flag = false;
     }else {
         $.ajax({
             url: "/login",
@@ -118,8 +122,8 @@ function login(identifier, credential, flag, check) {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                saveCookie(data, check)//保存cookie
-                flag = true
+                saveCookie(data, check);//保存cookie
+                flag = true;
             },
             error: function (data) {
                 html = '用户名或密码错误，请重新输入或' +
@@ -130,10 +134,10 @@ function login(identifier, credential, flag, check) {
                 $('.pass-form-normal .pass-generalErrorWrapper').html(html);
                 num++;
                 if (num >= 3) {
-                    $('.pass-form-normal .pass-form-item-verifyCode').css('display', 'block')
-                    $('.pass-form-normal .pass-form-item-verifyCode').css('visibility', 'visible')
-                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('color', '#F69')
-                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('border-color', '#F69')
+                    form_VerifyCode.css('display', 'block');
+                    form_VerifyCode.css('visibility', 'visible');
+                    text_VerifyCode.css('color', '#F69');
+                    text_VerifyCode.css('border-color', '#F69');
                 }
             }
         })
@@ -143,24 +147,26 @@ function login(identifier, credential, flag, check) {
 
 //短信登录手机号检测的焦点事件
 $(document).on('blur', '.pass-text-input-smsPhone', function () {
-    var identifier = $('.pass-text-input-smsPhone').val()
+    var smsGeneralError = $('#smsForm .pass-generalErrorWrapper .pass-generalError');
+    var identifier = $('.pass-text-input-smsPhone').val();
     if (identifier.length > 0) {
         if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) {
-            $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-            $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("手机号码格式不正确")
+            smsGeneralError.text('');
+            smsGeneralError.append("手机号码格式不正确");
         }
     }
-})
+});
 
 
 //获取短信验证码
-var time = 60
+var time = 60;
 $(document).on('click', '.pass-button-verifyCodeSend', function () {
-    var phone = $('.pass-text-input-smsPhone').val()
+    var phone = $('.pass-text-input-smsPhone').val();
+    var smsGeneralError = $('#smsForm .pass-generalErrorWrapper .pass-generalError');
     if (phone.length > 0) {
         if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
-            $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-            $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("手机号码格式不正确")
+            smsGeneralError.text('');
+            smsGeneralError.append("手机号码格式不正确");
         } else {
             $.ajax({
                 url: "/registrationPhone",
@@ -169,7 +175,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    var identifier = data.identifier
+                    var identifier = data.identifier;
                     $.ajax({
                         url: "/shortMessageSend",
                         type: "post",
@@ -177,55 +183,57 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                         data: {"identifier": identifier},
                         async: false,
                         success: function (data) {
-                            sendCode()
-                            if (data == 'false') {
-                                alert("发送失败")
+                            sendCode();
+                            if (data === 'false') {
+                                alert("发送失败");
                             } else {
-                                alert("发送成功")
+                                alert("发送成功");
                             }
                         }
                     })
                 },
                 error: function (data) {
-                    $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-                    $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("该手机号还未注册,请先注册")
+                    smsGeneralError.text('');
+                    smsGeneralError.append("该手机号还未注册,请先注册");
                 }
             })
         }
     } else {
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("请您输入手机号")
+        smsGeneralError.text('');
+        smsGeneralError.append("请您输入手机号");
     }
-})
+});
 
 function sendCode() {
-    if (time == 0) {//重新获取验证码
-        $(".pass-button-verifyCodeSend").attr("disabled", false);
-        $(".pass-button-verifyCodeSend").val("获取短信验证码");
+    var buttonVerifyCodeSend = $(".pass-button-verifyCodeSend");
+    if (time === 0) {//重新获取验证码
+        buttonVerifyCodeSend.attr("disabled", false);
+        buttonVerifyCodeSend.val("获取短信验证码");
         time = 60;
         return false;//清除定时器
     } else {
-        $(".pass-button-verifyCodeSend").attr("disabled", true);
-        $(".pass-button-verifyCodeSend").val("重新发送 " + time + "s");
+        buttonVerifyCodeSend.attr("disabled", true);
+        buttonVerifyCodeSend.val("重新发送 " + time + "s");
         time--;
     }
     //设置一个定时器
     setTimeout(function () {
-        sendCode()
+        sendCode();
     }, 1000)
 }
 
 //短信登录表单提交
 $(document).on('submit', '#smsForm', function () {
-    var smsflag = false
-    var identifier = $('.pass-text-input-smsPhone').val()
-    var smsVerifyCode = $('.pass-text-input-smsVerifyCode').val()
-    if (identifier == null || identifier == "") {
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("请您输入手机号")
-    } else if (smsVerifyCode == null || smsVerifyCode == "") {
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').text('')
-        $('#smsForm .pass-generalErrorWrapper .pass-generalError').append("请先输入验证码")
+    var smsflag = false;
+    var identifier = $('.pass-text-input-smsPhone').val();
+    var smsVerifyCode = $('.pass-text-input-smsVerifyCode').val();
+    var smsGeneralError = $('#smsForm .pass-generalErrorWrapper .pass-generalError');
+    if (identifier === null || identifier === "") {
+        smsGeneralError.text('');
+        smsGeneralError.append("请您输入手机号");
+    } else if (smsVerifyCode === null || smsVerifyCode === "") {
+        smsGeneralError.text('');
+        smsGeneralError.append("请先输入验证码");
     } else {
         $.ajax({
             url: "/smsLogin",
@@ -234,42 +242,40 @@ $(document).on('submit', '#smsForm', function () {
             data: {"identifier": identifier, "smsVerifyCode": smsVerifyCode},
             async: false,
             success: function (data) {
-                console.log("data:" + data)
-                if (data == true) {
+                console.log("data:" + data);
+                if (data === true) {
                     smsflag = true
-                } else if (data = false) {
-                    smsflag = false
-                    $('#verifyCode-span').css('display', 'none')
-                    $('#verifyCodeError-span').css('display', 'none')
-                    $('#verifyCodeExpiration-span').css('display', 'inline')
+                } else if (data === false) {
+                    smsflag = false;
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'none');
+                    $('#verifyCodeExpiration-span').css('display', 'inline');
                 } else {
-                    smsflag = false
-                    $('#verifyCode-span').css('display', 'none')
-                    $('#verifyCodeError-span').css('display', 'inline')
-                    $('#verifyCodeExpiration-span').css('display', 'none')
+                    smsflag = false;
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'inline');
+                    $('#verifyCodeExpiration-span').css('display', 'none');
                 }
             },
             error: function (data) {
-                console.log("出错了")
+                console.log("出错了");
             }
         })
     }
-    return smsflag
-})
+    return smsflag;
+});
 
-
-var beforeCity
 
 //判断是否异地登录
 function ipsearch(ip) {
     AMap.plugin('AMap.CitySearch', function () {
-        var citysearch = new AMap.CitySearch()
+        var citysearch = new AMap.CitySearch();
         citysearch.getCityByIp(ip, function (status, result) {
-            if (status == 'complete') {
-                beforeCity = result.city
+            if (status === 'complete') {
+                beforeCity = result.city;
 
             } else {
-                console.log(result)
+                console.log(result);
 
             }
         })
@@ -285,10 +291,10 @@ function updatelogin(identifier) {
         data: {"identifier": identifier},
         async: false,
         success: function (data) {
-            console.log("跳转成功")
+            console.log("跳转成功");
         },
         error: function (data) {
-            console.log("跳转失败")
+            console.log("跳转失败");
         }
     })
 }
@@ -296,33 +302,37 @@ function updatelogin(identifier) {
 
 //短信验证码登录和账号密码登录切换
 $(document).on('click', '#j-login .pass-form-normal .pass-smsSwitchWrapper .pass-sms-btn', function () {
-    $('#j-login').css('display', 'none')
-    $('#j-login').css('visibility', 'hidden')
-    $('#sms').css('display', 'block')
-    $('#sms').css('visibility', 'visible')
+    var j_login = $('#j-login');
+    var sms = $('#sms');
+    j_login.css('display', 'none');
+    j_login.css('visibility', 'hidden');
+    sms.css('display', 'block');
+    sms.css('visibility', 'visible');
 })
 $(document).on('click', '#sms #smsForm #smsSubmitWrapper #sms_btn_back', function () {
-    $('#sms').css('display', 'none')
-    $('#sms').css('visibility', 'hidden')
-    $('#j-login').css('display', 'block')
-    $('#j-login').css('visibility', 'visible')
-})
+    var j_login = $('#j-login');
+    var sms = $('#sms');
+    sms.css('display', 'none');
+    sms.css('visibility', 'hidden');
+    j_login.css('display', 'block');
+    j_login.css('visibility', 'visible');
+});
 
 //Cookie保存，自动登录
 function saveCookie(data, check) {
-    var date = new Date()
+    var date = new Date();
     date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-    document.cookie = "identifier=" + data.identifier
-    document.cookie = "credential=" + data.credential
-    document.cookie = "check=" + check
-    document.cookie = "expires=" + date.toGMTString()
+    document.cookie = "identifier=" + data.identifier;
+    document.cookie = "credential=" + data.credential;
+    document.cookie = "check=" + check;
+    document.cookie = "expires=" + date.toGMTString();
 }
 
 function getCookie(user) {
     var arrCookie = document.cookie.split('; ');
     for (var i = 0; i < arrCookie.length; i++) {
-        var arr = arrCookie[i].split('=')
-        if (arr[0] == user) {
+        var arr = arrCookie[i].split('=');
+        if (arr[0] === user) {
             return arr[1];
         }
     }
@@ -331,9 +341,9 @@ function getCookie(user) {
 
 function checkCookie() {
     var identifier = getCookie("identifier");
-    var credential = getCookie("credential")
-    var check = getCookie("check")
-    if (identifier != "" && check == "true") {
+    var credential = getCookie("credential");
+    var check = getCookie("check");
+    if (identifier !== "" && check === "true") {
         $.ajax({
             url: "/login",
             type: "post",
@@ -341,9 +351,9 @@ function checkCookie() {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                saveCookie(data, check)//保存cookie
-                alert("自动登录成功")
-                window.location.href = 'http://localhost:8080/index.html'
+                saveCookie(data, check);//保存cookie
+                alert("自动登录成功");
+                window.location.href = 'http://localhost:8080/index.html';
             },
             error: function (data) {
 
