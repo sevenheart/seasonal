@@ -20,4 +20,12 @@ public interface OrderFormService {
      * @return 订单
      */
     OrderForm findOrderFormByOrderId(String orderId);
+
+    /**
+     * 根据订单和用户id 查询订单账号密码
+     * @param orderId 订单id
+     * @param userId 用户id
+     * @return 结果集
+     */
+    OrderForm findOrderPassword(String orderId,String userId);
 }

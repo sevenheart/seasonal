@@ -1,4 +1,3 @@
-let userId;
 let goodHtml = '';
 let goodsData;
 // 已选商品数量
@@ -6,124 +5,76 @@ let chooseGoodsNum = 0;
 let cartList = $('#cart-con');
 
 window.onLoad = function () {
-    $.ajax({
-        url: "/getsessionUserId",
-        type: "post",
-        dataType: "text",
-        async:false,
-        success: function (data) {
-            userId = data;
-            //console.log('userid:' + userId);
-            if (data){
-                console.log("success->userId:" + userId);
-                $('.already-login').text('');
-                $('.already-login').text(userId);
-                $('.login-span').css('display', 'inline');
-                $('.already-login').css('display','inline');
-                $('.registration img').css('display', 'none');
-                $('.registration a').css('display', 'none');
-                $('.not-login').css('display','none');
-                $('.cancellation').css('display', 'inline');
-            } else{
-                $('.already-login').text('');
-                $('.login-span').css('display', 'none');
-                $('.already-login').css('display','none');
-                $('.registration img').css('display', 'inline');
-                $('.registration a').css('display', 'inline');
-                $('.not-login').css('display','inline');
-                $('.cancellation').css('display', 'none');
+    if (!(typeof userId == "undefined" || userId == null || userId == "")) {
+        $.ajax({
+            url: '/showCartList',
+            type: 'post',
+            data: {'userId': userId},
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                goodsData = data;
+                if (!(typeof data == "undefined" || data == null || data == "")) {
+                    $.each(data, function (i, value) {
+                        goodHtml = goodHtml + '<li class="cart-con-li">\n' +
+                            '                <ul class="cart-obj clear">\n' +
+                            '                    <li class="co-inp">\n' +
+                            '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
+                            '                    </li>\n' +
+                            '                    <li class="co-img">\n' +
+                            '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
+                            '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100" alt="">\n' +
+                            '                        </a>\n' +
+                            '                    </li>\n' +
+                            '                    <li class="co-name">\n' +
+                            '                        <a id="good_name' + i + '" href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
+                            '                    </li>\n' +
+                            '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
+                            '                    <li class="co-sl">\n' +
+                            '                        <span class="co-sl-span">\n' +
+                            '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
+                            '                            <input type="text" id="good_count' + i + '" value="' + value.goodCount + '" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
+                            '                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>\n' +
+                            '                        </span>\n' +
+                            '                        <span class="co-sl-remark" title></span>\n' +
+                            '                    </li>\n' +
+                            '                    <li class="co-je" id="price' + i + '">' + Number(value.composeGood.composeGoodPrice * value.goodCount).toFixed(2) + '</li>\n' +
+                            '                    <li class="co-del">\n' +
+                            '                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>\n' +
+                            '                    </li>\n' +
+                            '                </ul>\n' +
+                            '            </li>';
+                    });
+                    cartList.html(goodHtml);
+                    map = new AMap.Map('container', {});
+                    //构造路线导航类
+                    driving = new AMap.Driving({});
+                    //地理编码
+                    geocoder = new AMap.Geocoder({
+                        city: "", // 城市默认：“全国”
+                    });
+                    personLoction();
+                } else {
+                    goodHtml = '<div id="mc-msg">\n' +
+                        '                <span>购物车内暂时没有商品，</span>\n' +
+                        '                <a href="/index.html">去购物</a>\n' +
+                        '            </div>';
+                    cartList.html(goodHtml);
+                }
+            },
+            error: function (data) {
+                console.log('cartGoodsError:' + data);
             }
-
-            if(!(typeof userId === "undefined" || userId === null || userId === "")) {
-                $.ajax({
-                    url: '/showCartList',
-                    type: 'post',
-                    data: {'userId': userId},
-                    dataType: 'json',
-                    async:false,
-                    success: function (data) {
-                        goodsData = data;
-                        if (!(typeof data == "undefined" || data == null || data == "")) {
-                            $.each(data, function (i, value) {
-                                console.log(value);
-                                goodHtml = goodHtml + '<li class="cart-con-li">\n' +
-                                    '                <ul class="cart-obj clear">\n' +
-                                    '                    <li class="co-inp">\n' +
-                                    '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
-                                    '                    </li>\n' +
-                                    '                    <li class="co-img">\n' +
-                                    '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
-                                    '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100" alt="">\n' +
-                                    '                        </a>\n' +
-                                    '                    </li>\n' +
-                                    '                    <li class="co-name">\n' +
-                                    '                        <a id="good_name' + i + '" href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
-                                    '                    </li>\n' +
-                                    '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
-                                    '                    <li class="co-sl">\n' +
-                                    '                        <span class="co-sl-span">\n' +
-                                    '                            <a href="javascript:;" onclick="minusOne(this);" class="num-changes">-</a>\n' +
-                                    '                            <input type="text" id="good_count' + i + '" value="' + value.goodCount + '" class="num-inp" onchange="isInteger(this)" maxlength="4" disabled="disabled">\n' +
-                                    '                            <a href="javascript:;" onclick="plusOne(this);" class="num-changes">+</a>\n' +
-                                    '                        </span>\n' +
-                                    '                        <span class="co-sl-remark" title></span>\n' +
-                                    '                    </li>\n' +
-                                    '                    <li class="co-je" id="price' + i + '">' + Number(value.composeGood.composeGoodPrice * value.goodCount).toFixed(2) + '</li>\n' +
-                                    '                    <li class="co-del">\n' +
-                                    '                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>\n' +
-                                    '                    </li>\n' +
-                                    '                </ul>\n' +
-                                    '            </li>';
-                            });
-                            cartList.html(goodHtml);
-
-                            map = new AMap.Map('container', {});
-                            //构造路线导航类
-                            driving = new AMap.Driving({});
-                            //地理编码
-                            geocoder = new AMap.Geocoder({
-                                city: "", // 城市默认：“全国”
-                            });
-                            personLoction();
-                        }else{
-                            goodHtml = '<div id="mc-msg">\n' +
-                                '                <span>购物车内暂时没有商品，</span>\n' +
-                                '                <a href="/index.html">去购物</a>\n' +
-                                '            </div>';
-                            cartList.html(goodHtml);
-                        }
-                    },
-                    error: function (data) {
-                        console.log('cartGoodsError:' + data);
-                    }
-                });
-            }else{
-                goodHtml = '<div id="mc-msg">\n' +
-                    '                <span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span>\n' +
-                    '                <a href="/login/view/login.html">登录</a>\n' +
-                    '                <a href="/index.html">去购物</a>\n' +
-                    '            </div>';
-                cartList.html(goodHtml);
-            }
-        },
-        error: function (data) {
-            console.log('error:' + data);
-        }
-    });
-}
-
-$(document).on('click','.cancellation',function () {
-
-    $.ajax({
-        url:"/cancellation",
-        type:"post",
-        dataType: "text",
-        success:function () {
-            alert("退出成功");
-            window.location.reload();
-        }
-    });
-});
+        });
+    } else {
+        goodHtml = '<div id="mc-msg">\n' +
+            '                <span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span>\n' +
+            '                <a href="/login/view/login.html">登录</a>\n' +
+            '                <a href="/index.html">去购物</a>\n' +
+            '            </div>';
+        cartList.html(goodHtml);
+    }
+};
 
 //已选商品数量插入
 function chooseNum(){
@@ -274,7 +225,7 @@ function deleteProducts(obj){
                 })*/
                 window.location.reload();
             }else{
-                alert('删除失败！请刷新重试！');
+                alert('删除失败！请选择商品或刷新页面重试！');
             }
         },
         error:function (data) {

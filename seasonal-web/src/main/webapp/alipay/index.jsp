@@ -203,7 +203,7 @@ h2 {
 			<h2 id="tab4" name="tab">退 款 查 询</h2>
 			<h2 id="tab5" name="tab">交 易 关 闭</h2>
 		</div>
-		<form name=alipayment action=/pay method=post
+		<form name=alipayment action=/PayMoney method=post
 			  >
 			<div id="body1" class="show" name="divcontent">
 				<dl class="content">

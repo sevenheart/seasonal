@@ -1,22 +1,19 @@
 //初始化地图
-let callbackUrl = '&callback=onLoad'; //网页初始化地图服务回调函数
-let drivingUrl = '&plugin=AMap.Driving'; //引入路线规划服务
-let geocoderUrl = '&plugin=AMap.Geocoder'; //引入地理编码服务
-let url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl + drivingUrl + geocoderUrl;
-let jsapi = document.createElement('script');
+var callbackUrl = '&callback=onLoad';//网页初始化地图服务回调函数
+var drivingUrl = '&plugin=AMap.Driving'; //引入路线规划服务
+var geocoderUrl = '&plugin=AMap.Geocoder'; //引入地理编码服务
+var url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl + drivingUrl + geocoderUrl;
+var jsapi = document.createElement('script');
 jsapi.charset = 'utf-8';
 jsapi.src = url;
 document.head.appendChild(jsapi);
-let map;
-let driving;
-let geocoder;
-let markers = new Array();
-let addressNum = 0;
-let markerOptions;
-
-let personAddress;
-
-let addressAndDistance = new Array();
+var map;
+var driving;
+var geocoder;
+var markers = new Array();
+var addressNum = 0;
+var markerOptions;
+var personAddress;
 
 // 个人定位
 function personLoction() {
@@ -62,6 +59,9 @@ function personLoction() {
         console.log('失败原因排查信息:' + data.message);
     }
 }
+
+
+var addressAndDistance = new Array();
 
 // 从数据库获取地址进行路线规划，并且计算距离
 function getMerchantAddress() {
@@ -202,8 +202,10 @@ function planningRoute(city, address) {
                     planDistance = result.routes[0].distance * 0.001;
                 }
                 //console.log('当前最近的距离为:'+planDistance)
-                $("#allot_price").text("配送费：￥" + parseInt(planDistance));
-                $("#order_money").text(order_money + parseInt(planDistance));
+                delivery_money = parseInt(planDistance);
+                order_money += delivery_money;
+                $("#allot_price").text("配送费：￥" + delivery_money);
+                $("#order_money").text(order_money);
             } else {
                 console.log('获取数据失败：' + result);
             }

@@ -106,6 +106,9 @@
     </select>
 
     <select id="findOrderFormByOrderId" resultMap="cspo" parameterType="String">
-        select order_money,order_id,good_type from order_form where order_id = #{orderId}
+        select order_status,order_money,order_id,good_type from order_form where order_id = #{orderId}
+    </select>
+    <select id="findOrderPassword" resultType="orderForm">
+        select * from order_form where order_id=#{orderId} and order_user_id=#{userId}
     </select>
 </mapper>
