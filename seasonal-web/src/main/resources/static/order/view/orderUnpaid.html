@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../css/order_header.css">
     <link rel="stylesheet" type="text/css" href="../css/order_footer.css">
     <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap.css">
 </head>
 <body>
 <div class="app">
@@ -13,14 +14,16 @@
         <header class="com-header">
             <div class="login_bar">
                 <ul>
-                    <li>
-                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg"><a
-                            href="#">请登录</a>
+                    <li class="login">
+                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg">
+                        <span class="login-span" style="display: none">用户ID：</span>
+                        <a href="../../login/view/login.html" class="already-login" style="display: none"></a>
+                        <a href="../../login/view/login.html" class="not-login" style="display: inline">请登录</a>
                     </li>
-                    <li>
-                        <img alt=""
-                             src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/register_icon.jpg"><a
-                            href="#">免费注册</a>
+                    <li class="registration">
+                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/register_icon.jpg" style="display: inline">
+                        <a href="../../login/view/registration.html">免费注册</a>
+                        <a href="#" class="cancellation" style="display: none">退出账号</a>
                     </li>
                     <li>
                         <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/order_icon.jpg"><a
@@ -81,7 +84,13 @@
                     </div>
                     <div class="payment-submit-area clear-fix">
                         <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
-                        <div class="payment-submit"><a class="btn">去付款</a></div>
+                        <div class="payment-submit">
+                            <form name=alipayment action=/PayMoney method=post>
+                            <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
+                            <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
+                            <button class="btn" type="submit" >去付款</button>
+                            </form>
+                        </div>
                         <div class="payment-back"><a>删除订单</a></div>
                     </div>
                 </div>
@@ -92,9 +101,59 @@
         <img alt="" style="width: 100%"
              src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        支付完成
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    请在支付完成后点击下方的已完成支付！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="guanbi()" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" onclick="oncl()" class="btn btn-primary">
+                        已完成支付
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 </div>
 
 </body>
 <script src="../../jquery/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../../js/login.js"></script>
 <script src="../js/orderUnpaid.js"></script>
+<script src="../../bootstrap/bootstrap.min.js"></script>
+<script>
+
+    $('#myModal').modal(options);
+
+    function guanbi() {
+        window.location.reload();
+    }
+
+    function oncl() {
+        $.ajax({
+            url: "/order/FindOrderPassword",
+            type: "post",
+            data: {"orderId": orderId, "userId": userId},
+            dataType: "json",
+            success: function (data) {
+                if (data.code === 200) {
+                    $(".modal-body").html('<span>自取账号:</span>' + data.data.getAccount + '<br><span>自取密码:</span>' + data.data.getPassword);
+                } else {
+                    $(".modal-body").text(data.message);
+                }
+            }
+        });
+    }
+</script>
 </html>

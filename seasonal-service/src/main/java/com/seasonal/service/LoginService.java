@@ -7,6 +7,7 @@ import java.util.List;
 public interface LoginService {
     /**
      * 用户注册手机号码查重
+     *
      * @param identifier
      * @return
      */
@@ -14,6 +15,7 @@ public interface LoginService {
 
     /**
      * 登录验证
+     *
      * @param identifier
      * @param credential
      * @return
@@ -30,12 +32,14 @@ public interface LoginService {
 
     /**
      * 获取当前IP地址
+     *
      * @return
      */
     String getIpNow();
 
     /**
      * 发送短信验证码
+     *
      * @param identifier
      * @return
      */
@@ -43,13 +47,13 @@ public interface LoginService {
 
     /**
      * 用户注册信息添加
+     *
      * @param identifier
      * @param credential
      * @return
      */
-    String insertUserMessage(String identifier,String credential);
+    String insertUserMessage(String identifier, String credential);
 
-    boolean setCookie(String identifier,String credential,String check);
+    boolean setCookie(String identifier, String credential, String check);
 
-//    Object getCookie();
 }

@@ -41,4 +41,9 @@ public class OrderFormServiceImpl implements OrderFormService {
     public OrderForm findOrderFormByOrderId(String orderId) {
         return orderFormMapper.findOrderFormByOrderId(orderId);
     }
+
+    @Override
+    public OrderForm findOrderPassword(String orderId, String userId) {
+        return orderFormMapper.findOrderPassword(orderId, userId);
+    }
 }
