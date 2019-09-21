@@ -69,6 +69,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                 error: function (data) {
                     html = '<div id="phone-span-div"></div>';
                     phone_span.html(html);
+                    var phone_span_div = $('#phone-span-div');
                     phone_span_div.css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat');
                     phone_span_div.css('float', 'left');
                     phone_span_div.css('position', 'relative');
