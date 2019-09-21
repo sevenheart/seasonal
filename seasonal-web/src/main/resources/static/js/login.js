@@ -6,7 +6,6 @@ $.ajax({
     async: false,
     success: function (data) {
         userId = data.data;
-        console.log(data);
         if (data.code === 200) {
             console.log("success->userId:" + userId);
             $('.already-login').text('');
