@@ -233,7 +233,7 @@ function updateGoods(userId, goodId, goodCount, _input) {
 function deleteProducts(obj){
     //var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
     //console.log('obj:'+ $(obj).attr('value'))
-    var userId = '002'
+    //var userId = '002'
     var goodIdList = new Array()
     if($(obj).attr('value') === 'batchDeletion') {
         $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
