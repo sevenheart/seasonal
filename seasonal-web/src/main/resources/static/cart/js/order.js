@@ -1,6 +1,11 @@
 //订单商品列表
 var good_id_arrary = new Array(10);
-
+/*good_id_arrary.unshift("1");
+good_id_arrary.unshift("2");*/
+//订单商品名列表
+var good_name_arrary = new Array(10);
+/*good_name_arrary.unshift("1");
+good_name_arrary.unshift("2");*/
 //订单商品价格列表
 var good_price_array = new Array(10);
 
@@ -34,12 +39,17 @@ function random_No(j) {
 }
 
 // 订单生成前，遍历已选择的商品，获取要购买的商品信息
-function orderGoods() {
+function orderGoods(){
     $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
-        if ($(this).is(':checked')) {
+        if($(this).is(':checked')){
+            console.log('已选id:' + $(this).val())
             good_id_arrary.unshift($(this).val()); //填入商品id
-            good_price_array.unshift($('#price' + i).text()); //填入商品价钱
-            good_count_array.unshift($('#good_count' + i).val()); //填入商品数量
+            console.log('已选商品名:' + $('#good_name'+i).text())
+            good_name_arrary.unshift($('#good_name'+i).text()); //填入商品名
+            console.log('已选商品的价钱:' + $('#price'+i).text())
+            good_price_array.unshift($('#price'+i).text()); //填入商品价钱
+            console.log('已选商品的数量:' + $('#good_count'+i).val())
+            good_count_array.unshift($('#good_count'+i).val()); //填入商品数量
         }
     })
 }

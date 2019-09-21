@@ -102,42 +102,42 @@ $(document).on('submit', '.pass-form-normal', function () {
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
-    $.ajax({
-        url: "/login",
-        type: "post",
-        dataType: "json",
-        data: {"identifier": identifier, "credential": credential},
-        async: false,
-        success: function (data) {
-            if (nowCity != beforeCity) {
-                alert("异地登录，请使用短信登录")
-                $('#j-login').css('display', 'none')
-                $('#j-login').css('visibility', 'hidden')
-                $('#sms').css('display', 'block')
-                $('#sms').css('visibility', 'visible')
-                $('.pass-sms-link-back').css('visibility', 'hidden')
-                flag = false
-            } else {
+    if (nowCity != beforeCity) {
+        alert("异地登录，请使用短信登录")
+        $('#j-login').css('display', 'none')
+        $('#j-login').css('visibility', 'hidden')
+        $('#sms').css('display', 'block')
+        $('#sms').css('visibility', 'visible')
+        $('.pass-sms-link-back').css('visibility', 'hidden')
+        flag = false
+    }else {
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier, "credential": credential},
+            async: false,
+            success: function (data) {
                 saveCookie(data, check)//保存cookie
                 flag = true
+            },
+            error: function (data) {
+                html = '用户名或密码错误，请重新输入或' +
+                    '<a href="' +
+                    '#">' +
+                    '找回密码' +
+                    '</a>';
+                $('.pass-form-normal .pass-generalErrorWrapper').html(html);
+                num++;
+                if (num >= 3) {
+                    $('.pass-form-normal .pass-form-item-verifyCode').css('display', 'block')
+                    $('.pass-form-normal .pass-form-item-verifyCode').css('visibility', 'visible')
+                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('color', '#F69')
+                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('border-color', '#F69')
+                }
             }
-        },
-        error: function (data) {
-            html = '用户名或密码错误，请重新输入或' +
-                '<a href="' +
-                '#">' +
-                '找回密码' +
-                '</a>';
-            $('.pass-form-normal .pass-generalErrorWrapper').html(html);
-            num++;
-            if (num >= 3) {
-                $('.pass-form-normal .pass-form-item-verifyCode').css('display', 'block')
-                $('.pass-form-normal .pass-form-item-verifyCode').css('visibility', 'visible')
-                $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('color', '#F69')
-                $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('border-color', '#F69')
-            }
-        }
-    })
+        })
+    }
     return flag
 }
 
@@ -177,7 +177,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                         data: {"identifier": identifier},
                         async: false,
                         success: function (data) {
-                            //sendCode()
+                            sendCode()
                             if (data == 'false') {
                                 alert("发送失败")
                             } else {
