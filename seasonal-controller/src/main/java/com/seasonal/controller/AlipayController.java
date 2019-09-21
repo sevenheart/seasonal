@@ -17,8 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,9 +33,18 @@ public class AlipayController {
     public AlipayController(AliPayService orderInfoFormService){this.orderInfoFormService = orderInfoFormService;}
 
     //支付
-    @RequestMapping(value = "pay")
-    public String pay(Model model,String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody) throws UnsupportedEncodingException {
+    @RequestMapping ( value="PayMoney")
 
+    public String pay(String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody , Model model, HttpServletResponse response) throws UnsupportedEncodingException {
+       //
+      //  String WIDout_trade_no="" String WIDtotal_amount, String WIDsubject, String WIDbody ,
+        System.out.println("aaaaaaaaa");
+        if(WIDsubject == null){
+            WIDsubject = WIDout_trade_no;
+        }
+        if(WIDbody == null){
+            WIDbody="果酷网果切购买！";
+        }
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 
@@ -78,9 +88,14 @@ public class AlipayController {
         //输出
 
 
-
         model.addAttribute("user",result);
-        return "/pay";
+        System.out.println("bbb");
+       /* try {
+            response.sendRedirect("/alipay/pay.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        return "pay";
     }
     //交易查询
     @RequestMapping(value = "querypay")
@@ -112,8 +127,8 @@ public class AlipayController {
     //没有ip不可用
     //异步通知：controller去完成业务逻辑
     @RequestMapping("notify_url")
-    @ResponseBody
-    public ResultData notifyUrl(String out_trade_no, String trade_no, String  trade_status, HttpServletRequest request) throws AlipayApiException, UnsupportedEncodingException {
+
+    public String notifyUrl(String out_trade_no, String trade_no, String  trade_status, HttpServletRequest request) throws AlipayApiException, UnsupportedEncodingException {
         //获取支付宝POST过来反馈信息
 
         Map<String,String> params = new HashMap<String,String>();
@@ -141,6 +156,7 @@ public class AlipayController {
 	3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
 	4、验证app_id是否为该商户本身。
 	*/
+
         if(signVerified) {//验证成功
             //商户订单号
             String out_trade_no1 = new String(out_trade_no.getBytes("ISO-8859-1"),"UTF-8");
@@ -168,7 +184,8 @@ public class AlipayController {
             }*/
 
             System.out.println("验证成功！！支付成功了");
-
+            orderInfoSave(out_trade_no1,trade_no1);
+            System.out.println("修改订单状态成功");
         }else {//验证失败
             System.out.println("验证失败！！支付失败了");
 
@@ -179,7 +196,7 @@ public class AlipayController {
 
         System.out.println("反正进来了");
 
-        return  ResultUtil.success(ResultEnum.SUCCESS);
+        return  "redirect:/index.html";
     }
 
     /**
@@ -187,9 +204,9 @@ public class AlipayController {
      * 2.修改订单表的状态为已支付。
      * @param out_trade_no 系统的订单id
      * @param trade_no  交易成功的交易订单id
-     * @param trade_status 交易的状态如退款或正常状态，此处只存储正常状态。
+
      */
-    public ResultData orderInfoSave(String out_trade_no, String trade_no, String  trade_status){
+    public ResultData orderInfoSave(String out_trade_no, String trade_no){
 
         OrderInfoForm orderInfoForm = new OrderInfoForm();
         //支付宝交易id
