@@ -45,7 +45,7 @@ function orderGoods(){
             console.log('已选id:' + $(this).val())
             good_id_arrary.unshift($(this).val()); //填入商品id
             console.log('已选商品名:' + $('#good_name'+i).text())
-            good_id_arrary.unshift($('#good_name'+i).text()); //填入商品id
+            good_name_arrary.unshift($('#good_name'+i).text()); //填入商品名
             console.log('已选商品的价钱:' + $('#price'+i).text())
             good_price_array.unshift($('#price'+i).text()); //填入商品价钱
             console.log('已选商品的数量:' + $('#good_count'+i).val())

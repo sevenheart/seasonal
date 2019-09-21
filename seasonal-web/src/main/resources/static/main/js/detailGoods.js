@@ -126,7 +126,7 @@ $('.goods_describe_option span').click(function () {
         url:'/addCart',
         type:'post',
         dataType:'json',
-        data:{'userId':'002', 'goodId': goodId, 'goodCount': goodCount},
+        data:{'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
         success:function (data) {
             console.log('success:'+data)
             alert('添加入购物车成功')
