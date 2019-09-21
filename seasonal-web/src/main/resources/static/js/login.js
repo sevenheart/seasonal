@@ -2,12 +2,11 @@ let userId;
 $.ajax({
     url: "/getsessionUserId",
     type: "post",
-    dataType: "text",
+    dataType: "json",
     async: false,
     success: function (data) {
-        userId = data;
-        console.log(data);
-        if (data.coder === 200) {
+        userId = data.data;
+        if (data.code === 200) {
             console.log("success->userId:" + userId);
             $('.already-login').text('');
             $('.already-login').text(userId);

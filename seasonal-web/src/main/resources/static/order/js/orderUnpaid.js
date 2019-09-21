@@ -10,8 +10,8 @@ function getQueryVariable(variable) {
     return (false);
 }
 
-let orderId = data.data.detailedCommodityForms[0].orderId;
-let money = data.data.orderMoney;
+let orderId;
+let money;
 
 $.ajax({
     url: "/order/FindOrderFormById",
@@ -21,9 +21,16 @@ $.ajax({
     async: false,
     success: function (data) {
         console.log(data);
-        $("#order-id").text("订单ID:" + orderId);
-        $("#order-money").text(data.data.orderMoney);
-        $("#order-zhifu").text(data.data.orderMoney);
+        if(data.data.orderStatus ===1){
+            $(location).attr('href', "../view/orderCome.html");
+        }else{
+            orderId = data.data.detailedCommodityForms[0].orderId;
+            money = data.data.orderMoney;
+            $("#order-id").text("订单ID:" + orderId);
+            $("#order-money").text(data.data.orderMoney);
+            $("#order-zhifu").text(data.data.orderMoney);
+        }
+
     }
 });
 
