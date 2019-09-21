@@ -73,11 +73,11 @@ public class LoginController {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    session.removeAttribute("code");
+                    session.invalidate();
                     System.out.println("code删除成功");
                     timer.cancel();
                 }
-            },5*60*1000);
+            },60*1000);
             flag = true;
         }
         return flag;
