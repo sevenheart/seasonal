@@ -1,3 +1,7 @@
+if(userId ===''){
+    alert("请先登录，再访问个人中心");
+    $(location.href ="../../login/view/login.html");
+}
 $(".main_right_function_order_menu li").click(function(){
     $(this).parent().children("li").removeClass("currentmenu1");
     $(this).addClass("currentmenu1");
@@ -85,8 +89,9 @@ function showaddress(data){
     });
     /*批量删除地址*/
     $("#alladdresstable .delete_all").click(function () {
-        let check = new Array(10);
+        let check = new Array();
         $("#alladdresstable tr td input[type=checkbox]:checked").each(function(){
+            console.log("地址是"+$(this).val())
             check.push($(this).val());
         });
 
@@ -137,7 +142,7 @@ function init() {
     //查找用户的个人信息
     $.post({
         url:"/user/finduserbyid",
-        data:{id:'001'},
+        data:{id:userId},
         async:false,
         dataType:"json",
         success:function (data) {
@@ -190,7 +195,7 @@ function init() {
     //查找用户的地址信息
     $.post({
         url:"/address/selectalladdress",
-        data:{userId:'001'},
+        data:{userId:userId},
         async:false,
         dataType:"json",
         success:function (data) {
@@ -217,7 +222,7 @@ $('#addressManage').click(function () {
 /*点击新建收货用户信息*/
 $('#addAddressFrom .button').click(function () {
     $.post({
-        url:"/address/insertuseraddress?userId=001",
+        url:"/address/insertuseraddress?userId="+userId,
         data:$('#addAddressFrom').serialize(),
         dataType:"json",
         success:function (data) {

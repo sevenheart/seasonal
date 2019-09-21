@@ -1,7 +1,8 @@
-var callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
-var url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl;
-var jsapi = document.createElement('script');
-var map
+let callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
+let url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl;
+let jsapi = document.createElement('script');
+let map;
+let beforeCity;
 jsapi.charset = 'utf-8';
 jsapi.src = url;
 document.head.appendChild(jsapi);
@@ -21,7 +22,7 @@ window.onLoad = function () {
         });
         map.addControl(geolocation);
         geolocation.getCityInfo(function (status, result) {
-            if (status == 'complete') {
+            if (status === 'complete') {
                 nowCity = result.city
             } else {
                 console.log('loc-error' + result)
@@ -32,16 +33,16 @@ window.onLoad = function () {
 
 //账号
 $(document).on('click', '.pass-form-normal .pass-text-input-userName', function () {
-    $(this).css('color', '#F69')
-    $(this).css('border-color', '#F69')
+    $(this).css('color', '#F69');
+    $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -116px')
 
 })
 $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function () {
-    var identifier = $('.pass-form-normal .pass-text-input-userName').val()
-    $(this).css('color', '')
-    $(this).css('border-color', '')
-    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -97px')
+    var identifier = $('.pass-form-normal .pass-text-input-userName').val();
+    $(this).css('color', '');
+    $(this).css('border-color', '');
+    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -97px');
     $.ajax({
         url: "/login",
         type: "post",
@@ -60,14 +61,14 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
 
 //密码
 $(document).on('click', '.pass-form-normal .pass-text-input-password', function () {
-    $(this).css('color', '#F69')
-    $(this).css('border-color', '#F69')
+    $(this).css('color', '#F69');
+    $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-password').css('background-position', '-366px -157px')
 
 })
 $(document).on('blur', '.pass-form-normal .pass-text-input-password', function () {
-    $(this).css('color', '')
-    $(this).css('border-color', '')
+    $(this).css('color', '');
+    $(this).css('border-color', '');
     $('.pass-form-normal .pass-label-password').css('background-position', '-366px -135px')
 })
 
@@ -76,17 +77,17 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
 var num = 0
 $(document).on('submit', '.pass-form-normal', function () {
     var flag = false
-    var identifier = $('.pass-form-normal .pass-text-input-userName').val()
-    var credential = $('.pass-form-normal .pass-text-input-password').val()
-    if (identifier == null || identifier == '') {
+    var identifier = $('.pass-form-normal .pass-text-input-userName').val();
+    var credential = $('.pass-form-normal .pass-text-input-password').val();
+    if (identifier == null || identifier === '') {
         console.log("username")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机/邮箱/用户名")
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('');
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机/邮箱/用户名");
         flag = false
     } else if (credential == null || credential == '') {
         console.log("password")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入密码")
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('');
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入密码");
         flag = false
     } else {
         $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove()
@@ -102,7 +103,9 @@ $(document).on('submit', '.pass-form-normal', function () {
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
-    if (nowCity != beforeCity) {
+    console.log(nowCity);
+    console.log(beforeCity);
+    if (nowCity !== beforeCity) {
         alert("异地登录，请使用短信登录")
         $('#j-login').css('display', 'none')
         $('#j-login').css('visibility', 'hidden')
@@ -110,7 +113,7 @@ function login(identifier, credential, flag, check) {
         $('#sms').css('visibility', 'visible')
         $('.pass-sms-link-back').css('visibility', 'hidden')
         flag = false
-    }else {
+    } else {
         $.ajax({
             url: "/login",
             type: "post",
@@ -235,15 +238,15 @@ $(document).on('submit', '#smsForm', function () {
             async: false,
             success: function (data) {
                 console.log("data:" + data)
-                if (data == true) {
+                if (data === true) {
                     smsflag = true
-                } else if (data = false) {
-                    smsflag = false
+                } else if (data === false) {
+                    smsflag = false;
                     $('#verifyCode-span').css('display', 'none')
                     $('#verifyCodeError-span').css('display', 'none')
                     $('#verifyCodeExpiration-span').css('display', 'inline')
                 } else {
-                    smsflag = false
+                    smsflag = false;
                     $('#verifyCode-span').css('display', 'none')
                     $('#verifyCodeError-span').css('display', 'inline')
                     $('#verifyCodeExpiration-span').css('display', 'none')
@@ -255,22 +258,19 @@ $(document).on('submit', '#smsForm', function () {
         })
     }
     return smsflag
-})
+});
 
-
-var beforeCity
 
 //判断是否异地登录
 function ipsearch(ip) {
     AMap.plugin('AMap.CitySearch', function () {
-        var citysearch = new AMap.CitySearch()
+        var citysearch = new AMap.CitySearch();
         citysearch.getCityByIp(ip, function (status, result) {
-            if (status == 'complete') {
-                beforeCity = result.city
-
+            if (status === 'complete') {
+                beforeCity = result.city;
+                console.log(beforeCity);
             } else {
-                console.log(result)
-
+                console.log(result);
             }
         })
     })
@@ -322,32 +322,32 @@ function getCookie(user) {
     var arrCookie = document.cookie.split('; ');
     for (var i = 0; i < arrCookie.length; i++) {
         var arr = arrCookie[i].split('=')
-        if (arr[0] == user) {
+        if (arr[0] === user) {
             return arr[1];
         }
     }
     return "";
 }
 
-function checkCookie() {
-    var identifier = getCookie("identifier");
-    var credential = getCookie("credential")
-    var check = getCookie("check")
-    if (identifier != "" && check == "true") {
-        $.ajax({
-            url: "/login",
-            type: "post",
-            dataType: "json",
-            data: {"identifier": identifier, "credential": credential},
-            async: false,
-            success: function (data) {
-                saveCookie(data, check)//保存cookie
-                alert("自动登录成功")
-                window.location.href = 'http://localhost:8080/index.html'
-            },
-            error: function (data) {
-
-            }
-        })
-    }
-}
+// function checkCookie() {
+//     var identifier = getCookie("identifier");
+//     var credential = getCookie("credential")
+//     var check = getCookie("check")
+//     if (identifier != "" && check == "true") {
+//         $.ajax({
+//             url: "/login",
+//             type: "post",
+//             dataType: "json",
+//             data: {"identifier": identifier, "credential": credential},
+//             async: false,
+//             success: function (data) {
+//                 saveCookie(data, check)//保存cookie
+//                 alert("自动登录成功")
+//                 window.location.href = 'http://localhost:8080/index.html'
+//             },
+//             error: function (data) {
+//
+//             }
+//         })
+//     }
+// }

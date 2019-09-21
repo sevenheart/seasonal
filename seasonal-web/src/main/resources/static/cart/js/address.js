@@ -1,27 +1,19 @@
 //初始化地图
-var callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
-var drivingUrl = '&plugin=AMap.Driving' //引入路线规划服务
-var geocoderUrl = '&plugin=AMap.Geocoder' //引入地理编码服务
+var callbackUrl = '&callback=onLoad';//网页初始化地图服务回调函数
+var drivingUrl = '&plugin=AMap.Driving'; //引入路线规划服务
+var geocoderUrl = '&plugin=AMap.Geocoder'; //引入地理编码服务
 var url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl + drivingUrl + geocoderUrl;
 var jsapi = document.createElement('script');
 jsapi.charset = 'utf-8';
 jsapi.src = url;
 document.head.appendChild(jsapi);
-var map
-var driving
-var geocoder
-var markers = new Array()
-var addressNum = 0
-var markerOptions
-
-var personAddress
-
-/*
-window.onLoad = function () {
-    if(typeof userId == "undefined" || userId == null || userId == "") {
-
-    }
-}*/
+var map;
+var driving;
+var geocoder;
+var markers = new Array();
+var addressNum = 0;
+var markerOptions;
+var personAddress;
 
 // 个人定位
 function personLoction() {
@@ -80,15 +72,15 @@ function getMerchantAddress() {
         async: false,
         success: function (data) {
             $.each(data, function (i, value) {
-                //console.log('success:'+ value.address)
-                // 根据起终点名称规划驾车导航路线
+                console.log('success:'+ value.address)
+                //根据起终点名称规划驾车导航路线
                 driving.search([
                     {keyword: personAddress.formattedAddress, city: personAddress.city},
                     {keyword: value.address, city: value.city}//获取详细地址和市
                 ], function (status, result) {
                     if (status === 'complete') {
-                        //console.log('绘制路线完成')
-                        //console.log(value.address+'距离为:' + result.routes[0].distance)
+                        console.log('绘制路线完成')
+                        console.log(value.address+'距离为:' + result.routes[0].distance)
                         var mAddress = {
                             'addressData': value,
                             'distance': result.routes[0].distance
@@ -108,7 +100,7 @@ function getGeoCode(data) {
     geocoder.getLocation(data.addressData.address, function (status, result) {
         if (status === 'complete' && result.geocodes.length) {
             var lnglat = result.geocodes[0].location
-            //console.log('坐标为:'+lnglat)
+            console.log('坐标为:'+lnglat)
             if (addressNum < 5) {
                 var marker = new AMap.Marker({
                     position: lnglat,
@@ -206,12 +198,14 @@ function planningRoute(city, address) {
             if (status === 'complete') {
                 //console.log('绘制路线完成')
                 //console.log(address+'距离为:' + result.routes[0].distance * 0.001 + '公里')
-                if (planDistance == 0.0 || planDistance > result.routes[0].distance * 0.001) {
+                if (planDistance === 0.0 || planDistance > result.routes[0].distance * 0.001) {
                     planDistance = result.routes[0].distance * 0.001
                 }
                 //console.log('当前最近的距离为:'+planDistance)
-                $("#allot_price").text("配送费：￥" + parseInt(planDistance));
-                $("#order_money").text(order_money + parseInt(planDistance));
+                delivery_money = parseInt(planDistance);
+                order_money += delivery_money;
+                $("#allot_price").text("配送费：￥" + delivery_money);
+                $("#order_money").text(order_money);
             } else {
                 console.log('获取数据失败：' + result)
             }
