@@ -53,6 +53,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                     if (identifier === phone) {
                         html = '<div id="phone-span-div"></div>';
                         phone_span.html(html);
+                        var phone_span_div = $('#phone-span-div');
                         phone_span_div.append("此号码已注册");
                         phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
                         phone_span_div.css('float', 'left');
