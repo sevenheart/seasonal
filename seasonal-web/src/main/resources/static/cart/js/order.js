@@ -1,19 +1,16 @@
 //订单商品列表
 var good_id_arrary = new Array(10);
-/*good_id_arrary.unshift("1");
-good_id_arrary.unshift("2");*/
 //订单商品名列表
 var good_name_arrary = new Array(10);
-/*good_name_arrary.unshift("1");
-good_name_arrary.unshift("2");*/
 //订单商品价格列表
 var good_price_array = new Array(10);
-
 //订单商品数量列表
 var good_count_array = new Array(10);
+
+
 let order_money = 0;//订单金额
 let html = "";
-const order_user_id = "002";//用户id
+const order_user_id = userId;//用户id
 const order_name = "春野樱";
 // let delivery_way = "0";//配送方式
 // let delivery_money = "20"//配送费
@@ -39,17 +36,13 @@ function random_No(j) {
 }
 
 // 订单生成前，遍历已选择的商品，获取要购买的商品信息
-function orderGoods(){
+function orderGoods() {
     $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
-        if($(this).is(':checked')){
-            console.log('已选id:' + $(this).val())
+        if ($(this).is(':checked')) {
             good_id_arrary.unshift($(this).val()); //填入商品id
-            console.log('已选商品名:' + $('#good_name'+i).text())
-            good_id_arrary.unshift($('#good_name'+i).text()); //填入商品id
-            console.log('已选商品的价钱:' + $('#price'+i).text())
-            good_price_array.unshift($('#price'+i).text()); //填入商品价钱
-            console.log('已选商品的数量:' + $('#good_count'+i).val())
-            good_count_array.unshift($('#good_count'+i).val()); //填入商品数量
+            good_name_arrary.unshift($('#good_name' + i).text()); //填入商品id
+            good_price_array.unshift($('#price' + i).text()); //填入商品价钱
+            good_count_array.unshift($('#good_count' + i).val()); //填入商品数量
         }
     })
 }
@@ -98,8 +91,8 @@ $("#ctf-js").click(function () {
     for (let i = 0; i < good_id_arrary.length; i++) {
         if (good_id_arrary[i] !== undefined) {
             order_money += Number(good_price_array[i]);
-            console.log(order_money);
-            html += '<span class="og">商品一：</span><span class="og_sp">三分果盒：超级精选 总价：￥' + good_price_array[i] + ' 数量：' + good_count_array[i] + ' </span><br>';
+            console.log(good_name_arrary[i]);
+            html += '<span class="og">商品' + (i + 1) + '：</span><span class="og_sp">' + good_name_arrary[i] + ' 总价：￥' + good_price_array[i] + ' 数量：' + good_count_array[i] + ' </span><br>';
         }
     }
     html += '<span class="og">总价格：￥</span><span class="og_sp" id="order_money">' + order_money + ' </span><br>\n' +
