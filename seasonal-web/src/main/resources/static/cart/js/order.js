@@ -42,13 +42,13 @@ function random_No(j) {
 function orderGoods(){
     $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
         if($(this).is(':checked')){
-            console.log('已选id:' + $(this).val())
+            //console.log('已选id:' + $(this).val());
             good_id_arrary.unshift($(this).val()); //填入商品id
-            console.log('已选商品名:' + $('#good_name'+i).text())
+            //console.log('已选商品名:' + $('#good_name'+i).text());
             good_name_arrary.unshift($('#good_name'+i).text()); //填入商品名
-            console.log('已选商品的价钱:' + $('#price'+i).text())
+            //console.log('已选商品的价钱:' + $('#price'+i).text());
             good_price_array.unshift($('#price'+i).text()); //填入商品价钱
-            console.log('已选商品的数量:' + $('#good_count'+i).val())
+            //console.log('已选商品的数量:' + $('#good_count'+i).val());
             good_count_array.unshift($('#good_count'+i).val()); //填入商品数量
         }
     })
@@ -128,19 +128,19 @@ $("#ctf-js").click(function () {
         delivery_way = 0;
         $("#allot_price").text("配送费：￥0");
         $("#allot_address").css("display", "none");
-        $("#og_shou").css("display", "none")
+        $("#og_shou").css("display", "none");
         $("#order_money").text(order_money);
 
         if (markers.length == 0) {
             $.each(addressAndDistance, function (i, value) {
                 if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
-                    return true
+                    return true;
                 }
-                getGeoCode(value)
+                getGeoCode(value);
             })
         } else {
-            map.add(markers)
-            map.add(markerOptions)
+            map.add(markers);
+            map.add(markerOptions);
             map.setFitView(personAddress.location);
         }
     });
@@ -155,7 +155,7 @@ $("#ctf-js").click(function () {
         delivery_way = 1;
         $("#allot_price").text("配送费：￥10");
         $("#allot_address").css("display", "block");
-        $("#og_shou").css("display", "block")
+        $("#og_shou").css("display", "block");
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
 
@@ -199,15 +199,15 @@ $("#ctf-js").click(function () {
         resizeEnable: true
     });
 
-    map.add(markerOptions)
+    map.add(markerOptions);
 
     if ($('#pick_up').is(':checked')) {
         $.each(addressAndDistance, function (i, value) {
             if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
-                return true
+                return true;
             }
-            getGeoCode(value)
-        })
+            getGeoCode(value);
+        });
     }
 });
 
@@ -216,5 +216,5 @@ function allotAddressX(city, address) {
     $("#og_name").text(html_address_name[$("#allot_address_x ").get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$("#allot_address_x ").get(0).selectedIndex]);
 
-    planningRoute(city, address)
+    planningRoute(city, address);
 }

@@ -1,6 +1,9 @@
-var userId
-var goodHtml = ''
-var goodsData
+let userId;
+let goodHtml = '';
+let goodsData;
+// 已选商品数量
+let chooseGoodsNum = 0;
+let cartList = $('#cart-con');
 
 window.onLoad = function () {
     $.ajax({
@@ -9,29 +12,29 @@ window.onLoad = function () {
         dataType: "text",
         async:false,
         success: function (data) {
-            userId = data
-            console.log('userid:' + userId)
+            userId = data;
+            //console.log('userid:' + userId);
             if (data){
-                console.log("success->userId:" + userId)
-                $('.already-login').text('')
-                $('.already-login').text(userId)
-                $('.login-span').css('display', 'inline')
-                $('.already-login').css('display','inline')
-                $('.registration img').css('display', 'none')
-                $('.registration a').css('display', 'none')
-                $('.not-login').css('display','none')
-                $('.cancellation').css('display', 'inline')
+                console.log("success->userId:" + userId);
+                $('.already-login').text('');
+                $('.already-login').text(userId);
+                $('.login-span').css('display', 'inline');
+                $('.already-login').css('display','inline');
+                $('.registration img').css('display', 'none');
+                $('.registration a').css('display', 'none');
+                $('.not-login').css('display','none');
+                $('.cancellation').css('display', 'inline');
             } else{
-                $('.already-login').text('')
-                $('.login-span').css('display', 'none')
-                $('.already-login').css('display','none')
-                $('.registration img').css('display', 'inline')
-                $('.registration a').css('display', 'inline')
-                $('.not-login').css('display','inline')
-                $('.cancellation').css('display', 'none')
+                $('.already-login').text('');
+                $('.login-span').css('display', 'none');
+                $('.already-login').css('display','none');
+                $('.registration img').css('display', 'inline');
+                $('.registration a').css('display', 'inline');
+                $('.not-login').css('display','inline');
+                $('.cancellation').css('display', 'none');
             }
 
-            if(!(typeof userId == "undefined" || userId == null || userId == "")) {
+            if(!(typeof userId === "undefined" || userId === null || userId === "")) {
                 $.ajax({
                     url: '/showCartList',
                     type: 'post',
@@ -39,10 +42,10 @@ window.onLoad = function () {
                     dataType: 'json',
                     async:false,
                     success: function (data) {
-                        goodsData = data
+                        goodsData = data;
                         if (!(typeof data == "undefined" || data == null || data == "")) {
                             $.each(data, function (i, value) {
-                                console.log(value)
+                                console.log(value);
                                 goodHtml = goodHtml + '<li class="cart-con-li">\n' +
                                     '                <ul class="cart-obj clear">\n' +
                                     '                    <li class="co-inp">\n' +
@@ -50,7 +53,7 @@ window.onLoad = function () {
                                     '                    </li>\n' +
                                     '                    <li class="co-img">\n' +
                                     '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
-                                    '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100">\n' +
+                                    '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100" alt="">\n' +
                                     '                        </a>\n' +
                                     '                    </li>\n' +
                                     '                    <li class="co-name">\n' +
@@ -70,44 +73,43 @@ window.onLoad = function () {
                                     '                        <a href="#" onclick="deleteProducts(this)" class="hover-a">删除</a>\n' +
                                     '                    </li>\n' +
                                     '                </ul>\n' +
-                                    '            </li>'
-                            })
-                            $('#cart-con').html(goodHtml)
+                                    '            </li>';
+                            });
+                            cartList.html(goodHtml);
 
-                            map = new AMap.Map('container', {})
+                            map = new AMap.Map('container', {});
                             //构造路线导航类
                             driving = new AMap.Driving({});
                             //地理编码
                             geocoder = new AMap.Geocoder({
                                 city: "", // 城市默认：“全国”
                             });
-                            personLoction()
+                            personLoction();
                         }else{
                             goodHtml = '<div id="mc-msg">\n' +
                                 '                <span>购物车内暂时没有商品，</span>\n' +
-                                //'                <a href="#" onclick="">登录</a>\n' +
                                 '                <a href="/index.html">去购物</a>\n' +
-                                '            </div>'
-                            $('#cart-con').html(goodHtml)
+                                '            </div>';
+                            cartList.html(goodHtml);
                         }
                     },
                     error: function (data) {
-                        console.log('cartGoodsError:' + data)
+                        console.log('cartGoodsError:' + data);
                     }
                 });
             }else{
                 goodHtml = '<div id="mc-msg">\n' +
                     '                <span>购物车内暂时没有商品，登录后将显示您之前加入的商品</span>\n' +
-                    '                <a href="#" onclick="">登录</a>\n' +
-                    '                <a href="#">去购物</a>\n' +
-                    '            </div>'
-                $('#cart-con').html(goodHtml)
+                    '                <a href="/login/view/login.html">登录</a>\n' +
+                    '                <a href="/index.html">去购物</a>\n' +
+                    '            </div>';
+                cartList.html(goodHtml);
             }
         },
         error: function (data) {
-            console.log('error:' + data)
+            console.log('error:' + data);
         }
-    })
+    });
 }
 
 $(document).on('click','.cancellation',function () {
@@ -116,139 +118,139 @@ $(document).on('click','.cancellation',function () {
         url:"/cancellation",
         type:"post",
         dataType: "text",
-        success:function (data) {
-            alert("退出成功")
+        success:function () {
+            alert("退出成功");
             window.location.reload();
         }
-    })
-})
-
-// 已选商品数量
-var chooseGoodsNum = 0
+    });
+});
 
 //已选商品数量插入
 function chooseNum(){
-    $('#count').text(chooseGoodsNum) //已选商品数量插入
+    $('#count').text(chooseGoodsNum); //已选商品数量插入
 }
 
 //计算已选商品的所有总价格
 function sumAllPrice(){
-    var sumPrice = 0.00
-    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+    let sumPrice = 0.00;
+    let allGoods = $("input[name='goods']");
+    let total = $('#total');
+    allGoods.each(function (i) { //遍历并计算已选商品的所有总价格
         if($(this).is(':checked')){
-            sumPrice = sumPrice + parseFloat($('#price'+i).text())
+            sumPrice = sumPrice + parseFloat($('#price'+i).text());
         }
-    })
-    console.log('sumPrice:'+sumPrice)
-    $('#total').text('￥'+Number(sumPrice).toFixed(2))
+    });
+    //console.log('sumPrice:'+sumPrice)
+    total.text('￥'+Number(sumPrice).toFixed(2));
 }
 
 //商品全选
 $("input[name='all']").click(function () {
-    console.log('#all:'+$(this).is(':checked'))
+    //console.log('#all:'+$(this).is(':checked'))
+    let allChooseGoods = $("input[name='all']");
+    let chooseGood = $("input[name='goods']");
     if($(this).is(':checked')){
-        console.log('.goodsTrue:'+$("input[name='goods']").val())
-        $("input[name='all']").prop('checked',true)
-        $("input[name='goods']").prop('checked',true)
-        chooseGoodsNum = $("input[name='goods']").length
-        chooseNum()
-        sumAllPrice()
+        //console.log('.goodsTrue:'+chooseGood.val());
+        allChooseGoods.prop('checked',true);
+        chooseGood.prop('checked',true);
+        chooseGoodsNum = chooseGood.length;
+        chooseNum();
+        sumAllPrice();
     }else{
-        console.log('.goodsFalse:'+$("input[name='goods']").val())
-        $("input[name='all']").prop('checked', false)
-        $("input[name='goods']").prop('checked', false)
-        chooseGoodsNum = 0
-        chooseNum()
-        sumAllPrice()
+        //console.log('.goodsFalse:'+chooseGood.val());
+        allChooseGoods.prop('checked', false);
+        chooseGood.prop('checked', false);
+        chooseGoodsNum = 0;
+        chooseNum();
+        sumAllPrice();
     }
-})
+});
 
 //商品勾选
 $(document).on('click', "input[name='goods']",function(){
-    var allGoods = true //判断所有商品是否已勾选
+    let allGoods = true; //判断所有商品是否已勾选
+    let allChooseGoods = $("input[name='all']");
+    let chooseGood = $("input[name='goods']");
 
     if($(this).is(':checked')){
-        chooseGoodsNum++
+        chooseGoodsNum++;
     }else {
-        chooseGoodsNum--
+        chooseGoodsNum--;
     }
 
-    $("input[name='goods']").each(function(){ //遍历循环判断所有商品是否已勾选
+    chooseGood.each(function(){ //遍历循环判断所有商品是否已勾选
         if(!$(this).is(':checked')){
-            allGoods = false
+            allGoods = false;
         }
-    })
+    });
 
     if(allGoods){
-        $("input[name='all']").prop('checked', true)
+        allChooseGoods.prop('checked', true);
     }else{
-        $("input[name='all']").prop('checked', false)
+        allChooseGoods.prop('checked', false);
     }
 
-    chooseNum()
-    sumAllPrice()
-})
+    chooseNum();
+    sumAllPrice();
+});
 
 function minusOneCallback(_input){
-    console.log('-1')
-    console.log(_input.parents('ul').children('li').children(':checkbox').val())
-    var userId = '002'
-    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
-    var goodCount = _input.val()
-    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
-    updateGoods(userId, goodId, goodCount, _input)
+    console.log(_input.parents('ul').children('li').children(':checkbox').val());
+    let goodId = _input.parents('ul').children('li').children(':checkbox').val();
+    let goodCount = _input.val();
+    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount);
+    updateGoods(userId, goodId, goodCount, _input);
 }
 
 function plusOneCallback(_input){
-    console.log('+1')
-    console.log(_input.parents('ul').children('li').children(':checkbox').val())
-    var userId = '002'
-    var goodId = _input.parents('ul').children('li').children(':checkbox').val()
-    var goodCount = _input.val()
-    console.log('userId:'+userId+',goodId:'+goodId+',goodCount:'+goodCount)
-    updateGoods(userId, goodId, goodCount, _input)
+    console.log(_input.parents('ul').children('li').children(':checkbox').val());
+    let goodId = _input.parents('ul').children('li').children(':checkbox').val();
+    let goodCount = _input.val();
+    updateGoods(userId, goodId, goodCount, _input);
 }
 
 // 修改商品数量
 function updateGoods(userId, goodId, goodCount, _input) {
+    let price = _input.parents('ul').children('li .co-je');
     $.ajax({
         url:'/updateGoodCount',
         type:'post',
         data:{'userId':userId, 'goodId':goodId, 'goodCount':goodCount},
         dataType:'json',
         success:function (data) {
-            console.log('success:'+data)
-            var unitPrice = _input.parents('ul').children('li .co-dj').text()
-            var lastPrice = parseFloat(unitPrice) * goodCount
-            _input.parents('ul').children('li .co-je').text(Number(lastPrice).toFixed(2))
-            sumAllPrice()
+            console.log('success:'+data);
+            let unitPrice = _input.parents('ul').children('li .co-dj').text();
+            let lastPrice = parseFloat(unitPrice) * goodCount;
+            price.text(Number(lastPrice).toFixed(2));
+            sumAllPrice();
         },
         error:function (data) {
-            console.log('error:'+data)
+            console.log('error:'+data);
         }
-    })
+    });
 }
 
 // 从购物车中删除商品
 function deleteProducts(obj){
-    //var goodId = $(obj).parents('ul').children('li').children(':checkbox').val()
-    //console.log('obj:'+ $(obj).attr('value'))
-    //var userId = '002'
-    var goodIdList = new Array()
+    let goodIdList = new Array();
+    let goodsElement = $("input[name='goods']");
     if($(obj).attr('value') === 'batchDeletion') {
-        $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+        goodsElement.each(function () { //遍历并计算已选商品的所有总价格
             if ($(this).is(':checked')) {
-                goodIdList.push($(this).val())
+                goodIdList.push($(this).val());
             }
-        })
+        });
     }else {
-        goodIdList.push($(obj).parents('ul').children('li').children(':checkbox').val())
+        let goodId = $(obj).parents('ul').children('li').children(':checkbox').val();
+        goodIdList.push(goodId);
     }
-    var delGoods = {
+
+    let delGoods = {
         'userId': userId,
         'goodIdList': goodIdList
-    }
-    console.log(goodIdList)
+    };
+
+    //console.log(goodIdList)
     $.ajax({
         url:'/deleteGood',
         type:'post',
@@ -256,18 +258,27 @@ function deleteProducts(obj){
         dataType:'json',
         contentType:"application/json",
         success:function (data) {
-            console.log('success:'+data)
             if(data > 0){
-                $.each(goodIdList, function (i, value) {
-                    //console.log($("input[value='" + value + "']").attr('name'))
-                    $("input[value='" + value + "']").parents('ul').parents('li').remove()
-                })
+                /*$.each(goodIdList, function (i, value) {
+                    if(goodIdList.length > 1){
+                        console.log('有几个:'+goodsElement.length)
+                        $("input[value='" + value + "']").parents('ul').parents('li').remove();
+                        goodIdList.splice(i);
+                    }else{
+                        goodHtml = '<div id="mc-msg">\n' +
+                            '                <span>购物车内暂时没有商品，</span>\n' +
+                            '                <a href="/index.html">去购物</a>\n' +
+                            '            </div>';
+                        cartList.html(goodHtml);
+                    }
+                })*/
+                window.location.reload();
+            }else{
+                alert('删除失败！请刷新重试！');
             }
         },
         error:function (data) {
-            console.log('error:'+data)
+            console.log('error:'+data);
         }
-    })
+    });
 }
-
-
