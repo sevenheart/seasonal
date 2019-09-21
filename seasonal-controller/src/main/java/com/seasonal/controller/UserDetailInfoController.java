@@ -47,7 +47,7 @@ public class UserDetailInfoController {
         resultData.setData(userList);
         return resultData;
     }
-       @RequestMapping("updateUserInfo")
+    @RequestMapping("updateUserInfo")
     @ResponseBody
     public ResultData updateUserInfoById(User user,@RequestParam(value = "multipartFile",required = false) MultipartFile multipartFile) throws  IOException {
         //获取上传的文件

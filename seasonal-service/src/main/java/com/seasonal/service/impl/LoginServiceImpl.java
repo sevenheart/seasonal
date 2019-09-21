@@ -20,6 +20,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -123,7 +124,7 @@ public class LoginServiceImpl implements LoginService {
         //当前时间
         Date currentTime = new Date(System.currentTimeMillis());
 
-        String userId = identifier + currentTime;
+        String userId = UUID.randomUUID().toString().replace("-","").substring(17);
 
         String identityType = "Phone";
 

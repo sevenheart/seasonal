@@ -26,12 +26,10 @@ public class GoodsListServiceImpl implements GoodsListService {
 
     @Override
     public List<ComposeGood> showGoodsList(Long id, String orderName, int currPage, String likeName) {
-
         PageInfoResult pageInfoResult = new PageInfoResult();
         pageInfoResult.setOrderName(orderName);
         pageInfoResult.setCurrPage(currPage);
         pageInfoResult.setKeyPage((currPage - 1) * pageInfoResult.getPageSize());
-        System.out.println(orderName);
         return composeGoodMapper.findAllComposeGoodByClassifyIdForPage(id, pageInfoResult,likeName);
     }
 

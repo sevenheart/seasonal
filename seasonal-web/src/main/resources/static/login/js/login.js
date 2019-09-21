@@ -154,6 +154,7 @@ $(document).on('blur', '.pass-text-input-smsPhone', function () {
 
 
 //获取短信验证码
+var time = 60
 $(document).on('click', '.pass-button-verifyCodeSend', function () {
     var phone = $('.pass-text-input-smsPhone').val()
     if (phone.length > 0) {
@@ -169,7 +170,6 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 async: true,
                 success: function (data) {
                     var identifier = data.identifier
-                    $('.pass-text-input-smsVerifyCode').remove('disable')
                     $.ajax({
                         url: "/shortMessageSend",
                         type: "post",
@@ -177,6 +177,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                         data: {"identifier": identifier},
                         async: false,
                         success: function (data) {
+                            //sendCode()
                             if (data == 'false') {
                                 alert("发送失败")
                             } else {
@@ -197,6 +198,23 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
     }
 })
 
+function sendCode() {
+    if (time == 0) {//重新获取验证码
+        $(".pass-button-verifyCodeSend").attr("disabled", false);
+        $(".pass-button-verifyCodeSend").val("获取短信验证码");
+        time = 60;
+        return false;//清除定时器
+    } else {
+        $(".pass-button-verifyCodeSend").attr("disabled", true);
+        $(".pass-button-verifyCodeSend").val("重新发送 " + time + "s");
+        time--;
+    }
+    //设置一个定时器
+    setTimeout(function () {
+        sendCode()
+    }, 1000)
+}
+
 //短信登录表单提交
 $(document).on('submit', '#smsForm', function () {
     var smsflag = false
@@ -216,9 +234,10 @@ $(document).on('submit', '#smsForm', function () {
             data: {"identifier": identifier, "smsVerifyCode": smsVerifyCode},
             async: false,
             success: function (data) {
-                if (data == "ture") {
+                console.log("data:" + data)
+                if (data == true) {
                     smsflag = true
-                } else if (data = "false") {
+                } else if (data = false) {
                     smsflag = false
                     $('#verifyCode-span').css('display', 'none')
                     $('#verifyCodeError-span').css('display', 'none')
@@ -300,7 +319,6 @@ function saveCookie(data, check) {
 }
 
 function getCookie(user) {
-    console.log(user)
     var arrCookie = document.cookie.split('; ');
     for (var i = 0; i < arrCookie.length; i++) {
         var arr = arrCookie[i].split('=')
@@ -312,10 +330,8 @@ function getCookie(user) {
 }
 
 function checkCookie() {
-    console.log("======" + document.cookie.split(";") + "======")
     var identifier = getCookie("identifier");
     var credential = getCookie("credential")
-    console.log("identifier:" + identifier + "，credential" + credential)
     var check = getCookie("check")
     if (identifier != "" && check == "true") {
         $.ajax({
