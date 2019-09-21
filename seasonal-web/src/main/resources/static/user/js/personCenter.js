@@ -1,11 +1,16 @@
+if (userId === "") {
+    alert("请先登录，再访问个人中心！");
+    $(location).attr('href', "../../login/view/login.html");
+}
+
 $(".main_right_function_order_menu li").click(function () {
-    $(this).parent().children("li").removeClass("currentmenu1")
-    $(this).addClass("currentmenu1")
-    var num = $(this).index()
-    $(this).parent().parent().parent().children(".detailemessage").css("display", "none")
+    $(this).parent().children("li").removeClass("currentmenu1");
+    $(this).addClass("currentmenu1");
+    var num = $(this).index();
+    $(this).parent().parent().parent().children(".detailemessage").css("display", "none");
     $(this).parent().parent().parent().children(".detailemessage").eq(num).css("display", "block")
     /* $(this).addClass("currentmenu")*/
-})
+});
 /*控制右侧的功能页的显示与隐藏
 *右侧最大的main_right_function_order
 * 右侧子菜单
