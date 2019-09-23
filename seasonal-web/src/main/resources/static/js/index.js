@@ -1,3 +1,41 @@
+//自动登录检测
+function checklocalStorage() {
+    var storage = window.localStorage;
+    var identifier = storage['identifier'];
+    var credential = storage["credential"];
+    var check = storage['check'];
+    console.log("storage->>" + identifier + ", " + credential + ", " + check);
+    if (identifier !== "" && credential !== "" && check === "true") {
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier, "credential": credential},
+            async: false,
+            success: function (data) {
+                savelocalStorage(data, check);//保存localStorage
+            },
+            error: function (data) {
+                alert("自动登录失败");
+            }
+        })
+    }
+}
+
+//localStorage保存，自动登录
+function savelocalStorage(data, check) {
+    var storage = window.localStorage;
+    if (check === true) {
+        storage["identifier"] = data.identifier;
+        storage["credential"] = data.credential;
+        storage["check"] = "true";
+    } else {
+        storage["identifier"] = data.identifier;
+        storage["check"] = "false";
+    }
+}
+
+
 $(document).ready(function () {
     let length,
         currentIndex = 0,
