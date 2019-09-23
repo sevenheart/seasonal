@@ -196,7 +196,7 @@ public class AlipayController {
 
         System.out.println("反正进来了");
 
-        return  "redirect:/order/orderCome.html";
+        return  "redirect:/order/view/orderCome.html";
     }
 
     /**
