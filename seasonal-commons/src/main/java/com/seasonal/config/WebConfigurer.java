@@ -31,7 +31,8 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截 除了 excludePathList方法中页面的 其他请求
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePathList());
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**");
+        //registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePathList());
     }
 
     @Override
@@ -39,10 +40,10 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     }
 
-    public List<String> excludePathList() {
-        List<String> listUrls = new ArrayList<String>();
-        //网站静态资源
-        listUrls.add("../resources/static");
-        return listUrls;
-    }
+//    public List<String> excludePathList() {
+//        List<String> listUrls = new ArrayList<String>();
+//        //网站静态资源
+//        listUrls.add("../resources/static");
+//        return listUrls;
+//    }
 }

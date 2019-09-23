@@ -37,5 +37,8 @@
         where id=#{id}
     </update>
 
+    <insert id="insertUserMessage" parameterType="user">
+        insert into user(user_id,user_name,is_vip,user_sex,user_type,create_time,update_time) values (#{userId},#{userName},0,1,'年轻人',#{currentTime},#{currentTime})
+    </insert>
 
 </mapper>

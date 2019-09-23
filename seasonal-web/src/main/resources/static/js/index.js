@@ -13,9 +13,7 @@ function checklocalStorage() {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                savelocalStorage(data, check);//保存cookie
-                alert("自动登录成功");
-                //window.location.href = 'http://localhost:8080/index.html';
+                savelocalStorage(data, check);//保存localStorage
             },
             error: function (data) {
                 alert("自动登录失败");
