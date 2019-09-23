@@ -21,7 +21,7 @@ function ajax_test() {
                     '                                <div class="main_left">\n' +
                     '                                    <img alt="" class="main_left_img" src="' + v.generalitiesImg + '"/>\n' +
                     '                                    <div class="main_left_div">\n' +
-                    '                                        <button class="main_left_div_button">立即查看</button>\n' +
+                    '                                        <button class="main_left_div_button" value="'+v.id+'" >立即查看</button>\n' +
                     '                                    </div>\n' +
                     '                                </div>\n' +
                     '                            </div>\n' +

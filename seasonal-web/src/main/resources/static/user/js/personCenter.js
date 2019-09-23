@@ -1,4 +1,5 @@
-if(userId ===''){
+console.log(userId);
+if(userId === undefined){
     alert("请先登录，再访问个人中心");
     $(location.href ="../../login/view/login.html");
 }
