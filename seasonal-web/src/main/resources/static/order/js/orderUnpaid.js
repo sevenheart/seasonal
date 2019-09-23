@@ -12,7 +12,6 @@ function getQueryVariable(variable) {
 
 let orderId;
 let money;
-
 $.ajax({
     url: "/order/FindOrderFormById",
     type: "post",
@@ -29,11 +28,9 @@ $.ajax({
             $("#order-id").text("订单ID:" + orderId);
             $("#order-money").text(data.data.orderMoney);
             $("#order-zhifu").text(data.data.orderMoney);
+            //陆旭加了两个input赋值
+            $('#WIDtotal_amount').val(money);
+            $('#WIDout_trade_no').val(orderId);
         }
-
     }
-});
-
-$(".btn").click(function () {
-
 });

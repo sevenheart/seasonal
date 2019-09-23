@@ -40,10 +40,8 @@
     </div>
     <div id="body" class="container clear-fix">
         <div class="right right-widen">
-            <div class="order clear-fix"><span class="block-left"><div class="order-name"
-                                                                       id="order-id"></div></span><span
-                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price"
-                                                                         id="order-money"></span></div></span>
+            <div class="order clear-fix"><span class="block-left"><div class="order-name" id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price" id="order-money"></span></div></span>
             </div>
             <div class="payment-container">
                 <div class="payment payment-0">
@@ -72,7 +70,12 @@
                     </div>
                     <div class="payment-submit-area clear-fix">
                         <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
-                        <div class="payment-submit"><a class="btn" data-toggle="modal" data-target="#myModal">去付款</a>
+                        <div class="payment-submit">
+                            <form target="_blank" name=alipayment action=/PayMoney method=post>
+                            <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
+                            <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
+                            <button class="btn" type="submit" data-toggle="modal" data-target="#myModal" >去付款</button>
+                            </form>
                         </div>
                         <div class="payment-back"><a>删除订单</a></div>
                     </div>
@@ -117,7 +120,7 @@
 <script src="../../bootstrap/bootstrap.min.js"></script>
 <script>
 
-    $('#myModal').modal("options");
+    $('#myModal').modal(options);
 
     function guanbi() {
         window.location.reload();

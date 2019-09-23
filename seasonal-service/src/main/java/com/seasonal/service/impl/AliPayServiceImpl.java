@@ -31,9 +31,9 @@ public class AliPayServiceImpl implements AliPayService {
     public boolean paySuccess(OrderInfoForm orderInfoForm) {
         //1.插入支付信息到支付信息表中
         int insert = orderInfoFormMapper.insertOrderInfo(orderInfoForm);
-       /* //2.修改订单信息为已支付
+        //2.修改订单信息为已支付
 
-        int update = orderFormMapper.updateOrderState(orderInfoForm.getUserOrderId());*/
+        int update = orderFormMapper.updateOrderState(orderInfoForm.getUserOrderId());
        //2.插入订单信息(需要订单信息)
         //int orderform = orderFormMapper.insertOrderForm();
         //3.插入订单的详细信息。（需要详细信息list）

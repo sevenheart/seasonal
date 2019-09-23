@@ -7,7 +7,6 @@ import com.seasonal.pojo.OrderForm;
 import com.seasonal.randompass.RandomAccountPassword;
 import com.seasonal.service.CartFormService;
 import com.seasonal.service.OrderFormService;
-import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;

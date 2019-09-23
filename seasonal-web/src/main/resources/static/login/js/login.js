@@ -9,7 +9,6 @@ document.head.appendChild(jsapi);
 
 //获取当前IP地址
 var nowCity;
-
 window.onLoad = function () {
     //初始化地图
     map = new AMap.Map('container', {
@@ -23,21 +22,20 @@ window.onLoad = function () {
         map.addControl(geolocation);
         geolocation.getCityInfo(function (status, result) {
             if (status === 'complete') {
-                nowCity = result.city
+                nowCity = result.city;
             } else {
-                console.log('loc-error' + result)
+                console.log('loc-error' + result);
             }
         });
     });
-}
+};
 
 //账号
 $(document).on('click', '.pass-form-normal .pass-text-input-userName', function () {
     $(this).css('color', '#F69');
     $(this).css('border-color', '#F69');
-    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -116px')
-
-})
+    $('.pass-form-normal .pass-label-userName').css('background-position', '-366px -116px');
+});
 $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function () {
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
     $(this).css('color', '');
@@ -50,68 +48,67 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
         data: {"identifier": identifier},
         async: false,
         success: function (data) {
-            ipsearch(data.loginIp)
+            ipsearch(data.loginIp);
         },
         error: function (data) {
 
         }
     })
-})
+});
 
 
 //密码
 $(document).on('click', '.pass-form-normal .pass-text-input-password', function () {
     $(this).css('color', '#F69');
     $(this).css('border-color', '#F69');
-    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -157px')
-
-})
+    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -157px');
+});
 $(document).on('blur', '.pass-form-normal .pass-text-input-password', function () {
     $(this).css('color', '');
     $(this).css('border-color', '');
-    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -135px')
-})
-
+    $('.pass-form-normal .pass-label-password').css('background-position', '-366px -135px');
+});
 
 //表单提交，多次错误验证码显示，判断输入信息
-var num = 0
+var num = 0;
 $(document).on('submit', '.pass-form-normal', function () {
-    var flag = false
+    var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
+    var flag = false;
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
     var credential = $('.pass-form-normal .pass-text-input-password').val();
-    if (identifier == null || identifier === '') {
-        console.log("username")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('');
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入手机/邮箱/用户名");
+    if (identifier === null || identifier === '') {
+        pass_generalError_error.text('');
+        pass_generalError_error.append("请您输入手机/邮箱/用户名");
         flag = false
-    } else if (credential == null || credential == '') {
-        console.log("password")
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('');
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').append("请您输入密码");
-        flag = false
+    } else if (credential === null || credential === '') {
+        pass_generalError_error.text('');
+        pass_generalError_error.append("请您输入密码");
+        flag = false;
     } else {
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove()
-        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error').text('')
-        var check = document.getElementById("memberPass").checked
-        flag = login(identifier, credential, flag, check)
+        $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove();
+        pass_generalError_error.text('');
+        var check = document.getElementById("memberPass").checked;
+        flag = login(identifier, credential, flag, check);
     }
-    if (flag == true) {
-        updatelogin(identifier)
+    if (flag === true) {
+        updatelogin(identifier);
     }
     return flag;
-})
+});
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
-    console.log(nowCity);
-    console.log(beforeCity);
+    let j_login = $('#j-login');
+    let sms = $('#sms');
+    let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
+    let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
     if (nowCity !== beforeCity) {
-        alert("异地登录，请使用短信登录")
-        $('#j-login').css('display', 'none')
-        $('#j-login').css('visibility', 'hidden')
-        $('#sms').css('display', 'block')
-        $('#sms').css('visibility', 'visible')
-        $('.pass-sms-link-back').css('visibility', 'hidden')
+        alert("异地登录，请使用短信登录");
+        j_login.css('display', 'none');
+        j_login.css('visibility', 'hidden');
+        sms.css('display', 'block');
+        sms.css('visibility', 'visible');
+        $('.pass-sms-link-back').css('visibility', 'hidden');
         flag = false
     } else {
         $.ajax({
@@ -121,7 +118,7 @@ function login(identifier, credential, flag, check) {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                saveCookie(data, check)//保存cookie
+                saveCookie(data, check);//保存cookie
                 flag = true
             },
             error: function (data) {
@@ -133,15 +130,15 @@ function login(identifier, credential, flag, check) {
                 $('.pass-form-normal .pass-generalErrorWrapper').html(html);
                 num++;
                 if (num >= 3) {
-                    $('.pass-form-normal .pass-form-item-verifyCode').css('display', 'block')
-                    $('.pass-form-normal .pass-form-item-verifyCode').css('visibility', 'visible')
-                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('color', '#F69')
-                    $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode').css('border-color', '#F69')
+                    pass_form_item_verifyCode.css('display', 'block');
+                    pass_form_item_verifyCode.css('visibility', 'visible');
+                    pass_text_input_verifyCode.css('color', '#F69');
+                    pass_text_input_verifyCode.css('border-color', '#F69');
                 }
             }
         })
     }
-    return flag
+    return flag;
 }
 
 //短信登录手机号检测的焦点事件
@@ -329,25 +326,25 @@ function getCookie(user) {
     return "";
 }
 
-// function checkCookie() {
-//     var identifier = getCookie("identifier");
-//     var credential = getCookie("credential")
-//     var check = getCookie("check")
-//     if (identifier != "" && check == "true") {
-//         $.ajax({
-//             url: "/login",
-//             type: "post",
-//             dataType: "json",
-//             data: {"identifier": identifier, "credential": credential},
-//             async: false,
-//             success: function (data) {
-//                 saveCookie(data, check)//保存cookie
-//                 alert("自动登录成功")
-//                 window.location.href = 'http://localhost:8080/index.html'
-//             },
-//             error: function (data) {
-//
-//             }
-//         })
-//     }
-// }
+function checkCookie() {
+    var identifier = getCookie("identifier");
+    var credential = getCookie("credential")
+    var check = getCookie("check")
+    if (identifier != "" && check == "true") {
+        $.ajax({
+            url: "/login",
+            type: "post",
+            dataType: "json",
+            data: {"identifier": identifier, "credential": credential},
+            async: false,
+            success: function (data) {
+                saveCookie(data, check)//保存cookie
+                alert("自动登录成功")
+                window.location.href = 'http://localhost:8080/index.html'
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+}

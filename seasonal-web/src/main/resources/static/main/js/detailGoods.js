@@ -36,18 +36,18 @@ function ajax_test(id) {
                 if (v.imgType === 0) {
                     $(".goods_small_image_scoll_rongqi").append(' <ul class="goods_small_image_scoll_itme_ul">\n' +
                         '                        <li><img alt="" src="' + v.composeGoodImg + '"></li>\n' +
-                        '                        </ul>')
+                        '                        </ul>');
                 } else {
-                    $(".goods_signal_describe").append('<img src="' + v.composeGoodImg + '" alt="" />\n')
+                    $(".goods_signal_describe").append('<img src="' + v.composeGoodImg + '" alt="" />\n');
                 }
                 index += 1;
 
             })
             //选择查看用户评论时隐藏商品介绍
             $('#goods_discribe').click(function () {
-                console.log("jhiuh")
+                console.log("jhiuh");
                 $('#goods_discribe_div').hide();
-            })
+            });
         }
     });
 }
@@ -77,7 +77,6 @@ $(".goods_small_image_scoll_right").click(function () {
             margin = 0;
         }
         $(".goods_small_image_scoll_rongqi").css("margin-left", margin);
-
     }
 });
 
@@ -115,27 +114,35 @@ $('.goods_describe_option li').click(function () {
     $good_de.css("background-color", "#ffeded");
     $good_de.children("a").css("color", "#d2605e");
     $(this).css("background-color", "#e51e13");
-    $(this).children("a").css("color", "white")
+    $(this).children("a").css("color", "white");
 });
 
 //添加入购物车
 $('.goods_describe_option span').click(function () {
-    var goodCount = $('#good_count').val()
-    var goodId = getQueryVariable("id")
-    $.ajax({
-        url:'/addCart',
-        type:'post',
-        dataType:'json',
-        data:{'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
-        success:function (data) {
-            console.log('success:'+data)
-            alert('添加入购物车成功')
-        },
-        error:function (data) {
-            console.log('error:'+data)
-            alert('添加入购物车失败')
-        }
-    })
-})
+    let goodCount = $('#good_count').val();
+    let goodId = getQueryVariable("id");
+    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+        $.ajax({
+            url: '/addCart',
+            type: 'post',
+            dataType: 'json',
+            data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
+            success: function (data) {
+                console.log('success:' + data);
+                if (data > 0) {
+                    alert('添加入购物车成功');
+                }else{
+                    alert('添加入购物车失败,刷新后重试！');
+                }
+            },
+            error: function (data) {
+                console.log('error:' + data);
+                alert('添加入购物车失败');
+            }
+        });
+    }else{
+        alert('请先登录！');
+    }
+});
 
 

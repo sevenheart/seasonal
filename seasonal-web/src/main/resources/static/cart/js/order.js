@@ -132,9 +132,9 @@ $("#ctf-js").click(function () {
         if (markers.length === 0) {
             $.each(addressAndDistance, function (i, value) {
                 if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
-                    return true
+                    return true;
                 }
-                getGeoCode(value)
+                getGeoCode(value);
             })
         } else {
             map.add(markers);
@@ -210,7 +210,7 @@ $("#ctf-js").click(function () {
                 return true;
             }
             getGeoCode(value);
-        })
+        });
     }
 });
 
@@ -220,5 +220,5 @@ function allotAddressX(city, address) {
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$$allot_address_x.get(0).selectedIndex]);
 
-    planningRoute(city, address)
+    planningRoute(city, address);
 }
