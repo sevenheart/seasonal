@@ -38,7 +38,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '                                        <a class="add_goods">+</a>\n' +
                     '                                    </li>\n' +
                     '                                    <li class="goods_control_ul_li2">\n' +
-                    '                                        <a>\n' +
+                    '                                        <a href="javascript:void(0);" onclick="addGoodsToCart(this, ' + v.id + ')">\n' +
                     '                                            <i></i>\n' +
                     '                                            加入购物车\n' +
                     '                                        </a>\n' +
@@ -115,3 +115,30 @@ $("#sort_type_2").click(function () {
 $("#sort_type_3").click(function () {
     ajax_test(classifyId, "compose_good_sales", currPage, likeName);
 });
+
+function addGoodsToCart(obj, id) {
+    let goodCount = $(obj).parents('li').siblings('li').children('input').val();
+    let goodId = id;
+    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+        $.ajax({
+            url: '/addCart',
+            type: 'post',
+            dataType: 'json',
+            data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
+            success: function (data) {
+                console.log('success:' + data);
+                if (data > 0) {
+                    alert('添加入购物车成功');
+                }else{
+                    alert('添加入购物车失败,刷新后重试！');
+                }
+            },
+            error: function (data) {
+                console.log('error:' + data);
+                alert('添加入购物车失败');
+            }
+        });
+    }else{
+        alert('请先登录！');
+    }
+}
