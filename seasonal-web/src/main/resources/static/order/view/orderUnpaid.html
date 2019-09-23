@@ -40,8 +40,10 @@
     </div>
     <div id="body" class="container clear-fix">
         <div class="right right-widen">
-            <div class="order clear-fix"><span class="block-left"><div class="order-name" id="order-id"></div></span><span
-                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price" id="order-money"></span></div></span>
+            <div class="order clear-fix"><span class="block-left"><div class="order-name"
+                                                                       id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price"
+                                                                         id="order-money"></span></div></span>
             </div>
             <div class="payment-container">
                 <div class="payment payment-0">
@@ -52,11 +54,11 @@
                         <div class="payment-list payment-list-0">
                             <ul class="clear-fix">
                                 <!--<li>-->
-                                    <!--<input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">-->
-                                    <!--<label class="payment-icon" for="thirdpart_pay_wxqrpay">-->
-                                        <!--<img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">-->
-                                    <!--</label>-->
-                                    <!--<span class="payment-weak-tip" style="visibility:visible;"></span>-->
+                                <!--<input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">-->
+                                <!--<label class="payment-icon" for="thirdpart_pay_wxqrpay">-->
+                                <!--<img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">-->
+                                <!--</label>-->
+                                <!--<span class="payment-weak-tip" style="visibility:visible;"></span>-->
                                 <!--</li>-->
                                 <li>
                                     <input type="radio" name="thirdpart_pay" id="thirdpart_pay_alipay" checked>
@@ -72,9 +74,11 @@
                         <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
                         <div class="payment-submit">
                             <form target="_blank" name=alipayment action=/PayMoney method=post>
-                            <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
-                            <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
-                            <button class="btn" type="submit" data-toggle="modal" data-target="#myModal" >去付款</button>
+                                <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
+                                <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
+                                <button class="btn" type="submit" data-toggle="modal" data-target="#myModal"
+                                        id="goShop">去付款
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -119,7 +123,11 @@
 <script src="../../bootstrap/bootstrap.min.js"></script>
 <script>
 
-    $('#myModal').modal(options);
+
+    $("#goShop").click(function () {
+    });
+    $('#myModal').modal("hide");
+
 
     function guanbi() {
         window.location.reload();
