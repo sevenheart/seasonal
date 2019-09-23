@@ -28,4 +28,7 @@ public interface OrderFormService {
      * @return 结果集
      */
     OrderForm findOrderPassword(String orderId,String userId);
+
+
+    List<OrderForm> findAllOrderFormByUserId(String userId);
 }
