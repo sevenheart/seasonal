@@ -5,13 +5,14 @@
 <mapper namespace="com.seasonal.mapper.OrderFormMapper">
     <resultMap id="cspo" type="com.seasonal.pojo.OrderForm">
         <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
         <collection property="detailedCommodityForms" column="order_id"
                     select="com.seasonal.mapper.DetailedCommodityFormMapper.findDetailFormBy"/>
     </resultMap>
 
     <!--将订单的支付状态修改为已支付-->
     <update id="updateOrderState" parameterType="String">
-        update order_form set order_status=1 where id=#{orderId}
+        update order_form set order_status=1 where order_id=#{orderId}
     </update>
 
     <!--插入订单信息，订单状态默认为0未支付状态-->
@@ -101,7 +102,7 @@
     </insert>
 
     <!--查找所有的订单根据用户-->
-    <select id="findOrderFormByUserId" resultType="orderForm" parameterType="String">
+    <select id="findOrderFormByUserId" resultMap="cspo" parameterType="String">
           select * from order_form where order_user_id =#{userId}
     </select>
 

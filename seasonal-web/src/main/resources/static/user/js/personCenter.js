@@ -65,8 +65,8 @@ function showaddress(data){
             '                            <td> <input  type="text"  readonly value=' + data.data[i].city + ' /></td>\n' +
             '                            <td> <input  type="text" readonly value=' + data.data[i].district + ' /></td>\n' +
             '                            <td> <input  type="text"  readonly value=' + data.data[i].address + ' /></td>\n' +
-            '                            <td><input type="button" class="button delete_address" value="删除"  data-id=' + data.data[i].id + ' /></td>\n' +
-            '                            <td><input type="button" class="button update_address" value="修改" data-type="0"/></td>\n' +
+            '                     <td><input type="button" class="button delete_address" value="删除"  data-id=' + data.data[i].id + ' /></td>\n' +
+            '                  <td><input type="button" class="button update_address" value="修改" data-type="0" /></td>\n' +
             '                        </tr>'
     }
     html+='    <tr>\n' +
@@ -89,6 +89,7 @@ function showaddress(data){
     });
     /*批量删除地址*/
     $("#alladdresstable .delete_all").click(function () {
+
         let check = new Array();
         $("#alladdresstable tr td input[type=checkbox]:checked").each(function(){
             console.log("地址是"+$(this).val())
@@ -109,11 +110,14 @@ function showaddress(data){
     });
     /*修改用户的地址信息*/
     $("#alladdresstable .update_address").click(function () {
+        console.log("sdjflkjasodfk")
         var flag = $(this).attr("data-type");
-        if(flag===0){
+        console.log("flage是"+flag)
+        if(flag==0){
             $(this).parents("tr").children("td").children("input[type='text']").removeAttr("readonly");
             $(this).attr("data-type",1);
         }else {
+            console.log("flage是"+flag)
             var fd = new FormData();
             fd.append("userName", $(this).parents("tr").children("td").children("input").eq(1).val());
             fd.append("userPhone", $(this).parents("tr").children("td").children("input").eq(2).val());
@@ -137,6 +141,134 @@ function showaddress(data){
 
     })
 }
+/*展示订单信息*/
+function showorderform(data) {
+    var title =  '<tr style="width: 800px">\n' +
+        '                            <td><span>订单号</span></td>\n' +
+        '                            <td><span>商品描述</span></td>\n' +
+        '                            <td><span>订单金额</span></td>\n' +
+        '                            <td><span>订单状态</span></td>\n' +
+        '                            <td><span>支付平台</span></td>\n' +
+        '                            <td><span>配送方式</span></td>\n' +
+        '                        </tr>';
+    var htmlall =title;
+    noorderflag = false;
+    orderedflag = false;
+    flag = false;
+    var noorder =title;
+    var ordered=title;
+    let detaildata ;
+
+    for(let i = 0;i < data.length;i++){
+        flag = true;
+        var button = '<td><input  type="button" class="button delitalbutton payorder"  value="支付"/></td>\n'
+        var orderstates ='<td><p>未支付</p></td>'
+        var deliveryWay = '<td><p>自提</p></td>\n'
+        if(data.deliveryWay===0){
+            deliveryWay = '<td><p>配送</p></td>\n'
+        }
+        //已支付拼接
+        //未支付拼接
+        console.log("sdf"+data[i].orderStatus)
+        if(data[i].orderStatus == 1){
+            console.log("已支付状态"+data[i].orderStatus)
+            orderedflag = true;
+            button = '<td><input  type="button" class="button delitalbutton look"  value="查看详情" data-toggle="modal" data-target="#myModal" /></td>'
+            orderstates ='<td><p>已支付</p></td>'
+            ordered +=' <tr>\n' +
+                '                            <td><p>'+data[i].orderId+'</p></td>\n' +
+                '                            <td><p>夏日果切套餐</p></td>\n' +
+                '                            <!--已支付判断，赋class ordered-->\n' +
+                '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
+                orderstates+
+                '                            <td><p>支付宝</p></td>\n' +
+                deliveryWay+
+                button+
+                '                        </tr>\n'
+
+
+        }
+        else{
+            console.log("未支付状态")
+            noorderflag = true;
+            noorder +=' <tr>\n' +
+                '                            <td><p>'+data[i].orderId+'</p></td>\n' +
+                '                            <td><p>夏日果切套餐</p></td>\n' +
+                '                            <!--已支付判断，赋class ordered-->\n' +
+                '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
+                orderstates+
+                '                            <td><p>支付宝</p></td>\n' +
+                deliveryWay+
+                button+
+                '                        </tr>\n'
+        }
+
+
+        htmlall +=' <tr>\n' +
+            '                            <td><p>'+data[i].orderId+'</p></td>\n' +
+            '                            <td><p>夏日果切套餐</p></td>\n' +
+            '                            <!--已支付判断，赋class ordered-->\n' +
+            '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
+            orderstates+
+            '                            <td><p>支付宝</p></td>\n' +
+            deliveryWay+
+            '                            <td hidden class="detailData" data-type="'+i+'"><p>'+data[i].orderMoney+'</p></td>\n' +
+            button+
+            '                        </tr>\n'
+    }
+    if(flag===true){
+        $('#allordermessage').html(htmlall);
+    }else {
+        $('#allordermessage').html("没查到任何订单信息");
+    }
+    if(noorderflag===true){
+        $('#noorderform').html(noorder);
+    }else {
+        $('#noorderform').html("没查到任何订单信息");
+    }
+    if(orderedflag===true){
+        $('#orderedform').html(ordered);
+    }else {
+        $('#orderedform').html("没查到任何订单信息")
+    }
+
+    $('.payorder').click(function () {
+        var list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type");
+        window.location.href='/order/view/orderUnpaid.html?orderId='+data[list].orderId;
+    });
+    $(".look").click(function () {
+        console.log("sldifjoi")
+        var list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type")
+        detaildata = data[list].detailedCommodityForms
+        
+        }
+
+    )
+
+    //模态框控制
+    $('#myModal').modal("hide");
+    $('#myModal').on('show.bs.modal', function (event) {
+
+        var goodtable =' <tr>\n' +
+            '                                <td>商品名称</td>\n' +
+            '                                <td>商品数量</td>\n' +
+            '                                <td>商品价格</td>\n' +
+            '                            </tr> ';
+
+        $.each(detaildata,function (index,content) {
+            goodtable+= '  <tr>\n' +
+                '                                <td>'+content.composeGoods[0].composeGoodName+'</td>\n' +
+                '                                <td>'+content.goodId+'</td>\n' +
+                '                                <td>'+content.commodityMoney+'</td>\n' +
+ '                            </tr>'
+        })
+        $("#goodstable").html(goodtable)
+        console.log("模态框显示之钱")
+
+    })
+}
+/*展示已支付订单信息*/
+
 
 function init() {
     //查找用户的个人信息
@@ -200,6 +332,25 @@ function init() {
         dataType:"json",
         success:function (data) {
             showaddress(data)
+
+        }
+    })
+
+    //查中用户的订单信息
+    $.post({
+        url:"/order/FindAllorderFormById",
+        data:{userId:userId},
+        async:false,
+        dataType:"json",
+        success:function (data) {
+            console.log(data)
+            if(data.code == 1){
+                console.log("查询失败！");
+                alert("没有订单信息！");
+            }else{
+                showorderform(data.data);
+            }
+
 
         }
     })
