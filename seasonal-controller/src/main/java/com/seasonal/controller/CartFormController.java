@@ -55,9 +55,9 @@ public class CartFormController {
 
     @RequestMapping(value = "deleteGood")
     @ResponseBody
-    public int deleteGoodsOfCart(@RequestBody Map<String, Object> goodDataList){
-        String userId = (String)goodDataList.get("userId");
-        List<String> goodIdList = (List<String>)goodDataList.get("goodIdList");
+    public int deleteGoodsOfCart(@RequestBody Map<String, Object> goodDataList) {
+        String userId = (String) goodDataList.get("userId");
+        List<String> goodIdList = (List<String>) goodDataList.get("goodIdList");
         return cartFormService.deleteGoodsOfCart(userId, goodIdList);
     }
 
@@ -73,13 +73,18 @@ public class CartFormController {
          */
         OrderForm orderForm = new OrderForm();
         //订单id获取
-        orderForm.setOrderId((String) orderData.get("orderId"));
+        orderForm.setOrderId(orderData.get("orderId").toString());
         //订单配送状态 0自提 1配送
-        orderForm.setDeliveryWay(0);
+        orderForm.setDeliveryWay((Integer) orderData.get("deliveryWay"));
+        //订单配送地址
+        orderForm.setDeliveryAddress(orderData.get("deliveryAddress").toString());
+        System.out.println(orderForm.getDeliveryAddress());
+        //配送费
+        orderForm.setDeliveryMoney(new BigDecimal(orderData.get("deliveryMoney").toString()));
         //订单总金额
         orderForm.setOrderMoney(new BigDecimal(orderData.get("orderMoney").toString()));
         //订单用户id
-        orderForm.setOrderUserId((String) orderData.get("userId"));
+        orderForm.setOrderUserId(orderData.get("userId").toString());
         //订单创建时间
         orderForm.setCreateTime(new Date(System.currentTimeMillis()));
         //订单更新时间
@@ -88,10 +93,12 @@ public class CartFormController {
         orderForm.setDeliveryMoney(new BigDecimal(0));
         //订单状态 0未支付 1已支付
         orderForm.setOrderStatus(0);
-        //订单自取账号
-        orderForm.setGetAccount(RandomAccountPassword.genRandomNum(6));
-        //订单自取密码
-        orderForm.setGetPassword(RandomAccountPassword.genRandomNum(6));
+        if(orderForm.getDeliveryWay() == 0){
+            //订单自取账号
+            orderForm.setGetAccount(RandomAccountPassword.genRandomNum(6));
+            //订单自取密码
+            orderForm.setGetPassword(RandomAccountPassword.genRandomNum(6));
+        }
         //订单中商品的集合
         List<DetailedCommodityForm> detailedCommodityForms = new ArrayList<>(10);
         //单商品

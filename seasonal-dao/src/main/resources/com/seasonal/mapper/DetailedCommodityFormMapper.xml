@@ -5,6 +5,7 @@
 <mapper namespace="com.seasonal.mapper.DetailedCommodityFormMapper">
     <resultMap id="cspd" type="com.seasonal.pojo.DetailedCommodityForm">
         <id column="id" property="id"/>
+        <result column="good_id" property="goodId"/>
         <association property="composeGoods" column="good_id"
                      select="com.seasonal.mapper.ComposeGoodMapper.findComposeGoodByID"/>
     </resultMap>
@@ -29,6 +30,9 @@
             <if test="orderId!=null and orderId!=''">
                 order_id,
             </if>
+
+
+
             <if test="1!=0">
                 good_type,
             </if>
@@ -68,5 +72,7 @@
         </trim>
         )
     </insert>
-
+    <update id="updateCommentStates" parameterType="String">
+        update  detailed_commodity_form set iscomment = 1,comment_id = #{commentId}  where goood_id = #{goodId} and order_id = #{orderId}
+    </update>
 </mapper>

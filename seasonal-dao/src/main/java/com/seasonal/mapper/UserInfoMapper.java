@@ -4,6 +4,7 @@ import com.seasonal.pojo.User;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 @Repository
 public interface UserInfoMapper {
@@ -21,5 +22,7 @@ public interface UserInfoMapper {
      * @return
      */
     int updateUserInfo(User user);
+
+    int insertUserMessage(String userId, String userName, Date currentTime);
 
 }

@@ -21,4 +21,12 @@ public interface DetailedCommodityFormMapper {
      * 数据库中插入详细的订单信息
      */
     int insertDetailCommodityForm(DetailedCommodityForm detailedCommodityForm);
+
+    /**
+     * 根据订单id和商品id修改评论状态和评论id
+     * @param goodId
+     * @param orderId
+     * @return
+     */
+    int updateCommentStates (String goodId,String orderId,String commentId);
 }

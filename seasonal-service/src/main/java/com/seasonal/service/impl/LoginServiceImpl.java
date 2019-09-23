@@ -5,6 +5,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.seasonal.cookie.MyCookie;
 import com.seasonal.ip.GetIp;
 import com.seasonal.mapper.LoginFromMapper;
+import com.seasonal.mapper.UserInfoMapper;
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.redis.RedisUtil;
 import com.seasonal.service.LoginService;
@@ -26,14 +27,16 @@ import java.util.UUID;
 public class LoginServiceImpl implements LoginService {
 
     private final LoginFromMapper loginFrom;
+    private final UserInfoMapper userInfoMapper;
     private final RedisUtil redisUtil;
     private final GetIp getIp;
     private final ShortMessageVerification shortMessageVerification;
     private final MyCookie myCookie;
 
     @Autowired
-    public LoginServiceImpl(LoginFromMapper loginFrom, RedisUtil redisUtil, GetIp getIp, ShortMessageVerification shortMessageVerification, MyCookie myCookie) {
+    public LoginServiceImpl(LoginFromMapper loginFrom,UserInfoMapper userInfoMapper, RedisUtil redisUtil, GetIp getIp, ShortMessageVerification shortMessageVerification, MyCookie myCookie) {
         this.loginFrom = loginFrom;
+        this.userInfoMapper = userInfoMapper;
         this.redisUtil = redisUtil;
         this.getIp = getIp;
         this.shortMessageVerification = shortMessageVerification;
@@ -129,13 +132,15 @@ public class LoginServiceImpl implements LoginService {
 
         String userId = retStrFormatNowDate + UUID.randomUUID().toString().replace("-","").substring(27);
         System.out.println(userId);
+        String userName = UUID.randomUUID().toString().replace("-","").substring(24);
 
         String identityType = "Phone";
 
         //获取当前ip地址
         String loginIp = getIp.publicip();
         int num = loginFrom.insertUserMessage(userId, identityType, credential, identifier, loginIp, currentTime);
-        if (num > 0){
+        int userNum = userInfoMapper.insertUserMessage(userId,userName,currentTime);
+        if (num > 0 && userNum > 0){
             return userId;
         }
         return null;

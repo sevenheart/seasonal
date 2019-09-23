@@ -1101,12 +1101,10 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
   text-decoration: underline;
 }
 a:focus {
@@ -2517,13 +2515,12 @@ input[type="checkbox"] {
   margin-top: 1px \9;
   line-height: normal;
 }
-input[type="file"] {
-  display: block;
-}
+
 input[type="range"] {
   display: block;
   width: 100%;
 }
+
 select[multiple],
 select[size] {
   height: auto;
