@@ -33,13 +33,14 @@ $.ajax({
 
 
 $(document).on('click', '.cancellation', function () {
-
     $.ajax({
         url: "/cancellation",
         type: "post",
         dataType: "text",
         success: function (data) {
             alert("退出成功");
+            var storage = window.localStorage;
+            storage.clear();
             window.location.reload();
         }
     })

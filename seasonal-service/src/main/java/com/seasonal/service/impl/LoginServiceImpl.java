@@ -91,6 +91,7 @@ public class LoginServiceImpl implements LoginService {
     public String getIpNow() {
         //获取当前ip地址
         String loginIpNow = getIp.publicip();
+        System.out.println("现在的IP地址是：" + loginIpNow);
         return loginIpNow;
     }
 
@@ -123,8 +124,11 @@ public class LoginServiceImpl implements LoginService {
     public String insertUserMessage(String identifier, String credential) {
         //当前时间
         Date currentTime = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+        String retStrFormatNowDate = sdFormatter.format(currentTime).replace("-","").substring(2);
 
-        String userId = UUID.randomUUID().toString().replace("-","").substring(17);
+        String userId = retStrFormatNowDate + UUID.randomUUID().toString().replace("-","").substring(27);
+        System.out.println(userId);
 
         String identityType = "Phone";
 

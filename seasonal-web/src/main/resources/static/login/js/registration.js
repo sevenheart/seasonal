@@ -190,8 +190,18 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
             data: {"identifier": identifier},
             async: false,
             success: function (data) {
-                console.log("获取验证码：" + data);
+                console.log("返回值：" + data)
                 sendCode();
+                if (data === false) {
+                    alert("发送失败！");
+                } else if (data === true) {
+                    alert("发送成功！");
+                } else {
+                    if (data > 0){
+                        time = data;
+                    }
+                    alert("您请求验证码太过频繁，请计时结束在重新获取！")
+                }
             }
         })
     }

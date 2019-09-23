@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Intercept {
-    boolean required() default false;
+    String returnUrl() default "";
 }

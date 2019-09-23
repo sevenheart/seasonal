@@ -1,5 +1,6 @@
 package com.seasonal.controller;
 
+import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.UserAddress;
 import com.seasonal.service.UserAddressServer;
 import com.seasonal.vo.ResultData;
