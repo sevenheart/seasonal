@@ -1,6 +1,4 @@
-console.log(userId);
 if(userId === undefined){
-    alert("请先登录，再访问个人中心");
     $(location.href ="../../login/view/login.html");
 }
 $(".main_right_function_order_menu li").click(function(){
@@ -158,6 +156,9 @@ function showorderform(data) {
     flag = false;
     var noorder =title;
     var ordered=title;
+    //点击查看信息每个订单的信息存储
+    let orderlist;
+    //点击查看信息每个账号的存储
     let detaildata ;
 
     for(let i = 0;i < data.length;i++){
@@ -214,6 +215,7 @@ function showorderform(data) {
             '                            <td><p>支付宝</p></td>\n' +
             deliveryWay+
             '                            <td hidden class="detailData" data-type="'+i+'"><p>'+data[i].orderMoney+'</p></td>\n' +
+
             button+
             '                        </tr>\n'
     }
@@ -238,10 +240,11 @@ function showorderform(data) {
         window.location.href='/order/view/orderUnpaid.html?orderId='+data[list].orderId;
     });
     $(".look").click(function () {
-        console.log("sldifjoi")
+
         var list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type")
-        detaildata = data[list].detailedCommodityForms
-        
+        orderlist = data[list];
+        detaildata =data[list].detailedCommodityForms;
+        console.log(detaildata)
         }
 
     )
@@ -259,10 +262,18 @@ function showorderform(data) {
         $.each(detaildata,function (index,content) {
             goodtable+= '  <tr>\n' +
                 '                                <td>'+content.composeGoods[0].composeGoodName+'</td>\n' +
-                '                                <td>'+content.goodId+'</td>\n' +
+                '                                <td>'+content.goodCount+'</td>\n' +
                 '                                <td>'+content.commodityMoney+'</td>\n' +
  '                            </tr>'
+
         })
+        goodtable+=  '  <tr >\n' +
+        '                     <td colspan="3">取货账号是：'+orderlist.getAccount+'</td>\n' +
+        '               </tr>'+
+        '  <tr >\n' +
+        '                     <td colspan="3">取货密码是：'+orderlist.getPassword+'</td>\n' +
+        ' </tr>'
+
         $("#goodstable").html(goodtable)
         console.log("模态框显示之钱")
 
