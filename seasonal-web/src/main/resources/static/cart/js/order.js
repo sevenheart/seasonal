@@ -7,7 +7,6 @@ let good_price_array = new Array(10);
 //订单商品数量列表
 let good_count_array = new Array(10);
 
-
 let order_money = 0;//订单金额
 let html = "";
 const order_user_id = userId;//用户id
@@ -150,11 +149,17 @@ $("#ctf-js").click(function () {
             map: map
         });
 
+        let selectAddress = $('#allot_address_x');
+
         delivery_way = 1;
         $("#allot_address").css("display", "block");
         $("#og_shou").css("display", "block");
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
+
+        if(selectAddress.val() !== '' && selectAddress.val() !== null){
+            allotAddressX(selectAddress.val(), selectAddress.text())
+        }
     });
 
     $("#og-f").click(function () {
@@ -218,7 +223,7 @@ function allotAddressX(city, address) {
     //value为下拉时option 的value值
     const $allot_address_x = $("#allot_address_x ");
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
-    $("#og_phone").text(html_address_phone[$$allot_address_x.get(0).selectedIndex]);
+    $("#og_phone").text(html_address_phone[$allot_address_x.get(0).selectedIndex]);
 
     planningRoute(city, address);
 }
