@@ -1,17 +1,17 @@
 //订单商品列表
-var good_id_arrary = new Array(10);
+let good_id_arrary = new Array(10);
 //订单商品名列表
-var good_name_arrary = new Array(10);
+let good_name_arrary = new Array(10);
 //订单商品价格列表
-var good_price_array = new Array(10);
+let good_price_array = new Array(10);
 //订单商品数量列表
-var good_count_array = new Array(10);
+let good_count_array = new Array(10);
 
 
 let order_money = 0;//订单金额
 let html = "";
 const order_user_id = userId;//用户id
-const order_name = "春野樱";
+const order_name = userName;//用户名
 let delivery_way = 0;//配送方式
 let delivery_money = 0;//配送费
 let good_type = "0";//商品类型
@@ -132,9 +132,9 @@ $("#ctf-js").click(function () {
         if (markers.length === 0) {
             $.each(addressAndDistance, function (i, value) {
                 if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
-                    return true
+                    return true;
                 }
-                getGeoCode(value)
+                getGeoCode(value);
             })
         } else {
             map.add(markers);
@@ -210,7 +210,7 @@ $("#ctf-js").click(function () {
                 return true;
             }
             getGeoCode(value);
-        })
+        });
     }
 });
 
@@ -220,5 +220,5 @@ function allotAddressX(city, address) {
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$$allot_address_x.get(0).selectedIndex]);
 
-    planningRoute(city, address)
+    planningRoute(city, address);
 }

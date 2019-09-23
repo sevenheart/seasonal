@@ -1,8 +1,11 @@
 package com.seasonal.controller;
 
 
+import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.LoginFrom;
+import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
+import com.seasonal.service.UserInfoServer;
 import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -24,17 +30,26 @@ import java.util.*;
 public class LoginController {
 
     private final LoginService loginService;
+    private final UserInfoServer userInfoServer;
 
     @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, UserInfoServer userInfoServer) {
         this.loginService = loginService;
+        this.userInfoServer = userInfoServer;
     }
 
 
     @RequestMapping(value = "registrationPhone")
     @ResponseBody
     public Object registrationPhone(String identifier) {
-        return loginService.findRegistrationPhone(identifier);
+        LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
+        System.out.println(loginFrom);
+        if (loginFrom == null){
+            System.out.println("空");
+            return null;
+        } else{
+            return loginFrom;
+        }
     }
 
     @RequestMapping(value = "login")
@@ -63,25 +78,64 @@ public class LoginController {
 
     @RequestMapping(value = "shortMessageSend")
     @ResponseBody
-    public boolean shortMessageSend(String identifier, HttpSession session) {
-        boolean flag = false;
-        //String code = loginService.sendShortMessage(identifier);
-        String code = "1234";
-        if (code != null || code == "") {
-            System.out.println("code:" + code);
-            session.setAttribute("code", code);
-            final Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    session.removeAttribute("code");
-                    System.out.println("code删除成功");
-                    timer.cancel();
+    public String shortMessageSend(String identifier, HttpSession session) {
+        //获取当前时间
+        java.sql.Date currentTime = new Date(System.currentTimeMillis());
+        SimpleDateFormat sdFormatter = new SimpleDateFormat("HH-mm-ss");
+        long nowTime = Integer.parseInt(sdFormatter.format(currentTime).replace("-",""));
+        if (session.getAttribute("nowTimeCode") == null){
+            //String code = loginService.sendShortMessage(identifier);
+            String code = "1234";
+            if (code != null || code == "") {
+                System.out.println("code:" + code);
+                session.setAttribute("code", code);
+                session.setAttribute("nowTimeCode",nowTime);
+                final Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        session.removeAttribute("code");
+                        System.out.println("code删除成功");
+                        session.removeAttribute("nowTimeCode");
+                        System.out.println("nowTimeCode删除成功");
+                        timer.cancel();
+                    }
+                }, 5 * 60 * 1000);
+                return "true";
+            }
+        } else {
+            long lastTime = (long) session.getAttribute("nowTimeCode");
+            if (lastTime != 0){
+                System.out.println("nowTime:" + nowTime + ",lastTime:" + lastTime);
+                int D_value = (int) (nowTime - lastTime);
+                if (D_value >= 60){
+                    //String code = loginService.sendShortMessage(identifier);
+                    String code = "1234";
+                    if (code != null || code == "") {
+                        System.out.println("code:" + code);
+                        session.setAttribute("code", code);
+                        session.setAttribute("nowTimeCode",nowTime);
+                        final Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                session.removeAttribute("code");
+                                System.out.println("code删除成功");
+                                session.removeAttribute("nowTimeCode");
+                                System.out.println("nowTimeCode删除成功");
+                                timer.cancel();
+                            }
+                        }, 5 * 60 * 1000);
+                        return "true";
+                    }
+                } else {
+                    String time = String.valueOf(60 - D_value);
+                    System.out.println(time);
+                    return time;
                 }
-            }, 5 * 60 * 1000);
-            flag = true;
+            }
         }
-        return flag;
+        return "false";
     }
 
     @RequestMapping(value = "registrationInsert")
@@ -130,20 +184,15 @@ public class LoginController {
     @ResponseBody
     public Object getsessionUserId(HttpSession session) {
         String userId = (String) session.getAttribute("userId");
-
+        List<User> user = userInfoServer.findUserById(userId);
         if (userId != null) {
-            return ResultUtil.success(userId);
+            return ResultUtil.success(user);
         } else {
             return ResultUtil.fail("获取失败");
         }
     }
 
-    @RequestMapping(value = "setCookie")
-    @ResponseBody
-    public void setCookie(String identifier, String credential, String check) {
-        boolean flag = loginService.setCookie(identifier, credential, check);
-    }
-
+    //退出账号登录，删除session
     @RequestMapping(value = "cancellation")
     @ResponseBody
     public void cancellation(HttpSession session) {
@@ -154,5 +203,4 @@ public class LoginController {
     public String isLogin() {
         return "redirect:/index.html";
     }
-
 }

@@ -14,21 +14,7 @@
         <header class="com-header">
             <div class="login_bar">
                 <ul>
-                    <li class="login">
-                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg">
-                        <span class="login-span" style="display: none">用户ID：</span>
-                        <a href="../../login/view/login.html" class="already-login" style="display: none"></a>
-                        <a href="../../login/view/login.html" class="not-login" style="display: inline">请登录</a>
-                    </li>
-                    <li class="registration">
-                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/register_icon.jpg" style="display: inline">
-                        <a href="../../login/view/registration.html">免费注册</a>
-                        <a href="#" class="cancellation" style="display: none">退出账号</a>
-                    </li>
-                    <li>
-                        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/order_icon.jpg"><a
-                            href="#">我的订单</a>
-                    </li>
+
                 </ul>
             </div>
             <hr style="width: 100%;display: inline-block;margin-top: 1px;">
@@ -54,8 +40,10 @@
     </div>
     <div id="body" class="container clear-fix">
         <div class="right right-widen">
-            <div class="order clear-fix"><span class="block-left"><div class="order-name" id="order-id"></div></span><span
-                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price" id="order-money"></span></div></span>
+            <div class="order clear-fix"><span class="block-left"><div class="order-name"
+                                                                       id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price"
+                                                                         id="order-money"></span></div></span>
             </div>
             <div class="payment-container">
                 <div class="payment payment-0">
@@ -65,15 +53,15 @@
                         </ul>
                         <div class="payment-list payment-list-0">
                             <ul class="clear-fix">
+                                <!--<li>-->
+                                <!--<input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">-->
+                                <!--<label class="payment-icon" for="thirdpart_pay_wxqrpay">-->
+                                <!--<img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">-->
+                                <!--</label>-->
+                                <!--<span class="payment-weak-tip" style="visibility:visible;"></span>-->
+                                <!--</li>-->
                                 <li>
-                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">
-                                    <label class="payment-icon" for="thirdpart_pay_wxqrpay">
-                                        <img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">
-                                    </label>
-                                    <span class="payment-weak-tip" style="visibility:visible;"></span>
-                                </li>
-                                <li>
-                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_alipay">
+                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_alipay" checked>
                                     <label class="payment-icon" for="thirdpart_pay_alipay">
                                         <img src="https://p0.meituan.net/pay/alipaypcnew.png" alt="支付宝">
                                     </label>
@@ -86,12 +74,13 @@
                         <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
                         <div class="payment-submit">
                             <form target="_blank" name=alipayment action=/PayMoney method=post>
-                            <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
-                            <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
-                            <button class="btn" type="submit" data-toggle="modal" data-target="#myModal" >去付款</button>
+                                <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
+                                <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
+                                <button class="btn" type="submit" data-toggle="modal" data-target="#myModal"
+                                        id="goShop">去付款
+                                </button>
                             </form>
                         </div>
-                        <div class="payment-back"><a>删除订单</a></div>
                     </div>
                 </div>
             </div>
@@ -134,7 +123,11 @@
 <script src="../../bootstrap/bootstrap.min.js"></script>
 <script>
 
-    $('#myModal').modal(options);
+
+    $("#goShop").click(function () {
+    });
+    $('#myModal').modal("hide");
+
 
     function guanbi() {
         window.location.reload();
