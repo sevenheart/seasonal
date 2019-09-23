@@ -55,7 +55,9 @@
             <if test="updateTime!=null">
                 update_time,
             </if>
-
+            <if test="deliveryAddress!=null and deliveryAddress!=''">
+                delivery_address,
+            </if>
         </trim>
 
         ) values(
@@ -95,6 +97,9 @@
             </if>
             <if test="updateTime!=null">
                 #{updateTime},
+            </if>
+            <if test="deliveryAddress!=null and deliveryAddress!=''">
+                #{deliveryAddress},
             </if>
         </trim>
         )
