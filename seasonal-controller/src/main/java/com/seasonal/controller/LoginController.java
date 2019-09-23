@@ -2,7 +2,9 @@ package com.seasonal.controller;
 
 
 import com.seasonal.pojo.LoginFrom;
+import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
+import com.seasonal.service.UserInfoServer;
 import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,12 @@ import java.util.*;
 public class LoginController {
 
     private final LoginService loginService;
+    private final UserInfoServer userInfoServer;
 
     @Autowired
-    public LoginController(LoginService loginService) {
+    public LoginController(LoginService loginService, UserInfoServer userInfoServer) {
         this.loginService = loginService;
+        this.userInfoServer = userInfoServer;
     }
 
 
@@ -130,9 +134,9 @@ public class LoginController {
     @ResponseBody
     public Object getsessionUserId(HttpSession session) {
         String userId = (String) session.getAttribute("userId");
-
+        List<User> user = userInfoServer.findUserById(userId);
         if (userId != null) {
-            return ResultUtil.success(userId);
+            return ResultUtil.success(user);
         } else {
             return ResultUtil.fail("获取失败");
         }

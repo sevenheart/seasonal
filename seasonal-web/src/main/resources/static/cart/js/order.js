@@ -1,17 +1,17 @@
 //订单商品列表
-var good_id_arrary = new Array(10);
+let good_id_arrary = new Array(10);
 //订单商品名列表
-var good_name_arrary = new Array(10);
+let good_name_arrary = new Array(10);
 //订单商品价格列表
-var good_price_array = new Array(10);
+let good_price_array = new Array(10);
 //订单商品数量列表
-var good_count_array = new Array(10);
+let good_count_array = new Array(10);
 
 
 let order_money = 0;//订单金额
 let html = "";
 const order_user_id = userId;//用户id
-const order_name = "春野樱";
+const order_name = userName;//用户名
 let delivery_way = 0;//配送方式
 let delivery_money = 0;//配送费
 let good_type = "0";//商品类型

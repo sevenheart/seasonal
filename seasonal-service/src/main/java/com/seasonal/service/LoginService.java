@@ -56,4 +56,6 @@ public interface LoginService {
 
     boolean setCookie(String identifier, String credential, String check);
 
+
+
 }
