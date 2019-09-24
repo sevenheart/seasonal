@@ -75,8 +75,9 @@ body {
 
 #head .mod-header {
     display: block;
+    height: 80px;
     width: 330px;
-    background: url(../../img/registration/logo.png) right no-repeat
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/logo.png) right no-repeat;
 }
 
 #head .mod-header a {
@@ -101,7 +102,7 @@ body {
 
 #nav .nav-2 {
     height: 20px;
-    background: url(../../img/registration/reg_hr.png) no-repeat center top
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/reg_hr.png) no-repeat center top
 }
 
 .reg-content {
@@ -278,11 +279,11 @@ body {
     height: 16px;
     line-height: 14px;
     padding-left: 20px;
-    background: url(../../img/registration/err_small.png) 0 0 no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat;
 }
 
 #verifyCode-span, #verifyCodeError-span, #verifyCodeExpiration-span {
-    background: url(../../img/registration/err_small.png) 0 0 no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat;
     float: left;
     position: relative;
     width: 250px;

@@ -22,9 +22,9 @@ function ajax_test(id) {
             const $cname = $("#classify_name");
             const $gname = $("#generalities_name");
             $cname.text(data.classify.classifyName);
-            $cname.attr("href", "http://localhost:8080/main/view/getGoodsList.html?classifyId=" + data.classify.id);
+            $cname.attr("href", "getGoodsList.html?classifyId=" + data.classify.id);
             $gname.text(data.classify.generalities.generalitiesName);
-            $gname.attr("href", "http://localhost:8080/main/view/getGoodsList.html?classifyId=" + data.classify.generalities.id);
+            $gname.attr("href", "getGoodsList.html?classifyId=" + data.classify.generalities.id);
             $(".goods_describe_name").text(data.composeGoodName);
             $("#goods_describe_pc").text("￥" + data.composeGoodPrice + ".00");
             $(".goods_describe_ds").html("<li>净重：" + data.composeGoodWeight + "g/杯</li><li>服务：由果酷负责发货，并提供售后服务。</li>");
