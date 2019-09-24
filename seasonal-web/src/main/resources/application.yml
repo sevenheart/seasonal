@@ -1,5 +1,10 @@
 server:
-  port: 8080
+  port: 443
+  ssl:
+    key-store: classpath:strin.jks
+    key-store-password: 3jeuv93sz1
+    key-store-type: JKS
+
 spring:
   mvc:
     view:
