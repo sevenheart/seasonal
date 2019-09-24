@@ -38,14 +38,13 @@ $(".main_left_function a").click(function () {
 /*修改头像*/
 function preview(){
     //获取点击的文本框userimg
-    var file =document.getElementById("bookimg");
-    var imgUrl =window.URL.createObjectURL(file.files[0]);
-    console.log("图片地址是"+imgUrl);
+    let file =document.getElementById("bookimg");
+    let imgUrl =window.URL.createObjectURL(file.files[0]);
     $('#userimg img').attr('src',imgUrl); // 修改img标签src属性值
 }
 /*展示地址信息*/
 function showaddress(data){
-    var html='  <tr>\n' +
+    let html='  <tr>\n' +
         '                            <td> <span>全部</span></td>\n' +
         '                            <td> <span>收货人姓名:</span></td>\n' +
         '                            <td> <span>收货人电话:</span></td>\n' +
@@ -91,7 +90,6 @@ function showaddress(data){
 
         let check = new Array();
         $("#alladdresstable tr td input[type=checkbox]:checked").each(function(){
-            console.log("地址是"+$(this).val())
             check.push($(this).val());
         });
 
@@ -109,14 +107,11 @@ function showaddress(data){
     });
     /*修改用户的地址信息*/
     $("#alladdresstable .update_address").click(function () {
-        console.log("sdjflkjasodfk")
-        var flag = $(this).attr("data-type");
-        console.log("flage是"+flag)
-        if(flag==0){
+        let flag = $(this).attr("data-type");
+        if(Number(flag)===0){
             $(this).parents("tr").children("td").children("input[type='text']").removeAttr("readonly");
             $(this).attr("data-type",1);
         }else {
-            console.log("flage是"+flag)
             var fd = new FormData();
             fd.append("userName", $(this).parents("tr").children("td").children("input").eq(1).val());
             fd.append("userPhone", $(this).parents("tr").children("td").children("input").eq(2).val());
@@ -142,7 +137,7 @@ function showaddress(data){
 }
 /*展示订单信息*/
 function showorderform(data) {
-    var title =  '<tr style="width: 800px">\n' +
+    let title =  '<tr style="width: 800px">\n' +
         '                            <td><span>订单号</span></td>\n' +
         '                            <td><span>商品描述</span></td>\n' +
         '                            <td><span>订单金额</span></td>\n' +
@@ -150,12 +145,12 @@ function showorderform(data) {
         '                            <td><span>支付平台</span></td>\n' +
         '                            <td><span>配送方式</span></td>\n' +
         '                        </tr>';
-    var htmlall =title;
+    let htmlall =title;
     noorderflag = false;
     orderedflag = false;
     flag = false;
-    var noorder =title;
-    var ordered=title;
+    let noorder =title;
+    let ordered=title;
     //点击查看信息每个订单的信息存储
     let orderlist;
     //点击查看信息每个账号的存储
@@ -163,43 +158,42 @@ function showorderform(data) {
 
     for(let i = 0;i < data.length;i++){
         flag = true;
-        var button = '<td><input  type="button" class="button delitalbutton payorder"  value="支付"/></td>\n'
-        var orderstates ='<td><p>未支付</p></td>'
-        var deliveryWay = '<td><p>自提</p></td>\n'
-        if(data.deliveryWay===0){
-            deliveryWay = '<td><p>配送</p></td>\n'
+        let button = '<td><input  type="button" class="button delitalbutton payorder"  value="支付"/></td>\n';
+        let orderstates ='<td><p>未支付</p></td>';
+        let deliveryWay = '<td><p>自提</p></td>\n';
+        if(data[i].deliveryWay===0){
+            deliveryWay = '<td><p>配送</p></td>\n';
         }
         //已支付拼接
         //未支付拼接
-        console.log("sdf"+data[i].orderStatus)
-        if(data[i].orderStatus == 1){
-            console.log("已支付状态"+data[i].orderStatus)
+        if(Number(data[i].orderStatus) === 1){
             orderedflag = true;
-            button = '<td><input  type="button" class="button delitalbutton look"  value="查看详情" data-toggle="modal" data-target="#myModal" /></td>'
-            orderstates ='<td><p>已支付</p></td>'
+            button = '<td><input  type="button" class="button delitalbutton look"  value="查看详情" data-toggle="modal" data-target="#myModal" /></td>';
+            orderstates ='<td><p>已支付</p></td>';
             ordered +=' <tr>\n' +
                 '                            <td><p>'+data[i].orderId+'</p></td>\n' +
-                '                            <td><p>夏日果切套餐</p></td>\n' +
+                '                            <td><p>'+data[i].detailedCommodityForms[0].composeGoods[0].composeGoodName+'</p></td>\n' +
                 '                            <!--已支付判断，赋class ordered-->\n' +
                 '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
                 orderstates+
                 '                            <td><p>支付宝</p></td>\n' +
+                '                            <td hidden class="detailData" data-type="'+i+'"></td>\n' +
+
                 deliveryWay+
                 button+
-                '                        </tr>\n'
-
-
+                '                        </tr>\n';
         }
         else{
-            console.log("未支付状态")
             noorderflag = true;
             noorder +=' <tr>\n' +
                 '                            <td><p>'+data[i].orderId+'</p></td>\n' +
-                '                            <td><p>夏日果切套餐</p></td>\n' +
+                '                            <td><p>'+data[i].detailedCommodityForms[0].composeGoods[0].composeGoodName+'</p></td>\n' +
                 '                            <!--已支付判断，赋class ordered-->\n' +
                 '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
                 orderstates+
                 '                            <td><p>支付宝</p></td>\n' +
+                '                            <td hidden class="detailData" data-type="'+i+'"></td>\n' +
+
                 deliveryWay+
                 button+
                 '                        </tr>\n'
@@ -208,13 +202,13 @@ function showorderform(data) {
 
         htmlall +=' <tr>\n' +
             '                            <td><p>'+data[i].orderId+'</p></td>\n' +
-            '                            <td><p>夏日果切套餐</p></td>\n' +
+            '                            <td><p>'+data[i].detailedCommodityForms[0].composeGoods[0].composeGoodName+'</p></td>\n' +
             '                            <!--已支付判断，赋class ordered-->\n' +
             '                            <td><p>'+data[i].orderMoney+'</p></td>\n' +
             orderstates+
             '                            <td><p>支付宝</p></td>\n' +
             deliveryWay+
-            '                            <td hidden class="detailData" data-type="'+i+'"><p>'+data[i].orderMoney+'</p></td>\n' +
+            '                            <td hidden class="detailData" data-type="'+i+'"></td>\n' +
 
             button+
             '                        </tr>\n'
@@ -236,24 +230,22 @@ function showorderform(data) {
     }
 
     $('.payorder').click(function () {
-        var list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type");
+        let list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type");
         window.location.href='/order/view/orderUnpaid.html?orderId='+data[list].orderId;
     });
     $(".look").click(function () {
-
-        var list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type")
+        let list = $(this).parent("td").parent("tr").children(".detailData").attr("data-type");
         orderlist = data[list];
         detaildata =data[list].detailedCommodityForms;
-        console.log(detaildata)
         }
 
-    )
+    );
 
     //模态框控制
     $('#myModal').modal("hide");
     $('#myModal').on('show.bs.modal', function (event) {
 
-        var goodtable =' <tr>\n' +
+        let goodtable =' <tr>\n' +
             '                                <td>商品名称</td>\n' +
             '                                <td>商品数量</td>\n' +
             '                                <td>商品价格</td>\n' +
@@ -264,18 +256,24 @@ function showorderform(data) {
                 '                                <td>'+content.composeGoods[0].composeGoodName+'</td>\n' +
                 '                                <td>'+content.goodCount+'</td>\n' +
                 '                                <td>'+content.commodityMoney+'</td>\n' +
- '                            </tr>'
+ '              </tr>';
 
-        })
-        goodtable+=  '  <tr >\n' +
-        '                     <td colspan="3">取货账号是：'+orderlist.getAccount+'</td>\n' +
-        '               </tr>'+
-        '  <tr >\n' +
-        '                     <td colspan="3">取货密码是：'+orderlist.getPassword+'</td>\n' +
-        ' </tr>'
+        });
+        if(Number(orderlist.deliveryWay)===0){
+            goodtable+=  '  <tr >\n' +
+                '                     <td colspan="3">取货账号是：'+orderlist.getAccount+'</td>\n' +
+                '               </tr>'+
+                '  <tr >\n' +
+                '                     <td colspan="3">取货密码是：'+orderlist.getPassword+'</td>\n' +
+                ' </tr>';
+        }else {
+            goodtable+=  '  <tr >\n' +
+                '                     <td colspan="3">配送地址是：'+orderlist.deliveryAddress+'</td>\n' +
+                '               </tr>';
+        }
+
 
         $("#goodstable").html(goodtable)
-        console.log("模态框显示之钱")
 
     })
 }
@@ -314,7 +312,7 @@ function init() {
             $('#user_info_form .button').click(function () {
                 let fd = new FormData();
                 fd.append("id", $('#id').val());
-                console.log("id是何打开发"+$('#userId').val())
+                console.log("id是何打开发"+$('#userId').val());
                 fd.append("userName", $('#userName').val());
                 fd.append("userId", $('#userId').val());
                 fd.append("usrType", $('#userType').val());
@@ -346,7 +344,7 @@ function init() {
             showaddress(data)
 
         }
-    })
+    });
 
     //查中用户的订单信息
     $.post({
@@ -355,8 +353,8 @@ function init() {
         async:false,
         dataType:"json",
         success:function (data) {
-            console.log(data)
-            if(data.code == 1){
+            console.log(data);
+            if(Number(data.code) === 1){
                 console.log("查询失败！");
                 alert("没有订单信息！");
             }else{
@@ -372,7 +370,7 @@ init();
 
 /*查找用户的地址信息*/
 $('#addressManage').click(function () {
-    var num =$(this).attr("name");
+    let num =$(this).attr("name");
     /*只读*/
     /* $('#addressManage input[type="text"]').attr("readonly","readonly")*/
     /*先隐藏右侧的页面在显示*/

@@ -19,7 +19,6 @@ $.ajax({
     data: {"orderId": getQueryVariable("orderId")},
     async: false,
     success: function (data) {
-        console.log(data);
         if(data.data.orderStatus ===1){
             $(location).attr('href', "../view/orderCome.html");
         }else{

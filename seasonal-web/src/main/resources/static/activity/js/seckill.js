@@ -19,7 +19,7 @@ function ajax_test() {
         data: {"flag": true},
         async: false,
         success: function (data) { //请求成功完成后要执行的方法
-            console.log(data);
+
         }
 
     });

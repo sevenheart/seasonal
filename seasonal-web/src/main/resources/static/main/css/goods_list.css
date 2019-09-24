@@ -58,7 +58,7 @@ a.grgp_op {
     float: right;
     margin-right: 10px;
     /*空心得-15*/
-    background: url("../../img/inner.png") no-repeat 0 -15px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -15px;
 }
 
 span.grgp_np_grgp_npri {
@@ -165,7 +165,7 @@ li.goods_control_ul_li2 a:hover {
 }
 
 li.goods_control_ul_li2 a:hover i {
-    background: url("../../img/inner.png") no-repeat 0 -56px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -56px;
 }
 
 li.goods_control_ul_li2 a {
@@ -185,7 +185,7 @@ li.goods_control_ul_li2 i {
     height: 23px;
     display: block;
     float: left;
-    background: url("../../img/inner.png") no-repeat 0 -32px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -32px;
 }
 
 body, ul, div, li, a {
@@ -210,14 +210,14 @@ ul.sort_ul li {
     border: solid 1px #ddd;
     cursor: pointer;
     float: left;
-    background: white url("../../img/inner.png") no-repeat 50px -82px;
+    background: white url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 50px -82px;
     color: #666666;
 }
 
 /*初始*/
 #sort_type_1 {
     color: white;
-    background: #e51e13 url('../../img/inner.png') no-repeat 48px -99px;
+    background: #e51e13 url('https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png') no-repeat 48px -99px;
 }
 
 

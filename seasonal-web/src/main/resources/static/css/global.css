@@ -68,7 +68,7 @@
     height: 25px;
     width: 25px;
     position: absolute;
-    background: url("../img/topbar.png") no-repeat;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/topbar.png") no-repeat;
     background-size: 100%;
     top: 3px;
     left: 285px;
@@ -174,7 +174,7 @@
 }
 
 .ct_in {
-    background: url(../img/category.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/category.png) no-repeat;
     width: 28px;
     height: 28px;
     display: block;
@@ -251,7 +251,7 @@
     width: 22px;
     height: 22px;
     display: inline-block;
-    background: url(../img/index.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/index.png) no-repeat;
     background-position: 0px -46px;
 }
 
@@ -259,7 +259,7 @@
     width: 22px;
     height: 22px;
     display: inline-block;
-    background: url(../img/index.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/index.png) no-repeat;
     background-position: 0px -23px;
 }
 

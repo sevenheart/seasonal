@@ -1,35 +1,5 @@
-let callbackUrl = '&callback=onLoad' //网页初始化地图服务回调函数
-let url = 'https://webapi.amap.com/maps?v=1.4.15&key=f9d2a4291a8c1899397625dc9bc8646e' + callbackUrl;
-let jsapi = document.createElement('script');
-let map;
-let beforeCity;
-jsapi.charset = 'utf-8';
-jsapi.src = url;
-document.head.appendChild(jsapi);
-
 //获取当前IP地址
-var nowCity;
-window.onLoad = function () {
-    //初始化地图
-    map = new AMap.Map('container', {
-        resizeEnable: true
-    });
-    AMap.plugin('AMap.Geolocation', function () {
-        var geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-            timeout: 10000,          //超过10秒后停止定位，默认：5s
-        });
-        map.addControl(geolocation);
-        geolocation.getCityInfo(function (status, result) {
-            if (status === 'complete') {
-                nowCity = result.city;
-                console.log("nowCity:" + nowCity);
-            } else {
-                console.log('loc-error' + result);
-            }
-        });
-    });
-};
+let beforeCity;
 
 function lastIp() {
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
@@ -184,6 +154,7 @@ function login(identifier, credential, flag, check) {
     let sms = $('#sms');
     let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
     let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
+    let nowCity = personAddress.addressComponent.city;
     //判断异地登录
     if (nowCity !== beforeCity) {
         alert("异地登录，请使用短信登录");

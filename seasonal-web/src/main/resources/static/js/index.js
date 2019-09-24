@@ -4,7 +4,6 @@ function checklocalStorage() {
     var identifier = storage['identifier'];
     var credential = storage["credential"];
     var check = storage['check'];
-    console.log("storage->>" + identifier + ", " + credential + ", " + check);
     if (identifier !== "" && credential !== "" && check === "true") {
         $.ajax({ //修改登录信息，重新保存localStorage
             url: "/login",

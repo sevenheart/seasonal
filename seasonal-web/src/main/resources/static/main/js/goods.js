@@ -5,7 +5,6 @@ function ajax_test() {
         dataType: "json", //返回数据格式为json
         async: false,
         success: function (data) { //请求成功完成后要执行的方法
-            console.log(data);
             let mainRightIndex = 0;//控制添加第几个商品栏（如：超级果盒下的每个商品）
             let goodsShowNavUlIndex = 0;//添加第几个ul中的li类栏名称（如：超级果盒）
             const $goodsAllShow = $(".goods_all_show");//全局大div

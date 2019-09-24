@@ -61,7 +61,7 @@ $("#ctf-js").click(function () {
         '            <li class="c-f-li">3.成功提交订单</li>\n' +
         '        </ul>\n' +
         '    </div>');
-    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
+    $("#c-f-img").css("background", "url(\"https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/cart/cart_main.png\") no-repeat 0px -303px");
 
     $.ajax({
         url: "/address/selectalladdress",
@@ -150,11 +150,17 @@ $("#ctf-js").click(function () {
             map: map
         });
 
+        let selectAddress = $('#allot_address_x');
+
         delivery_way = 1;
         $("#allot_address").css("display", "block");
         $("#og_shou").css("display", "block");
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
+
+        if(selectAddress.val() !== '' && selectAddress.val() !== null){
+            allotAddressX(selectAddress.val(), selectAddress.text())
+        }
     });
 
     $("#og-f").click(function () {
@@ -188,15 +194,14 @@ $("#ctf-js").click(function () {
                         '            <li class="c-f-li c-f-li-cur">3.成功提交订单</li>\n' +
                         '        </ul>\n' +
                         '    </div>');
-                    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -326px");
+                    $("#c-f-img").css("background", "url(\"https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/cart/cart_main.png\") no-repeat 0px -326px");
                     cart.append('<div style="width: 80%;height: 400px;margin: 50px auto">\n' +
                         '    请在新页面支付订单后，耐心等待配送，祝您用餐愉快！    \n' +
                         '    </div>');
-                    window.open('_blank').location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
+                    window.open().location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
                 }
             }
         });
-
     });
 
     map = new AMap.Map('container', {
@@ -215,7 +220,6 @@ $("#ctf-js").click(function () {
     }
 });
 
-//下拉框改变事件
 function allotAddressX(city, address) {
     //value为下拉时option 的value值
     const $allot_address_x = $("#allot_address_x ");
