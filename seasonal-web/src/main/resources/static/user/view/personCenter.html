@@ -232,14 +232,14 @@
                 </div>
             </div>
             <!--评价管理-->
-            <div class="main_right_function_order" style="display: none">
+            <div class="main_right_function_order" style="display: none;">
                 <div>
                     <ul class="main_right_function_order_menu">
                         <li class="currentmenu1">
-                            <a href="javascript:">全部</a>
+                            <a href="javascript:">已评论</a>
                         </li>
                         <li><a href="javascript:">待评论</a></li>
-                        <li><a href="javascript:">已评论</a></li>
+       >
 
 
                     </ul>
@@ -250,140 +250,30 @@
                     <!--          <h1>选项卡1
                                   <span>此处可查看订单信息.</span>
                               </h1>-->
-                    <table class="detailmessagecontext">
+                    <table id="commenttable" class="detailmessagecontext">
 
-                        <tr>
-                            <td><span>订单号</span></td>
-                            <td><span>商品id</span></td>
-                            <td><span>商品金额</span></td>
-                            <td><span>商品类型（自选固有）</span></td>
-                            <td><span></span></td>
-                            <td><span>评论状态：</span></td>
-                        </tr>
-                        <tr>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="161501140207"/></td>
-                            <td><input readonly  style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="夏日果切套餐"/></td>
-                            <!--已支付判断，赋class ordered-->
-                            <td><input readonly  style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="16"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="已支付"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="支付宝"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="Your Full Name"/></td>
 
-                            <td><input  type="button" class="button" value="未评论"/></td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="7">
-                                <div class="commentbox">
-                                   <!-- <textarea style="width:100%" cols="50" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-                                    <div class="button" id="comment">评论</div>-->
-                                    <table style="width: 100%;">
-                                        <tr >
-                                            <td>商品名称</td>
-                                            <td>商品数量</td>
-                                            <td>商品总价</td>
-                                            <td>商品类型</td>
-                                            <td>订单号</td>
-                                            <td>评论状态</td>
-                                        </tr>
-                                        <tr>
-                                            <td>苹果</td>
-                                            <td>3</td>
-                                            <td>118</td>
-                                            <td>自选</td>
-                                            <td>161515020</td>
-                                            <td>未评论</td>
-                                        </tr>
-                                        <tr>
-                                            <td>苹果</td>
-                                            <td>3</td>
-                                            <td>118</td>
-                                            <td>自选</td>
-                                            <td>161515020</td>
-                                            <td>未评论</td>
-                                        </tr>
-                                        <tr>
-                                            <td>苹果</td>
-                                            <td>3</td>
-                                            <td>118</td>
-                                            <td>自选</td>
-                                            <td>161515020</td>
-                                            <td>未评论</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr name="jkdfjs">
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="161501140207"/></td>
-                            <td><input readonly  style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="夏日果切套餐"/></td>
-                            <!--未支付判断，赋class noorder-->
-                            <td><input  readonly class="ordered" style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="16"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="待支付"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="支付宝"/></td>
-                            <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="Your Full Name"/></td>
-                            <td><input hidden name="dsjlfkjsadf"><input  type="button" id="11" class="button" data-date="123"   value="支付"/></td>
-                        </tr>
                     </table>
 
                 </div>
                 <!--选项卡2-->
-                <div class="detailemessage">
-                    <form action="" method="post" class="basic-grey">
-                        <table class="detailmessagecontext">
+                <div class="detailemessage basic-grey" style="display:block;max-width: 800px;">
 
-                            <tr>
-                                <td><span>订单号</span></td>
-                                <td><span>商品id</span></td>
-                                <td><span>商品金额</span></td>
-                                <td><span>商品类型（自选固有）</span></td>
-                                <td><span>支付平台</span></td>
-                                <td><span>评论状态：</span></td>
-                            </tr>
-                            <tr>
-                                <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="161501140207"/></td>
-                                <td><input readonly  style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="夏日果切套餐"/></td>
-                                <!--已支付判断，赋class ordered-->
-                                <td><inputt readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="已支付"/></td>
-                                <td><inp readonly  style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="16"/></td>
-                                <td><inpuut readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="支付宝"/></td>
-                                <td><input readonly style="border: none;box-shadow: inset 0px 0px 0px ;" type="text" name="name" placeholder="Your Full Name"/></td>
+                    <!--          <h1>选项卡1
+                                  <span>此处可查看订单信息.</span>
+                              </h1>-->
+                    <table id="nocommenttable" class="detailmessagecontext">
 
-                                <td><input  type="button" class="button" value="未评论"/></td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
-                                    <div class="commentbox">
-                                        <textarea style="width:100%" cols="50" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-                                        <div class="button" id="comment">评论</div>
-                                    </div>
-                                </td>
-                            </tr>
-                       </table>
-                    </form>
+
+                    </table>
+
                 </div>
                 <!--选项卡3-->
-                <div class="detailemessage">
-                    <form action="" method="post" class="basic-grey">
-                        <span>个性签名 :</span>
-                        <textarea name="message" placeholder="Your Message to Us"></textarea>
-                        </label>
-                        <label>
-                            <span>瞎几把说:</span><select name="selection">
-                            <option value="Job Inquiry">Job Inquiry</option>
-                            <option value="General Question">General Question</option>
-                        </select>
-                        </label>
-                        <label>
-                            <span>&nbsp;</span>
-                            <input type="button" class="button" value="提交修改"/>
-                        </label>
-                    </form>
-                </div>
+
 
             </div>
         </div>
-      <!--  //模态框-->
+      <!--  //订单相关模态框-->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -403,6 +293,35 @@
                     <div class="modal-footer">
                         <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
                         </button>
+                        <!--   <button type="button"  class="btn btn-primary">
+                               点击关闭、、
+                           </button>-->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <!--评论相关模态框-->
+        <div class="modal fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" >
+                            发表评论
+                        </h4>
+                    </div>
+                    <div class="modal-body " >
+                        <div class="commentbox">
+                            <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-primary" id="modal-confirm">确定</button>
                         <!--   <button type="button"  class="btn btn-primary">
                                点击关闭、、
                            </button>-->
