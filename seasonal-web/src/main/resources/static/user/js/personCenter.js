@@ -213,7 +213,7 @@ function showorderform(data) {
             button+
             '                        </tr>\n'
         //这里顺便拼接评论页面：
-        showcommetstates(data[i].detailedCommodityForms);
+        showcommetstates(data[i].detailedCommodityForms,i);
     }//评论完成展示commenttablecommented
     $("#commenttable").html(commenttablecommented);
     //评论未完成
@@ -248,15 +248,22 @@ function showorderform(data) {
 
     );
     //评论列表中点击评论按钮，记录需要保存到数据库中的值
-    $('#commentclick').click(function () {
-
+    $('.commentclick').click(function () {
+        let outindex = $(this).attr("data-big");
+        let inindex = $(this).attr("data-little");
+        let time=getNowDateFormat();
         //商品id
         //用户头像昵称id
         //评论内容
         //创建时间
 
-
-   /*     mongocomment=*/
+        console.log("商品id是"+$(this).attr("data-big"));
+        //存储需要保存的评论信息
+        mongocomment ={"comment_goods_id":data[outindex].detailedCommodityForms[inindex].goodId,
+            "comment_user_id":"001", "comment_user_name":"陆旭",
+            "comment_user_img":"baidu.com",
+            "orderId":data[outindex].orderId,
+            "comment_content":"","comment_create_time":time}
     })
     //模态框控制
     $('#myModal').modal("hide");
@@ -296,7 +303,28 @@ function showorderform(data) {
     //评论模态框commentmodal
     $('#commentmodal').modal("hide")
     $('#commentmodal').on('show.bs.modal', function (event){
-        //
+
+    })
+    /*点击评论按钮后存储评论信息*/
+    $('#modal-confirm').click(function () {
+        let contents = $('#content').val()
+        mongocomment.comment_content = contents;
+        if(contents===null||contents==""){
+            alert("不能输入空字符串！");
+        }else {
+            console.log("点击了确定评论按钮");
+            $.post({
+                url: "/upsertcomment",
+                data: mongocomment,
+                dataType: "json",
+                success: function (data) {
+                    alert(data.message);
+                    $('#commentmodal').modal("hide")
+                }
+            })
+        }
+
+
     })
 }
 /*展示商品评论状态在showorderform中调用
@@ -319,10 +347,10 @@ let commenttablenocomment='<tr>' +
     '</tr>';
 let commentbutton ;
 
-function showcommetstates(data) {
+function showcommetstates(data,j) {
     $.each(data,function (index,content) {
         if(Number(content.iscomment)===0){
-            commentbutton  = '<td><input  type="button" class="button commentclick "  value="评论"  data-toggle="modal" data-target="#commentmodal"  /></td>';
+            commentbutton  = '<td><input  type="button" class="button commentclick " data-big="'+j+'" data-little='+index+' value="评论"  data-toggle="modal" data-target="#commentmodal"  /></td>';
             commenttablenocomment +=' <tr>\n' +
                 '                            <td><img  src='+content.composeGoods[0].composeGoodIcon+' /></td>\n' +
                 '                            <td><p>'+content.composeGoods[0].composeGoodName+'</p></td>\n' +

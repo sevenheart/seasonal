@@ -1,4 +1,3 @@
-
 //获取当前IP地址
 let beforeCity;
 
@@ -107,9 +106,9 @@ function login(identifier, credential, flag, check) {
     let sms = $('#sms');
     let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
     let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
-    let nowCity = personAddress.city;
+    let nowCity = personAddress.addressComponent.city;
     if (nowCity !== beforeCity) {
-        alert("异地登录，请使用短信登录");
+        alert("检测到当前不是常用地址登录，请使用短信验证登录！");
         j_login.css('display', 'none');
         j_login.css('visibility', 'hidden');
         sms.css('display', 'block');

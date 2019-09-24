@@ -11,6 +11,7 @@ public class Comment {
     private String id;
     private  String comment_id;
     private String comment_goods_id;
+    private String orderId;
     private String comment_user_id;
     private String comment_user_name;
     private String comment_user_img;
