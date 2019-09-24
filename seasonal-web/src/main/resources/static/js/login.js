@@ -1,6 +1,7 @@
 let userId;
 let userName;
 let login_html;
+//页面自动加载，判断是否自动登录，并完成自动登录
 $.ajax({
     url: "/getsessionUserId",
     type: "post",
