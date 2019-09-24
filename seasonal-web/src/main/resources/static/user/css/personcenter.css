@@ -67,6 +67,10 @@ td{
 .button:hover {
     background: #bb3221;
 }
+a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
 .button:before {
     content: ' ';
     position: absolute;
