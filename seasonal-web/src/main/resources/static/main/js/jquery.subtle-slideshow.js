@@ -81,7 +81,6 @@
 
         // Prepends a new slide to the slideshow element and fades out the previous one
         function slideRefresh() {
-            console.log('Slide refresh triggered.');
             currentSlideStartTime = Date.now();
             var slideshowDOM = slideshow[0];
             // If setInterval glitches out the slideshow will sometimes have no slides in
@@ -89,7 +88,6 @@
             // if it is empty. Pausing the slideshow on tab blur will prevent glitches most of the time,
             // so this is a fallback for if that fails.
             if (slideshowDOM.children.length == 0) {
-                console.log('There are no slides in the slideshow.');
                 slides.find('.' + settings.slideElementClass + ':first').prependTo(slideshow);
             } else {
                 slides.find('.' + settings.slideElementClass + ':first').prependTo(slideshow);

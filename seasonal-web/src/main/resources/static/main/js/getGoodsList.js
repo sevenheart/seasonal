@@ -7,10 +7,8 @@ function ajax_test(id, orderName, currPage, likeName) {
         async: false,
         success: function (data) { //请求成功完成后要执行的方法
             $(".goods_right_list").html("");
-            console.log(data);
             $.each(data, function (k, v) {
                 let html;
-                console.log(v);
                 html = '' +
                     '                    <div class="goods_block_main">\n' +
                     '                        <div class="glc_rt_gds" style="border: 1px solid rgb(255, 255, 255);background: #fff;">\n' +
@@ -126,7 +124,6 @@ function addGoodsToCart(obj, id) {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + data);
                 if (data > 0) {
                     alert('添加入购物车成功');
                 }else{
@@ -134,7 +131,6 @@ function addGoodsToCart(obj, id) {
                 }
             },
             error: function (data) {
-                console.log('error:' + data);
                 alert('添加入购物车失败');
             }
         });

@@ -45,7 +45,6 @@ function ajax_test(id) {
             })
             //选择查看用户评论时隐藏商品介绍
             $('#goods_discribe').click(function () {
-                console.log("jhiuh");
                 $('#goods_discribe_div').hide();
             });
         }
@@ -128,7 +127,6 @@ $('.goods_describe_option span').click(function () {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + data);
                 if (data > 0) {
                     alert('添加入购物车成功');
                 }else{
@@ -136,7 +134,6 @@ $('.goods_describe_option span').click(function () {
                 }
             },
             error: function (data) {
-                console.log('error:' + data);
                 alert('添加入购物车失败');
             }
         });
