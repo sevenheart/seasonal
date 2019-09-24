@@ -2,6 +2,7 @@
 let beforeCity;
 
 function lastIp() {
+    var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
     if (identifier === null || identifier === '') {
         pass_generalError_error.text('');
@@ -147,6 +148,11 @@ $(document).on('submit', '.pass-form-normal', function () {
     }
     return flag;
 });
+$(document).on('keydown', '.pass-form-normal', function (event) {
+    switch(event.keyCode){
+        case 13:return false;
+    }
+});
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
@@ -173,25 +179,23 @@ function login(identifier, credential, flag, check) {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                if (data.code === 200) {
-                    savelocalStorage(data, check);//保存localStorage
-                    flag = true
-                } else {
-                    html = '用户名或密码错误，请重新输入或' +
-                        '<a href="' +
-                        '#">' +
-                        '找回密码' +
-                        '</a>';
-                    $('.pass-form-normal .pass-generalErrorWrapper').html(html);
-                    num++;
-                    if (num >= 3) {//多次输入信息错误后，弹出验证码
-                        pass_form_item_verifyCode.css('display', 'block');
-                        pass_form_item_verifyCode.css('visibility', 'visible');
-                        pass_text_input_verifyCode.css('color', '#F69');
-                        pass_text_input_verifyCode.css('border-color', '#F69');
-                    }
+                savelocalStorage(data, check);//保存localStorage
+                flag = true
+            },
+            error: function (data) {
+                html = '用户名或密码错误，请重新输入或' +
+                    '<a href="' +
+                    '#">' +
+                    '找回密码' +
+                    '</a>';
+                $('.pass-form-normal .pass-generalErrorWrapper').html(html);
+                num++;
+                if (num >= 3) {
+                    pass_form_item_verifyCode.css('display', 'block');
+                    pass_form_item_verifyCode.css('visibility', 'visible');
+                    pass_text_input_verifyCode.css('color', '#F69');
+                    pass_text_input_verifyCode.css('border-color', '#F69');
                 }
-
             }
         })
     }
@@ -228,31 +232,32 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    if (data.code === 200) {
-                        var identifier = data.identifier;
-                        $.ajax({
-                            url: "/shortMessageSend",
-                            type: "post",
-                            dataType: "json",
-                            data: {"identifier": identifier},
-                            async: false,
-                            success: function (data) {
-                                //调用倒计时方法
-                                sendCode();
-                                if (data.code === 200) {
-                                    alert("发送成功！");
-                                } else if (data.message === "0" && data.code === 100) {
-                                    alert("发送失败！");
-                                } else {
-                                    time = parseInt(data.message);
-                                    alert("您请求验证码太过频繁，请计时结束在重新获取！");
+                    var identifier = data.identifier;
+                    $.ajax({
+                        url: "/shortMessageSend",
+                        type: "post",
+                        dataType: "json",
+                        data: {"identifier": identifier},
+                        async: false,
+                        success: function (data) {
+                            console.log("返回值：" + data)
+                            sendCode();
+                            if (data === false) {
+                                alert("发送失败！");
+                            } else if (data === true) {
+                                alert("发送成功！");
+                            } else {
+                                if (data > 0){
+                                    time = data;
                                 }
+                                alert("您请求验证码太过频繁，请计时结束在重新获取！")
                             }
-                        })
-                    } else {
-                        pass_generalError.text('');
-                        pass_generalError.append("该手机号还未注册,请先注册");
-                    }
+                        }
+                    })
+                },
+                error: function (data) {
+                    pass_generalError.text('');
+                    pass_generalError.append("该手机号还未注册,请先注册");
                 }
             })
         }
@@ -301,30 +306,35 @@ $(document).on('submit', '#smsForm', function () {
             async: false,
             success: function (data) {
                 console.log("data:" + data);
-                if (data.code === 200) {
-                    //短信登录成功
+                if (data === true) {
                     smsflag = true;
-                } else if (data.code === 404) {
+                } else if (data === false) {
                     smsflag = false;
-                    pass_generalError.text('');
-                    pass_generalError.append("验证码已过期，请重新获取");
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'none');
+                    $('#verifyCodeExpiration-span').css('display', 'inline');
                 } else {
                     smsflag = false;
-                    pass_generalError.text('');
-                    pass_generalError.append("验证码错误，请确认后再输入");
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'inline');
+                    $('#verifyCodeExpiration-span').css('display', 'none');
                 }
+            },
+            error: function (data) {
+                console.log("出错了");
             }
         })
     }
-    if (smsflag === true) {
-        //登录成功，修改用户登录信息
-        updatelogin(identifier);
-    }
     return smsflag;
+});
+$(document).on('keydown', '#smsForm', function (event) {
+    switch(event.keyCode){
+        case 13:return false;
+    }
 });
 
 
-//将上一次登录的ip转换为真实地址
+//判断是否异地登录
 function ipsearch(ip) {
     AMap.plugin('AMap.CitySearch', function () {
         var citysearch = new AMap.CitySearch();
