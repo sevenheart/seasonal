@@ -1,5 +1,4 @@
 if(userId === undefined){
-    alert("请先登录，再访问个人中心");
     $(location.href ="../../login/view/login.html");
 }
 $(".main_right_function_order_menu li").click(function(){

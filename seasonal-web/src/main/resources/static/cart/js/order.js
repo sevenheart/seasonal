@@ -7,7 +7,7 @@ let good_price_array = new Array(10);
 //订单商品数量列表
 let good_count_array = new Array(10);
 
-
+let delivery_address = "";
 let order_money = 0;//订单金额
 let html = "";
 const order_user_id = userId;//用户id
@@ -150,52 +150,58 @@ $("#ctf-js").click(function () {
             map: map
         });
 
+        let selectAddress = $('#allot_address_x');
+
         delivery_way = 1;
         $("#allot_address").css("display", "block");
         $("#og_shou").css("display", "block");
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
+
+        if(selectAddress.val() !== '' && selectAddress.val() !== null){
+            allotAddressX(selectAddress.val(), selectAddress.text())
+        }
     });
 
     $("#og-f").click(function () {
-        var orderData = {
+        const orderData = {
             "orderId": orderId,
             "userId": order_user_id,
             "orderMoney": order_money,
             "goodIdArray": good_id_arrary,
             "goodPriceArray": good_price_array,
             "goodCountArray": good_count_array,
-            "goodType": good_type
+            "goodType": good_type,
+            "deliveryMoney": delivery_money,
+            "deliveryAddress": delivery_address,
+            "deliveryWay": delivery_way
         };
-        if (delivery_way === 0) {
-            $.ajax({
-                url: "/ProvideOrderForm",
-                type: "post",
-                data: JSON.stringify(orderData),
-                contentType: "application/json",
-                success: function (data) {
-                    if (data.code === 200) {
-                        cart.html("");
-                        cart.append('<div id="cart-tit" class="clear">\n' +
-                            '        <span id="cart-tit-txt">我的购物车</span>\n' +
-                            '        <ul id="cart-flow" class="clear">\n' +
-                            '            <li id="c-f-img"></li>\n' +
-                            '            <li class="c-f-li ">1.我的购物车</li>\n' +
-                            '            <li class="c-f-li">2.填写核对订单信息</li>\n' +
-                            '            <li class="c-f-li c-f-li-cur">3.成功提交订单</li>\n' +
-                            '        </ul>\n' +
-                            '    </div>');
-                        $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -326px");
-                        cart.append('<div style="width: 80%;height: 400px;margin: 50px auto">\n' +
-                            '    请在新页面支付订单后，耐心等待配送，祝您用餐愉快！    \n' +
-                            '    </div>');
-                        window.open('_blank').location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
-                    }
+        $.ajax({
+            url: "/ProvideOrderForm",
+            type: "post",
+            data: JSON.stringify(orderData),
+            contentType: "application/json",
+            success: function (data) {
+                console.log(delivery_address);
+                if (data.code === 200) {
+                    cart.html("");
+                    cart.append('<div id="cart-tit" class="clear">\n' +
+                        '        <span id="cart-tit-txt">我的购物车</span>\n' +
+                        '        <ul id="cart-flow" class="clear">\n' +
+                        '            <li id="c-f-img"></li>\n' +
+                        '            <li class="c-f-li ">1.我的购物车</li>\n' +
+                        '            <li class="c-f-li">2.填写核对订单信息</li>\n' +
+                        '            <li class="c-f-li c-f-li-cur">3.成功提交订单</li>\n' +
+                        '        </ul>\n' +
+                        '    </div>');
+                    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -326px");
+                    cart.append('<div style="width: 80%;height: 400px;margin: 50px auto">\n' +
+                        '    请在新页面支付订单后，耐心等待配送，祝您用餐愉快！    \n' +
+                        '    </div>');
+                    window.open('_blank').location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
                 }
-            });
-        } else {
-
-        }
+            }
+        });
     });
 
     map = new AMap.Map('container', {
@@ -218,7 +224,7 @@ function allotAddressX(city, address) {
     //value为下拉时option 的value值
     const $allot_address_x = $("#allot_address_x ");
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
-    $("#og_phone").text(html_address_phone[$$allot_address_x.get(0).selectedIndex]);
-
+    $("#og_phone").text(html_address_phone[$allot_address_x.get(0).selectedIndex]);
+    delivery_address = address;
     planningRoute(city, address);
 }

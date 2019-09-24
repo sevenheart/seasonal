@@ -75,8 +75,9 @@ body {
 
 #head .mod-header {
     display: block;
+    height: 80px;
     width: 330px;
-    background: url(../../img/registration/logo.png) right no-repeat
+    background: url(../../img/registration/logo.png) right no-repeat;
 }
 
 #head .mod-header a {

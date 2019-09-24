@@ -5,6 +5,7 @@ let chooseGoodsNum = 0;
 let cartList = $('#cart-con');
 
 window.onLoad = function () {
+    settleScroll();
     if (!(typeof userId == "undefined" || userId == null || userId == "")) {
         $.ajax({
             url: '/showCartList',
@@ -231,5 +232,28 @@ function deleteProducts(obj){
         error:function (data) {
             console.log('error:'+data);
         }
+    });
+}
+
+function settleScroll(){
+    //结算按钮悬浮效果
+    var _cart_tf = $("#cart-tf");
+    //console.log(_cart_tf);
+    if ($("#ctf-js")[0] && $("#ctf-js").offset().top >= $(window).height()) {
+        _cart_tf.addClass("cart-tf-xf");
+    }
+    var _lis = $("#cart-con li.cart-con-li");
+    _len = _lis.length;
+    $(window).scroll(function() {
+        if (_len > 0 && _cart_tf.offset().top >= (_lis.eq(_len - 1).offset().top + _lis.eq(_len - 1).height())) {
+            _cart_tf.removeClass("cart-tf-xf");
+        }
+        if (_cart_tf.attr("class") == "clear" && $(window).scrollTop() + $(window).height() <= (_cart_tf.offset().top + _cart_tf.height())) {
+            _cart_tf.addClass("cart-tf-xf");
+        }
+        //滚动时，记录滚动条的位置，刷新后，保持在相同的位置
+        var cookietime = new Date();
+        cookietime.setTime(cookietime.getTime() + (30 * 1000)); //coockie保存30秒
+        //document.cookie("scroll", $(window).scrollTop(), {expires: cookietime});
     });
 }
