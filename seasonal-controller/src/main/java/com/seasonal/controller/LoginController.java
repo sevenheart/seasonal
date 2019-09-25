@@ -2,6 +2,7 @@ package com.seasonal.controller;
 
 
 import com.seasonal.annotation.Intercept;
+import com.seasonal.crypto.MD5Utils;
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
@@ -141,6 +142,10 @@ public class LoginController {
     @RequestMapping(value = "registrationInsert")
     @ResponseBody
     public String registrationInsert(String identifier, String credential, String verifyCode, HttpSession session) {
+        //md5 sha-1 混合加密密码
+        credential = MD5Utils.getSaltMd5AndSha(credential);
+
+
         String code = (String) session.getAttribute("code");
         System.out.println("Controller->verifyCode:" + verifyCode);
         System.out.println("Controller->code:" + code);
