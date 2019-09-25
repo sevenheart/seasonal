@@ -1,7 +1,6 @@
-
 //获取当前IP地址
 let beforeCity;
-
+//进入页面扫描输入信息，获取IP地址
 function lastIp() {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
@@ -20,25 +19,11 @@ function lastIp() {
             data: {"identifier": identifier},
             async: true,
             success: function (data) {
-                if (data.code === 200) {
-                    $.ajax({
-                        url: "/login",
-                        type: "post",
-                        dataType: "json",
-                        data: {"identifier": identifier},
-                        async: false,
-                        success: function (data) {
-                            if (data.code === 200) {
-                                //调用ipseatch获取当前地址所在市
-                                ipsearch(data.data.loginIp);
-                            } else {
-                                alert("获取用户信息出错了！")
-                            }
-                        }
-                    })
-                } else {
+                if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
+                } else {
+                    ipsearch(data.data.loginIp);
                 }
             }
         })
@@ -73,25 +58,11 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
             data: {"identifier": identifier},
             async: true,
             success: function (data) {
-                if (data.code === 200) {
-                    $.ajax({
-                        url: "/login",
-                        type: "post",
-                        dataType: "json",
-                        data: {"identifier": identifier},
-                        async: false,
-                        success: function (data) {
-                            if (data.code === 200) {
-                                //调用ipseatch获取当前地址所在市
-                                ipsearch(data.data.loginIp);
-                            } else {
-                                alert("获取用户信息出错了！")
-                            }
-                        }
-                    })
-                } else {
+                if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
+                } else {
+                    ipsearch(data.data.loginIp);
                 }
             }
         })
@@ -148,10 +119,12 @@ $(document).on('submit', '.pass-form-normal', function () {
     }
     return flag;
 });
+
 //表单提交禁止使用回车键
 $(document).on('keydown', '.pass-form-normal', function (event) {
-    switch(event.keyCode){
-        case 13:return false;
+    switch (event.keyCode) {
+        case 13:
+            return false;
     }
 });
 
@@ -178,16 +151,17 @@ function login(identifier, credential, flag, check) {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                savelocalStorage(data, check);//保存localStorage
-                flag = true
-            },
-            error: function (data) {
-                html = '用户名或密码错误，请重新输入或' +
-                    '<a href="' +
-                    '#">' +
-                    '找回密码' +
-                    '</a>';
-                $('.pass-form-normal .pass-generalErrorWrapper').html(html);
+                if (data.code === 200) {
+                    savelocalStorage(data, check);//保存localStorage
+                    flag = true
+                } else {
+                    html = '用户名或密码错误，请重新输入或' +
+                        '<a href="' +
+                        '#">' +
+                        '找回密码' +
+                        '</a>';
+                    $('.pass-form-normal .pass-generalErrorWrapper').html(html);
+                }
             }
         })
     }
@@ -224,25 +198,22 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    var identifier = data.identifier;
                     $.ajax({
                         url: "/shortMessageSend",
                         type: "post",
                         dataType: "json",
-                        data: {"identifier": identifier},
+                        data: {"identifier": phone},
                         async: false,
                         success: function (data) {
-                            console.log("返回值：" + data)
+                            //调用倒计时方法
                             sendCode();
-                            if (data === false) {
-                                alert("发送失败！");
-                            } else if (data === true) {
+                            if (data.code === 200) {
                                 alert("发送成功！");
+                            } else if (data.message === "0" && data.code === 100) {
+                                alert("发送失败！");
                             } else {
-                                if (data > 0){
-                                    time = data;
-                                }
-                                alert("您请求验证码太过频繁，请计时结束在重新获取！")
+                                time = parseInt(data.message);
+                                alert("您请求验证码太过频繁，请计时结束在重新获取！");
                             }
                         }
                     })
@@ -297,32 +268,30 @@ $(document).on('submit', '#smsForm', function () {
             data: {"identifier": identifier, "smsVerifyCode": smsVerifyCode},
             async: false,
             success: function (data) {
-                console.log("data:" + data);
-                if (data === true) {
+                if (data.code === 200){
                     smsflag = true;
-                } else if (data === false) {
+                } else if (data.code === 100){
                     smsflag = false;
-                    $('#verifyCode-span').css('display', 'none');
-                    $('#verifyCodeError-span').css('display', 'none');
-                    $('#verifyCodeExpiration-span').css('display', 'inline');
+                    pass_generalError.text('');
+                    pass_generalError.append("验证码错误，请重新输入");
+                } else if (data.code === 404) {
+                    pass_generalError.text('');
+                    pass_generalError.append("验证码已过期，请重新发送");
                 } else {
-                    smsflag = false;
-                    $('#verifyCode-span').css('display', 'none');
-                    $('#verifyCodeError-span').css('display', 'inline');
-                    $('#verifyCodeExpiration-span').css('display', 'none');
+                    pass_generalError.text('');
+                    pass_generalError.append("请不要修改手机号");
                 }
-            },
-            error: function (data) {
-                console.log("出错了");
             }
         })
     }
     return smsflag;
 });
+
 //表单提交禁止使用回车键
 $(document).on('keydown', '#smsForm', function (event) {
-    switch(event.keyCode){
-        case 13:return false;
+    switch (event.keyCode) {
+        case 13:
+            return false;
     }
 });
 

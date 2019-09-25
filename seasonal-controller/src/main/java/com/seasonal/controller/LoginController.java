@@ -1,26 +1,16 @@
 package com.seasonal.controller;
 
-
-import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
 import com.seasonal.service.UserInfoServer;
 import com.seasonal.vo.ResultUtil;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.Console;
-import java.io.IOException;
-import java.net.InetAddress;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -38,7 +28,7 @@ public class LoginController {
         this.userInfoServer = userInfoServer;
     }
 
-
+    //查找账号
     @RequestMapping(value = "registrationPhone")
     @ResponseBody
     public Object registrationPhone(String identifier) {//验证账号是否已存在
@@ -51,11 +41,12 @@ public class LoginController {
         }
     }
 
+    //登录，根据手机号和密码核对数据库
     @RequestMapping(value = "login")
     @ResponseBody
     public Object userMessage(String identifier, String credential, HttpSession session) {
         LoginFrom loginFrom = (LoginFrom) loginService.findLogin(identifier, credential);
-        if (credential != null && loginFrom != null) {
+        if (loginFrom != null) {
             System.out.println(loginFrom);
             session.setAttribute("userId", loginFrom.getUserId());
         }
@@ -66,21 +57,25 @@ public class LoginController {
         }
     }
 
+    //登录成功修改用户登录信息
     @RequestMapping(value = "loginIp")
     @ResponseBody
     public void updateMessage(String identifier) {
         int num = loginService.updateMessage(identifier);
     }
 
+    //获取用户当前IP地址
     @RequestMapping(value = "getIpNow")
     @ResponseBody
     public String getIpNow() {
         return loginService.getIpNow();
     }
 
+    //发送短信验证码
     @RequestMapping(value = "shortMessageSend")
     @ResponseBody
     public Object shortMessageSend(String identifier, HttpSession session) {
+        System.out.println("shortMessageSend:" + identifier);
         //初始化可获取验证码的倒计时
         String time = "0";
         //获取当前时间
@@ -93,6 +88,7 @@ public class LoginController {
             if (code != null || code == "") {//判断验证码是否发送成功，并返回值到后台
                 System.out.println("code:" + code);
                 session.setAttribute("code", code);//发送验证码后，保存到session
+                session.setAttribute("identifier",identifier);//获取验证码的手机号，用于匹配验证码
                 session.setAttribute("nowTimeCode", nowTime);//获取验证码时间保存到session
                 final Timer timer = new Timer();
                 timer.schedule(new TimerTask() {//设置session的保存时间
@@ -115,6 +111,7 @@ public class LoginController {
                 if (code != null || code == "") {//判断验证码是否发送成功，并返回值到后台
                     System.out.println("code:" + code);
                     session.setAttribute("code", code);//发送验证码后，保存到session
+                    session.setAttribute("identifier",identifier);//获取验证码的手机号，用于匹配验证码
                     session.setAttribute("nowTimeCode", nowTime);//获取验证码时间保存到session
                     final Timer timer = new Timer();
                     timer.schedule(new TimerTask() {//设置session保存时间
@@ -134,6 +131,7 @@ public class LoginController {
         return ResultUtil.fail(100, time);//发送验证码失败的返回值
     }
 
+    //注册账号数据添加验证
     @RequestMapping(value = "registrationInsert")
     @ResponseBody
     public Object registrationInsert(String identifier, String credential, String verifyCode, HttpSession session) {//存储用户注册信息
@@ -156,26 +154,34 @@ public class LoginController {
         }
     }
 
+    //验证码核对
     @RequestMapping(value = "smsLogin")
     @ResponseBody
     public Object smsLogin(String identifier, String smsVerifyCode, HttpSession session) {
         String code = (String) session.getAttribute("code");
+        String phone = (String) session.getAttribute("identifier");
+        System.out.println("phone=" + phone + ",identifier:" + identifier);
         if (code == null || code == "") {
             return ResultUtil.fail(404,"验证码已过期，请重新发送");
         } else if (code.equals(smsVerifyCode)) {
-            LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
-            String userId = loginFrom.getUserId();
-            if (userId != null) {
-                System.out.println("登录成功");
-                session.setAttribute("userId", userId);
+            if (!phone.equals(identifier)){
+                return ResultUtil.fail(405,"请不要修改手机号");
+            } else {
+                LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
+                String userId = loginFrom.getUserId();
+                if (userId != null) {
+                    System.out.println("登录成功");
+                    session.setAttribute("userId", userId);
+                }
+                return ResultUtil.success(200,"注册成功");
             }
-            return ResultUtil.success(200,"注册成功");
         } else {
             System.out.println("验证码错误，请重新输入");
             return ResultUtil.fail(100,"验证码错误，请重新输入");
         }
     }
 
+    //登录保持
     @RequestMapping(value = "getsessionUserId")
     @ResponseBody
     public Object getsessionUserId(HttpSession session) {
@@ -195,9 +201,10 @@ public class LoginController {
         session.invalidate();
     }
 
+    //表单跳转
     @RequestMapping(value = "isLogin")
     public String isLogin() {
         System.out.println("llllll");
-        return "redirect:static/index.html";
+        return "redirect:index";
     }
 }
