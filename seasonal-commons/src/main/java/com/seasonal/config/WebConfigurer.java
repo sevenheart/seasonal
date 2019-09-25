@@ -43,7 +43,7 @@ public class WebConfigurer implements WebMvcConfigurer {
 //    public List<String> excludePathList() {
 //        List<String> listUrls = new ArrayList<String>();
 //        //网站静态资源
-//        listUrls.add("../resources/static");
+//        listUrls.add("../../../../seasonal-web/src/main/resources/static");
 //        return listUrls;
 //    }
 }

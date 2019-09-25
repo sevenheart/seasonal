@@ -28,7 +28,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
             phone_span.html(html);
             let phone_span_div = $('#phone-span-div');
             phone_span_div.append("手机号码格式不正确");
-            phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+            phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
             phone_span_div.css('float', 'left');
             phone_span_div.css('position', 'relative');
             phone_span_div.css('width', '250px');
@@ -53,7 +53,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                         phone_span.html(html);
                         let phone_span_div = $('#phone-span-div');
                         phone_span_div.append("此号码已注册");
-                        phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+                        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
                         phone_span_div.css('float', 'left');
                         phone_span_div.css('position', 'relative');
                         phone_span_div.css('width', '250px');
@@ -68,7 +68,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                         html = '<div id="phone-span-div"></div>';
                         phone_span.html(html);
                         let phone_span_div = $('#phone-span-div');
-                        phone_span_div.css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat');
+                        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/reg_icons.png) -80px 0 no-repeat');
                         phone_span_div.css('float', 'left');
                         phone_span_div.css('position', 'relative');
                         phone_span_div.css('width', '250px');
@@ -109,6 +109,7 @@ $(document).on('click', '.pass-text-input-password', function () {
     $(this).css('border-color', '#F69');
 });
 $(document).on('blur', '.pass-text-input-password', function () {
+    $('#password-span div').remove();
     var pwd = $('.pass-text-input-password').val();
     if (pwd.length > 0) {
         if (!(/^\S{8,14}$/.test(pwd))) {
@@ -117,7 +118,7 @@ $(document).on('blur', '.pass-text-input-password', function () {
             $('#password-span').html(html);
             let password_span_div = $('#password-span-div');
             password_span_div.append("密码格式不正确");
-            password_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+            password_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
             password_span_div.css('float', 'left');
             password_span_div.css('position', 'relative');
             password_span_div.css('width', '250px');
@@ -130,7 +131,7 @@ $(document).on('blur', '.pass-text-input-password', function () {
             html = '<div id="password-span-div"></div>';
             $('#password-span').html(html);
             let password_span_div = $('#password-span-div');
-            password_span_div.css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat');
+            password_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/reg_icons.png) -80px 0 no-repeat');
             password_span_div.css('float', 'left');
             password_span_div.css('position', 'relative');
             password_span_div.css('width', '250px');
@@ -164,7 +165,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
         phone_span_div.append("请您输入手机号");
-        phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         phone_span_div.css('float', 'left');
         phone_span_div.css('position', 'relative');
         phone_span_div.css('width', '250px');
@@ -179,7 +180,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
         phone_span_div.append("手机号码格式不正确");
-        phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         phone_span_div.css('float', 'left');
         phone_span_div.css('position', 'relative');
         phone_span_div.css('width', '250px');
@@ -288,7 +289,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
         phone_span_div.append("请您输入手机号");
-        phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         phone_span_div.css('float', 'left');
         phone_span_div.css('position', 'relative');
         phone_span_div.css('width', '250px');
@@ -303,7 +304,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
         phone_span_div.append("手机号码格式不正确");
-        phone_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         phone_span_div.css('float', 'left');
         phone_span_div.css('position', 'relative');
         phone_span_div.css('width', '250px');
@@ -319,7 +320,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
         $('#password-span').html(html);
         let password_span_div = $('#password-span-div');
         password_span_div.append("请您输入密码");
-        password_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        password_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         password_span_div.css('float', 'left');
         password_span_div.css('position', 'relative');
         password_span_div.css('width', '250px');
@@ -334,7 +335,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
         $('#password-span').html(html);
         let password_span_div = $('#password-span-div');
         password_span_div.append("密码格式不正确");
-        password_span_div.css('background', 'url(../../img/registration/err_small.png) 0 0 no-repeat');
+        password_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
         password_span_div.css('float', 'left');
         password_span_div.css('position', 'relative');
         password_span_div.css('width', '250px');

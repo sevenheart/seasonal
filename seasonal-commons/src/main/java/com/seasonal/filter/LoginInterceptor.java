@@ -52,7 +52,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                         //String finallyUrl = LOGIN_PAGE_URL + "?" + CALL_BACK_URL + "=" + callBackUrl;
                         //System.out.println(finallyUrl);
                         // 开始做重定向操作
-                        //response.sendRedirect(finallyUrl);
+                        response.sendRedirect("isLogin");
                     }
                     return false;
                 } else { //登录了
