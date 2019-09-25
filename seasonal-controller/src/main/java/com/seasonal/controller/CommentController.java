@@ -77,7 +77,7 @@ public class CommentController {
     //传一个response，插入相应地方,完成回复功能，先插入然后再前端显示
     public String upsertResponse(Responses responses){
         String time = responses.getResponse_create_time();
-        responses.toString();
+        System.out.println( responses.toString());
         //Responses response = responses;
        // response.setId("02");
         // response.setResponse_user_img("http://tupiandizhi.com");
