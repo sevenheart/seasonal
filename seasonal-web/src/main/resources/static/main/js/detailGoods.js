@@ -128,10 +128,10 @@ $('.goods_describe_option span').click(function () {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + data);
-                if (data > 0) {
+                console.log('success:' + JSON.stringify(data));
+                if (data.code === 200) {
                     alert('添加入购物车成功');
-                }else{
+                }else if(data.code === 500){
                     alert('添加入购物车失败,刷新后重试！');
                 }
             },
@@ -144,5 +144,33 @@ $('.goods_describe_option span').click(function () {
         alert('请先登录！');
     }
 });
+
+// 立即购买
+$('.goods_describe_option').find('li').eq(0).click(function () {
+    console.log('立即购买')
+    let goodCount = $('#good_count').val();
+    let goodId = getQueryVariable("id");
+    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+        $.ajax({
+            url: '/addCart',
+            type: 'post',
+            dataType: 'json',
+            data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
+            success: function (data) {
+                console.log('success:' + JSON.stringify(data));
+                if (data.code === 200) {
+                    window.open("/cart/view/myCarts.html");
+                }else if(data.code === 500){
+                    alert('购买失败,请刷新后重试！');
+                }
+            },
+            error: function (data) {
+                alert('购买失败,请刷新后重试！');
+            }
+        });
+    }else{
+        alert('请先登录！');
+    }
+})
 
 

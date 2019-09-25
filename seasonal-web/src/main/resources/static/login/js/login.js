@@ -107,7 +107,8 @@ function login(identifier, credential, flag, check) {
     let sms = $('#sms');
     let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
     let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
-    let nowCity = personAddress.city;
+    let nowCity = personAddress.addressComponent.city;
+    console.log(nowCity)
     if (nowCity !== beforeCity) {
         alert("异地登录，请使用短信登录");
         j_login.css('display', 'none');

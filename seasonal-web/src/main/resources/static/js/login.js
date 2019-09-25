@@ -20,6 +20,12 @@ let markerOptions;
 
 window.onLoad = function () {
     map = new AMap.Map('container', {});
+    //构造路线导航类
+    driving = new AMap.Driving({});
+    //地理编码
+    geocoder = new AMap.Geocoder({
+        city: "", // 城市默认：“全国”
+    });
     personLoction();
 }
 
@@ -100,8 +106,7 @@ function personLoction() {
     //解析定位结果
     function onComplete(data) {
         console.log('定位成功');
-        console.log('定位结果：' + data.position);
-        console.log("地址: "+data.formattedAddress)
+        console.log("地址: "+data.formattedAddress);
         personAddress = data;
         markerOptions = new AMap.Marker({//自定义定位点样式，同Marker的Options
             position: data.position,
