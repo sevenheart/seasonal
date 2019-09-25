@@ -124,9 +124,9 @@ function addGoodsToCart(obj, id) {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                if (data > 0) {
+                if (data.code === 200) {
                     alert('添加入购物车成功');
-                }else{
+                }else if(data.code === 500){
                     alert('添加入购物车失败,刷新后重试！');
                 }
             },

@@ -37,33 +37,52 @@ public class CartFormController {
 
     @RequestMapping(value = "showCartList")
     @ResponseBody
-    public List<CartForm> findCartFormById(String userId) {
-        return cartFormService.findCartFormById(userId);
+    public Object findCartFormById(String userId) {
+        List<CartForm> cartFormList = cartFormService.findCartFormById(userId);
+        for (CartForm cart:cartFormList) {
+            System.out.println("nihao");
+            System.out.println(cart.toString());
+        }
+        if(cartFormList != null && cartFormList.size() > 0){
+            return ResultUtil.success(cartFormList);
+        }else{
+            return ResultUtil.fail("没有找到商品");
+        }
     }
 
     @RequestMapping(value = "addCart")
     @ResponseBody
-    public int addGoodsToCart(String userId, String goodId, Integer goodCount) {
-        return cartFormService.addGoodsToCart(userId, goodId, goodCount);
+    public Object addGoodsToCart(String userId, String goodId, Integer goodCount) {
+        if(cartFormService.addGoodsToCart(userId, goodId, goodCount) > 0){
+            return ResultUtil.success(200, "添加购物车成功");
+        }else {
+            return ResultUtil.fail(500, "添加购物车失败");
+        }
     }
 
     @RequestMapping(value = "updateGoodCount")
     @ResponseBody
-    public int updateGoodsCount(String userId, String goodId, Integer goodCount) {
-        return cartFormService.updateGoodsCount(userId, goodId, goodCount);
+    public Object updateGoodsCount(String userId, String goodId, Integer goodCount) {
+        if(cartFormService.updateGoodsCount(userId, goodId, goodCount) > 0){
+            return ResultUtil.success(200, "修改商品数量成功");
+        }else {
+            return ResultUtil.fail(500, "修改商品数量失败");
+        }
     }
 
     @RequestMapping(value = "deleteGood")
     @ResponseBody
-    public int deleteGoodsOfCart(@RequestBody Map<String, Object> goodDataList) {
+    public Object deleteGoodsOfCart(@RequestBody Map<String, Object> goodDataList) {
         String userId = (String) goodDataList.get("userId");
         List<String> goodIdList = (List<String>) goodDataList.get("goodIdList");
-        return cartFormService.deleteGoodsOfCart(userId, goodIdList);
+        if(cartFormService.deleteGoodsOfCart(userId, goodIdList) > 0){
+            return ResultUtil.success(200, "从购物车删除商品成功");
+        }else {
+            return ResultUtil.fail("从购物车删除商品失败");
+        }
     }
 
     //String orderId, String userId, Double orderMoney, String[] goodIdArray, Double[] goodPriceArray, Integer[] goodCountArray
-
-
     @RequestMapping(value = "ProvideOrderForm")
     @ResponseBody
     public Object provideOrderForm(@RequestBody Map<String, Object> orderData) {
