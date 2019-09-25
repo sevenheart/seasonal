@@ -25,5 +25,6 @@
             <artifactId>alipay-sdk-java</artifactId>
             <version>3.7.110.ALL</version>
         </dependency>
+
     </dependencies>
 </project>

@@ -1,6 +1,7 @@
 let userId;
 let userName;
 let login_html;
+//页面自动加载，判断是否自动登录，并完成自动登录
 
 //初始化地图
 var callbackUrl = '&callback=onLoad';//网页初始化地图服务回调函数
@@ -20,8 +21,14 @@ let markerOptions;
 
 window.onLoad = function () {
     map = new AMap.Map('container', {});
+    //构造路线导航类
+    driving = new AMap.Driving({});
+    //地理编码
+    geocoder = new AMap.Geocoder({
+        city: "", // 城市默认：“全国”
+    });
     personLoction();
-}
+};
 
 $.ajax({
     url: "/getsessionUserId",
@@ -59,7 +66,7 @@ $.ajax({
     error: function (data) {
         console.log('error:' + data)
     }
-})
+});
 
 
 $(document).on('click', '.cancellation', function () {
@@ -74,7 +81,7 @@ $(document).on('click', '.cancellation', function () {
             window.location.reload();
         }
     })
-})
+});
 
 
 // 个人定位
@@ -100,8 +107,7 @@ function personLoction() {
     //解析定位结果
     function onComplete(data) {
         console.log('定位成功');
-        console.log('定位结果：' + data.position);
-        console.log("地址: "+data.formattedAddress)
+        console.log("地址: "+data.formattedAddress);
         personAddress = data;
         markerOptions = new AMap.Marker({//自定义定位点样式，同Marker的Options
             position: data.position,
@@ -116,7 +122,7 @@ function personLoction() {
 
     //解析定位错误信息
     function onError(data) {
-        console.log('定位失败');
+        alert('定位失败，请刷新重试');
         console.log('失败原因排查信息:' + data.message);
     }
 }

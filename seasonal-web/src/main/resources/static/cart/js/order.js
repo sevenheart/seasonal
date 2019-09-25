@@ -36,12 +36,12 @@ function random_No(j) {
 
 // 订单生成前，遍历已选择的商品，获取要购买的商品信息
 function orderGoods() {
-    $("input[name='goods']").each(function (i) { //遍历并计算已选商品的所有总价格
+    $("input[name='goods']").each(function (i) { // 遍历并获取已选商品所需的订单信息
         if ($(this).is(':checked')) {
-            good_id_arrary.unshift($(this).val()); //填入商品id
-            good_name_arrary.unshift($('#good_name' + i).text()); //填入商品id
-            good_price_array.unshift($('#price' + i).text()); //填入商品价钱
-            good_count_array.unshift($('#good_count' + i).val()); //填入商品数量
+            good_id_arrary.unshift($(this).val()); // 填入商品id
+            good_name_arrary.unshift($('#good_name' + i).text()); // 填入商品id
+            good_price_array.unshift($('#price' + i).text()); // 填入商品价钱
+            good_count_array.unshift($('#good_count' + i).val()); // 填入商品数量
         }
     })
 }
@@ -120,7 +120,10 @@ $("#ctf-js").click(function () {
     const $pick_up = $("#pick_up");
     //自提按钮点击事件
     $pick_up.click(function () {
+
+        // 将路线规划的路径显示清除
         driving.clear();
+
         delivery_way = 0;
         order_money -= delivery_money;
         delivery_money = 0;
@@ -129,28 +132,48 @@ $("#ctf-js").click(function () {
         $("#og_shou").css("display", "none");
         $("#order_money").text(order_money);
 
+        // 判断坐标点列表中是否有值，若无值则重新获取
         if (markers.length === 0) {
+            // 遍历判断取出的所有地址中五公里内最近的五个点
             $.each(addressAndDistance, function (i, value) {
                 if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
+                    // 若超出范围，则直接跳入下一个循环
                     return true;
                 }
+                // 五公里范围内的值进入地理编码，获取坐标
                 getGeoCode(value);
             })
         } else {
+            // 若坐标点列表有值，则直接显示到地图中
             map.add(markers);
+
+            // 填入用户自己的坐标点
             map.add(markerOptions);
+
+            // 以用户坐标点为中心，在地图上显示所有坐标点
             map.setFitView(personAddress.location);
         }
     });
+
     //配送按钮点击事件
     $("#delivery").click(function () {
+
+        // 移除最近的五个地址的坐标点
         map.remove(markers);
+
+        //移除用户自己的坐标点
         map.remove(markerOptions);
+
+        // 开启路线规划的路径显示
         driving = new AMap.Driving({
-            map: map
+            //map: map
         });
 
         let selectAddress = $('#allot_address_x');
+        deliveryAddress = {
+          'city': selectAddress.val(),
+          'address': selectAddress.text()
+        };
 
         delivery_way = 1;
         $("#allot_address").css("display", "block");
@@ -158,9 +181,19 @@ $("#ctf-js").click(function () {
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
 
+        // 判断地址下拉列表是否选中值，若选中则直接进入路线规划
         if(selectAddress.val() !== '' && selectAddress.val() !== null){
-            allotAddressX(selectAddress.val(), selectAddress.text())
+            $.each(addressAndDistance, function (i, value) {
+                allotAddressX(value.addressData.city, value.addressData.address);
+            });
         }
+        setTimeout(function () {
+            console.log('最短距离为:'+planDistance);
+            driving = new AMap.Driving({
+                map: map
+            });
+            planningRoute(planMLocation.city, planMLocation.address);
+        }, 2000);
     });
 
     $("#og-f").click(function () {
@@ -204,27 +237,34 @@ $("#ctf-js").click(function () {
         });
     });
 
+    // 订单生成时，重新定义地图，显示到页面中
     map = new AMap.Map('container', {
         resizeEnable: true
     });
 
+    // 地图中加入当前用户自己的坐标点
     map.add(markerOptions);
 
+    // 遍历判断取出的所有地址中五公里内最近的五个点
     if ($pick_up.is(':checked')) {
         $.each(addressAndDistance, function (i, value) {
             if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
+                // 若超出范围，则直接跳入下一个循环
                 return true;
             }
+            // 五公里范围内的值进入地理编码，获取坐标
             getGeoCode(value);
         });
     }
 });
 
 function allotAddressX(city, address) {
-    //value为下拉时option 的value值
+    // city为下拉列表的value值，address为下拉列表的text值，分别表示城市、详细地址
     const $allot_address_x = $("#allot_address_x ");
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
     $("#og_phone").text(html_address_phone[$allot_address_x.get(0).selectedIndex]);
     delivery_address = address;
+
+    // 根据city和address值进行路线规划，选出最短路径，并计算配送费
     planningRoute(city, address);
 }

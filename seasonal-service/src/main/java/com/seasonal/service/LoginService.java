@@ -2,8 +2,6 @@ package com.seasonal.service;
 
 import com.seasonal.pojo.LoginFrom;
 
-import java.util.List;
-
 public interface LoginService {
     /**
      * 用户注册手机号码查重
@@ -53,9 +51,4 @@ public interface LoginService {
      * @return
      */
     String insertUserMessage(String identifier, String credential);
-
-    boolean setCookie(String identifier, String credential, String check);
-
-
-
 }

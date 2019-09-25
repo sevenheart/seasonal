@@ -7,8 +7,8 @@
 		//用户名和头像以及时间获取
 		
 		var el = "<div class='comment-info'><header><img src='"+obj.comment_user_img+"'></header>" +
-			"<div class='comment-right'><h3>"+obj.comment_user_name+"</h3>"
-				+"<div class='comment-content-header'><span><i class='glyphicon glyphicon-time'></i>"+obj.comment_create_time+"</span>";
+			"<div class='comment-right'><h3>"+obj.comment_user_name+"</h3><h4 hidden"
+				+">l觑序列复苏发"+obj.comment_user_id+"</h4></h4><div class='comment-content-header'><span><i class='glyphicon glyphicon-time'></i>"+obj.comment_create_time+"</span>";
 
 		//评论内容获取
 		el = el+"</div><p class='content'>"+obj.comment_content+"</p><div class='comment-content-footer'><div class='row'><div class='col-md-10'></div>";
@@ -66,9 +66,9 @@
 	function replyClick(el){
 		el.parent().parent().append("<div class='replybox'><textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea><span class='send'>发送</span></div>")
 		.find(".send").click(function(){
-			var content = $(this).prev().val();
+			var response_content = $(this).prev().val();
 			/*var commentid =*/
-			if(content != ""){
+			if(response_content != ""){
 				var parentEl = $(this).parent().parent().parent().parent();
 				var obj = new Object();
 				//评论人姓名：获取当前元素的姓名
@@ -78,20 +78,33 @@
 				//通过全局获取姓名和id
 				//obj.response_user_name=el.parent().children(".commentuserid").html();
 				obj.commentid=el.parent().children(".commentid").html();
-				console.log("评论的id是"+obj.commentid);
+				console.log("评论的id是"+el.parent().children(".commentid").html());
 			/*	if(el.parent().parent().hasClass("reply")){
 					console.log("回复的回复1111");
 					obj.beReplyName = el.parent().parent().find("a:first").text();
 				}else{*/
 					console.log("回复2222");
 					obj.beReplyName=parentEl.find("h3").text();
+					obj.commentuserid=parentEl.find("h4").text();
+					console.log("comment的用户id是："+parentEl.find("h4").text());
 				/*}*/
-				obj.response_content=content;
+				obj.response_content=response_content;
 				obj.response_create_time = getNowDateFormat();
 				//先把回复插入数据库成功后再显示再前台
+				//只需要插入就完事了。
+				$.post({
+					url: "/upsertresponse",
+					data: obj,
+					dataType: "json",
+					success: function (data) {
+						alert("success")
+					}
+				})
+
 
                 //
 				var replyString = createReplyComment(obj);
+				//点击完发送后隐藏输入框
 				$(".replybox").remove();
 				parentEl.find(".reply-list").append(replyString)/*.find(".reply-list-btn:last").click(function(){alert("不能回复自己");})*/;
 			}else{
@@ -121,24 +134,32 @@
 			$(this).append(totalString).find(".reply-btn").click(function(){
 
 				if($(this).parent().parent().find(".replybox").length > 0){
+					alert("replybox.lengeth大于0")
 					$(".replybox").remove();
 				}else{
+					alert("replybox.lengeth不大于0")
 					$(".replybox").remove();
+					//在这里存储回复信息
+
 					replyClick($(this));
 				}
 			});
-			$(".reply-list-btn").click(function(){
+		/*	$(".reply-list-btn").click(function(){
 				if($(this).parent().parent().find(".replybox").length > 0){
+					console.log("replybox.lengeth大于0")
+					alert("replybox.lengeth大于0")
 					$(".replybox").remove();
 				}else{
+					console.log("replybox.lengeth不大于0")
 					$(".replybox").remove();
 					replyClick($(this));
 				}
-			})
+			})*/
 		}
 		
 		//添加新数据
 		if(option.add != ""){
+			alert("添加新数据")
 			obj = option.add;
 			var str = crateCommentInfo(obj);
 			$(this).prepend(str).find(".reply-btn").click(function(){
