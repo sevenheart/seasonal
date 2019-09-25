@@ -10,7 +10,7 @@ function getQueryVariable(variable) {
     return (false);
 }
 
-
+userName
 function ajax_test(id) {
     $.ajax({
         url: "/ShowDetailGood", //json文件位置
