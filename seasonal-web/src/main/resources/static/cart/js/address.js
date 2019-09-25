@@ -17,7 +17,24 @@ function getMerchantAddress() {
         success: function (data) {
             if(data.code === 200) {
                 $.each(data.data, function (i, value) {
-                    // 根据起终点名称规划驾车导航路线
+                    // 直接计算两边距离
+                    geocoder.getLocation(value.address, function (status, result) {
+                        if (status === 'complete' && result.geocodes.length) {
+                            let mLnglat = result.geocodes[0].location;
+                            let pLnglat = personAddress.position;
+                            let distance = pLnglat.distance(mLnglat);
+                            // 将获取得到的地址和路线规划的距离整合
+                            let mAddress = {
+                                'addressData': value,
+                                'lnglat': mLnglat,
+                                'pickupDistance': result.routes[0].distance
+                            };
+                            // 存入全局变量中
+                            addressAndDistance.push(mAddress);
+                            console.log(value.address +'distance:'+ Number(distance * 0.001).toFixed(2));
+                        }
+                    });
+                    /*// 根据起终点名称规划驾车导航路线
                     driving.search([
                         {keyword: personAddress.formattedAddress, city: personAddress.city},
                         {keyword: value.address, city: value.city}//获取详细地址和市
@@ -34,7 +51,7 @@ function getMerchantAddress() {
                         } else {
                             alert('获取地址失败，请刷新重试');
                         }
-                    });
+                    });*/
                 });
             }else if(data.code === 100){
                 // 若获取错误，则弹出提示
@@ -156,11 +173,7 @@ function planningRoute(city, address) {
                     'address': address
                 };
             }
-            console.log('当前最近的距离为:'+planDistance)
-            delivery_money = parseInt(planDistance);
-            order_money += delivery_money;
-            $("#allot_price").text("配送费：￥" + delivery_money);
-            $("#order_money").text(order_money);
+            console.log('当前最近的距离为:'+planDistance);
         } else {
             console.log('获取数据失败：' + result);
         }

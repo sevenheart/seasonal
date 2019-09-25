@@ -169,6 +169,13 @@ $("#ctf-js").click(function () {
             //map: map
         });
 
+        // 进度条
+        let progressHtml = '<dl class="defail-stat">\n' +
+            '    <dd>\n' +
+            '        <i class="up" style="width: 0;"></i>\n' +
+            '    </dd>\n' +
+            '</dl>';
+
         let selectAddress = $('#allot_address_x');
         deliveryAddress = {
           'city': selectAddress.val(),
@@ -180,6 +187,7 @@ $("#ctf-js").click(function () {
         $("#og_shou").css("display", "block");
         $("#og_name").text(html_address_name[0]);
         $("#og_phone").text(html_address_phone[0]);
+        //$("#allot_price").html(progressHtml);
 
         // 判断地址下拉列表是否选中值，若选中则直接进入路线规划
         if(selectAddress.val() !== '' && selectAddress.val() !== null){
@@ -192,6 +200,10 @@ $("#ctf-js").click(function () {
             driving = new AMap.Driving({
                 map: map
             });
+            delivery_money = parseInt(planDistance);
+            order_money += delivery_money;
+            $("#allot_price").text("配送费：￥" + delivery_money);
+            $("#order_money").text(order_money);
             planningRoute(planMLocation.city, planMLocation.address);
         }, 2000);
     });
