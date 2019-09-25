@@ -197,6 +197,7 @@ public class LoginController {
 
     @RequestMapping(value = "isLogin")
     public String isLogin() {
-        return "redirect:/index.html";
+        System.out.println("llllll");
+        return "redirect:static/index.html";
     }
 }

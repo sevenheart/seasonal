@@ -116,8 +116,7 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
     }
 });
 
-//表单提交，多次错误验证码显示，判断输入信息
-var num = 0;
+//表单提交，判断输入信息
 $(document).on('submit', '.pass-form-normal', function () {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     var flag = false;
@@ -148,6 +147,7 @@ $(document).on('submit', '.pass-form-normal', function () {
     }
     return flag;
 });
+//表单提交禁止使用回车键
 $(document).on('keydown', '.pass-form-normal', function (event) {
     switch(event.keyCode){
         case 13:return false;
@@ -158,8 +158,6 @@ $(document).on('keydown', '.pass-form-normal', function (event) {
 function login(identifier, credential, flag, check) {
     let j_login = $('#j-login');
     let sms = $('#sms');
-    let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
-    let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
     let nowCity = personAddress.addressComponent.city;
     //判断异地登录
     if (nowCity !== beforeCity) {
@@ -189,13 +187,6 @@ function login(identifier, credential, flag, check) {
                     '找回密码' +
                     '</a>';
                 $('.pass-form-normal .pass-generalErrorWrapper').html(html);
-                num++;
-                if (num >= 3) {
-                    pass_form_item_verifyCode.css('display', 'block');
-                    pass_form_item_verifyCode.css('visibility', 'visible');
-                    pass_text_input_verifyCode.css('color', '#F69');
-                    pass_text_input_verifyCode.css('border-color', '#F69');
-                }
             }
         })
     }
@@ -327,6 +318,7 @@ $(document).on('submit', '#smsForm', function () {
     }
     return smsflag;
 });
+//表单提交禁止使用回车键
 $(document).on('keydown', '#smsForm', function (event) {
     switch(event.keyCode){
         case 13:return false;
