@@ -6,9 +6,9 @@ function getQueryVariable(variable) {
         if (pair[0] === variable) {
             return pair[1];
         }
-    }
-    return (false);
+    }    return (false);
 }
+
 
 let orderId;
 let money;
