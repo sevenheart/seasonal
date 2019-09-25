@@ -27,7 +27,7 @@ window.onLoad = function () {
         city: "", // 城市默认：“全国”
     });
     personLoction();
-}
+};
 
 $.ajax({
     url: "/getsessionUserId",
@@ -65,7 +65,7 @@ $.ajax({
     error: function (data) {
         console.log('error:' + data)
     }
-})
+});
 
 
 $(document).on('click', '.cancellation', function () {
@@ -80,7 +80,7 @@ $(document).on('click', '.cancellation', function () {
             window.location.reload();
         }
     })
-})
+});
 
 
 // 个人定位
@@ -121,7 +121,7 @@ function personLoction() {
 
     //解析定位错误信息
     function onError(data) {
-        console.log('定位失败');
+        alert('定位失败，请刷新重试');
         console.log('失败原因排查信息:' + data.message);
     }
 }
