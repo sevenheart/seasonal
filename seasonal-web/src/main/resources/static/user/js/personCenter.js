@@ -137,6 +137,7 @@ function showaddress(data){
 }
 /*展示订单信息*/
 function showorderform(data) {
+    console.log(data)
     let title =  '<tr style="width: 800px">\n' +
         '                            <td><span>订单号</span></td>\n' +
         '                            <td><span>商品描述</span></td>\n' +
@@ -155,6 +156,8 @@ function showorderform(data) {
     let orderlist;
     //点击查看信息每个账号的存储
     let detaildata ;
+    //需要传递的评论信息的存储。
+    let mongocomment;
 
     for(let i = 0;i < data.length;i++){
         flag = true;
@@ -178,7 +181,6 @@ function showorderform(data) {
                 orderstates+
                 '                            <td><p>支付宝</p></td>\n' +
                 '                            <td hidden class="detailData" data-type="'+i+'"></td>\n' +
-
                 deliveryWay+
                 button+
                 '                        </tr>\n';
@@ -198,8 +200,6 @@ function showorderform(data) {
                 button+
                 '                        </tr>\n'
         }
-
-
         htmlall +=' <tr>\n' +
             '                            <td><p>'+data[i].orderId+'</p></td>\n' +
             '                            <td><p>'+data[i].detailedCommodityForms[0].composeGoods[0].composeGoodName+'</p></td>\n' +
@@ -212,7 +212,14 @@ function showorderform(data) {
 
             button+
             '                        </tr>\n'
-    }
+        //这里顺便拼接评论页面：
+        showcommetstates(data[i].detailedCommodityForms,i);
+    }//评论完成展示commenttablecommented
+    $("#commenttable").html(commenttablecommented);
+    //评论未完成
+    $("#nocommenttable").html(commenttablenocomment);
+
+    //评论未完成展示
     if(flag===true){
         $('#allordermessage').html(htmlall);
     }else {
@@ -240,7 +247,24 @@ function showorderform(data) {
         }
 
     );
+    //评论列表中点击评论按钮，记录需要保存到数据库中的值
+    $('.commentclick').click(function () {
+        let outindex = $(this).attr("data-big");
+        let inindex = $(this).attr("data-little");
+        let time=getNowDateFormat();
+        //商品id
+        //用户头像昵称id
+        //评论内容
+        //创建时间
 
+        console.log("商品id是"+$(this).attr("data-big"));
+        //存储需要保存的评论信息
+        mongocomment ={"comment_goods_id":data[outindex].detailedCommodityForms[inindex].goodId,
+            "comment_user_id":"001", "comment_user_name":"陆旭",
+            "comment_user_img":"baidu.com",
+            "orderId":data[outindex].orderId,
+            "comment_content":"","comment_create_time":time}
+    })
     //模态框控制
     $('#myModal').modal("hide");
     $('#myModal').on('show.bs.modal', function (event) {
@@ -276,10 +300,81 @@ function showorderform(data) {
         $("#goodstable").html(goodtable)
 
     })
+    //评论模态框commentmodal
+    $('#commentmodal').modal("hide")
+    $('#commentmodal').on('show.bs.modal', function (event){
+
+    })
+    /*点击评论按钮后存储评论信息*/
+    $('#modal-confirm').click(function () {
+        let contents = $('#content').val()
+        mongocomment.comment_content = contents;
+        if(contents===null||contents==""){
+            alert("不能输入空字符串！");
+        }else {
+            console.log("点击了确定评论按钮");
+            $.post({
+                url: "/upsertcomment",
+                data: mongocomment,
+                dataType: "json",
+                success: function (data) {
+                    alert(data.message);
+                    $('#commentmodal').modal("hide")
+                }
+            })
+        }
+
+
+    })
 }
-/*展示已支付订单信息*/
+/*展示商品评论状态在showorderform中调用
+* data是详细商品的信息
+*
+* */
+let commenttablecommented='<tr>' +
+    '                                <td>商品图片</td>\n' +
+    '                                <td>商品名称</td>\n' +
+    '                                <td>商品数量</td>\n' +
+    '                                <td>商品价格</td>\n' +
+    '                                <td></td>\n' +
+    '</tr>';
+let commenttablenocomment='<tr>' +
+    '                                <td>商品图片</td>\n' +
+    '                                <td>商品名称</td>\n' +
+    '                                <td>商品数量</td>\n' +
+    '                                <td>商品价格</td>\n' +
+    '                                <td></td>\n' +
+    '</tr>';
+let commentbutton ;
+
+function showcommetstates(data,j) {
+    $.each(data,function (index,content) {
+        if(Number(content.iscomment)===0){
+            commentbutton  = '<td><input  type="button" class="button commentclick " data-big="'+j+'" data-little='+index+' value="评论"  data-toggle="modal" data-target="#commentmodal"  /></td>';
+            commenttablenocomment +=' <tr>\n' +
+                '                            <td><img  src='+content.composeGoods[0].composeGoodIcon+' /></td>\n' +
+                '                            <td><p>'+content.composeGoods[0].composeGoodName+'</p></td>\n' +
+                '                            <td><p>'+content.goodCount+'</p></td>\n' +
+                '                            <td><p>'+content.commodityMoney+'</p></td>\n' +
+                commentbutton+
+                '                        </tr>\n';
+
+        }else {
+            commentbutton = '<td><input  type="button" class="button"  value="查看评论" /></td>';
+            commenttablecommented+=' <tr>\n' +
+                '                            <td><img  src='+content.composeGoods[0].composeGoodIcon+' /></td>\n' +
+                '                            <td><p>'+content.composeGoods[0].composeGoodName+'</p></td>\n' +
+                '                            <td><p>'+content.goodCount+'</p></td>\n' +
+                '                            <td><p>'+content.commodityMoney+'</p></td>\n' +
+                commentbutton+
+                '                        </tr>\n';
+        }
 
 
+
+
+    })
+}
 function init() {
     //查找用户的个人信息
     $.post({
@@ -347,6 +442,7 @@ function init() {
     });
 
     //查中用户的订单信息
+    //评论情况信息
     $.post({
         url:"/order/FindAllorderFormById",
         data:{userId:userId},
@@ -402,3 +498,22 @@ $('#userInfoManage').click(function () {
     target.eq(num).css("display","block");
 });
 
+/*获取当前时间，为存储到mongodb备用*/
+//获取当前时间
+function getNowDateFormat(){
+    var nowDate = new Date();
+    var year = nowDate.getFullYear();
+    var month = filterNum(nowDate.getMonth()+1);
+    var day = filterNum(nowDate.getDate());
+    var hours = filterNum(nowDate.getHours());
+    var min = filterNum(nowDate.getMinutes());
+    var seconds = filterNum(nowDate.getSeconds());
+    return year+"-"+month+"-"+day+" "+hours+":"+min+":"+seconds;
+}
+function filterNum(num){
+    if(num < 10){
+        return "0"+num;
+    }else{
+        return num;
+    }
+}

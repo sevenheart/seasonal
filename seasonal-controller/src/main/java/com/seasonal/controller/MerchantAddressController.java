@@ -2,6 +2,7 @@ package com.seasonal.controller;
 
 import com.seasonal.pojo.MerchantAddress;
 import com.seasonal.service.MerchantAddressService;
+import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,15 @@ public class MerchantAddressController {
         this.merchantAddressService = merchantAddressService;
     }
 
+    // List<MerchantAddress>
     @RequestMapping(value = "getAllMerchantAddress")
     @ResponseBody
-    public List<MerchantAddress> findAllMerchantAddress(String userId){
-        return merchantAddressService.findAllMerchantAddress();
+    public Object findAllMerchantAddress(){
+        List<MerchantAddress> merchantAddressList = merchantAddressService.findAllMerchantAddress();
+        if(merchantAddressList != null && merchantAddressList.size() > 0){
+            return ResultUtil.success(merchantAddressList);
+        } else {
+            return ResultUtil.fail("未获取到地址");
+        }
     }
 }
