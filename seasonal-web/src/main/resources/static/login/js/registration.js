@@ -21,9 +21,9 @@ $(document).on('blur', '.pass-text-input-phone', function () {
     let phone_span = $('#phone-span');
     phone_span.text('');
     var phone = $('.pass-text-input-phone').val();
-    console.log(phone);
     if (phone.length > 0) {
         if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))) {
+            //验证手机号码格式
             html = '<div id="phone-span-div"></div>';
             phone_span.html(html);
             let phone_span_div = $('#phone-span-div');
@@ -38,6 +38,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
             phone_span_div.css('line-height', '14px');
             phone_span_div.css('padding-left', '20px');
         } else {
+            //格式正确，查找数据库，判断手机号是否已注册
             $.ajax({
                 url: "/registrationPhone",
                 type: "post",
@@ -45,8 +46,9 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    var identifier = data.identifier;
-                    if (identifier === phone) {
+                    console.log(data)
+                    if (data.code === 200) {
+                        //返回200,号码已存在，不可注册
                         html = '<div id="phone-span-div"></div>';
                         phone_span.html(html);
                         let phone_span_div = $('#phone-span-div');
@@ -61,20 +63,21 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                         phone_span_div.css('line-height', '14px');
                         phone_span_div.css('padding-left', '20px');
                     }
-                },
-                error: function (data) {
-                    html = '<div id="phone-span-div"></div>';
-                    phone_span.html(html);
-                    let phone_span_div = $('#phone-span-div');
-                    phone_span_div.css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat');
-                    phone_span_div.css('float', 'left');
-                    phone_span_div.css('position', 'relative');
-                    phone_span_div.css('width', '250px');
-                    phone_span_div.css('top', '12px');
-                    phone_span_div.css('color', '#fc4343');
-                    phone_span_div.css('height', '16px');
-                    phone_span_div.css('line-height', '14px');
-                    phone_span_div.css('padding-left', '20px');
+                    if (data.code === 100) {
+                        //返回100，可注册
+                        html = '<div id="phone-span-div"></div>';
+                        phone_span.html(html);
+                        let phone_span_div = $('#phone-span-div');
+                        phone_span_div.css('background', 'url(../../img/registration/reg_icons.png) -80px 0 no-repeat');
+                        phone_span_div.css('float', 'left');
+                        phone_span_div.css('position', 'relative');
+                        phone_span_div.css('width', '250px');
+                        phone_span_div.css('top', '12px');
+                        phone_span_div.css('color', '#fc4343');
+                        phone_span_div.css('height', '16px');
+                        phone_span_div.css('line-height', '14px');
+                        phone_span_div.css('padding-left', '20px');
+                    }
                 }
             })
         }
@@ -109,6 +112,7 @@ $(document).on('blur', '.pass-text-input-password', function () {
     var pwd = $('.pass-text-input-password').val();
     if (pwd.length > 0) {
         if (!(/^\S{8,14}$/.test(pwd))) {
+            //验证密码格式
             html = '<div id="password-span-div"></div>';
             $('#password-span').html(html);
             let password_span_div = $('#password-span-div');
@@ -155,6 +159,7 @@ var time = 60;
 $(document).on('click', '.pass-button-verifyCodeSend', function () {
     var identifier = $('.pass-text-input-phone').val();
     if (identifier === null || identifier === '') {
+        //判断手机号是否为空
         html = '<div id="phone-span-div"></div>';
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
@@ -168,7 +173,8 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
         phone_span_div.css('height', '16px');
         phone_span_div.css('line-height', '14px');
         phone_span_div.css('padding-left', '20px');
-    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))){
+    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) {
+        //判断手机号格式是否正确
         html = '<div id="phone-span-div"></div>';
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
@@ -183,6 +189,7 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
         phone_span_div.css('line-height', '14px');
         phone_span_div.css('padding-left', '20px');
     } else {
+        //手机号格式正确，可以获取验证码
         $.ajax({
             url: "/shortMessageSend",
             type: "post",
@@ -190,38 +197,39 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
             data: {"identifier": identifier},
             async: false,
             success: function (data) {
-                console.log("返回值：" + data)
+                //调用倒计时方法
                 sendCode();
-                if (data === false) {
-                    alert("发送失败！");
-                } else if (data === true) {
+                if (data.code === 200) {
                     alert("发送成功！");
+                } else if (data.message === "0" && data.code === 100) {
+                    alert("发送失败！");
                 } else {
-                    if (data > 0){
-                        time = data;
-                    }
-                    alert("您请求验证码太过频繁，请计时结束在重新获取！")
+                    time = parseInt(data.message);
+                    alert("您请求验证码太过频繁，请计时结束在重新获取！");
                 }
             }
         })
     }
 });
-function sendCode(){
+
+function sendCode() {//倒计时方法
     let pass_button_verifyCodeSend = $(".pass-button-verifyCodeSend");
-    if(time===0){//重新获取验证码
-        pass_button_verifyCodeSend.attr("disabled",false);
+    if (time === 0) {
+        //重新获取验证码
+        pass_button_verifyCodeSend.attr("disabled", false);
         pass_button_verifyCodeSend.val("获取短信验证码");
         time = 60;
-        return false;//清除定时器
-    }else{
-        pass_button_verifyCodeSend.attr("disabled",true);
-        pass_button_verifyCodeSend.val(time+"s后可重新获取");
+        return false;
+        //清除定时器
+    } else {
+        pass_button_verifyCodeSend.attr("disabled", true);
+        pass_button_verifyCodeSend.val(time + "s后可重新获取");
         time--;
     }
     //设置一个定时器
-    setTimeout(function(){
+    setTimeout(function () {
         sendCode()
-    },1000)
+    }, 1000)
 }
 
 //用户协议
@@ -236,33 +244,36 @@ $(document).on('click', '.pass-checkbox-isAgree', function () {
 
 //注册
 $(document).on('submit', '#form', function () {
-    var identifier = $('.pass-text-input-phone').val();
-    var credential = $('.pass-text-input-password').val();
-    var verifyCode = $('.pass-text-input-verifyCode').val();
-    var isAgree = document.getElementById("isAgree-checkbox").checked;
+    var identifier = $('.pass-text-input-phone').val();//手机号
+    var credential = $('.pass-text-input-password').val();//密码
+    var verifyCode = $('.pass-text-input-verifyCode').val();//验证码
+    var isAgree = document.getElementById("isAgree-checkbox").checked;//用户协议
     var flag = false;
-    var errorFlag = messageError(identifier, credential, verifyCode, isAgree);
-    if (errorFlag === true){
-        console.log("进来了")
+    var errorFlag = messageError(identifier, credential, verifyCode, isAgree);//调用messageError回调函数
+    if (errorFlag === true) {
+        //判断errorFlag的值，为true，则可以提交数据
         $.ajax({
-            url:"/registrationInsert",
-            type:"post",
-            data:{"identifier":identifier,"credential":credential,"verifyCode":verifyCode},
-            dataType:"text",
+            url: "/registrationInsert",
+            type: "post",
+            data: {"identifier": identifier, "credential": credential, "verifyCode": verifyCode},
+            dataType: "json",
             async: false,
-            success:function (data) {
-                if (data === "True"){
+            success: function (data) {
+                if (data.code === 200) {
+                    //注册成功
                     flag = true;
-                } else if(data === "False"){
+                } else if (data.code === 404) {
+                    //注册失败，验证码已过期
                     flag = false;
-                    $('#verifyCode-span').css('display','none');
-                    $('#verifyCodeError-span').css('display','none');
-                    $('#verifyCodeExpiration-span').css('display','inline');
-                } else{
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'none');
+                    $('#verifyCodeExpiration-span').css('display', 'inline');
+                } else {
+                    //注册失败，验证码输入错误
                     flag = false;
-                    $('#verifyCode-span').css('display','none');
-                    $('#verifyCodeError-span').css('display','inline');
-                    $('#verifyCodeExpiration-span').css('display','none');
+                    $('#verifyCode-span').css('display', 'none');
+                    $('#verifyCodeError-span').css('display', 'inline');
+                    $('#verifyCodeExpiration-span').css('display', 'none');
                 }
             }
         })
@@ -270,7 +281,7 @@ $(document).on('submit', '#form', function () {
     return flag;
 });
 
-function messageError(identifier, credential, verifyCode, isAgree) {
+function messageError(identifier, credential, verifyCode, isAgree) {//判断表单数据
     //判断手机号是否为空
     if (identifier === null || identifier === '') {
         html = '<div id="phone-span-div"></div>';
@@ -286,7 +297,8 @@ function messageError(identifier, credential, verifyCode, isAgree) {
         phone_span_div.css('height', '16px');
         phone_span_div.css('line-height', '14px');
         phone_span_div.css('padding-left', '20px');
-    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))){
+    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) {
+        //判断手机号格式
         html = '<div id="phone-span-div"></div>';
         $('#phone-span').html(html);
         let phone_span_div = $('#phone-span-div');
@@ -317,6 +329,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {
         password_span_div.css('line-height', '14px');
         password_span_div.css('padding-left', '20px');
     } else if (!(/^\S{8,14}$/.test(credential))) {
+        //判断密码格式
         html = '<div id="password-span-div"></div>';
         $('#password-span').html(html);
         let password_span_div = $('#password-span-div');
@@ -345,12 +358,10 @@ function messageError(identifier, credential, verifyCode, isAgree) {
     }
     //返回值用于判断是否执行ajax
     if ((identifier !== null && identifier !== '' && (/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) &&
-        (credential !== null && credential !== ''&& (/^\S{8,14}$/.test(credential))) &&
-        (verifyCode !== null && verifyCode !== '' ) &&
+        (credential !== null && credential !== '' && (/^\S{8,14}$/.test(credential))) &&
+        (verifyCode !== null && verifyCode !== '') &&
         isAgree === true) {
-        console.log("true");
         return true;
     }
-    console.log("false");
     return false;
 }

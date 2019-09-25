@@ -53,11 +53,7 @@ button{
     content: "";
 }
 
-.p-login .header .logo, .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-userName,
-.p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn,
-.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-password,
-.p-login .body .login-area .tang-pass-login .pass-form-item .pass-clearbtn,
-.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone{
+.p-login .header .logo{
     background-image: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png);
 }
 
@@ -120,7 +116,7 @@ button{
     margin-top: 49px;
     width: 623px;
     height: 337px;
-    background: url(../../img/login/login-logo.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/login-logo.png) no-repeat;
 }
 
 .p-login .body .login-area {
@@ -172,7 +168,7 @@ button{
 }
 
 .tang-pass-login .pass-smsSwitchWrapper .pass-sms-btn {
-    background: url(../../img/login/smsSwitchPhone.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/smsSwitchPhone.png) no-repeat;
     background-position: 0 0;
     padding-left: 15px;
     color: #666;
@@ -186,7 +182,7 @@ button{
 }
 
 .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-userName {
-    background-position: -366px -97px;
+    background-position: 0 -91px;
     top: 13px;
     left: 10px;
     background-repeat: no-repeat;
@@ -202,7 +198,7 @@ button{
     height: 18px;
     overflow: hidden;
     padding: 0 0 0 18px;
-    background: url(../../img/login/input_icons_16.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/input_icons_16.png) no-repeat;
 }
 
 .p-login .body .login-area .tang-pass-login .pass-form-item input.pass-text-input {
@@ -218,7 +214,6 @@ button{
 }
 
 .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-password {
-    background-position: -366px -135px;
     top: 10px;
     left: 10px;
     background-repeat: no-repeat;
@@ -289,7 +284,7 @@ button{
     display: block;
     cursor: pointer;
     list-style: none;
-    background: url(../../img/login/pass_login_icons.png) no-repeat;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/pass_login_icons.png) no-repeat;
     width: 0;
     overflow: hidden;
 }
@@ -322,7 +317,7 @@ button{
 }
 
 .tang-pass-login .pass-verifyCode {
-    background: url(../../img/login/loading_16.gif) no-repeat center center;
+    background: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/loading_16.gif) no-repeat center center;
     border: 1px solid #DDD;
     float: left;
 }
@@ -417,10 +412,6 @@ button{
     line-height: 18px;
     color: #999;
     font-weight: 400;
-}
-
-.p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone {
-    background-position: -370px -179px;
 }
 
 .p-login .body .login-area .tang-pass-login .pass-form-item label.pass-label-smsPhone {

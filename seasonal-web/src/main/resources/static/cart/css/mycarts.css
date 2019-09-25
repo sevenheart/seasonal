@@ -27,7 +27,7 @@
 }
 
 #cart-flow #c-f-img {
-    background: url("../../img/cart/cart_main.png") no-repeat 0px -280px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/cart/cart_main.png") no-repeat 0 -280px;
     height: 23px;
     width: 483px;
 }
@@ -45,7 +45,7 @@
 #cart-flow .c-f-li {
     width: 160px;
     text-align: center;
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 #cart-th {
@@ -116,7 +116,7 @@
 #cart-con {
     background: #fff;
     border: solid 1px #ede8d8;
-    border-bottom: 0px;
+    border-bottom: 0;
 }
 
 .cart-con-li {
@@ -250,7 +250,7 @@
 #mc-msg {
     color: #005aa4;
     text-align: center;
-    padding: 30px 0px;
+    padding: 30px 0;
 }
 
 #mc-msg a {
@@ -264,7 +264,7 @@
 
 .cart-tf-xf {
     position: fixed;
-    bottom: 0px;
+    bottom: 0;
     width: 1200px;
 }
 
@@ -318,7 +318,7 @@
 }
 
 #total {
-    padding: 0px 25px 0px 25px;
+    padding: 0 25px 0 25px;
     color: #fc461e;
     font-size: 18px;
     font-weight: bold;
@@ -327,7 +327,7 @@
 #count {
     color: #fc461e;
     font-weight: bold;
-    padding: 0px 5px 0px 5px;
+    padding: 0 5px 0 5px;
 }
 
 .hover-a {

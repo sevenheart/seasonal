@@ -5,6 +5,7 @@ import com.seasonal.pojo.Comment;
 import com.seasonal.pojo.Responses;
 import com.seasonal.service.CommentService;
 import com.seasonal.vo.ResultData;
+import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,22 +31,18 @@ public class CommentController {
      */
     @RequestMapping("upsertcomment")
     @ResponseBody
-    public String upsertComment(Comment comment1){
+    public ResultData upsertComment(Comment comment1){
+
+        System.out.println("进入了存储方法");
+
         //生成一个随机的commentid
-        String time = calendar.getTime().toString();
         //随机生成一个commentid
-        String comment_id = UUID.randomUUID()+ String.valueOf((int)Math.random()*10+99);
+        String comment_id = UUID.randomUUID()+ String.valueOf((int)Math.random()*10+10000);
         System.out.println("生成的评论id是"+comment_id);
-        Comment comment = new Comment();
-        comment.setComment_id(comment_id);
-        comment.setComment_goods_id("01");
-        comment.setComment_user_id("005");
-        comment.setComment_user_name("5号用户");
-        comment.setComment_user_img("http://tupiandizhi.com");
-        comment.setComment_content("5楼：这是评论内容");
-        comment.setComment_create_time(time);
-        commentService.insertComment(comment);
-        return "detail";
+        comment1.setComment_id(comment_id);
+        System.out.println(comment1.toString());
+       // commentService.commentAndUpdate(comment1);
+        return ResultUtil.success(200,"评论成功");
     }
 
     /**
@@ -79,8 +76,9 @@ public class CommentController {
     @ResponseBody
     //传一个response，插入相应地方,完成回复功能，先插入然后再前端显示
     public String upsertResponse(Responses responses){
-        String time = calendar.getTime().toString();
-        Responses response = responses;
+        String time = responses.getResponse_create_time();
+        responses.toString();
+        //Responses response = responses;
        // response.setId("02");
         // response.setResponse_user_img("http://tupiandizhi.com");
        /* response.setResponse_user_id("002");
@@ -89,7 +87,7 @@ public class CommentController {
         response.setResponse_content("这是2号用户给1楼的评论");
         response.setResponse_create_time(time);*/
         //根据评论id继续评论,前端后端生成一个
-        commentService.addResponse(response);
+       // commentService.addResponse(response);
 
         return "成功";
     }

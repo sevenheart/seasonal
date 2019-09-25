@@ -22,9 +22,9 @@ function ajax_test(id) {
             const $cname = $("#classify_name");
             const $gname = $("#generalities_name");
             $cname.text(data.classify.classifyName);
-            $cname.attr("href", "http://localhost:8080/main/view/getGoodsList.html?classifyId=" + data.classify.id);
+            $cname.attr("href", "getGoodsList.html?classifyId=" + data.classify.id);
             $gname.text(data.classify.generalities.generalitiesName);
-            $gname.attr("href", "http://localhost:8080/main/view/getGoodsList.html?classifyId=" + data.classify.generalities.id);
+            $gname.attr("href", "getGoodsList.html?classifyId=" + data.classify.generalities.id);
             $(".goods_describe_name").text(data.composeGoodName);
             $("#goods_describe_pc").text("￥" + data.composeGoodPrice + ".00");
             $(".goods_describe_ds").html("<li>净重：" + data.composeGoodWeight + "g/杯</li><li>服务：由果酷负责发货，并提供售后服务。</li>");
@@ -45,7 +45,6 @@ function ajax_test(id) {
             })
             //选择查看用户评论时隐藏商品介绍
             $('#goods_discribe').click(function () {
-                console.log("jhiuh");
                 $('#goods_discribe_div').hide();
             });
         }
@@ -128,7 +127,6 @@ $('.goods_describe_option span').click(function () {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + JSON.stringify(data));
                 if (data.code === 200) {
                     alert('添加入购物车成功');
                 }else if(data.code === 500){
@@ -136,7 +134,6 @@ $('.goods_describe_option span').click(function () {
                 }
             },
             error: function (data) {
-                console.log('error:' + data);
                 alert('添加入购物车失败');
             }
         });
@@ -147,7 +144,6 @@ $('.goods_describe_option span').click(function () {
 
 // 立即购买
 $('.goods_describe_option').find('li').eq(0).click(function () {
-    console.log('立即购买')
     let goodCount = $('#good_count').val();
     let goodId = getQueryVariable("id");
     if(!(typeof userId === "undefined" || userId === null || userId === "")) {
@@ -157,7 +153,6 @@ $('.goods_describe_option').find('li').eq(0).click(function () {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + JSON.stringify(data));
                 if (data.code === 200) {
                     window.open("/cart/view/myCarts.html");
                 }else if(data.code === 500){
@@ -171,6 +166,6 @@ $('.goods_describe_option').find('li').eq(0).click(function () {
     }else{
         alert('请先登录！');
     }
-})
+});
 
 

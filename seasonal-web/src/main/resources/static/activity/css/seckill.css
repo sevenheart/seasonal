@@ -1,6 +1,6 @@
 .seckill_main {
     width: 100%;
-    background-image: url(../../img/killing_bg.png);
+    background-image: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/killing_bg.png);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position-y: -100px;
@@ -17,7 +17,7 @@
     width: 36px;
     height: 36px;
     margin-top: 10px;
-    background-image: url(../../img/clock.png);
+    background-image: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/clock.png);
     background-repeat: no-repeat;
     background-size: 35px;
 }
@@ -35,7 +35,7 @@
 }
 
 .inner_wrap {
-    background-image: url("../../img/killing_bg2.png");
+    background-image: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/killing_bg2.png");
     background-repeat: no-repeat;
     background-size: 100%;
     width: 80%;
@@ -141,7 +141,7 @@
 }
 
 .ckill_good_shopping:hover i {
-    background: url("../../img/inner.png") no-repeat 0 -56px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -56px;
 }
 
 .ckill_good_shopping {
@@ -163,5 +163,5 @@
     height: 23px;
     display: block;
     float: left;
-    background: url("../../img/inner.png") no-repeat 0 -32px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -32px;
 }

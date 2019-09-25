@@ -7,15 +7,13 @@ function ajax_test(id, orderName, currPage, likeName) {
         async: false,
         success: function (data) { //请求成功完成后要执行的方法
             $(".goods_right_list").html("");
-            console.log(data);
             $.each(data, function (k, v) {
                 let html;
-                console.log(v);
                 html = '' +
                     '                    <div class="goods_block_main">\n' +
                     '                        <div class="glc_rt_gds" style="border: 1px solid rgb(255, 255, 255);background: #fff;">\n' +
                     '                            <div class="glc_rt_gds_img">\n' +
-                    '                                <a target="_blank" href="http://localhost:8080/main/view/detailGoods.html?id=' + v.id + '">\n' +
+                    '                                <a target="_blank" href="detailGoods.html?id=' + v.id + '">\n' +
                     '                                    <img alt="" src="' + v.composeGoodIcon + '"\n' +
                     '                                         style="height: 100%;width:100%">\n' +
                     '                                </a>\n' +
@@ -27,7 +25,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '                                <a href="" class="grgp_op"></a>\n' +
                     '                            </div>\n' +
                     '                            <div class="glc_rt_gds_des">\n' +
-                    '                                <a href="http://localhost:8080/main/view/detailGoods.html?id=' + v.id + '" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
+                    '                                <a href="detailGoods.html?id=' + v.id + '" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
                     '                                <div>规格：' + v.composeGoodWeight + 'g</div>\n' +
                     '                            </div>\n' +
                     '                            <div class="goods_control_div">\n' +
@@ -46,7 +44,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '                                </ul>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
-                    '                    </div>\n'
+                    '                    </div>\n';
                 $(".goods_right_list").append(html);
             });
             $(".add_goods").click(function () {
@@ -101,9 +99,9 @@ $(".sort_ul_li").click(function () {
 
     $(this).parent().children("li").css("backgroundColor", "white");
     $(this).parent().children("li").css("color", "#666");
-    $(this).parent().children("li").css("background", 'white url("../../img/inner.png") no-repeat 50px -82px');
+    $(this).parent().children("li").css("background", 'white url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/indexinner.png") no-repeat 50px -82px');
     $(this).css("color", "white");
-    $(this).css("background", " #e51e13 url('../../img/inner.png') no-repeat 48px -99px");
+    $(this).css("background", " #e51e13 url('https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png') no-repeat 48px -99px");
 
 });
 $("#sort_type_1").click(function () {
@@ -126,7 +124,6 @@ function addGoodsToCart(obj, id) {
             dataType: 'json',
             data: {'userId': userId, 'goodId': goodId, 'goodCount': goodCount},
             success: function (data) {
-                console.log('success:' + JSON.stringify(data));
                 if (data.code === 200) {
                     alert('添加入购物车成功');
                 }else if(data.code === 500){
@@ -134,7 +131,6 @@ function addGoodsToCart(obj, id) {
                 }
             },
             error: function (data) {
-                console.log('error:' + data);
                 alert('添加入购物车失败');
             }
         });

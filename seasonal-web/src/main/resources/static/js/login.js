@@ -1,6 +1,7 @@
 let userId;
 let userName;
 let login_html;
+//页面自动加载，判断是否自动登录，并完成自动登录
 
 //初始化地图
 var callbackUrl = '&callback=onLoad';//网页初始化地图服务回调函数

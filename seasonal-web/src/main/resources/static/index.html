@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>果酷</title>
+    <link rel="shortcut icon" href="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/icon.ico"/>
+    <title>果酷❤首页</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body onload="checklocalStorage()">
@@ -262,7 +263,7 @@
 <script>
     $(".sousuo").click(function () {
         console.log($("#sousuo-id-txt").val());
-        $(location).attr('href', "http://localhost:8080/main/view/getGoodsList.html?likeName=" + $("#sousuo-id-txt").val());
+        $(location).attr('href', "main/view/getGoodsList.html?likeName=" + $("#sousuo-id-txt").val());
     });
 </script>
 </html>

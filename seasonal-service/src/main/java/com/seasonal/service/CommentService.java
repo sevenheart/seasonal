@@ -27,9 +27,10 @@ public interface CommentService {
 
     /**
      * 插入一条评论
+     * 修改数据库的
      * @param comment
      */
-    int insertComment(Comment comment);
+    int commentAndUpdate(Comment comment);
 
     /**
      * 添加一条一级评论的回复

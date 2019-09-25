@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户登录</title>
+    <link rel="shortcut icon" href="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/icon.ico"/>
+    <title>果酷❤用户登录</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="../../js/index.js"></script>
-    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="../../js/login.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+
 </head>
 <body>
 <div class="p-login">
@@ -22,7 +24,7 @@
                 <a href="registration.html" class="reg-btn">注册</a></div>
         </div>
     </div>
-    <div class="body">
+    <div class="body" onload="lastIp()">
         <div class="wrap clearfix">
             <div class="login-logo"></div>
             <div class="login-area" id="j-loginArea">
@@ -69,7 +71,7 @@
                             <span id="verifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-verifyCode"
                                   style="display:none;"></span>
                             <span id="verifyCodeImgParent" class="pass-verifyCodeImgParent">
-                                <img id="verifyCodeImg" class="pass-verifyCode" src="../../img/login/small_blank.gif">
+                                <img id="verifyCodeImg" class="pass-verifyCode" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/small_blank.gif">
                             </span>
                             <a id="verifyCodeChange" href="#" class="pass-change-verifyCode">换一张</a>
                             <span id="verifyCodeError" class="pass-error pass-error-verifyCode"></span>
@@ -85,7 +87,7 @@
                             </a>
                         </p>
                         <p id="submitWrapper" class="pass-form-item pass-form-item-submit">
-                            <input id="submit" type="submit" value="登录" class="pass-button pass-button-submit">
+                            <input id="submit" type="submit" value="登录" class="pass-button pass-button-submit" onmouseover="lastIp()">
                         </p>
                     </form>
                 </div>

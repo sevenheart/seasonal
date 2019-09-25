@@ -8,8 +8,6 @@
     <link rel='stylesheet' href='../../css/style.css' type='text/css'/>
     <!--    外部模板样式-->
     <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
-    <link rel="stylesheet" href="../css/main.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/subtle-slideshow.css">
     <link rel="stylesheet" href="../css/retistrationAgreement.css">
 
 </head>
@@ -173,7 +171,7 @@
 
     </div>
     <div class="footer">
-        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
+        <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg" style="width: 100%"/>
     </div>
 </div>
 
@@ -182,37 +180,5 @@
 <script src="../../jquery/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../../js/login.js"></script>
 <script src="../../js/global.js"></script>
-<script src="../js/goods.js"></script>
-<script src="../js/main.js"></script>
-<script src="../js/jquery.subtle-slideshow.js"></script>
-<script>
-    // These are te default settings.
-    $('#slides').slideshow({
-        randomize: true,      // Randomize the play order of the slides.
-        slideDuration: 5000,  // Duration of each induvidual slide.
-        fadeDuration: 0,    // Duration of the fading transition. Should be shorter than slideDuration.
-        animate: true,        // Turn css animations on or off.
-        pauseOnTabBlur: true, // Pause the slideshow when the tab is out of focus. This prevents glitches with setTimeout().
-        enableLog: false      // Enable log messages to the console. Useful for debugging.
-    });
-    $(".search_button").click(function () {
-        $(location).attr('href', "http://localhost:8080/main/view/getGoodsList.html?likeName=" + $(".search").val());
-    });
 
-    $(".main_left_div_button").click(function () {
-        let btnValue = $(this).attr("value");
-        console.log(btnValue);
-        if (btnValue === '1') {
-            $(location).attr('href', "getGoodsList.html?classifyId=1");
-        } else if (btnValue === '2') {
-            $(location).attr('href', "getGoodsList.html?classifyId=4");
-        } else if (btnValue === '3') {
-            $(location).attr('href', "getGoodsList.html?classifyId=11");
-        } else if (btnValue === '4') {
-            $(location).attr('href', "getGoodsList.html?classifyId=17");
-        } else {
-
-        }
-    });
-</script>
 </html>

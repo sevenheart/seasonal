@@ -61,7 +61,7 @@ $("#ctf-js").click(function () {
         '            <li class="c-f-li">3.成功提交订单</li>\n' +
         '        </ul>\n' +
         '    </div>');
-    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -303px");
+    $("#c-f-img").css("background", "url(\"https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/cart/cart_main.png\") no-repeat 0px -303px");
 
     $.ajax({
         url: "/address/selectalladdress",
@@ -227,11 +227,11 @@ $("#ctf-js").click(function () {
                         '            <li class="c-f-li c-f-li-cur">3.成功提交订单</li>\n' +
                         '        </ul>\n' +
                         '    </div>');
-                    $("#c-f-img").css("background", "url(\"../../img/cart/cart_main.png\") no-repeat 0px -326px");
+                    $("#c-f-img").css("background", "url(\"https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/cart/cart_main.png\") no-repeat 0px -326px");
                     cart.append('<div style="width: 80%;height: 400px;margin: 50px auto">\n' +
                         '    请在新页面支付订单后，耐心等待配送，祝您用餐愉快！    \n' +
                         '    </div>');
-                    window.open('_blank').location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
+                    window.open().location = '../../order/view/orderUnpaid.html?orderId=' + orderId;
                 }
             }
         });
