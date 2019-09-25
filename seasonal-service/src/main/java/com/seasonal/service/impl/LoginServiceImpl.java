@@ -2,7 +2,6 @@ package com.seasonal.service.impl;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
-import com.seasonal.cookie.MyCookie;
 import com.seasonal.ip.GetIp;
 import com.seasonal.mapper.LoginFromMapper;
 import com.seasonal.mapper.UserInfoMapper;
@@ -15,8 +14,6 @@ import net.sf.json.JsonConfig;
 import net.sf.json.processors.JsonValueProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.Cookie;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,25 +28,23 @@ public class LoginServiceImpl implements LoginService {
     private final RedisUtil redisUtil;
     private final GetIp getIp;
     private final ShortMessageVerification shortMessageVerification;
-    private final MyCookie myCookie;
 
     @Autowired
-    public LoginServiceImpl(LoginFromMapper loginFrom,UserInfoMapper userInfoMapper, RedisUtil redisUtil, GetIp getIp, ShortMessageVerification shortMessageVerification, MyCookie myCookie) {
+    public LoginServiceImpl(LoginFromMapper loginFrom,UserInfoMapper userInfoMapper, RedisUtil redisUtil, GetIp getIp, ShortMessageVerification shortMessageVerification) {
         this.loginFrom = loginFrom;
         this.userInfoMapper = userInfoMapper;
         this.redisUtil = redisUtil;
         this.getIp = getIp;
         this.shortMessageVerification = shortMessageVerification;
-        this.myCookie = myCookie;
     }
 
-
+    //根据手机号码查找数据
     @Override
     public LoginFrom findRegistrationPhone(String identifier) {
-        System.out.println("serviceimpl:"+identifier);
         return loginFrom.findRegistrationPhone(identifier);
     }
 
+    //登录验证
     @Override
     public Object findLogin(String identifier, String credential) {
         //Json对sql.data的转换器
@@ -65,7 +60,7 @@ public class LoginServiceImpl implements LoginService {
                 return arg1 == null ? "" : sd.format(arg1);
             }
         });
-
+        //保存到RedisUtil
         redisUtil.setHash();
         if (redisUtil.get("findLogin") == loginFrom.findLogin(identifier, credential)) {
             return redisUtil.get("findLogin");
@@ -75,6 +70,7 @@ public class LoginServiceImpl implements LoginService {
         return loginFrom.findLogin(identifier, credential);
     }
 
+    //登录成功后的信息修改
     @Override
     public int updateMessage(String identifier) {
         //获取当前ip地址
@@ -90,6 +86,7 @@ public class LoginServiceImpl implements LoginService {
         return num;
     }
 
+    //获取当前IP地址
     @Override
     public String getIpNow() {
         //获取当前ip地址
@@ -98,9 +95,9 @@ public class LoginServiceImpl implements LoginService {
         return loginIpNow;
     }
 
+    //生成短信验证码
     @Override
     public String sendShortMessage(String identifier) {
-
         //生成一个验证码
         shortMessageVerification.setNewcode();
         //获取
@@ -123,19 +120,20 @@ public class LoginServiceImpl implements LoginService {
         return code;
     }
 
+    //用户注册信息添加
     @Override
     public String insertUserMessage(String identifier, String credential) {
         //当前时间
         Date currentTime = new Date(System.currentTimeMillis());
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
         String retStrFormatNowDate = sdFormatter.format(currentTime).replace("-","").substring(2);
-
+        //生成用户ID
         String userId = retStrFormatNowDate + UUID.randomUUID().toString().replace("-","").substring(27);
         System.out.println(userId);
+        //生成用户昵称
         String userName = UUID.randomUUID().toString().replace("-","").substring(24);
-
+        //用户注册方式
         String identityType = "Phone";
-
         //获取当前ip地址
         String loginIp = getIp.publicip();
         int num = loginFrom.insertUserMessage(userId, identityType, credential, identifier, loginIp, currentTime);
@@ -145,13 +143,4 @@ public class LoginServiceImpl implements LoginService {
         }
         return null;
     }
-
-    @Override
-    public boolean setCookie(String identifier, String credential, String check) {
-        myCookie.saveCookie(identifier, credential, check);
-        System.out.println();
-        return false;
-    }
-
-
 }

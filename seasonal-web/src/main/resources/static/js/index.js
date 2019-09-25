@@ -1,11 +1,11 @@
 //自动登录检测
 function checklocalStorage() {
-    var storage = window.localStorage;
+    var storage = window.localStorage;//获取登录信息
     var identifier = storage['identifier'];
     var credential = storage["credential"];
     var check = storage['check'];
     if (identifier !== "" && credential !== "" && check === "true") {
-        $.ajax({
+        $.ajax({ //修改登录信息，重新保存localStorage
             url: "/login",
             type: "post",
             dataType: "json",
