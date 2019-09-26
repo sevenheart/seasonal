@@ -1,6 +1,3 @@
-if(userId === undefined){
-    $(location.href ="../../login/view/login.html");
-}
 $(".main_right_function_order_menu li").click(function(){
     $(this).parent().children("li").removeClass("currentmenu1");
     $(this).addClass("currentmenu1");

@@ -204,7 +204,6 @@ public class LoginController {
     //表单跳转
     @RequestMapping(value = "isLogin")
     public String isLogin() {
-        System.out.println("llllll");
-        return "redirect:index";
+        return "redirect:index.html";
     }
 }
