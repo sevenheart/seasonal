@@ -10,9 +10,10 @@
     <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/collections.css">
-    <style>
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/orders.css">
+<style>
+
+</style>
 </head>
 <body id="main">
 
@@ -56,7 +57,7 @@
 
 <div id="react">
     <div class="page index" data-reactroot="">
-        <div class="collections-container clearfix">
+        <div class="orders-container">
             <div style="float:left">
                 <div class="orders-link-box">
                     <div class="link-group">
@@ -83,14 +84,14 @@
 
                     <div class="link-group">
                         <p class="title"><a href=""
-                                                    >通知</a></p>
+                                                   >通知</a></p>
 
                         <ul class="link-ul">
                             <li>
                                 <a href="">消息通知</a>
                             </li>
                             <li>
-                                <a href="https://www.meituan.com/collections/#tab=poi">系统通知</a>
+                                <a href="">系统通知</a>
                             </li>
                         </ul>
                     </div>
@@ -133,60 +134,111 @@
                 </div>
 
             </div>
-
-            <div class="collections-box">
+            <div class="orders-box clearfix">
                 <div class="orders">
-                    <div style="margin-left: 2em" class="orders-head  clearfix">
-                        <a href="#tab=poi">
-                            <ul class="orders-ul">
-                                <li class="active">收藏的商品</li>
-                            </ul></a>
+                    <div class="orders-head">
+                        <ul class="orders-ul clearfix">
+                            <li class="">待评价</li>
+                        </ul>
                     </div>
+                    <!--<div class="orders-body">
 
+                    </div>-->
+                    <div class="orders-body">
+                      <!--  //点击的时候orders下重新拼接-->
+                        <div class="order-item clearfix">
+                            <div class="order-img">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <div><img src=
+                                                      "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
+                                              class="image"></div></a>
+                            </div>
 
-                    <div class="col-poi">
-                        <div class="col-item clearfix">
-                            <div class="item-img"><img src="//p1.meituan.net/deal/201209/17/3_0917161201.jpg@200w_112h_1e_1c"
-                                                       class="image"></div>
+                            <div class="order-info info-box">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
 
-                            <div class="item-info">
-                                <p class="poi-name">万达影城(平江IMAX店)</p>
+                                <p class="info">商品数量：2个</p>
 
-                                <div class="rate-stars">
-                                    <ul class="rate-stars-ul rate-stars-dark"></ul>
-
-                                    <ul class="rate-stars-ul rate-stars-light" style="width: 100%;">
-                                    </ul>
-                                </div>
 
                             </div>
 
-                            <div class="btn-box">
-                                <a href="https://www.meituan.com/shop/1560421/" class=
-                                        "link show-deal" target="_blank">进入商家</a>
-
-                                <a href="https://www.meituan.com/shop/1560421/" class=
-                                        "link show-deal" target="_blank">删除</a>
+                            <div class="order-price">
+                                总价：¥73.8
                             </div>
+
+                            <div class="order-status">
+                                已支付
+                            </div>
+
+                            <div class="order-btn"></div>
+                        </div>
+                        <div class="order-item clearfix">
+                            <div class="order-img">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <div><img src=
+                                                      "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
+                                              class="image"></div></a>
+                            </div>
+
+                            <div class="order-info info-box">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
+
+                                <p class="info">商品数量：2个</p>
+
+
+                            </div>
+
+                            <div class="order-price">
+                                总价：¥73.8
+                            </div>
+
+                            <div class="order-status">
+                                未评论
+                            </div>
+
+
+                            <div class="order-btn"></div>
+                        </div>
+                        <div class="order-item clearfix">
+                        <div class="order-img">
+                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                               target="_blank">
+                                <div><img src=
+                                                  "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
+                                          class="image"></div></a>
                         </div>
 
+                        <div class="order-info info-box">
+                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                               target="_blank">
+                                <p class="order-title" >三分果盒：夏日酷爽等</p></a>
+
+                            <p class="info">商品数量：2个</p>
+
+                        </div>
+
+                        <div class="order-price">
+                            总价：¥73.8
+                        </div>
+
+                        <div class="order-status">
+                            已支付
+                        </div>
+                        <div class="order-btn"></div>
                     </div>
-                </div>
 
-                <div class="page-box" style="display: block;">
-                    <nav class="mt-pagination">
-                        <ul class="clearfix">
-                            <li class="pagination-item select num-item">
-                                <a href="javascript:void(0);">1</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div class="btn-box"><a class="left-arrow iconfont icon-btn_left "></a><a
+                            class="right-arrow iconfont icon-btn_right btn-active"></a></div>
                 </div>
-
-                <div class="page-box" style="display: none;"></div>
             </div>
         </div>
-
+    </div>
     </div>
 </div>
 
@@ -197,5 +249,6 @@
 
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
-<script src="../../js/login.js"></script>
+<!--<script src="../../js/login.js"></script>-->
+<script src="../js/orders.js"></script>
 </html>
