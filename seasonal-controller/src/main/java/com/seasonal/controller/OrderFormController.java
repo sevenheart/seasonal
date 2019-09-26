@@ -45,24 +45,19 @@ public class OrderFormController {
 
     @RequestMapping("FindAllorderFormById")
     @ResponseBody
-    public ResultData findAllOrderFormByUserId(String userId){
-        ResultData resultData = new ResultData();
+    public Object findAllOrderFormByUserId(String userId){
         List<OrderForm> orderForms = orderFormService.findAllOrderFormByUserId(userId);
-        if(orderForms != null&& orderForms.size()>0 ){
+        if(orderForms != null && orderForms.size() > 0 ){
             System.out.println("结果是");
             for (OrderForm x:orderForms) {
                 System.out.println(x.toString());
             }
             //查找成功
-            resultData.setData(0);
-            resultData.setData(orderForms);
+            return ResultUtil.success(orderForms);
         }else {
             //查找失败
-            resultData.setData(1);
-            resultData.setMessage("不存在记录或查找失败！");
+            return ResultUtil.fail(100, "不存在记录或查找失败！");
         }
-
-        return resultData;
     }
 
 }
