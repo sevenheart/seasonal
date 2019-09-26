@@ -33,6 +33,7 @@ function lastIp() {
 
 //账号
 $(document).on('click', '.pass-form-normal .pass-text-input-userName', function () {
+    $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error span').remove();
     $(this).css('color', '#F69');
     $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-userName').css('background-position', '0 -115px');
@@ -72,6 +73,7 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
 
 //密码
 $(document).on('click', '.pass-form-normal .pass-text-input-password', function () {
+    $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error span').remove();
     $(this).css('color', '#F69');
     $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-password').css('background-position', '0 -24px');
@@ -92,6 +94,8 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
 //表单提交，判断输入信息
 $(document).on('submit', '.pass-form-normal', function () {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
+    $('.pass-form-normal .pass-generalErrorWrapper a').remove();
+    pass_generalError_error.text('');
     var flag = false;
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
     var credential = $('.pass-form-normal .pass-text-input-password').val();
@@ -160,13 +164,16 @@ function login(identifier, credential, flag, check) {
                 if (data.code === 200) {
                     savelocalStorage(data, check);//保存localStorage
                     flag = true
-                } else {
-                    html = '用户名或密码错误，请重新输入或' +
+                } else if (data.code === 100) {
+                    html = '<span id = "password_error">密码错误，请重新输入或' +
                         '<a href="' +
                         '#">' +
                         '找回密码' +
-                        '</a>';
-                    $('.pass-form-normal .pass-generalErrorWrapper').html(html);
+                        '</a></span>';
+                    pass_generalError_error.html(html);
+                } else {
+                    pass_generalError_error.text('');
+                    pass_generalError_error.append("这个手机号还未注册，请先注册");
                 }
             }
         })
