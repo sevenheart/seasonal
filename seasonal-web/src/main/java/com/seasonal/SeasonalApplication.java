@@ -20,8 +20,10 @@ public class SeasonalApplication {
     public static void main(String[] args) {
         SpringApplication.run(SeasonalApplication.class, args);
     }
+
     /**
      * http重定向到https
+     *
      * @return
      */
     @Bean

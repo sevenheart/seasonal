@@ -327,6 +327,9 @@ function showorderform(data) {
 
     })
 }
+
+
+
 /*展示商品评论状态在showorderform中调用
 * data是详细商品的信息
 *
