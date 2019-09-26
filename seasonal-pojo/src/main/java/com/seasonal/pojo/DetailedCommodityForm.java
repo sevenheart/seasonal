@@ -13,6 +13,7 @@ public class DetailedCommodityForm {
     private Integer goodCount;
     private BigDecimal commodityMoney;
     private String orderId;
+    private String userId;
     private Integer iscomment;
     private Integer goodType;
     private Date createTime;
