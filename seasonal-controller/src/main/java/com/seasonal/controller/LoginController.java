@@ -45,15 +45,16 @@ public class LoginController {
     @RequestMapping(value = "login")
     @ResponseBody
     public Object userMessage(String identifier, String credential, HttpSession session) {
-        LoginFrom loginFrom = (LoginFrom) loginService.findLogin(identifier, credential);
-        if (loginFrom != null) {
-            System.out.println(loginFrom);
-            session.setAttribute("userId", loginFrom.getUserId());
-        }
+        LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
         if (loginFrom != null){
-            return ResultUtil.success(loginFrom);
+            if (credential.equals(loginFrom.getCredential())){
+                session.setAttribute("userId", loginFrom.getUserId());
+                return ResultUtil.success(loginFrom);
+            } else {
+                return ResultUtil.fail(100,"密码错误");
+            }
         } else {
-            return ResultUtil.fail(100,"登录信息错误");
+            return ResultUtil.fail(500,"账号不存在");
         }
     }
 
@@ -204,7 +205,6 @@ public class LoginController {
     //表单跳转
     @RequestMapping(value = "isLogin")
     public String isLogin() {
-        System.out.println("llllll");
-        return "redirect:index";
+        return "redirect:index.html";
     }
 }
