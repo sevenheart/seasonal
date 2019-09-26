@@ -56,6 +56,8 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.insertComment(comment);
         if (update>0){
             System.out.println("修改评论状态成功！！插入评论不知道成功没有！！");
+        }else {
+            System.out.println("修改评论状态失败");
         }
         return update;
     }

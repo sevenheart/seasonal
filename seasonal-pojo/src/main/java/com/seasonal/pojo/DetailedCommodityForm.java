@@ -15,6 +15,7 @@ public class DetailedCommodityForm {
     private String orderId;
     private String userId;
     private Integer iscomment;
+    private Integer commentId;
     private Integer goodType;
     private Date createTime;
     private Date updateTime;
