@@ -39,10 +39,6 @@ public class CartFormController {
     @ResponseBody
     public Object findCartFormById(String userId) {
         List<CartForm> cartFormList = cartFormService.findCartFormById(userId);
-        for (CartForm cart:cartFormList) {
-            System.out.println("nihao");
-            System.out.println(cart.toString());
-        }
         if(cartFormList != null && cartFormList.size() > 0){
             return ResultUtil.success(cartFormList);
         }else{

@@ -31,15 +31,6 @@ public interface LoginFromMapper {
     LoginFrom findRegistrationPhone(String identifier);
 
     /**
-     * 登录验证
-     *
-     * @param identifier
-     * @param credential
-     * @return
-     */
-    LoginFrom findLogin(String identifier, String credential);
-
-    /**
      * 登录信息修改
      * @param identifier
      * @param currentTime

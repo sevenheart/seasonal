@@ -4,7 +4,6 @@ var addressAndDistance = new Array();
 
 // 初始化路线距离
 var planDistance = 0.0;
-var planMLocation;
 let deliveryAddress;
 
 // ajax请求从数据库获取地址进行路线规划，并且计算距离
@@ -17,22 +16,22 @@ function getMerchantAddress() {
         success: function (data) {
             if(data.code === 200) {
                 $.each(data.data, function (i, value) {
-                    // 根据起终点名称规划驾车导航路线
-                    driving.search([
-                        {keyword: personAddress.formattedAddress, city: personAddress.city},
-                        {keyword: value.address, city: value.city}//获取详细地址和市
-                    ], function (status, result) {
-                        // 判断高德地图接口是否路线规划成功
-                        if (status === 'complete') {
+                    // 直接计算两点距离
+                    geocoder.getLocation(value.address, function (status, result) {
+                        if (status === 'complete' && result.geocodes.length) {
+                            let mLnglat = result.geocodes[0].location;
+                            let pLnglat = personAddress.position;
+                            let distance = pLnglat.distance(mLnglat);
                             // 将获取得到的地址和路线规划的距离整合
                             let mAddress = {
                                 'addressData': value,
-                                'distance': result.routes[0].distance
+                                'lnglat': mLnglat,
+                                'pickupDistance': distance
                             };
                             // 存入全局变量中
                             addressAndDistance.push(mAddress);
-                        } else {
-                            alert('获取地址失败，请刷新重试');
+                            //console.log(addressAndDistance);
+                            //console.log(value.address +'distance:'+ Number(mAddress.pickupDistance * 0.001).toFixed(2));
                         }
                     });
                 });
@@ -44,32 +43,47 @@ function getMerchantAddress() {
     });
 }
 
+// 封装成点，放入到点列表中
+function pushMarkers(value) {
+    //console.log('value:'+JSON.stringify(value));
+    if(addressNum < 5) {
+        //console.log('position:'+value.lnglat);
+        let marker = new AMap.Marker({
+            position: value.lnglat,
+            icon: new AMap.Icon({
+                image: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-' + ++addressNum + '.png',
+                imageSize: new AMap.Size(26, 36)
+            }),
+            title: '地址:' + value.addressData.address + ',距您:' + Number(value.pickupDistance * 0.001).toFixed(2) + '公里', // 点标签
+            offset: new AMap.Pixel(-20, -10), // 位置偏移
+        });
+        // 设置点的点击事件
+        showWindow(marker, value);
+        //console.log(marker.getPosition());
+        // 将点存入点列表的全局变量中
+        markers.push(marker);
+    }
+}
+
 // 正向地理编码
-function getGeoCode(data) {
-    geocoder.getLocation(data.addressData.address, function (status, result) {
-        if (status === 'complete' && result.geocodes.length) {
+function getGeoCode(city, address) {
+    geocoder.getLocation(address, function (status, result) {
+        if (status === 'complete') {
             let lnglat = result.geocodes[0].location;
-            if (addressNum < 5) {
-                var marker = new AMap.Marker({
-                    position: lnglat,
-                    icon: new AMap.Icon({
-                        image: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-' + ++addressNum + '.png',
-                        imageSize: new AMap.Size(26, 36)
-                    }),
-                    title: '地址:' + data.addressData.address + ',距您:' + Number(data.distance * 0.001).toFixed(2) + '公里', // 点标签
-                    offset: new AMap.Pixel(-20, -30), // 位置偏移
-                });
-                // 设置点的点击事件
-                showWindow(marker, data);
-                // 将点存入点列表的全局变量中
-                markers.push(marker);
-                // 将所有点放入到地图中
-                map.add(markers);
-                // 以用户的点为中
-                map.setFitView(personAddress.location);
-            }
-        } else {
-            console.log('根据地址查询位置失败');
+            $.each(addressAndDistance, function (i, value) {
+                console.log('vlnglat:'+value.lnglat)
+                var calDistance = Math.round(lnglat.distance(value.lnglat));
+                console.log('calDistance:'+calDistance)
+                if(planDistance === 0 || planDistance > calDistance) {
+                    planDistance = calDistance;
+                    console.log('planDistance:'+planDistance)
+                    deliveryAddress = {
+                        'city': value.addressData.city,
+                        'address': value.addressData.address,
+                    };
+                    console.log('in deliveryAddress:'+deliveryAddress)
+                }
+            });
         }
     });
 }
@@ -82,14 +96,14 @@ function showWindow(marker, data) {
         infoWindow.open(map, marker.getPosition());
     });
 
-    let title = data.addressData.merchantName + '<span style="font-size:11px;color:#F00;">距离:' + Number(data.distance * 0.001).toFixed(2) + '公里</span>',
+    let title = data.addressData.merchantName + '<span style="font-size:11px;color:#F00;">距离:' + Number(data.pickupDistance * 0.001).toFixed(2) + '公里</span>',
         content = [];
     content.push("<img src='http://tpc.googlesyndication.com/simgad/5843493769827749134' alt=''>地址：" + data.addressData.city + data.addressData.address);
     content.push("电话：" + data.addressData.merchantPhone);
     let infoWindow = new AMap.InfoWindow({
         isCustom: true,  //使用自定义窗体
         content: createInfoWindow(title, content.join("<br/>")),
-        offset: new AMap.Pixel(16, -45)
+        offset: new AMap.Pixel(16, -35)
     });
 
     //构建自定义信息窗体
@@ -143,48 +157,13 @@ function showWindow(marker, data) {
 function planningRoute(city, address) {
     // 遍历商家地址列表，根据用户提供的地址进行路线规划
     driving.search([
-        {keyword: address, city: city},//获取详细地址和市
-        {keyword: deliveryAddress.address, city: deliveryAddress.city}
+        {keyword: deliveryAddress.address, city: deliveryAddress.city},//获取详细地址和市
+        {keyword: address, city: city}
     ], function (status, result) {
         if (status === 'complete') {
             console.log('绘制路线完成')
-            //console.log(address+'距离为:' + result.routes[0].distance * 0.001 + '公里')
-            if (planDistance === 0.0 || planDistance > result.routes[0].distance * 0.001) {
-                planDistance = result.routes[0].distance * 0.001;
-                planMLocation = {
-                    'city': city,
-                    'address': address
-                };
-            }
-            console.log('当前最近的距离为:'+planDistance)
-            delivery_money = parseInt(planDistance);
-            order_money += delivery_money;
-            $("#allot_price").text("配送费：￥" + delivery_money);
-            $("#order_money").text(order_money);
         } else {
             console.log('获取数据失败：' + result);
         }
     });
 }
-
-/*// 计算距离
-function calDistance(city, address) {
-    var sellerPosition
-    var dis
-    geocoder.getLocation(address, function(status, result) {
-        if(status === 'complete'){
-            var nowPosition = result.geocodes[0].location
-            $.each(markers, function (i, value) {
-                console.log('marker:'+value.getPosition())
-                if(dis === 0.0 || dis > Math.round(value.getPosition().distance(nowPosition))) {
-                    dis = Math.round(value.getPosition().distance(nowPosition))
-                    sellerPosition = value.getPosition()
-                }
-            })
-            console.log('最短距离为:'+dis)
-            planningRoute(sellerPosition)
-        }else{
-            console.log('找不到地址')
-        }
-    })
-}*/

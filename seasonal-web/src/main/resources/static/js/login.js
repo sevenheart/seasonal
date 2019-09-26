@@ -23,7 +23,10 @@ let markerOptions;
 window.onLoad = function () {
     map = new AMap.Map('container', {});
     //构造路线导航类
-    driving = new AMap.Driving({});
+    // 开启路线规划的路径显示
+    driving = new AMap.Driving({
+        map: map
+    });
     //地理编码
     geocoder = new AMap.Geocoder({
         city: "", // 城市默认：“全国”

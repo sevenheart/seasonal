@@ -17,9 +17,6 @@
     <select id="findRegistrationPhone" resultMap="pl">
        select * from login_from where identifier=#{identifier}
     </select>
-    <select id="findLogin" resultMap="pl">
-        select * from login_from where identifier=#{identifier}and credential=#{credential}
-    </select>
     <update id="updateMessage">
         update login_from set  login_ip=#{loginIp},update_time=#{currentTime} where identifier=#{identifier}
     </update>
