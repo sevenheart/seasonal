@@ -1,6 +1,7 @@
 let userId;
 let userName;
 let login_html;
+let userImg;
 //页面自动加载，判断是否自动登录，并完成自动登录
 
 //初始化地图
@@ -43,6 +44,7 @@ $.ajax({
         if (data.code === 200) {
             userId = data.data[0].userId;
             userName = data.data[0].userName;
+            userImg = data.data[0].userImg;
             login_html = '<li class="login">\n' +
                 '                    <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg">\n' +
                 '                    <span class="login-span">用户名：</span>\n' +

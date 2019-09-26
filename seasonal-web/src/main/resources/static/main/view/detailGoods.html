@@ -29,7 +29,7 @@
         <hr>
         <div class="header_main">
             <form action="" class="parent">
-                <input type="text" class="search" placeholder="搜索">
+                <input type="text" class="search" placeholder="搜索" style="width: 322px;">
                 <input type="button" name="" id="" class="search_button">
             </form>
             <div class="hd">
@@ -252,8 +252,8 @@
             </div>
             <div class="goods_advertisement">
                 <div class="goods_signal">
-                    <div class="goods_signal_title">商品推荐</div>
-                    <div class="goods_signal_paddingtop">
+                    <div class="goods_signal_title " >商品推荐</div>
+                    <div class="goods_signal_paddingtop commontdiv currentdiv">
 
                         <a href="detailGoods.html?id=25" class="goods">
                             <img  alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/4_1.jpg"/>
@@ -281,10 +281,13 @@
                             <span class="goods_price">￥22.00</span>
                         </a>
                     </div>
-                    <div class="goods_signal_title">商品介绍</div>
+                    <div class="goods_signal_title"  >商品评论</div>
+                    <div class="commenthtml commontdiv" style="text-align: left;"></div>
+                    <div class="goods_signal_title" >商品介绍</div>
+                    <div class="goods_signal_describe goods_signal commontdiv">
+                    </div>
                 </div>
-                <div class="goods_signal_describe goods_signal">
-                </div>
+
             </div>
         </div>
     </div>
@@ -300,5 +303,21 @@
 <script src="../../js/global.js"></script>
 <script src="../js/detailGoods.js"></script>
 <script src="../js/main.js"></script>
+<script src="../../comment/js/jquery.comment.js"></script>
+<script>
+/*    $('.goods_signal_title').click(function () {
+        $('.goods_signal_describe').hide();
+        }
+    )*/
+
+    $('.commontdiv').hide();
+    $(".goods_signal_title").click(function () {
+        $('.commontdiv').hide();
+        $(this).next().show();
+    })
+$('.commenthtml').load('../../comment/view/demo-show.html');
+
+
+</script>
 
 </html>

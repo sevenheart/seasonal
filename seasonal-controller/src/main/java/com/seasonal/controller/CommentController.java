@@ -2,8 +2,10 @@ package com.seasonal.controller;
 
 
 import com.seasonal.pojo.Comment;
+import com.seasonal.pojo.DetailedCommodityForm;
 import com.seasonal.pojo.Responses;
 import com.seasonal.service.CommentService;
+import com.seasonal.service.DetailGoodService;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import net.sf.json.JSONObject;
@@ -25,6 +27,11 @@ public class CommentController {
 
     Calendar calendar = Calendar.getInstance();
 
+    DetailGoodService detailGoodService;
+    @Autowired
+    public  CommentController(DetailGoodService detailGoodService){
+        this.detailGoodService = detailGoodService;
+    }
     /**
      * 插入评论信息根据商品id插入
      * @return
@@ -41,7 +48,8 @@ public class CommentController {
         System.out.println("生成的评论id是"+comment_id);
         comment1.setComment_id(comment_id);
         System.out.println(comment1.toString());
-       // commentService.commentAndUpdate(comment1);
+        commentService.commentAndUpdate(comment1);
+//        ResultData resultData = ResultUtil.success(200,"查询成功了");
         return ResultUtil.success(200,"评论成功");
     }
 
@@ -70,16 +78,16 @@ public class CommentController {
 
     /**
      * 增加回复根据评论id增加
+     *  //传一个response，插入相应地方,完成回复功能，先插入然后再前端显示
      * @return
      */
-    @RequestMapping("upsertresponse")
+    @RequestMapping("UpserrtResponse")
     @ResponseBody
-    //传一个response，插入相应地方,完成回复功能，先插入然后再前端显示
-    public String upsertResponse(Responses responses){
+    public ResultData upsertResponse(Responses responses){
         String time = responses.getResponse_create_time();
         System.out.println( responses.toString());
-        //Responses response = responses;
-       // response.setId("02");
+        Responses response = responses;
+//        response.setId("02");
         // response.setResponse_user_img("http://tupiandizhi.com");
        /* response.setResponse_user_id("002");
         response.setResponse_user_name("2号用户");
@@ -87,9 +95,30 @@ public class CommentController {
         response.setResponse_content("这是2号用户给1楼的评论");
         response.setResponse_create_time(time);*/
         //根据评论id继续评论,前端后端生成一个
-       // commentService.addResponse(response);
+        commentService.addResponse(response);
 
-        return "成功";
+        return ResultUtil.success(200,"成了");
+    }
+
+    /**
+     * 根据userId去查找用户的所有未评论信息
+     * @param userId
+     * @return
+     */
+    @RequestMapping("FindNoCommentGoods")
+    @ResponseBody
+    public ResultData findAllNoCommentGoodsByUserId(String userId){
+        System.out.println("用户的额userid是"+userId);
+        //查到未评论的商品信息包括商品的详细信息
+        List<DetailedCommodityForm> list = detailGoodService.findNoCommentGoodsByUserId(userId);
+        ResultData resultData = new ResultData();
+        if(list.size()>0||null!=list){
+            resultData.setMessage("查找未评论信息成功");
+            resultData.setData(list);
+            resultData.setCode(200);
+            return resultData;
+        }
+        return ResultUtil.fail(300,"没有查询到想要的信息");
     }
 
 }
