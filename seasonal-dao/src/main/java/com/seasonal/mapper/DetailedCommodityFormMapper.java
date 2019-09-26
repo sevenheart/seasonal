@@ -29,4 +29,12 @@ public interface DetailedCommodityFormMapper {
      * @return
      */
     int updateCommentStates (String goodId,String orderId,String commentId);
+
+
+    /**
+     * 根据用户id查找未评论的订单中的详细信息以及商品详细信息
+     * @param userId
+     * @return
+     */
+    List<DetailedCommodityForm> findNoCommentGoodsByUserId(String userId);
 }

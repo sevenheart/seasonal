@@ -39,10 +39,6 @@ public class CartFormController {
     @ResponseBody
     public Object findCartFormById(String userId) {
         List<CartForm> cartFormList = cartFormService.findCartFormById(userId);
-        for (CartForm cart:cartFormList) {
-            System.out.println("nihao");
-            System.out.println(cart.toString());
-        }
         if(cartFormList != null && cartFormList.size() > 0){
             return ResultUtil.success(cartFormList);
         }else{
@@ -134,6 +130,8 @@ public class CartFormController {
             if (goodIdArray.get(i) != null) {
                 //创建一个商品
                 detailedCommodityForm = new DetailedCommodityForm();
+                //用户id存储在详细商品表中
+                detailedCommodityForm.setUserId(orderForm.getOrderUserId());
                 //商品创建时间
                 detailedCommodityForm.setCreateTime(new Date(System.currentTimeMillis()));
                 //商品修改时间

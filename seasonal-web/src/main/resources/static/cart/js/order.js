@@ -136,13 +136,19 @@ $("#ctf-js").click(function () {
         if (markers.length === 0) {
             // 遍历判断取出的所有地址中五公里内最近的五个点
             $.each(addressAndDistance, function (i, value) {
-                if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
+                if (Number(value.pickupDistance * 0.001).toFixed(2) > 3.0) {
                     // 若超出范围，则直接跳入下一个循环
                     return true;
                 }
                 // 五公里范围内的值进入地理编码，获取坐标
-                getGeoCode(value);
-            })
+                pushMarkers(value);
+            });
+
+            // 若坐标点列表有值，则直接显示到地图中
+            map.add(markers);
+
+            // 填入用户自己的坐标点
+            map.add(markerOptions);
         } else {
             // 若坐标点列表有值，则直接显示到地图中
             map.add(markers);
@@ -164,16 +170,7 @@ $("#ctf-js").click(function () {
         //移除用户自己的坐标点
         map.remove(markerOptions);
 
-        // 开启路线规划的路径显示
-        driving = new AMap.Driving({
-            //map: map
-        });
-
         let selectAddress = $('#allot_address_x');
-        deliveryAddress = {
-          'city': selectAddress.val(),
-          'address': selectAddress.text()
-        };
 
         delivery_way = 1;
         $("#allot_address").css("display", "block");
@@ -183,17 +180,8 @@ $("#ctf-js").click(function () {
 
         // 判断地址下拉列表是否选中值，若选中则直接进入路线规划
         if(selectAddress.val() !== '' && selectAddress.val() !== null){
-            $.each(addressAndDistance, function (i, value) {
-                allotAddressX(value.addressData.city, value.addressData.address);
-            });
+            allotAddressX(selectAddress.val(), selectAddress.text());
         }
-        setTimeout(function () {
-            console.log('最短距离为:'+planDistance);
-            driving = new AMap.Driving({
-                map: map
-            });
-            planningRoute(planMLocation.city, planMLocation.address);
-        }, 2000);
     });
 
     $("#og-f").click(function () {
@@ -248,17 +236,26 @@ $("#ctf-js").click(function () {
     // 遍历判断取出的所有地址中五公里内最近的五个点
     if ($pick_up.is(':checked')) {
         $.each(addressAndDistance, function (i, value) {
-            if (Number(value.distance * 0.001).toFixed(2) > 5.0) {
+            if (Number(value.pickupDistance * 0.001).toFixed(2) > 3.0) {
                 // 若超出范围，则直接跳入下一个循环
                 return true;
             }
-            // 五公里范围内的值进入地理编码，获取坐标
-            getGeoCode(value);
+            // 三公里范围内的值进入点创建，存入点列表
+            pushMarkers(value);
         });
+        // 将所有点放入到地图中
+        map.add(markers);
+        // 以用户的点为中
+        map.setFitView(personAddress.location);
     }
 });
 
 function allotAddressX(city, address) {
+    driving.clear();
+
+    order_money -= delivery_money;
+    delivery_money = 0;
+
     // city为下拉列表的value值，address为下拉列表的text值，分别表示城市、详细地址
     const $allot_address_x = $("#allot_address_x ");
     $("#og_name").text(html_address_name[$allot_address_x.get(0).selectedIndex]);
@@ -266,5 +263,17 @@ function allotAddressX(city, address) {
     delivery_address = address;
 
     // 根据city和address值进行路线规划，选出最短路径，并计算配送费
-    planningRoute(city, address);
+    getGeoCode(city, address);
+    setTimeout(function () {
+        console.log('deliveryAddress:'+ JSON.stringify(deliveryAddress));
+        console.log('最短距离为:'+planDistance * 0.001)
+        driving = new AMap.Driving({
+            map: map
+        });
+        delivery_money = parseInt(planDistance * 0.001);
+        order_money += delivery_money;
+        $("#allot_price").text("配送费：￥" + delivery_money);
+        $("#order_money").text(order_money);
+        planningRoute(city, address);
+    }, 500);
 }

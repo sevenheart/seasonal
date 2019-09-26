@@ -1,13 +1,14 @@
 package com.seasonal.pojo;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Document(collection = "bootComment")
 public class Comment {
-
+    @Id
     private String id;
     private  String comment_id;
     private String comment_goods_id;

@@ -3,23 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>评论插件</title>
-<link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css">
 <style>
+	.mytextarea {
+		width: 100%;
+		overflow: auto;
+		word-break: break-all;
+		height: 100px;
+		color: #000;
+		font-size: 1em;
+		resize: none;
+	}
 	.container{
 		width: 1000px;
-	}
-	.commentbox{
-		width: 900px;
-		margin: 20px auto;
-	}
-	.mytextarea {
-	    width: 100%;
-	    overflow: auto;
-	    word-break: break-all;
-	    height: 100px;
-	    color: #000;
-	    font-size: 1em;
-	    resize: none;
+		margin-left: 0px;
 	}
 	.comment-list{
 		width: 900px;
@@ -77,109 +74,243 @@
 <body>
 
 <div class="container">
-	<!--可以用做商品评论-->
-	<div class="commentbox">
-	<textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
-	<div class="btn btn-info pull-right" id="comment">评论</div>
-	</div>
 	<div class="comment-list">
-		<div class="comment-info">
-			<header><img src="img.jpg"></header>
-			<div class="comment-right">
-				<h3>匿名</h3>
-				<div class="comment-content-header"><span><i class="glyphicon glyphicon-time"></i> 2017-10-17 11:42:53</span><span><i class="glyphicon glyphicon-map-marker"></i>深圳</span></div>
-				<p class="content">mongodb 副本集配置副本集概念：就我的理解就是和主从复制 差不多，就是在主从复制的基础上多加了一个选举的机制。
-				复制集 特点：数据一致性 主是唯一的，没有Mysql 那样的双主结构大多数原则，集群存活节点小于二分之一是集群不可写，
-				只可读从库无法写入数据自动容灾通过下面的一个图来简单的了解下
-				配置过程：一、安装mongodb安装过程略，不懂得可以看前面的教程二、创建存储目录与配置文件创...</p>
-				<div class="comment-content-footer">
-					<div class="row">
-						<div class="col-md-10">
-							<span><i class="glyphicon glyphicon-pushpin"></i> 来自:win10 </span><span><i class="glyphicon glyphicon-globe"></i> chrome 55.0.2883.87</span>
-						</div>
-						<div class="col-md-2"><span class="reply-btn">回复</span></div>
-					</div>
-				</div>
-				<div class="reply-list"></div>
-			</div>
-		</div>
-		
-		<div class="comment-info">
-			<header><img src="img.jpg"></header>
-			<div class="comment-right">
-				<h3>匿名</h3>
-				<div class="comment-content-header"><span><i class="glyphicon glyphicon-time"></i> 2017-10-17 11:42:53</span><span><i class="glyphicon glyphicon-map-marker"></i>深圳</span></div>
-				<p class="content">mongodb 副本集配置副本集概念：就我的理解就是和主从复制 差不多，就是在主从复制的基础上多加了一个选举的机制。
-				复制集 特点：数据一致性 主是唯一的，没有Mysql 那样的双主结构大多数原则，集群存活节点小于二分之一是集群不可写，
-				只可读从库无法写入数据自动容灾通过下面的一个图来简单的了解下
-				 配置过程：一、安装mongodb安装过程略，不懂得可以看前面的教程二、创建存储目录与配置文件创...</p>
-				<div class="comment-content-footer">
-					<div class="row">
-						<div class="col-md-10">
-							<span><i class="glyphicon glyphicon-pushpin"></i> 来自:win10 </span><span><i class="glyphicon glyphicon-globe"></i> chrome 55.0.2883.87</span>
-						</div>
-						<div class="col-md-2"><span class="reply-btn">回复</span></div>
-					</div>
-				</div>
-				<div class="reply-list">
-					<div class="reply">
-						<div><a href="javascript:void(0)">匿名</a>:<a href="javascript:void(0)">@匿名</a><span>这写的是什么鬼东西。。。。</span></div>
-						<p><span>2017-10-17 11:42:53</span> <span class="reply-list-btn">回复</span></p>
-					</div>
-					<div class="reply">
-						<div><a href="javascript:void(0)">匿名</a>:<a href="javascript:void(0)">@匿名</a><span>这写的是什么鬼东西。。。。</span></div>
-						<p><span>2017-10-17 11:42:53</span> <span class="reply-list-btn">回复</span></p>
-					</div>
-					<div class="reply">
-						<div><a href="javascript:void(0)">匿名</a>:<a href="javascript:void(0)">@匿名</a><span>这写的是什么鬼东西。。。。</span></div>
-						<p><span>2017-10-17 11:42:53</span> <span class="reply-list-btn">回复</span></p>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		
 	</div>
 </div>
 
-<script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../js/jquery.comment.js" ></script>
-<script type="text/javascript" src="../../bootstrap/bootstrap.min.js"></script>
-<script type="text/javascript">
-	//初始化数据
-	var arr = [
-/*		{comment_id:1,comment_user_img:"img.jpg",comment_user_name:"帅大叔",beReplyName:"匿名",content:"同学聚会，看到当年追我的屌丝开着宝马车带着他老婆来了，他老婆是我隔壁宿舍的同班同学，心里后悔极了。",time:"2017-10-17 11:42:53",good_id:"商品id",comment_user_id:"评论人id",replyBody:[]},
-		{comment_id:2,comment_user_img:"img.jpg",comment_user_name:"匿名",beReplyName:"",content:"到菜市场买菜，看到一个孩子在看摊，我问：“一只鸡多少钱？” 那孩子回答：“23。” 我又问：“两只鸡多少钱？” 孩子愣了一下，一时间没算过来，急中生智大吼一声：“一次只能买一只！”",time:"2017-10-17 11:42:53",
-			good_id:"商品id",comment_user_id:"评论者id",replyBody:[]},
-		{comment_id:3,comment_user_img:"img.jpg",comment_user_name:"帅大叔",beReplyName:"匿名",content:"同学聚会，看到当年追我的屌丝开着宝马车带着他老婆来了，他老婆是我隔壁宿舍的同班同学，心里后悔极了。",time:"2017-10-17 11:42:53",good_id:"商品id",comment_user_id:"评论人id",replyBody:[]}*/
-	];
+<script type="text/javascript" src="/jquery/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/bootstrap/bootstrap.min.js"></script>
+<script src="../../js/login.js"></script>
 
 
-		$.post({
-			url: "/findallbyid",
-			data: {id: '01'},
-			dataType: "json",
-			success: function (data) {
-				arr= data.data;
-				console.log(arr)
-				//初始化评论
+<script>
+	function filterNum(num){
+		if(num < 10){
+			return "0"+num;
+		}else{
+			return num;
+		}
+	}
+	//获取当前时间
+	function getNowDateFormat(){
+		let nowDate = new Date();
+		let year = nowDate.getFullYear();
+		let month = filterNum(nowDate.getMonth()+1);
+		let day = filterNum(nowDate.getDate());
+		let hours = filterNum(nowDate.getHours());
+		let min = filterNum(nowDate.getMinutes());
+		let seconds = filterNum(nowDate.getSeconds());
+		return year+"-"+month+"-"+day+" "+hours+":"+min+":"+seconds;
+	}
 
-				$(function(){
-					$(".comment-list").addCommentList({data:arr,add:""});
-					/*	$("#comment").click(function(){
-                            var obj = new Object();
-                            obj.img="img.jpg";
-                            obj.replyName="匿名";
-                            obj.content=$("#content").val();
-                            obj.browse="深圳";
-                            obj.osname="win10";
-                            obj.replyBody="";
-                            $(".comment-list").addCommentList({data:[],add:obj});
-                        });*/
+	//创建comment的html
+	function crateCommentInfo(obj){
+		console.log("获得的是"+obj);
+		obj=JSON.parse(obj);
+		console.log(obj);
+		/*if(typeof(obj.comment_create_time) == "undefined" || obj.comment_create_time == ""){
+            obj.comment_create_time = getNowDateFormat();
+        }*/
+		//用户名和头像以及时间获取
+
+		var el = "<div class='comment-info'><header><img src='"+obj.comment_user_img+"'></header>" +
+				"<div class='comment-right'><h3>"+obj.comment_user_name+"</h3><h4 hidden"
+				+">"+obj.comment_user_id+"</h4></h4><div class='comment-content-header'><span>时间："+obj.comment_create_time+"</span>";
+
+		//评论内容获取
+		el = el+"</div><p class='content'>"+obj.comment_content+"</p><div class='comment-content-footer'><div class='row'><div class='col-md-10'></div>";
+
+		//获取评论的id
+		if(typeof(obj.comment_id) != "undefined" && obj.comment_id != ""){
+			el =el+"<div class='col-md-2'><span hidden class='commentid' >"+obj.comment_id+"</span>";
+		}
+		//商品id获取
+		if(typeof(obj.comment_goods_id) != "undefined" && obj.comment_goods_id != ""){
+			el =el+"<span hidden class='commentgoodsid' >"+obj.comment_goods_id+"</span>";
+		}
+		//品论人id获取
+		/*	if(typeof(obj.comment_user_id) != "undefined" && obj.comment_user_id != ""){
+                el = el + "<span hidden  class='commentuserid'>"+obj.comment_user_id+"</span>";
+            }*/
+		el = el + "<span class='reply-btn'>回复</span></div></div></div>" + "<div class='reply-list'>";
+		console.log("长度是"+obj);
+		if(obj.response !=undefined&& obj.response !=null){
+			let arr = obj.response;
+			for(let j=0;j<arr.length;j++){
+				let replyObj = arr[j];
+				el = el+createReplyComment(replyObj);
+			}
+		}
+		el = el+"</div></div></div>";
+		console.log(el)
+		return el;
+	}
+
+	//返回每个回复体内容
+	function createReplyComment(response){
+		let replyEl = "<div class='reply'><div><a href='javascript:void(0)' class='replyname'>"+"评论人："+response.response_user_name+"</a>:<a href='javascript:void(0)'></a><span>"+response.response_content+"</span></div>"
+				+ "<p><span>"+response.response_create_time+"</span><!-- <span class='reply-list-btn'>回复</span>--></p></div>";
+		return replyEl;
+	}
+
+	//点击回复
+	function replyClick(el){
+		console.log(el.attr("class"))
+		el.parent().parent().append("<div class='replybox'><textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea><span class='send'>发送</span></div>")
+				.find(".send").click(function(){
+			let response_content = $(this).prev().val();
+			/*var commentid =*/
+			if(response_content != ""){
+				let parentEl = $(this).parent().parent().parent().parent();
+				console.log(parentEl.attr("class"))
+				let obj = new Object();
+				//评论人姓名：获取当前元素的姓名
+				//商品评论评论人得id用来做通知。比对id确定是不是同一个用户在回复自己的评论
+				//obj.commentuserid=
+				//obj.response_user_id = el.parent().children(".commentuserid").html();
+				//通过全局获取姓名和id
+				//obj.response_user_name=el.parent().children(".commentuserid").html();
+				obj.commentid=el.parent().children(".commentid").html();
+				console.log("评论的id是"+el.parent().children(".commentid").html());
+				/*	if(el.parent().parent().hasClass("reply")){
+                        console.log("回复的回复1111");
+                        obj.beReplyName = el.parent().parent().find("a:first").text();
+                    }else{*/
+				console.log("回复2222");
+				obj.beReplyName=parentEl.find("h3").text();
+				obj.commentuserid=parentEl.find("h4").text();
+				console.log("comment的用户id是："+parentEl.find("h4").text());
+				/*}*/
+				obj.response_content=response_content;
+				obj.response_user_id=userId;
+				obj.response_user_name=userName;
+				obj.response_user_img=userImg;
+				obj.response_create_time = getNowDateFormat();
+				//先把回复插入数据库成功后再显示再前台
+				//只需要插入就完事了。
+				$.post({
+					url: "/UpserrtResponse",
+					data: obj,
+					dataType: "json",
+					success: function (data) {
+						console.log("回调成功了")
+						alert("评论成功");
+						let replyString = createReplyComment(obj);
+						//点击完发送后隐藏输入框
+						$(".replybox").remove();
+						parentEl.find(".reply-list").append(replyString);
+						windows.location.href="/user/view/comment.html";
+					},
+						error:function () {
+							alert("回复消息失败");
+							$(".replybox").remove();
+						}
 				})
+
+
+				//
+				/*.find(".reply-list-btn:last").click(function(){alert("不能回复自己");})*/;
+			}else{
+				alert("空内容");
+			}
+		});
+	}
+
+	function  addCommentList(options){
+		var defaults = {
+			data:[],
+			add:""
+		}
+		let option = options;
+		console.log("数据的长度是"+JSON.stringify(option.data));
+		//加载数据
+		if(option.data!=undefined&&option.data.length > 0){
+
+
+			let totalString = "";
+			//遍历一级评论
+			for(let i=0;i<option.data.length;i++){
+				//每个以及品论创建一个评论card
+				let objString = crateCommentInfo(JSON.stringify(option.data[i]));
+
+				totalString = totalString+objString;
+			}
+			$(".comment-list").append(totalString);
+
+			/*.find(".reply-btn").click(function(){
+					console.log("电极的类名是"+$(this).attr("class"));
+				if($(this).parent().parent().find(".replybox").length > 0){
+
+					$(".replybox").remove();
+				}else{
+
+					$(".replybox").remove();
+					//在这里存储回复信息
+
+					replyClick($(this));
+				}
+			});*/
+			/*	$(".reply-list-btn").click(function(){
+                    if($(this).parent().parent().find(".replybox").length > 0){
+                        console.log("replybox.lengeth大于0")
+                        alert("replybox.lengeth大于0")
+                        $(".replybox").remove();
+                    }else{
+                        console.log("replybox.lengeth不大于0")
+                        $(".replybox").remove();
+                        replyClick($(this));
+                    }
+                })*/
+		}
+		$(".reply-btn").click(function () {
+			console.log("电极的类名是"+$(this).attr("class"));
+			if($(this).parent().parent().find(".replybox").length > 0){
+
+				$(".replybox").remove();
+			}else{
+
+				$(".replybox").remove();
+				//在这里存储回复信息
+
+				replyClick($(this));
 			}
 		})
-</script>
 
+
+	}
+
+
+	/*参数提取*/
+	function getQueryVariable(variable) {
+		let query = window.location.search.substring(1);
+		let vars = query.split("&");
+		for (let i = 0; i < vars.length; i++) {
+			let pair = vars[i].split("=");
+			if (pair[0] === variable) {
+				return pair[1];
+			}
+		}
+		return (false);
+	}
+</script>
+<script>
+	//初始化数据
+	var arr = [];
+	$.post({
+		url: "/findallbyid",
+		data: {id: getQueryVariable("id")},
+		dataType: "json",
+		success: function (data) {
+			arr= data.data;
+			console.log(arr);
+			//初始化评论
+			addCommentList({data:arr,add:""});
+
+
+		}
+	})
+
+</script>
 </body>
 </html>
