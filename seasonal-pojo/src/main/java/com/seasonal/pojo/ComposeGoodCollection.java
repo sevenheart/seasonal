@@ -10,4 +10,5 @@ public class ComposeGoodCollection {
     private String userId;
     private long goodId;
     private Date collectionTime;
+    private ComposeGood composeGood;
 }

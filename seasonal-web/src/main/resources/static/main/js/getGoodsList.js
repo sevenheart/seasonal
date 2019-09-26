@@ -143,14 +143,33 @@ function addGoodsToCart(obj, id) {
 $(document).on('click','.grgp_op',function () {
     console.log($(this).attr("value"));
     var goodId = $(this).attr("value");
-    // $.ajax({
-    //     url:"",
-    //     type:"POST",
-    //     dataType:"json",
-    //     data:{"userId":userId,"goodId":goodId},
-    //     async: false,
-    //     success:function (data) {
-    //
-    //     }
-    // })
+    //查询收藏信息，判断是否已收藏
+    $.ajax({
+        url:"/selectCollection",
+        type:"POST",
+        dataType:"json",
+        data:{"userId":userId,"goodId":goodId},
+        async: false,
+        success:function (data) {
+            if (data.code === 100){
+                alert(data.message);
+            } else {
+                //插入收藏信息
+                $.ajax({
+                    url:"/GoodCollection",
+                    type:"POST",
+                    dataType:"json",
+                    data:{"userId":userId,"goodId":goodId},
+                    async: false,
+                    success:function (data) {
+                        if (data.code === 200){
+                            alert("收藏成功");
+                        } else {
+                            alert("收藏失败");
+                        }
+                    }
+                })
+            }
+        }
+    });
 });
