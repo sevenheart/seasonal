@@ -17,7 +17,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--此日志appender是为开发使用，只配置最低级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>debug</level>
+            <level>info</level>
         </filter>
         <encoder>
             <Pattern>${CONSOLE_LOG_PATTERN}</Pattern>
@@ -137,7 +137,7 @@
     <!-- 4.1 开发环境:打印控制台-->
     <springProfile name="dev">
         <logger name="com.seasonal" level="debug"/>
-        <logger name="com.seasonal.mapper" level="info"/>
+<!--        <logger name="com.seasonal.mapper" level="info"/>-->
     </springProfile>
 
     <root level="DEBUG">
@@ -148,8 +148,8 @@
         <appender-ref ref="ERROR_FILE" />
     </root>
 
-    <root level="info">
+    <!--<root level="info">
         <appender-ref ref="CONSOLE"/>
-    </root>
+    </root>-->
 
 </configuration>

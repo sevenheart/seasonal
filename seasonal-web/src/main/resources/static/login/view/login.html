@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/icon.ico"/>
     <title>果酷❤用户登录</title>
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" type="text/css" href="../css/retistrationAgreement.css">
     <script type="text/javascript" src="../../jquery/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="../../js/index.js"></script>
     <script type="text/javascript" src="../../js/login.js"></script>
@@ -29,8 +30,10 @@
             <div class="login-logo"></div>
             <div class="login-area" id="j-loginArea">
                 <div class="title">登录果酷</div>
-                <div class="login tang-pass-login" id="j-login" style="display: block; visibility: visible; opacity: 1;">
-                    <form id="form" action="/isLogin" class="pass-form pass-form-normal" method="post" autocomplete="off">
+                <div class="login tang-pass-login" id="j-login"
+                     style="display: block; visibility: visible; opacity: 1;">
+                    <form id="form" action="/isLogin" class="pass-form pass-form-normal" method="post"
+                          autocomplete="off">
                         <p id="errorWrapper" class="pass-generalErrorWrapper">
                             <span id="error" class="pass-generalError pass-generalError-error"></span>
                         </p>
@@ -61,23 +64,6 @@
                                 <span id="passwordTipText" class="pass-item-tiptext pass-item-tiptext-password"></span>
                             </span>
                         </p>
-                        <p id="verifyCodeImgWrapper" class="pass-form-item pass-form-item-verifyCode"
-                           style="display: none; visibility: hidden;">
-                            <label id="verifyCodeLabel" class="pass-label pass-label-verifyCode">
-                                验证码
-                            </label>
-                            <input id="verifyCode" type="text" name="verifyCode"
-                                   class="pass-text-input pass-text-input-verifyCode" maxlength="6" placeholder="验证码">
-                            <span id="verifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-verifyCode"
-                                  style="display:none;"></span>
-                            <span id="verifyCodeImgParent" class="pass-verifyCodeImgParent">
-                                <img id="verifyCodeImg" class="pass-verifyCode" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/login/small_blank.gif">
-                            </span>
-                            <a id="verifyCodeChange" href="#" class="pass-change-verifyCode">换一张</a>
-                            <span id="verifyCodeError" class="pass-error pass-error-verifyCode"></span>
-                            <span id="verifyCodeTip" class="pass-tip pass-tip-verifyCode"></span>
-                            <span id="verifyCodeSuccess" class="pass-success pass-success-verifyCode"></span>
-                        </p>
                         <p id="memberPassWrapper" class="pass-form-item pass-form-item-memberPass">
                             <input id="memberPass" type="checkbox" name="memberPass"
                                    class="pass-checkbox-input pass-checkbox-memberPass" checked="true">
@@ -87,11 +73,13 @@
                             </a>
                         </p>
                         <p id="submitWrapper" class="pass-form-item pass-form-item-submit">
-                            <input id="submit" type="submit" value="登录" class="pass-button pass-button-submit" onmouseover="lastIp()">
+                            <input  type="submit" value="登录"
+                                   class="pass-button pass-button-submit" onmouseover="lastIp()">
                         </p>
                     </form>
                 </div>
-                <div id="sms" class="tang-pass-login tang-pass-sms" style="display: none; visibility: hidden; opacity: 1;">
+                <div id="sms" class="tang-pass-login tang-pass-sms"
+                     style="display: none; visibility: hidden; opacity: 1;">
                     <p class="tang-pass-sms-title">短信登录</p>
                     <p class="tang-pass-sms-tip">验证即登录，未注册将自动创建果酷帐号</p>
                     <form id="smsForm" action="/isLogin" method="POST">
@@ -102,8 +90,10 @@
                             <label id="smsPhoneLabel" class="pass-label pass-label-smsPhone" data-countrycode="">
                                 手机号
                             </label>
-                            <input id="smsPhone" type="text" name="username" class="pass-text-input pass-text-input-smsPhone" maxlength="11" placeholder="手机号">
-                            <span id="smsPhone_clearbtn" class="pass-clearbtn pass-clearbtn-smsPhone" style="display:none;"></span>
+                            <input id="smsPhone" type="text" name="username"
+                                   class="pass-text-input pass-text-input-smsPhone" maxlength="11" placeholder="手机号">
+                            <span id="smsPhone_clearbtn" class="pass-clearbtn pass-clearbtn-smsPhone"
+                                  style="display:none;"></span>
                             <span id="smsPhoneTip" class="pass-item-tip pass-item-tip-smsPhone" style="display:none">
                                 <span id="smsPhoneTipText"></span>
                             </span>
@@ -112,11 +102,15 @@
                             <label id="smsVerifyCodeLabel" class="pass-label pass-label-smsVerifyCode">
                                 验证码
                             </label>
-                            <input id="smsVerifyCode" type="text" name="password" class="pass-text-input pass-text-input-smsVerifyCode" placeholder="验证码">
-                            <span id="smsVerifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-smsVerifyCode" style="display:none;"></span>
-                            <input id="verifyCodeSend-button" type="button" value="获取短信验证码" class="pass-button pass-button-verifyCodeSend" autocomplete="off">
+                            <input id="smsVerifyCode" type="text" name="password"
+                                   class="pass-text-input pass-text-input-smsVerifyCode" placeholder="验证码">
+                            <span id="smsVerifyCode_clearbtn" class="pass-clearbtn pass-clearbtn-smsVerifyCode"
+                                  style="display:none;"></span>
+                            <input id="verifyCodeSend-button" type="button" value="获取短信验证码"
+                                   class="pass-button pass-button-verifyCodeSend" autocomplete="off">
                         </p>
-                        <p id="smsUnReceiveWrapper" class="pass-form-item pass-form-item-unrecevie" style="display: none; visibility: hidden;">
+                        <p id="smsUnReceiveWrapper" class="pass-form-item pass-form-item-unrecevie"
+                           style="display: none; visibility: hidden;">
                             <span id="smsUnReceiveTipWrapper" class="pass-sms-unreceive-tips">收不到短信验证码?</span>
                         </p>
                         <p id="smsSubmitWrapper" class="pass-form-item pass-form-item-submit">
@@ -161,4 +155,5 @@
     </div>
 </div>
 </body>
+
 </html>

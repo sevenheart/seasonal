@@ -1,5 +1,6 @@
 package com.seasonal.controller;
 
+import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.OrderForm;
 import com.seasonal.service.CartFormService;
 import com.seasonal.service.OrderFormService;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.List;
 
 @Controller
@@ -24,7 +24,9 @@ public class OrderFormController {
 
     @RequestMapping(value = "FindOrderFormById")
     @ResponseBody
+    @Intercept
     public Object findOrderFormById(String orderId) {
+        System.out.println("支付");
         return ResultUtil.success(orderFormService.findOrderFormByOrderId(orderId));
     }
 

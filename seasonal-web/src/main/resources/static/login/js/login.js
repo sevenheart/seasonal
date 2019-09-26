@@ -1,7 +1,7 @@
-
 //获取当前IP地址
 let beforeCity;
 
+//进入页面扫描输入信息，获取IP地址
 function lastIp() {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
@@ -20,25 +20,11 @@ function lastIp() {
             data: {"identifier": identifier},
             async: true,
             success: function (data) {
-                if (data.code === 200) {
-                    $.ajax({
-                        url: "/login",
-                        type: "post",
-                        dataType: "json",
-                        data: {"identifier": identifier},
-                        async: false,
-                        success: function (data) {
-                            if (data.code === 200) {
-                                //调用ipseatch获取当前地址所在市
-                                ipsearch(data.data.loginIp);
-                            } else {
-                                alert("获取用户信息出错了！")
-                            }
-                        }
-                    })
-                } else {
+                if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
+                } else {
+                    ipsearch(data.data.loginIp);
                 }
             }
         })
@@ -73,25 +59,11 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
             data: {"identifier": identifier},
             async: true,
             success: function (data) {
-                if (data.code === 200) {
-                    $.ajax({
-                        url: "/login",
-                        type: "post",
-                        dataType: "json",
-                        data: {"identifier": identifier},
-                        async: false,
-                        success: function (data) {
-                            if (data.code === 200) {
-                                //调用ipseatch获取当前地址所在市
-                                ipsearch(data.data.loginIp);
-                            } else {
-                                alert("获取用户信息出错了！")
-                            }
-                        }
-                    })
-                } else {
+                if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
+                } else {
+                    ipsearch(data.data.loginIp);
                 }
             }
         })
@@ -104,6 +76,7 @@ $(document).on('click', '.pass-form-normal .pass-text-input-password', function 
     $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-password').css('background-position', '0 -24px');
 });
+
 $(document).on('blur', '.pass-form-normal .pass-text-input-password', function () {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     pass_generalError_error.text('');
@@ -117,9 +90,9 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
     }
 });
 
-//表单提交，多次错误验证码显示，判断输入信息
-var num = 0;
+//表单提交，判断输入信息
 $(document).on('submit', '.pass-form-normal', function () {
+
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     var flag = false;
     var identifier = $('.pass-form-normal .pass-text-input-userName').val();
@@ -140,8 +113,11 @@ $(document).on('submit', '.pass-form-normal', function () {
         $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove();
         pass_generalError_error.text('');
         var check = document.getElementById("memberPass").checked;
+
+
         //调用login方法，判断输入值
         flag = login(identifier, credential, flag, check);
+
     }
     if (flag === true) {
         //登录成功，修改用户登录信息
@@ -149,21 +125,27 @@ $(document).on('submit', '.pass-form-normal', function () {
     }
     return flag;
 });
+
+//表单提交禁止使用回车键
 $(document).on('keydown', '.pass-form-normal', function (event) {
-    switch(event.keyCode){
-        case 13:return false;
+    switch (event.keyCode) {
+        case 13:
+            return false;
     }
 });
 
 //账号登录判断
 function login(identifier, credential, flag, check) {
+    var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     let j_login = $('#j-login');
     let sms = $('#sms');
-    let pass_form_item_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode');
-    let pass_text_input_verifyCode = $('.pass-form-normal .pass-form-item-verifyCode .pass-text-input-verifyCode');
     let nowCity = personAddress.addressComponent.city;
     //判断异地登录
-    if (nowCity !== beforeCity) {
+    console.log("beforeCity:" + beforeCity);
+    if (beforeCity === null || beforeCity === '' || beforeCity === undefined) {
+        pass_generalError_error.text('');
+        pass_generalError_error.append("这个手机号还未注册，请先注册");
+    } else if (nowCity !== beforeCity) {
         alert("异地登录，请使用短信登录");
         j_login.css('display', 'none');
         j_login.css('visibility', 'hidden');
@@ -180,22 +162,16 @@ function login(identifier, credential, flag, check) {
             data: {"identifier": identifier, "credential": credential},
             async: false,
             success: function (data) {
-                savelocalStorage(data, check);//保存localStorage
-                flag = true
-            },
-            error: function (data) {
-                html = '用户名或密码错误，请重新输入或' +
-                    '<a href="' +
-                    '#">' +
-                    '找回密码' +
-                    '</a>';
-                $('.pass-form-normal .pass-generalErrorWrapper').html(html);
-                num++;
-                if (num >= 3) {
-                    pass_form_item_verifyCode.css('display', 'block');
-                    pass_form_item_verifyCode.css('visibility', 'visible');
-                    pass_text_input_verifyCode.css('color', '#F69');
-                    pass_text_input_verifyCode.css('border-color', '#F69');
+                if (data.code === 200) {
+                    savelocalStorage(data, check);//保存localStorage
+                    flag = true
+                } else {
+                    html = '用户名或密码错误，请重新输入或' +
+                        '<a href="' +
+                        '#">' +
+                        '找回密码' +
+                        '</a>';
+                    $('.pass-form-normal .pass-generalErrorWrapper').html(html);
                 }
             }
         })
@@ -211,6 +187,21 @@ $(document).on('blur', '.pass-text-input-smsPhone', function () {
         if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) {
             pass_generalError.text('');
             pass_generalError.append("手机号码格式不正确");
+        } else {
+            //手机号格式正确，用于获取上次登录IP地址
+            $.ajax({
+                url: "/registrationPhone",
+                type: "post",
+                dataType: "json",
+                data: {"identifier": identifier},
+                async: true,
+                success: function (data) {
+                    if (data.code === 100) {
+                        pass_generalError.text('');
+                        pass_generalError.append("该手机号还未注册,请先注册");
+                    }
+                }
+            })
         }
     }
 });
@@ -233,32 +224,30 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    var identifier = data.identifier;
-                    $.ajax({
-                        url: "/shortMessageSend",
-                        type: "post",
-                        dataType: "json",
-                        data: {"identifier": identifier},
-                        async: false,
-                        success: function (data) {
-                            console.log("返回值：" + data)
-                            sendCode();
-                            if (data === false) {
-                                alert("发送失败！");
-                            } else if (data === true) {
-                                alert("发送成功！");
-                            } else {
-                                if (data > 0){
-                                    time = data;
+                    if (data.code === 200) {
+                        $.ajax({
+                            url: "/shortMessageSend",
+                            type: "post",
+                            dataType: "json",
+                            data: {"identifier": phone},
+                            async: false,
+                            success: function (data) {
+                                //调用倒计时方法
+                                sendCode();
+                                if (data.code === 200) {
+                                    alert("发送成功！");
+                                } else if (data.message === "0" && data.code === 100) {
+                                    alert("发送失败！");
+                                } else {
+                                    time = parseInt(data.message);
+                                    alert("您请求验证码太过频繁，请计时结束在重新获取！");
                                 }
-                                alert("您请求验证码太过频繁，请计时结束在重新获取！")
                             }
-                        }
-                    })
-                },
-                error: function (data) {
-                    pass_generalError.text('');
-                    pass_generalError.append("该手机号还未注册,请先注册");
+                        })
+                    } else {
+                        pass_generalError.text('');
+                        pass_generalError.append("该手机号还未注册,请先注册");
+                    }
                 }
             })
         }
@@ -306,31 +295,34 @@ $(document).on('submit', '#smsForm', function () {
             data: {"identifier": identifier, "smsVerifyCode": smsVerifyCode},
             async: false,
             success: function (data) {
-                console.log("data:" + data);
-                if (data === true) {
+                if (data.code === 200) {
                     smsflag = true;
-                } else if (data === false) {
+                } else if (data.code === 100) {
                     smsflag = false;
-                    $('#verifyCode-span').css('display', 'none');
-                    $('#verifyCodeError-span').css('display', 'none');
-                    $('#verifyCodeExpiration-span').css('display', 'inline');
+                    pass_generalError.text('');
+                    pass_generalError.append("验证码错误，请重新输入");
+                } else if (data.code === 404) {
+                    pass_generalError.text('');
+                    pass_generalError.append("验证码已过期，请重新发送");
                 } else {
-                    smsflag = false;
-                    $('#verifyCode-span').css('display', 'none');
-                    $('#verifyCodeError-span').css('display', 'inline');
-                    $('#verifyCodeExpiration-span').css('display', 'none');
+                    pass_generalError.text('');
+                    pass_generalError.append("请不要修改手机号");
                 }
-            },
-            error: function (data) {
-                console.log("出错了");
             }
         })
     }
+    if (smsflag === true) {
+        //登录成功，修改用户登录信息
+        updatelogin(identifier);
+    }
     return smsflag;
 });
+
+//表单提交禁止使用回车键
 $(document).on('keydown', '#smsForm', function (event) {
-    switch(event.keyCode){
-        case 13:return false;
+    switch (event.keyCode) {
+        case 13:
+            return false;
     }
 });
 
