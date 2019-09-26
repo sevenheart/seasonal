@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>我的订单-那曲美团网</title>
+    <title>我的订单-果酷网</title>
 
     <link rel='stylesheet' href='../../css/style.css' type='text/css'/>
     <!--    外部模板样式-->
@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/orders.css">
-<style>
-    .orders-link-box .orders-ul li{
+    <style>
+        .orders-link-box .orders-ul li {
 
-    }
-</style>
+        }
+    </style>
 </head>
 <body id="main">
 
@@ -41,7 +41,9 @@
                 <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
             </a>
         </div>
-        <a href="../../index.html"><img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" id="logo"></a>
+        <a href="../../index.html"><img alt=""
+                                        src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png"
+                                        id="logo"></a>
         <div class="header_nav">
             <ul>
                 <li><a href="../../index.html" name="首 页">HOME</a></li>
@@ -141,29 +143,34 @@
                         <ul class="orders-ul clearfix">
                             <li class="active">全部订单</li>
                             <li class="">待付款</li>
-                            <li class="">待使用</li>
-                            <li class="">待评价</li>
-                            <li class="">退款/售后</li>
+                            <li class="">已付款</li>
+                            <!--<li class="">待评价</li>
+                            <li class="">退款/售后</li>-->
                         </ul>
                     </div>
                     <!--<div class="orders-body">
 
                     </div>-->
                     <div class="orders-body">
-                      <!--  //点击的时候orders下重新拼接-->
-                        <div class="order-item clearfix">
+                        <!-- 无订单时显示 -->
+                        <div>
+                            <p class="no-order-text">您暂时还没有订单</p>
+                        </div>
+                        <!--  //点击的时候orders下重新拼接-->
+                        <!--<div class="order-item clearfix">
                             <div class="order-img">
                                 <a href="http://maoyan.com/order/detail/21282407199/" class="link"
                                    target="_blank">
                                     <div><img src=
                                                       "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                              class="image"></div></a>
+                                              class="image"></div>
+                                </a>
                             </div>
 
                             <div class="order-info info-box">
                                 <a href="http://maoyan.com/order/detail/21282407199/" class="link"
                                    target="_blank">
-                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
+                                    <p class="order-title">三分果盒：夏日酷爽等</p></a>
 
                                 <p class="info">商品数量：2个</p>
 
@@ -186,13 +193,14 @@
                                    target="_blank">
                                     <div><img src=
                                                       "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                              class="image"></div></a>
+                                              class="image"></div>
+                                </a>
                             </div>
 
                             <div class="order-info info-box">
                                 <a href="http://maoyan.com/order/detail/21282407199/" class="link"
                                    target="_blank">
-                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
+                                    <p class="order-title">三分果盒：夏日酷爽等</p></a>
 
                                 <p class="info">商品数量：2个</p>
 
@@ -211,42 +219,43 @@
                             <div class="order-btn"></div>
                         </div>
                         <div class="order-item clearfix">
-                        <div class="order-img">
-                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                               target="_blank">
-                                <div><img src=
-                                                  "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                          class="image"></div></a>
+                            <div class="order-img">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <div><img src=
+                                                      "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
+                                              class="image"></div>
+                                </a>
+                            </div>
+
+                            <div class="order-info info-box">
+                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
+                                   target="_blank">
+                                    <p class="order-title">三分果盒：夏日酷爽等</p></a>
+
+                                <p class="info">商品数量：2个</p>
+
+
+                            </div>
+
+                            <div class="order-price">
+                                总价：¥73.8
+                            </div>
+
+                            <div class="order-status">
+                                已支付
+                            </div>
+
+
+                            <div class="order-btn"></div>
                         </div>
 
-                        <div class="order-info info-box">
-                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                               target="_blank">
-                                <p class="order-title" >三分果盒：夏日酷爽等</p></a>
-
-                            <p class="info">商品数量：2个</p>
-
-
-                        </div>
-
-                        <div class="order-price">
-                            总价：¥73.8
-                        </div>
-
-                        <div class="order-status">
-                            已支付
-                        </div>
-
-
-                        <div class="order-btn"></div>
+                        <div class="btn-box"><a class="left-arrow iconfont icon-btn_left "></a><a
+                                class="right-arrow iconfont icon-btn_right btn-active"></a></div>-->
                     </div>
-
-                    <div class="btn-box"><a class="left-arrow iconfont icon-btn_left "></a><a
-                            class="right-arrow iconfont icon-btn_right btn-active"></a></div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 
@@ -257,6 +266,6 @@
 
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
-<!--<script src="../../js/login.js"></script>-->
+<script src="../../js/login.js"></script>
 <script src="../js/orders.js"></script>
 </html>
