@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/setting.css">
     <link rel="stylesheet" type="text/css" href="../css/useraddress.css">
+    <link rel="stylesheet" type="text/css" href="../css/container.css">
     <style>
 
     </style>
@@ -192,6 +193,11 @@
                            placeholder="11位手机号">
                     <p class="msg msg-error">请输入正确的手机号</p>
                 </div>
+                <div class="form-section form-name">
+                    <label class="input-label" for="J_addressAddress">地址</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressAddress" name="user_name"
+                           placeholder="收货人姓名">
+                </div>
             </div>
         </div>
     </div>
@@ -201,23 +207,5 @@
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
 <script src="../js/account.js"></script>
-<script>
-    $(".input-text").focus(function () {
-        $(this).parent("div").addClass("form-section-focus");
-        $(this).parent("div").addClass("form-section-active");
-    });
-    $(".input-text").blur(function () {
-        if ($(this).val() !== "") {
-            $(this).parent("div").removeClass("form-section-focus");
-            $(this).parent("div").addClass("form-section-valid");
-            $(this).parent("div").addClass("form-section-error");
-
-        } else {
-            $(this).parent("div").removeClass("form-section-focus");
-            $(this).parent("div").removeClass("form-section-active");
-            $(this).parent("div").removeClass("form-section-error");
-            $(this).parent("div").removeClass("form-section-valid");
-        }
-    });
-</script>
+<script src="../js/container.js"></script>
 </html>
