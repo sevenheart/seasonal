@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/setting.css">
+    <link rel="stylesheet" type="text/css" href="../css/useraddress.css">
     <style>
 
     </style>
@@ -135,25 +136,34 @@
 
             <div class="setting-content">
                 <div class="head">
-                    <p class="title">个人信息</p>
-
-                    <p class="des">收货地址</p>
+                    <p class="address-title">收货地址</p>
                 </div>
-                <div style="border: 1px red solid;width: 100%">
-                    <ul style="width: 100%;border: 1px blue solid">
-                        <li style="display: inline-block;width: 240px;height: 240px;background-color: #9E3F3F;margin: 20px 0 0 40px">
-
+                <div style="width: 100%">
+                    <ul style="width: 100%;margin-bottom: 40px;display: inline-block">
+                        <li class="address-item address-item-new">
+                            <i class="iconfont">&#xe603</i>
+                            添加新地址
                         </li>
-                        <li style="display: inline-block;width: 240px;height: 240px;background-color: #9E3F3F;margin: 20px 0 0 40px">
-
+                        <li class="address-item">
+                            <dl>
+                                <dt>
+                                    <span class="tag">公司</span>
+                                    <em class="uname">郭倩铭</em>
+                                </dt>
+                                <dd class="utel">184****5899</dd>
+                                <dd class="uaddress">
+                                    江苏 苏州市 工业园区 苏州工业园区直属镇
+                                    <br>
+                                    科技产业园五期A1 (215028)
+                                </dd>
+                            </dl>
+                            <div class="actions">
+                                <a class="modify J_addressModify">修改</a>
+                                <a class="modify J_addressDel">删除</a>
+                            </div>
                         </li>
-                        <li style="display: inline-block;width: 240px;height: 240px;background-color: #9E3F3F;margin: 20px 0 0 40px">
-
-                        </li>
-
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
@@ -162,10 +172,52 @@
 <div class="footer" style="margin-top: 0px;">
     <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
 </div>
-
+<div class="container">
+    <div class="mask"></div>
+    <div class="content">
+        <div class="modal-header">
+            <span class="title">添加收货地址</span>
+            <a class="close"><i class="iconfont1">&#xe602;</i></a>
+        </div>
+        <div class="modal-body">
+            <div class="form-box clearfix">
+                <div class="form-section form-name">
+                    <label class="input-label" for="J_addressNameInput">姓名</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressNameInput" name="user_name"
+                           placeholder="收货人姓名">
+                </div>
+                <div class="form-section form-phone">
+                    <label class="input-label" for="J_addressPhoneInput">手机号</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressPhoneInput" name="user_phone"
+                           placeholder="11位手机号">
+                    <p class="msg msg-error">请输入正确的手机号</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
 <script src="../js/account.js"></script>
+<script>
+    $(".input-text").focus(function () {
+        $(this).parent("div").addClass("form-section-focus");
+        $(this).parent("div").addClass("form-section-active");
+    });
+    $(".input-text").blur(function () {
+        if ($(this).val() !== "") {
+            $(this).parent("div").removeClass("form-section-focus");
+            $(this).parent("div").addClass("form-section-valid");
+            $(this).parent("div").addClass("form-section-error");
+
+        } else {
+            $(this).parent("div").removeClass("form-section-focus");
+            $(this).parent("div").removeClass("form-section-active");
+            $(this).parent("div").removeClass("form-section-error");
+            $(this).parent("div").removeClass("form-section-valid");
+        }
+    });
+</script>
 </html>
