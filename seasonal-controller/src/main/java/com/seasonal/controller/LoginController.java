@@ -95,14 +95,17 @@ public class LoginController {
                 timer.schedule(new TimerTask() {//设置session的保存时间
                     @Override
                     public void run() {
-                        session.invalidate();
-                        System.out.println("session删除成功");
+                        //5分钟后清空
+                        session.setAttribute("code", null);
+                        session.setAttribute("identifier", null);
+                        session.setAttribute("nowTimeCode", null);
                         timer.cancel();
                     }
                 },  60 * 1000);
                 return ResultUtil.success(200, "发送成功");//发送成功的返回值
             }
         } else {
+            System.out.println("类型异常：" + session.getAttribute("nowTimeCode"));
             long lastTime = (long) session.getAttribute("nowTimeCode");//获取上一次获取验证码的时间
             System.out.println("nowTime:" + nowTime + ",lastTime:" + lastTime);
             int D_value = (int) (nowTime - lastTime);//两次获取时间相比较,大于60s，则可以重新获取验证码
@@ -118,8 +121,10 @@ public class LoginController {
                     timer.schedule(new TimerTask() {//设置session保存时间
                         @Override
                         public void run() {
-                            session.invalidate();
-                            System.out.println("session删除成功");
+                            //5分钟后清空
+                            session.setAttribute("code", null);
+                            session.setAttribute("identifier", null);
+                            session.setAttribute("nowTimeCode", null);
                             timer.cancel();
                         }
                     }, 60 * 1000);

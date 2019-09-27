@@ -23,20 +23,20 @@ public class LoginInterceptor implements HandlerInterceptor {
         //拦截的是方法
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-          //  System.out.println("handler:" + handlerMethod);
+//            System.out.println("handler:" + handlerMethod);
             Object intercept = handlerMethod.getMethodAnnotation(Intercept.class);
-         //   System.out.println("注解：" + intercept);
+//            System.out.println("注解：" + intercept);
             if (intercept == null) {//没有这个注解
-            //    System.out.println("没有注解");
+//                System.out.println("没有注解");
                 return true;
             } else{//有注解
                 Object obj = session.getAttribute("userId");
                 if (obj == null) {//没有登录
-                 //   System.out.println("未登录");
+//                    System.out.println("未登录");
                     redirect(request, response);
                     return false;
                 } else { //登录了
-                 //   System.out.println("已登录");
+//                    System.out.println("已登录");
                     return true;
                 }
             }
@@ -62,13 +62,13 @@ public class LoginInterceptor implements HandlerInterceptor {
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             //告诉ajax我是重定向
             response.setHeader("REDIRECT", "REDIRECT");
-            System.out.println("REDIRECT：" + response.getHeader("REDIRECT"));
+//            System.out.println("REDIRECT：" + response.getHeader("REDIRECT"));
             //告诉ajax我重定向的路径CONTENTPATH
-            System.out.println("true：" + basePath + "/login/view/login.html");
+//            System.out.println("true：" + basePath + "/login/view/login.html");
             response.setHeader("contentpath", basePath + "/login/view/login.html");
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         } else {
-            System.out.println("false：" + basePath + "/login/view/login.html");
+//            System.out.println("false：" + basePath + "/login/view/login.html");
             response.sendRedirect(basePath + "/login/view/login.html");
         }
     }

@@ -28,4 +28,6 @@ public interface ComposeGoodMapper {
     ComposeGood findComposeGoodByID(Long id);
 
     List<ComposeGood> findMainComposeGoodByClassifyId(Long classifyId);
+
+    List<ComposeGood> findUpGoodsByNumber();
 }
