@@ -65,14 +65,17 @@ function showOrders(i, data){
         '                            <div class="order-status">\n' +
         '                                '+ status +'\n' +
         '                            </div>\n' +
+        '                            <div class="showtime">\n' +
+        '                                '+ data.createTime +'\n' +
+        '                            </div>\n' +
         '                            <div class="order-btn"></div>\n' +
         '                        </div>';
 
-    allOrderHtml += orderHtml;
+    allOrderHtml = orderHtml + allOrderHtml;
     if(orderStatus === 1){
-        paidHtml += orderHtml;
+        paidHtml = orderHtml + paidHtml;
     }else{
-        unpaidHtml += orderHtml;
+        unpaidHtml = orderHtml + unpaidHtml;
     }
 
     $('.orders-body').html(allOrderHtml);

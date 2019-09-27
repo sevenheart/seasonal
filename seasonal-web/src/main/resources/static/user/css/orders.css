@@ -319,3 +319,12 @@
     font-size: 1em;
     resize: none;
 }
+
+.order-item .showtime{
+    float:left;
+    line-height:90px;
+    text-align:center;
+    width:100px;
+    font-size: 12px;
+    color: #f03d37;
+}
