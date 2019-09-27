@@ -2,6 +2,7 @@ package com.seasonal.service.impl;
 
 
 import com.seasonal.mapper.CartFormMapper;
+import com.seasonal.mapper.ComposeGoodMapper;
 import com.seasonal.mapper.DetailedCommodityFormMapper;
 import com.seasonal.mapper.OrderFormMapper;
 import com.seasonal.pojo.Comment;
@@ -21,9 +22,12 @@ import java.util.List;
 @Service
 public class CommentServiceImpl implements CommentService {
     private final DetailedCommodityFormMapper detailedCommodityFormMapper;
+    private final ComposeGoodMapper composeGoodMapper;
+
     @Autowired
-    public CommentServiceImpl( DetailedCommodityFormMapper detailedCommodityFormMapper) {
+    public CommentServiceImpl( DetailedCommodityFormMapper detailedCommodityFormMapper,ComposeGoodMapper composeGoodMapper) {
         this.detailedCommodityFormMapper = detailedCommodityFormMapper;
+        this.composeGoodMapper = composeGoodMapper;
     }
     @Autowired
     CommentRepository commentRepository;
@@ -49,12 +53,14 @@ public class CommentServiceImpl implements CommentService {
     /*
     * 1.插入comment
     * 2.修改数据库的评论信息
+    * 3.商品的评论数量修改
     * */
     @Override
     public int commentAndUpdate(Comment comment) {
         int update = detailedCommodityFormMapper.updateCommentStates(comment.getComment_goods_id(),comment.getOrderId(),comment.getComment_id());
         commentRepository.insertComment(comment);
-        if (update>0){
+        int flag = composeGoodMapper.addCommentNumber(comment.getComment_goods_id());
+        if (update > 0 && flag > 0){
             System.out.println("修改评论状态成功！！插入评论不知道成功没有！！");
         }else {
             System.out.println("修改评论状态失败");
@@ -70,6 +76,7 @@ public class CommentServiceImpl implements CommentService {
 
         return commentRepository.addResponse(responses);
     }
+
 
 
 }
