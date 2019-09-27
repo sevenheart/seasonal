@@ -1,6 +1,7 @@
 let userId;
 let userName;
 let login_html;
+let userImg;
 //页面自动加载，判断是否自动登录，并完成自动登录
 
 //初始化地图
@@ -22,7 +23,10 @@ let markerOptions;
 window.onLoad = function () {
     map = new AMap.Map('container', {});
     //构造路线导航类
-    driving = new AMap.Driving({});
+    // 开启路线规划的路径显示
+    driving = new AMap.Driving({
+        map: map
+    });
     //地理编码
     geocoder = new AMap.Geocoder({
         city: "", // 城市默认：“全国”
@@ -40,6 +44,7 @@ $.ajax({
         if (data.code === 200) {
             userId = data.data[0].userId;
             userName = data.data[0].userName;
+            userImg = data.data[0].userImg;
             login_html = '<li class="login">\n' +
                 '                    <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/login_icon.jpg">\n' +
                 '                    <span class="login-span">用户名：</span>\n' +

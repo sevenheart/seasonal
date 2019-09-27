@@ -44,31 +44,6 @@ public class LoginServiceImpl implements LoginService {
         return loginFrom.findRegistrationPhone(identifier);
     }
 
-    //登录验证
-    @Override
-    public Object findLogin(String identifier, String credential) {
-        //Json对sql.data的转换器
-        JsonConfig config = new JsonConfig();
-        config.registerJsonValueProcessor(java.sql.Date.class, new JsonValueProcessor() {
-            private SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
-            @Override
-            public Object processArrayValue(Object arg0, JsonConfig arg1) {
-                return null;
-            }
-            @Override
-            public Object processObjectValue(String arg0, Object arg1, JsonConfig arg2) {
-                return arg1 == null ? "" : sd.format(arg1);
-            }
-        });
-        //保存到RedisUtil
-        redisUtil.setHash();
-        if (redisUtil.get("findLogin") == loginFrom.findLogin(identifier, credential)) {
-            return redisUtil.get("findLogin");
-        }
-        JSONArray jsonArray = JSONArray.fromObject(loginFrom.findLogin(identifier, credential),config);
-        redisUtil.set("findLogin", jsonArray.toString());
-        return loginFrom.findLogin(identifier, credential);
-    }
 
     //登录成功后的信息修改
     @Override

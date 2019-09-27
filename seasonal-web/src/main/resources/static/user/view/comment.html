@@ -10,8 +10,24 @@
     <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+
     <link rel="stylesheet" type="text/css" href="../css/orders.css">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap.css">
 <style>
+    .commentclick{
+        font-size: 14px;
+        color: #666666;
+        font-weight: 500;
+        border: 1px solid #E5E5E5;
+        border-radius: 130px;
+        padding: 10px 25px;
+        position: relative;
+        top: -90px;
+        cursor: pointer;
+        text-decoration: none;
+        float: right;
+    }
+
 
 </style>
 </head>
@@ -61,30 +77,28 @@
             <div style="float:left">
                 <div class="orders-link-box">
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/account/userinfo/">我的美团</a></p>
+                        <p class="title"><a href="/user/view/userinfo.html">我的美团</a></p>
 
-                        <p class="title"><a href="/orders/#status=0">我的订单</a></p>
+                        <p class="title"><a href="/user/view/order.html">我的订单</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="/orders/#status=0">全部订单</a>
+                                <a href="/user/view/order.html">全部订单</a>
                             </li>
 
                             <li>
-                                <a href="/orders/#status=1">待付款</a>
+                                <a href="/user/view/order.html">待付款</a>
                             </li>
 
                             <li>
-                                <a href="/orders/#status=2">已完成</a>
+                                <a href="/user/view/order.html">已完成</a>
                             </li>
 
                         </ul>
                     </div>
 
                     <div class="link-group">
-                        <p class="title"><a href=""
-                                                   >通知</a></p>
+                        <p class="title"><a href="">通知</a></p>
 
                         <ul class="link-ul">
                             <li>
@@ -97,37 +111,34 @@
                     </div>
 
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/vouchers/">评价管理</a></p>
+                        <p class="title"><a href="/user/view/collections.html">个人收藏</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/vouchers/#tab=available">未评价</a>
+                                <a href="/user/view/collections.html">收藏商品</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/vouchers/">评价管理</a></p>
+                        <p class="title"><a href="/user/view/comment.html">评价管理</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/vouchers/#tab=available">未评价</a>
+                                <a href=" /user/view/comment.html">未评价</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/account/settings">个人信息</a></p>
+                        <p class="title"><a href=" /user/view/account.html">个人信息</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/account/settings">账户设置</a>
+                                <a href="/user/view/account.html">账户设置</a>
                             </li>
                             <li>
-                                <a href="https://www.meituan.com/account/settings">地址管理</a>
+                                <a href="/user/view/account.html">地址管理</a>
                             </li>
                         </ul>
                     </div>
@@ -138,107 +149,47 @@
                 <div class="orders">
                     <div class="orders-head">
                         <ul class="orders-ul clearfix">
-                            <li class="">待评价</li>
+                            <li class="active">待评价</li>
                         </ul>
                     </div>
-                    <!--<div class="orders-body">
-
-                    </div>-->
                     <div class="orders-body">
                       <!--  //点击的时候orders下重新拼接-->
-                        <div class="order-item clearfix">
-                            <div class="order-img">
-                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                                   target="_blank">
-                                    <div><img src=
-                                                      "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                              class="image"></div></a>
-                            </div>
-
-                            <div class="order-info info-box">
-                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                                   target="_blank">
-                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
-
-                                <p class="info">商品数量：2个</p>
-
-
-                            </div>
-
-                            <div class="order-price">
-                                总价：¥73.8
-                            </div>
-
-                            <div class="order-status">
-                                已支付
-                            </div>
-
-                            <div class="order-btn"></div>
-                        </div>
-                        <div class="order-item clearfix">
-                            <div class="order-img">
-                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                                   target="_blank">
-                                    <div><img src=
-                                                      "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                              class="image"></div></a>
-                            </div>
-
-                            <div class="order-info info-box">
-                                <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                                   target="_blank">
-                                    <p class="order-title" >三分果盒：夏日酷爽等</p></a>
-
-                                <p class="info">商品数量：2个</p>
-
-
-                            </div>
-
-                            <div class="order-price">
-                                总价：¥73.8
-                            </div>
-
-                            <div class="order-status">
-                                未评论
-                            </div>
-
-
-                            <div class="order-btn"></div>
-                        </div>
-                        <div class="order-item clearfix">
-                        <div class="order-img">
-                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                               target="_blank">
-                                <div><img src=
-                                                  "//p0.meituan.net/movie/648bbced128324a4b4ccf7db6c564a251744344.jpg@112w_112h_1e_1c"
-                                          class="image"></div></a>
-                        </div>
-
-                        <div class="order-info info-box">
-                            <a href="http://maoyan.com/order/detail/21282407199/" class="link"
-                               target="_blank">
-                                <p class="order-title" >三分果盒：夏日酷爽等</p></a>
-
-                            <p class="info">商品数量：2个</p>
-
-                        </div>
-
-                        <div class="order-price">
-                            总价：¥73.8
-                        </div>
-
-                        <div class="order-status">
-                            已支付
-                        </div>
-                        <div class="order-btn"></div>
-                    </div>
-
                     <div class="btn-box"><a class="left-arrow iconfont icon-btn_left "></a><a
                             class="right-arrow iconfont icon-btn_right btn-active"></a></div>
                 </div>
             </div>
         </div>
-    </div>
+           <!-- 评论模态框-->
+            <!--评论相关模态框-->
+            <div class="modal fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" >
+                                发表评论
+                            </h4>
+                        </div>
+                        <div class="modal-body " >
+                            <div class="commentbox">
+                                <textarea cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" id="modal-confirm">确定</button>
+                            <!--   <button type="button"  class="btn btn-primary">
+                                   点击关闭、、
+                               </button>-->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+        </div>
     </div>
 </div>
 
@@ -249,6 +200,7 @@
 
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
-<!--<script src="../../js/login.js"></script>-->
-<script src="../js/orders.js"></script>
+<script src="../../bootstrap/bootstrap.min.js"></script>
+<script src="../../js/login.js"></script>
+<script src="../js/comment.js"></script>
 </html>

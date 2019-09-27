@@ -22,7 +22,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '\t\t\t\t\t\t\t\t\t<span class="grgp_np_grgp_npri">\n' +
                     '\t\t\t\t\t\t\t\t\t\t￥' + v.composeGoodPrice + '.00\n' +
                     '\t\t\t\t\t\t\t\t\t</span>\n' +
-                    '                                <a href="" class="grgp_op"></a>\n' +
+                    '                                <a href="javascript:void(0)" class="grgp_op" value="' + v.id + '"></a>\n' +
                     '                            </div>\n' +
                     '                            <div class="glc_rt_gds_des">\n' +
                     '                                <a href="detailGoods.html?id=' + v.id + '" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
@@ -138,3 +138,38 @@ function addGoodsToCart(obj, id) {
         alert('请先登录！');
     }
 }
+
+//点击收藏事件
+$(document).on('click','.grgp_op',function () {
+    console.log($(this).attr("value"));
+    var goodId = $(this).attr("value");
+    //查询收藏信息，判断是否已收藏
+    $.ajax({
+        url:"/selectCollection",
+        type:"POST",
+        dataType:"json",
+        data:{"userId":userId,"goodId":goodId},
+        async: false,
+        success:function (data) {
+            if (data.code === 100){
+                alert(data.message);
+            } else {
+                //插入收藏信息
+                $.ajax({
+                    url:"/GoodCollection",
+                    type:"POST",
+                    dataType:"json",
+                    data:{"userId":userId,"goodId":goodId},
+                    async: false,
+                    success:function (data) {
+                        if (data.code === 200){
+                            alert("收藏成功");
+                        } else {
+                            alert("收藏失败");
+                        }
+                    }
+                })
+            }
+        }
+    });
+});

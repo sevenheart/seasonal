@@ -45,15 +45,16 @@ public class LoginController {
     @RequestMapping(value = "login")
     @ResponseBody
     public Object userMessage(String identifier, String credential, HttpSession session) {
-        LoginFrom loginFrom = (LoginFrom) loginService.findLogin(identifier, credential);
-        if (loginFrom != null) {
-            System.out.println(loginFrom);
-            session.setAttribute("userId", loginFrom.getUserId());
-        }
+        LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
         if (loginFrom != null){
-            return ResultUtil.success(loginFrom);
+            if (credential.equals(loginFrom.getCredential())){
+                session.setAttribute("userId", loginFrom.getUserId());
+                return ResultUtil.success(loginFrom);
+            } else {
+                return ResultUtil.fail(100,"密码错误");
+            }
         } else {
-            return ResultUtil.fail(100,"登录信息错误");
+            return ResultUtil.fail(500,"账号不存在");
         }
     }
 
@@ -94,14 +95,17 @@ public class LoginController {
                 timer.schedule(new TimerTask() {//设置session的保存时间
                     @Override
                     public void run() {
-                        session.invalidate();
-                        System.out.println("session删除成功");
+                        //5分钟后清空
+                        session.setAttribute("code", null);
+                        session.setAttribute("identifier", null);
+                        session.setAttribute("nowTimeCode", null);
                         timer.cancel();
                     }
                 },  60 * 1000);
                 return ResultUtil.success(200, "发送成功");//发送成功的返回值
             }
         } else {
+            System.out.println("类型异常：" + session.getAttribute("nowTimeCode"));
             long lastTime = (long) session.getAttribute("nowTimeCode");//获取上一次获取验证码的时间
             System.out.println("nowTime:" + nowTime + ",lastTime:" + lastTime);
             int D_value = (int) (nowTime - lastTime);//两次获取时间相比较,大于60s，则可以重新获取验证码
@@ -117,8 +121,10 @@ public class LoginController {
                     timer.schedule(new TimerTask() {//设置session保存时间
                         @Override
                         public void run() {
-                            session.invalidate();
-                            System.out.println("session删除成功");
+                            //5分钟后清空
+                            session.setAttribute("code", null);
+                            session.setAttribute("identifier", null);
+                            session.setAttribute("nowTimeCode", null);
                             timer.cancel();
                         }
                     }, 60 * 1000);
