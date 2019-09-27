@@ -237,4 +237,9 @@
 <script src="../../js/global.js"></script>
 <script src="../js/getGoodsList.js"></script>
 <script src="../js/main.js"></script>
+<script>
+    $(".search_button").click(function () {
+        $(location).attr('href', "getGoodsList.html?likeName=" + $(".search").val());
+    });
+</script>
 </html>
