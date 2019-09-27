@@ -24,5 +24,8 @@
     <insert id="goodCollection">
         insert into compose_good_collection(user_id,good_id,collection_time) values(#{userId},#{goodId},#{currentTime})
     </insert>
-
+<!--    删除收藏-->
+    <delete id="deleteGoodCollection">
+        delete from compose_good_collection where user_id=#{userId} and good_id=#{goodId}
+    </delete>
 </mapper>
