@@ -281,10 +281,10 @@
                             <span class="goods_price">￥22.00</span>
                         </a>
                     </div>
-                    <div class="goods_signal_title"  >商品评论</div>
-                    <div class="commenthtml commontdiv" style="text-align: left;"></div>
-                    <div class="goods_signal_title" >商品介绍</div>
-                    <div class="goods_signal_describe goods_signal commontdiv">
+                    <div class="goods_signal_title" style="float: left; " >商品评论</div>
+            <!--        <div class="commenthtml commontdiv" style="text-align: left;"></div>-->
+                    <div class="goods_signal_title" style="float: left; width: 95%" >商品介绍</div>
+                <!--    <div class="goods_signal_describe goods_signal commontdiv">-->
                     </div>
                 </div>
 
@@ -310,7 +310,7 @@
         }
     )*/
 
-    $('.commontdiv').hide();
+   /* $('.commontdiv').hide();*/
     $(".goods_signal_title").click(function () {
         $('.commontdiv').hide();
         $(this).next().show();

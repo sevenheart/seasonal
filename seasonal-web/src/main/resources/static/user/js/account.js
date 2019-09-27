@@ -1,3 +1,12 @@
+//初始化用户信息
+function accountInit(){
+    $()
+}
+
+
+
+
+
 $('#bookimg').parent().children("img").click(function () {
     $('#bookimg').click();
 })
@@ -9,3 +18,7 @@ function preview(){
     $('#userimg img').attr('src',imgUrl); // 修改img标签src属性值
 }
 $('#bookimg').change(preview);
+
+$('.btn-change').click(function () {
+
+})
