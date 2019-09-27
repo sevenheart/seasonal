@@ -1,5 +1,11 @@
 server:
   port: 8080
+  ssl:
+    key-store: www.strin.xyz.jks
+    key-store-password: 3jeuv93sz1
+    key-store-type: JKS
+    key-alias: www.strin.xyz
+
 spring:
   mvc:
     view:
