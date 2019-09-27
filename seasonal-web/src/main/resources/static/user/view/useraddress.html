@@ -193,12 +193,47 @@
                            placeholder="11位手机号">
                     <p class="msg msg-error">请输入正确的手机号</p>
                 </div>
-                <div class="form-section form-name">
-                    <label class="input-label" for="J_addressAddress">地址</label>
-                    <input class="input-text J_addressInput" type="text" id="J_addressAddress" name="user_name"
-                           placeholder="收货人姓名">
+                <div class="form-section form-four-address form-section-active">
+                    <input id="J_selectAddressTrigger" class="input-text J_addressInput active" type="text"
+                           name="four_address" readonly="readonly" value="选择省 / 市 / 区 / 街道"
+                           placeholder="选择省 / 市 / 区 / 街道">
+                </div>
+                <div class="form-section form-address-detail">
+                    <label class="input-label" for="J_addressDetailInput">详细地址</label>
+                    <textarea class="input-text J_addressInput" type="text" id="J_addressDetailInput" name="user_adress"
+                              placeholder="详细地址，路名或街道名称，门牌号"></textarea>
+                </div>
+                <div class="form-section form-zipcode">
+                    <label class="input-label" for="J_addressZipcodeInput">邮政编码</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressZipcodeInput" name="user_zipcode">
+                </div>
+                <div class="form-section form-tag">
+                    <label class="input-label" for="J_addressTagInput">地址标签</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressTagInput" name="user_tag"
+                           placeholder="如&quot;家&quot;、&quot;公司&quot;。限5个字内">
+                </div>
+
+
+                <div class="select-address-wrapper" id="J_selectAddressWrapper">
+                    <span class="select-address-close">x</span>
+                    <div class="four-address-wrapper J_selectAddressItem" data-type="select">
+                        <div id="J_fourAddressWrapper">
+                            <div class="select-box clearfix" id="J_selectWrapper">
+                                <div class="select-first select-item J_select" data-init-txt="选择省份/自治区">选择省份/自治区</div>
+                                <div class="select-item J_select hide" data-init-txt="选择城市/地区"></div>
+                                <div class="select-item J_select hide" data-init-txt="选择区县"></div>
+                            </div>
+                            <div class="options-box">
+                                <ul class="options-list J_optionsWrapper clearfix" a="0"></ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" id="J_editAddressSave">保存</a>
+            <a class="btn btn-gray">取消</a>
         </div>
     </div>
 </div>
