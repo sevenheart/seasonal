@@ -5,6 +5,7 @@
 <mapper namespace="com.seasonal.mapper.DetailedCommodityFormMapper">
     <resultMap id="cspd" type="com.seasonal.pojo.DetailedCommodityForm">
         <id column="id" property="id"/>
+        <result column="comment_id" property="commentId"/>
         <result column="good_id" property="goodId"/>
         <association property="composeGoods" column="good_id"
                      select="com.seasonal.mapper.ComposeGoodMapper.findComposeGoodByID"/>

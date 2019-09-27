@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/userinfo.css">
+    <style>
+        .recommend-card-wrapper .info-box .bottom-line {
+            color: #FF6600;
+        }
 
+
+    </style>
 </head>
 <body id="main">
 
@@ -62,22 +68,21 @@
             <div style="float:left">
                 <div class="orders-link-box">
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/account/userinfo/">我的美团</a></p>
+                        <p class="title"><a href="/user/view/userinfo.html">我的美团</a></p>
 
-                        <p class="title"><a href="/orders/#status=0">我的订单</a></p>
+                        <p class="title"><a href="/user/view/order.html">我的订单</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="/orders/#status=0">全部订单</a>
+                                <a href="/user/view/order.html">全部订单</a>
                             </li>
 
                             <li>
-                                <a href="/orders/#status=1">待付款</a>
+                                <a href="/user/view/order.html">待付款</a>
                             </li>
 
                             <li>
-                                <a href="/orders/#status=2">已完成</a>
+                                <a href="/user/view/order.html">已完成</a>
                             </li>
 
                         </ul>
@@ -97,69 +102,65 @@
                     </div>
 
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/vouchers/">评价管理</a></p>
+                        <p class="title"><a href="/user/view/collections.html">个人收藏</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/vouchers/#tab=available">未评价</a>
+                                <a href="/user/view/collections.html">收藏商品</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/vouchers/">评价管理</a></p>
+                        <p class="title"><a href="/user/view/comment.html">评价管理</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/vouchers/#tab=available">未评价</a>
+                                <a href=" /user/view/comment.html">未评价</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href=
-                                                    "https://www.meituan.com/account/settings">个人信息</a></p>
+                        <p class="title"><a href=" /user/view/account.html">个人信息</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/account/settings">账户设置</a>
+                                <a href="/user/view/account.html">账户设置</a>
                             </li>
                             <li>
-                                <a href="https://www.meituan.com/account/settings">地址管理</a>
+                                <a href="/user/view/account.html">地址管理</a>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
+
             <div class="userinfo-box my-page">
                 <div class="user-info-box">
                     <div class="user-info">
                         <div class="head-img">
                             <a href="https://www.meituan.com/account/settings" target=
-                                    "_blank"><img src=
-                                                          "//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" alt=
-                                                          ""></a>
+                                    "_blank">
+                                <img src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" alt=""></a>
                         </div>
 
                         <div class="nick-name">
-                            <a href="https://www.meituan.com/account/settings" target="_blank">
+                            <a href="/user/view/account.html" target="_blank">
                                 <p class="nick-name-txt">空心怎能世界</p></a>
 
-                            <p class="user-money">我的余额：￥<!-- -->11.76<!-- --> · <a href=
-                                                                                           "https://npay.meituan.com/resource/cashier/recharge-card.html"
-                                                                                   target="_blank">充值卡充值</a></p>
-                        </div><a href="https://www.meituan.com/account/settings" target=
+                            <p class="user-money">我的id：果酷  </p>
+                        </div><a href="/user/view/account.html" target=
                             "_blank" class="user-setting">个人信息设置 &gt;</a>
                     </div>
 
                     <div class="userfn-ls">
                         <ul class="userfn-ul clearfix">
                             <li>
-                                <a href="/orders#status=0"><span>全部订单</span></a>
-                                <i style="width: 36px;height: 32px;background: linear-gradient(to bottom right,#FFA24B,#FD7F3A);
-    -webkit-background-clip: text;    font-size: 32px;"></i>
+                                <a href="/user/view/order.html"><span>全部订单</span></a>
+                              <!--  <i style="width: 36px;height: 32px;background: linear-gradient(to bottom right,#FFA24B,#FD7F3A);
+    -webkit-background-clip: text;    font-size: 32px;"></i>-->
                             </li>
 
                             <li>
@@ -167,15 +168,13 @@
                             </li>
 
                             <li>
-                                <a href="/orders#status=2"><span>待使用</span></a>
+                                <a href="/orders#status=3"><span>待评论</span></a>
                             </li>
-
                             <li>
-                                <a href="/orders#status=3"><b class="num">7</b><span>待评论</span></a>
+                                <a href="/orders#status=4"><span>收藏</span></a>
                             </li>
-
                             <li>
-                                <a href="/orders#status=4"><span>退款/售后</span></a>
+                                <a href="/orders#status=4"><span>通知</span></a>
                             </li>
                         </ul>
                     </div>
@@ -184,75 +183,9 @@
                 <div class="recommend-list clearfix">
                     <div class="list-head">
                         <p>猜你喜欢<b>为您甄选最合适的</b></p>
-                    </div><a href="//www.meituan.com/meishi/190770891/" class=
-                        "link recommend-item-box" target="_blank">
-                    <div class="recommend-card-wrapper">
-                        <div class="img-box"><img src=
-                                                          "//p1.meituan.net/msmerchant/bdd991103dfeffbde06213d2e790d5af65212.jpg@237w_132h_1e_1c"
-                                                  class="image"></div>
+                    </div>
 
-                        <div class="info-box">
-                            <div class="title" title="">
-                                旺门食府
-                            </div>
-
-                            <div class="score-line">
-                                <div class="score rate-stars">
-                                    <ul class="rate-stars-ul rate-stars-dark"></ul>
-
-                                    <ul class="rate-stars-ul rate-stars-light" style="width: 94%;">
-                                    </ul>
-                                </div>
-
-                                <div class="comment-number">
-                                    19个评价
-                                </div>
-                            </div>
-
-                            <div class="desc-line"></div>
-
-                            <div class="bottom-line price-box">
-            <span><span class="yuan">￥</span><span class=
-                                                           "price-number numfont">88.0</span><span class=
-                                                                                                           "price-desc">起</span></span>
-                            </div>
-                        </div>
-                    </div></a><a href="//www.meituan.com/meishi/81045499/" class=
-                        "link recommend-item-box" target="_blank">
-                    <div class="recommend-card-wrapper">
-                        <div class="img-box"><img src=
-                                                          "//p0.meituan.net/deal/d37378a20c373892b59890a4ede5dda727845.jpg@237w_132h_1e_1c"
-                                                  class="image"></div>
-
-                        <div class="info-box">
-                            <div class="title" title="">
-                                销魂掌（那曲店）
-                            </div>
-
-                            <div class="score-line">
-                                <div class="score rate-stars">
-                                    <ul class="rate-stars-ul rate-stars-dark"></ul>
-
-                                    <ul class="rate-stars-ul rate-stars-light" style="width: 100%;">
-                                    </ul>
-                                </div>
-
-                                <div class="comment-number">
-                                    58个评价
-                                </div>
-                            </div>
-
-                            <div class="desc-line desc">
-                                那曲镇
-                            </div>
-
-                            <div class="bottom-line price-box">
-            <span><span class="yuan">￥</span><span class=
-                                                           "price-number numfont">95.0</span><span class=
-                                                                                                           "price-desc">起</span></span>
-                            </div>
-                        </div>
-                    </div></a><a href="//www.meituan.com/jiudian/52192490/" class=
+                 <!--   <a href="//www.meituan.com/jiudian/52192490/" class=
                         "link recommend-item-box" target="_blank">
                     <div class="recommend-card-wrapper">
                         <div class="img-box"><img src=
@@ -266,20 +199,21 @@
 
                             <div class="score-line">
                                 <div class="score rate-stars">
-                                    <ul class="rate-stars-ul rate-stars-dark"></ul>
-
-                                    <ul class="rate-stars-ul rate-stars-light" style="width: 74%;">
+                                    <ul class="rate-stars-ul rate-stars-dark">
+                                        <li><img  src="../css/xingxing%20.png"></li>
+                                        <li><img src="../css/xingxing%20.png"></li>
+                                        <li><img  src="../css/xingxing%20.png"></li>
+                                        <li><img  src="../css/xingxing%20.png"></li>
+                                        <li><img src="../css/xingxing%20.png"></li>
                                     </ul>
                                 </div>
 
                                 <div class="comment-number">
-                                    41个评价
+                                    19个评价
                                 </div>
                             </div>
 
-                            <div class="desc-line desc">
-                                那曲镇
-                            </div>
+                            <div class="desc-line">应季精选</div>
 
                             <div class="bottom-line price-box">
             <span><span class="yuan">￥</span><span class=
@@ -287,7 +221,7 @@
                                                                                                             "price-desc">起</span></span>
                             </div>
                         </div>
-                    </div></a>
+                    </div></a>-->
                 </div>
             </div>
         </div>
@@ -302,6 +236,7 @@
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
+<script src="../js/userInfo.js"></script>
 <script>
 
 </script>

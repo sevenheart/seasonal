@@ -20,4 +20,9 @@ public interface DetailGoodService {
      * @return
      */
     List<DetailedCommodityForm>findNoCommentGoodsByUserId(String userId);
+
+    /**
+     * 根据销量推送商品信息
+     */
+    List<ComposeGood>   showGoodsBySales();
 }

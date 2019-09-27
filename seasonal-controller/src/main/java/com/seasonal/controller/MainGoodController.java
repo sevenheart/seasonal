@@ -8,6 +8,7 @@ import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
 import com.seasonal.pojo.SecKillRedis;
 import com.seasonal.redis.RedisUtil;
+import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,6 +101,28 @@ public class MainGoodController {
         System.out.println(id);
         return detailGoodService.findComposeGoodById(id);
     }
+
+    /**
+     * 根据销量推送商品
+     * @return
+     */
+    @RequestMapping(value = "FindUpGoodsByNumber")
+    @ResponseBody
+    public ResultData findUpGoodsByNumber(){
+
+        ResultData resultData = new ResultData();
+        List<ComposeGood> list = detailGoodService.showGoodsBySales();
+        list = list.subList(0,3);
+        if(list.size()>0){
+            System.out.println(list.toString());
+            resultData.setCode(200);
+            resultData.setData(list);
+            resultData.setMessage("推荐商品成功！");
+            return  resultData;
+        }
+        return resultData;
+    }
+
 
     /**
      * 根据用户id和商品id查找该商品是否已收藏

@@ -15,12 +15,10 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "order")
 public class OrderFormController {
-    private final CartFormService cartFormService;
     private final OrderFormService orderFormService;
 
     @Autowired
-    public OrderFormController(CartFormService cartFormService, OrderFormService orderFormService) {
-        this.cartFormService = cartFormService;
+    public OrderFormController( OrderFormService orderFormService) {
         this.orderFormService = orderFormService;
     }
 

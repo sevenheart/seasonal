@@ -249,13 +249,14 @@
     margin-left:10px;
     font-weight: 400;
 }
-.recommend-list .list-head p a{
+.recommend-list  a{
     font-size: 14px;
     color: #222222;
     display:block;
     font-weight: 400;
     float:right;
     padding-right:20px;
+    text-decoration: none;
 }
 
 .recommend-list .recommend-item-box{
@@ -294,6 +295,8 @@
 .recommend-card-wrapper {
     width: 100%;
     box-sizing: border-box;
+
+
 }
 .recommend-card-wrapper .img-box {
     height: 0;
@@ -307,7 +310,8 @@
     overflow: hidden;
 }
 .recommend-card-wrapper .img-box img {
-    width: 100%;
+    width: 212px;
+    height: 118px;
     font-size: 0;
 }
 .recommend-card-wrapper .info-box {
@@ -322,20 +326,35 @@
     margin: 0;
     font-weight: 500;
 }
-
 .recommend-card-wrapper .info-box .score-line div {
     display: inline-block;
 }
-.recommend-card-wrapper .info-box .score-line .comment-number {
+.recommend-card-wrapper .info-box .rate-stars img{
+    width: 16px;
+    height: 16px;
+}
+.recommend-card-wrapper .info-box  .comment-number {
     font-size: 12px;
     color: #999;
     height: 24px;
     line-height: 24px;
-    margin-left: 10px;
+    margin-left: 30px;
 }
 
+.recommend-card-wrapper .info-box .bottom-line  .yuan {
+    font-size: 14px;
+    font-weight: 700;
+}
+.recommend-card-wrapper .info-box .bottom-line  .price-number {
+    font-size: 22px;}
+.recommend-card-wrapper .info-box .bottom-line  .price-desc {
+    font-size: 12px;
+    margin-left: 4px;
+    font-weight: 700;
+}
 .recommend-card-wrapper .info-box .bottom-line {
     position: relative;
+    text-decoration: none;
 }
 .recommend-card-wrapper .info-box .bottom-line div {
     display: inline-block;
