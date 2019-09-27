@@ -112,6 +112,14 @@ public class MainGoodController {
 
         ResultData resultData = new ResultData();
         List<ComposeGood> list = detailGoodService.showGoodsBySales();
+        list = list.subList(0,3);
+        if(list.size()>0){
+            System.out.println(list.toString());
+            resultData.setCode(200);
+            resultData.setData(list);
+            resultData.setMessage("推荐商品成功！");
+            return  resultData;
+        }
         return resultData;
     }
 

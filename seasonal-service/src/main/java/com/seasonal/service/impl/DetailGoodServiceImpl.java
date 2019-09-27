@@ -34,6 +34,7 @@ public class DetailGoodServiceImpl implements DetailGoodService {
 
     /*推荐商品的逻辑处理
     * 找到高销量商品并且查询其评论个数
+    * 若扩展其查找方式在此处扩展
     * */
     @Override
     public List<ComposeGood> showGoodsBySales() {

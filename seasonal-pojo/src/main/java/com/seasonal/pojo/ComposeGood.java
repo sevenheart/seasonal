@@ -15,6 +15,8 @@ public class ComposeGood {
     private Integer composeGoodStatus;
     private String composeGoodIcon;
     private Integer composeGoodWeight;
+    private Integer commentNumber;
+
     private List<ComposeGoodImg>  composeGoodImgs;
     private Classify classify;
 //    private Date createTime;

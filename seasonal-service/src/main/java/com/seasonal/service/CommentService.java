@@ -27,7 +27,8 @@ public interface CommentService {
 
     /**
      * 插入一条评论
-     * 修改数据库的
+     * 修改数据库的评论数量
+     * 修改评论状态
      * @param comment
      */
     int commentAndUpdate(Comment comment);
@@ -39,6 +40,8 @@ public interface CommentService {
      * @return
      */
     int addResponse( Responses responses);
+
+
 
 
 }

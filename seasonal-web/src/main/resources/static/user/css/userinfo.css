@@ -249,13 +249,14 @@
     margin-left:10px;
     font-weight: 400;
 }
-.recommend-list .list-head p a{
+.recommend-list  a{
     font-size: 14px;
     color: #222222;
     display:block;
     font-weight: 400;
     float:right;
     padding-right:20px;
+    text-decoration: none;
 }
 
 .recommend-list .recommend-item-box{
@@ -309,7 +310,8 @@
     overflow: hidden;
 }
 .recommend-card-wrapper .img-box img {
-    width: 100%;
+    width: 212px;
+    height: 118px;
     font-size: 0;
 }
 .recommend-card-wrapper .info-box {
