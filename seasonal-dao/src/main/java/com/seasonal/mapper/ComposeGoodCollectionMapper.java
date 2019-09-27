@@ -29,4 +29,12 @@ public interface ComposeGoodCollectionMapper {
      * @return
      */
     List<ComposeGoodCollection> selectAllCollectionById(String userId);
+
+    /**
+     * 根据用户Id和商品Id删除收藏
+     * @param userId
+     * @param goodId
+     * @return
+     */
+    int deleteGoodCollection(String userId, String goodId);
 }

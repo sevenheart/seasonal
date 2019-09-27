@@ -78,6 +78,7 @@ $(document).on('click', '.pass-form-normal .pass-text-input-password', function 
     $(this).css('border-color', '#F69');
     $('.pass-form-normal .pass-label-password').css('background-position', '0 -24px');
 });
+
 $(document).on('blur', '.pass-form-normal .pass-text-input-password', function () {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     pass_generalError_error.text('');
@@ -93,6 +94,7 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-password', function (
 
 //表单提交，判断输入信息
 $(document).on('submit', '.pass-form-normal', function () {
+
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
     $('.pass-form-normal .pass-generalErrorWrapper a').remove();
     pass_generalError_error.text('');
@@ -115,8 +117,11 @@ $(document).on('submit', '.pass-form-normal', function () {
         $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error a').remove();
         pass_generalError_error.text('');
         var check = document.getElementById("memberPass").checked;
+
+
         //调用login方法，判断输入值
         flag = login(identifier, credential, flag, check);
+
     }
     if (flag === true) {
         //登录成功，修改用户登录信息

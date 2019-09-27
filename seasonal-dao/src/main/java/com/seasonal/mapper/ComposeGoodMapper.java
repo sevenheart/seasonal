@@ -29,5 +29,15 @@ public interface ComposeGoodMapper {
 
     List<ComposeGood> findMainComposeGoodByClassifyId(Long classifyId);
 
+    /**
+     * g根据销量返回商品信息
+     * @return
+     */
     List<ComposeGood> findUpGoodsByNumber();
+
+    /**
+     * 修改商品的评论数量
+     * @return
+     */
+    int addCommentNumber(String goodId);
 }

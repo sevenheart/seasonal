@@ -67,4 +67,10 @@ public class GoodsListServiceImpl implements GoodsListService {
     public List<ComposeGoodCollection> selectAllCollectionById(String userId) {
         return composeGoodCollectionMapper.selectAllCollectionById(userId);
     }
+
+    @Override
+    public int deleteGoodCollection(String userId, String goodId) {
+        int num = composeGoodCollectionMapper.deleteGoodCollection(userId,goodId);
+        return num;
+    }
 }

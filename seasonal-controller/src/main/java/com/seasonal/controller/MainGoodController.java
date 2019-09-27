@@ -112,6 +112,14 @@ public class MainGoodController {
 
         ResultData resultData = new ResultData();
         List<ComposeGood> list = detailGoodService.showGoodsBySales();
+        list = list.subList(0,3);
+        if(list.size()>0){
+            System.out.println(list.toString());
+            resultData.setCode(200);
+            resultData.setData(list);
+            resultData.setMessage("推荐商品成功！");
+            return  resultData;
+        }
         return resultData;
     }
 
@@ -162,10 +170,27 @@ public class MainGoodController {
     public Object selectAllCollectionById(String userId) {
         List<ComposeGoodCollection> composeGoodCollections = goodsListService.selectAllCollectionById(userId);
         composeGoodCollections.forEach(System.out::println);
-        if (composeGoodCollections != null || composeGoodCollections.size() > 0){
+        if (composeGoodCollections != null && composeGoodCollections.size() > 0){
             return ResultUtil.success(composeGoodCollections);
         } else {
             return ResultUtil.fail(100,"您还没有收藏哟！");
+        }
+    }
+
+    /**
+     * 删除收藏
+     * @param userId
+     * @param goodId
+     * @return
+     */
+    @RequestMapping(value = "DeleteGoodCollection")
+    @ResponseBody
+    public Object deleteGoodCollection(String userId,String goodId) {
+        int num = goodsListService.deleteGoodCollection(userId,goodId);
+        if (num > 0){
+            return ResultUtil.success("删除成功");
+        } else {
+            return ResultUtil.fail(100,"删除失败");
         }
     }
 

@@ -120,7 +120,7 @@ $("#ctf-js").click(function () {
     const $pick_up = $("#pick_up");
     //自提按钮点击事件
     $pick_up.click(function () {
-
+        delivery_address = "";
         // 将路线规划的路径显示清除
         driving.clear();
 
