@@ -233,5 +233,5 @@
 }
 .container{
     transition: all .2s;
-    display: none;
+    display: block;
 }
