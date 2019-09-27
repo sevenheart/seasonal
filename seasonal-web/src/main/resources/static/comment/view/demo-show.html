@@ -23,6 +23,13 @@
 		margin: 20px auto;
 		clear: both;
 		padding-top: 20px;
+		background: #fff;
+		border: 1px solid #e5e5e5;
+		border-radius: 4px;
+		padding: 0 20px 40px;
+		color: #666;
+
+
 	}
 	.comment-list .comment-info{
 		position: relative;
@@ -69,11 +76,42 @@
 		padding-right: 2em;
 		color: #aaa;
 	}
+
+	.total{
+		font-size: 20px;
+		line-height: 28px;
+		font-weight: 800;
+	}
+	.total .sort {
+		cursor: pointer;
+		float: right;
+		font-size: 12px;
+		color: #999;
+	}
+	.total .sort .on {
+		color: #00c9b3;
+	}
+	.total .sort span {
+		font-size: 12px;
+		margin-left: 20px;
+	}
+
+	{
+
+	}
 </style>
 </head>
 <body>
 
 <div class="container">
+
+	<div class="total" >
+		<div class="sort"  >
+			<span class="on" >默认排序</span><span>时间排序</span>
+		</div>248条网友点评
+	</div>
+
+
 	<div class="comment-list">
 
 	</div>

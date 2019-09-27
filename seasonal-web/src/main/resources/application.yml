@@ -48,11 +48,11 @@ spring:
   data:
     mongodb:
       database: seasonal
-      host: localhost
+      host: 39.105.184.0
       port: 27017
       username:
       password:
-      uri: mongodb://localhost
+      uri: mongodb://39.105.184.0
 
 
 
