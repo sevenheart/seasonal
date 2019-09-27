@@ -14,7 +14,7 @@ let orderId;
 let money;
 $.ajax({
     url: "/order/FindOrderFormById",
-    type: "post",
+    type: "get",
     dataType: "json",
     data: {"orderId": getQueryVariable("orderId")},
     async: false,

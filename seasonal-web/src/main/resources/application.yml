@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 443
   ssl:
     key-store: www.strin.xyz.jks
     key-store-password: 3jeuv93sz1
@@ -7,6 +7,9 @@ server:
     key-alias: www.strin.xyz
 
 spring:
+  thymeleaf:
+    cache: false
+    enabled: false
   mvc:
     view:
       prefix: /WEB-INF/jsp/
