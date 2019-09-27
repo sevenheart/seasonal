@@ -38,7 +38,7 @@ public class AliPayServiceImpl implements AliPayService {
         //int orderform = orderFormMapper.insertOrderForm();
         //3.插入订单的详细信息。（需要详细信息list）
 
-
+        System.out.println("修改状态未"+update);
         if (insert>0){
             return true;
         }

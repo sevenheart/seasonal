@@ -257,7 +257,7 @@
     float: right;
 }
 
-.btn-box .show-deal {
+.btn-box .show-deal,.btn-box .delete-collection {
     font-size: 14px;
     color: #666666;
     font-weight: 500;
@@ -467,4 +467,12 @@
     display: block;
     font-size: 16px;
     color: #e51e13;
+}
+
+.no-collection-text {
+    border-top: 1px solid #E5E5E5;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
 }
