@@ -255,6 +255,7 @@ function allotAddressX(city, address) {
 
     order_money -= delivery_money;
     delivery_money = 0;
+    delivery_address = '';
 
     // city为下拉列表的value值，address为下拉列表的text值，分别表示城市、详细地址
     const $allot_address_x = $("#allot_address_x ");
