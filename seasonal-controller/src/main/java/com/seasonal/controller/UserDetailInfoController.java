@@ -8,6 +8,7 @@ import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,14 +56,25 @@ public class UserDetailInfoController {
 
     @RequestMapping("updateUserInfo")
     @ResponseBody
-    public ResultData updateUserInfoById(User user, @RequestParam(value = "multipartFile", required = false) MultipartFile multipartFile) throws IOException {
+    public ResultData updateUserInfoById(User user,@RequestParam( value="oldlocation") String oldlocation, @RequestParam(value = "multipartFile", required = false) MultipartFile multipartFile) throws IOException {
         //获取上传的文件
+        String oldName;
+        String newName;
         if (null != multipartFile) {
-            System.out.println("获取到图片了" + user.getId());
-            //获取上传的文件的文件名
-            String oldName = multipartFile.getOriginalFilename();
-            //通过UUID随机生成一个新的文件名
-            String newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
+            if(oldlocation!=null){
+                //删除云的图片
+                 String[] name = oldlocation.split("/");
+                //名字还是原来的
+                newName =  name[name.length-1];
+                TencentUploadUtil.deleteFile("img/user/"+newName);
+            }else{
+                System.out.println("获取到图片了" + user.getId());
+                //获取上传的文件的文件名
+                 oldName = multipartFile.getOriginalFilename();
+                //通过UUID随机生成一个新的文件名
+                 newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
+            }
+
             File file = new File("E:\\" + newName);
             //将图片进行存储
             multipartFile.transferTo(file);

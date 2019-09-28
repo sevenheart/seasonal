@@ -1,4 +1,4 @@
-//
+
 accountInit();
 //初始化用户信息
 function accountInit(){
@@ -72,24 +72,34 @@ $('.btn-gray').click(function () {
 //模态框确定按钮
 //修改用户的信息
 $('.btn-primary').click(function () {
-    let fd = new FormData();
-    fd.append("userId", userId);
-    fd.append("userName", $('#J_addressNameInput').val());
-    fd.append("userSex", document.getElementById('J_addressPhoneInput').value);
-    fd.append("userAge", $('#J_addressZipcodeInput').val());
-    fd.append("multipartFile", $('#bookimg')[0].files[0]);
-    $.post({
-        url:"/user/updateUserInfo",
-        data:fd,
-        dataType:"json",
-        processData: false,
-        contentType: false,
-        success:function (data) {
-            alert(data.message);
-            window.location.href="/user/view/account.html"
-        }
+    if($('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120){
+        alert("请输入合法的年龄！");
+        return;
+    }else if($('#bookimg')[0].files[0].size>3145728){
+      alert("文件超出了限制大小请重新上传！");
+    } else{
+        let fd = new FormData();
+        fd.append("oldlocation",userImg);
+        fd.append("userId", userId);
+        fd.append("userName", $('#J_addressNameInput').val());
+        fd.append("userSex", document.getElementById('J_addressPhoneInput').value);
+        fd.append("userAge", $('#J_addressZipcodeInput').val());
+        fd.append("multipartFile", $('#bookimg')[0].files[0]);
+        $.post({
+            url:"/user/updateUserInfo",
+            data:fd,
+            dataType:"json",
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                alert(data.message);
+                window.location.href="/user/view/account.html"
+            }
 
-    })
+        })
+    }
+
+
 
 })
 

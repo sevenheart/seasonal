@@ -56,4 +56,33 @@ public class TencentUploadUtil {
             return "";
         }
     }
+
+
+    /**
+     * 删除用户头像
+     *
+     * @param fileKey  img/user/。。.jpg
+     */
+    public static  void deleteFile(String fileKey){
+        // 1 初始化用户身份信息(secretId, secretKey)
+        COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
+        // 2 设置 bucket 区域
+        ClientConfig clientConfig = new ClientConfig(new Region(region));
+        // 3 生成 cos 客户端
+        COSClient cosClient = new COSClient(cred, clientConfig);
+        try {
+            // 指定对象所在的存储桶
+            String bucketName = "seasonal-1300148510";
+            // 指定对象在 COS 上的对象键
+            String key = fileKey;
+            cosClient.deleteObject(bucketName, key);
+        } catch (CosServiceException serverException) {
+            serverException.printStackTrace();
+        } catch (CosClientException clientException) {
+            clientException.printStackTrace();
+        }finally {
+            cosClient.shutdown();
+        }
+
+    }
 }
