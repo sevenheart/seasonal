@@ -109,9 +109,10 @@ public class MainGoodController {
     @RequestMapping(value = "FindUpGoodsByNumber")
     @ResponseBody
     public ResultData findUpGoodsByNumber(){
-
+        System.out.println("进入了推荐商品");
         ResultData resultData = new ResultData();
         List<ComposeGood> list = detailGoodService.showGoodsBySales();
+        System.out.println(list.size());
         list = list.subList(0,3);
         if(list.size()>0){
             System.out.println(list.toString());
