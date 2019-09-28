@@ -2,6 +2,7 @@ var allOrderHtml = '';
 var unpaidHtml = '';
 var paidHtml = '';
 var orderAndIndex = new Array();
+var allOrderArray = new Array();
 
 // 查看用户的订单信息
 if(orderAndIndex.length === 0) {
@@ -17,14 +18,22 @@ if(orderAndIndex.length === 0) {
                 //alert("没有订单信息！");
             } else if (data.code === 200) {
                 $.each(data.data, function (i, value) {
-                    showOrders(i, value);
-                })
+                    collationOrders(i, value);
+                });
+                if(orderAndIndex.length % 5 !== 0){
+                    allOrderArray.push(allOrderHtml);
+                    allOrderHtml = '';
+                }
+                $("#Pagination").pagination(orderAndIndex.length, {
+                    callback: showOrders,
+                });
             }
         }
     });
 }
 
-function showOrders(i, data){
+// 分页整理
+function collationOrders(i, data){
     var goodsCount = 0;
     var goodsPrice = 0;
     var status;
@@ -71,14 +80,21 @@ function showOrders(i, data){
         '                            <div class="order-btn"></div>\n' +
         '                        </div>';
 
-    allOrderHtml = orderHtml + allOrderHtml;
+    allOrderHtml = allOrderHtml + orderHtml;
+    if(orderAndIndex.length % 5 === 0){
+        allOrderArray.push(allOrderHtml);
+        allOrderHtml = '';
+    }
     if(orderStatus === 1){
         paidHtml = orderHtml + paidHtml;
     }else{
         unpaidHtml = orderHtml + unpaidHtml;
     }
+}
 
-    $('.orders-body').html(allOrderHtml);
+function showOrders(current_page,obj){
+    console.log('页码:'+current_page);
+    $('.orders-body').html(allOrderArray[current_page]);
 }
 
 //点击重新加载数据选项卡效果
