@@ -3,6 +3,11 @@ var unpaidHtml = '';
 var paidHtml = '';
 var orderAndIndex = new Array();
 var allOrderArray = new Array();
+var unpaidArray = new Array();
+var paidArray = new Array();
+let unpaidCount = 0;
+let paidCount = 0;
+const $orders_body = $(".orders-box .orders-body");
 
 // 查看用户的订单信息
 if(orderAndIndex.length === 0) {
@@ -20,12 +25,23 @@ if(orderAndIndex.length === 0) {
                 $.each(data.data, function (i, value) {
                     collationOrders(i, value);
                 });
+                // 判断是否还有剩余的订单
                 if(orderAndIndex.length % 5 !== 0){
                     allOrderArray.push(allOrderHtml);
                     allOrderHtml = '';
                 }
+                if(unpaidCount % 5 !== 0){
+                    unpaidArray.push(unpaidHtml);
+                    unpaidHtml = '';
+                }
+                if(paidCount % 5 !== 0){
+                    paidArray.push(paidHtml);
+                    paidHtml = '';
+                }
+
+                // 调用分页插件回调函数，显示全部订单
                 $("#Pagination").pagination(orderAndIndex.length, {
-                    callback: showOrders,
+                    callback: showAllOrders,
                 });
             }
         }
@@ -34,13 +50,20 @@ if(orderAndIndex.length === 0) {
 
 // 分页整理
 function collationOrders(i, data){
+    // 订单中商品数量
     var goodsCount = 0;
-    var goodsPrice = 0;
+    // 订单总价格
+    var goodsPrice = data.orderMoney;
     var status;
+    // 将订单按排序索引存入到数组中
     orderAndIndex.push(data);
+    // 获取当前订单状态
     var orderStatus = data.orderStatus;
+    // 订单显示第一张图片
     var goodsIcon = data.detailedCommodityForms[0].composeGoods[0].composeGoodIcon;
+    // 订单描述名称
     var goodsName = data.detailedCommodityForms[0].composeGoods[0].composeGoodName + '...';
+    // 订单跳转url
     var orderUrl;
 
     // 确认该订单的支付状态
@@ -52,19 +75,18 @@ function collationOrders(i, data){
         orderUrl = '/order/view/orderUnpaid.html?orderId=' + data.orderId;
     }
 
-    // 遍历该订单中的所有商品，并将该商品显示到页面
+    // 遍历该订单中的所有商品，获取商品数量
     $.each(data.detailedCommodityForms, function (i, value) {
         goodsCount += value.goodCount;
-        goodsPrice += value.goodCount * value.composeGoods[0].composeGoodPrice;
     });
 
     let orderHtml = '<div class="order-item clearfix">\n' +
         '                            <div class="order-img">\n' +
-        '                                <a href="'+ orderUrl +'" class="link" target="_blank">\n' +
+        '                                <a href="'+ orderUrl +'" class="link" target="_blank" title="查看订单详情">\n' +
         '                                    <div><img src="'+ goodsIcon +'" class="image" alt=""></div></a>\n' +
         '                            </div>\n' +
         '                            <div class="order-info info-box">\n' +
-        '                                <a href="'+ orderUrl +'" class="link" target="_blank">\n' +
+        '                                <a href="'+ orderUrl +'" class="link" target="_blank" title="查看订单详情">\n' +
         '                                    <p class="order-title" >'+ goodsName +'</p></a>\n' +
         '                                <p class="info">商品数量：'+ goodsCount +'个</p>\n' +
         '                            </div>\n' +
@@ -86,15 +108,20 @@ function collationOrders(i, data){
         allOrderHtml = '';
     }
     if(orderStatus === 1){
-        paidHtml = orderHtml + paidHtml;
+        paidCount++;
+        paidHtml = paidHtml + orderHtml;
+        if(paidCount % 5 === 0){
+            paidArray.push(paidHtml);
+            paidHtml = '';
+        }
     }else{
-        unpaidHtml = orderHtml + unpaidHtml;
+        unpaidCount++;
+        unpaidHtml = unpaidHtml + orderHtml;
+        if(unpaidCount % 5 === 0){
+            unpaidArray.push(unpaidHtml);
+            unpaidHtml = '';
+        }
     }
-}
-
-function showOrders(current_page,obj){
-    console.log('页码:'+current_page);
-    $('.orders-body').html(allOrderArray[current_page]);
 }
 
 //点击重新加载数据选项卡效果
@@ -102,24 +129,50 @@ $(".orders-box .orders-ul li").click(function () {
     $(this).parent("ul").children("li").removeClass("active");
     $(this).addClass("active");
     let labelName = $(this).text();
-    const $orders_body = $(".orders-box .orders-body");
     //在orders-body下追加div即可
 
     if(labelName === '全部订单'){
-        $orders_body.html(allOrderHtml);
+        // 显示全部订单
+        if(allOrderArray.length !== 0){
+            $("#Pagination").pagination(orderAndIndex.length, {
+                callback: showAllOrders,
+            });
+        }
     }else if(labelName === '待付款'){
-        if(unpaidHtml === ''){
+        if(unpaidArray.length === 0){
             unpaidHtml = '<div>\n' +
                 '                            <p class="no-order-text">您暂时还没有订单</p>\n' +
                 '                        </div>';
+        }else{
+            $("#Pagination").pagination(unpaidCount, {
+                callback: showUnpaidOrders,
+            });
         }
-        $orders_body.html(unpaidHtml);
     }else if(labelName === '已付款'){
-        if(paidHtml === ''){
+        if(paidArray.length === 0){
             paidHtml = '<div>\n' +
                 '                            <p class="no-order-text">您暂时还没有订单</p>\n' +
                 '                        </div>';
+        }else{
+            $("#Pagination").pagination(paidCount, {
+                callback: showPaidOrders,
+            });
         }
-        $orders_body.html(paidHtml);
+
     }
 });
+
+// 根据页码显示相应的页数
+function showAllOrders(current_page){
+    $orders_body.html(allOrderArray[current_page]);
+}
+
+// 根据页码显示相应的页数
+function showUnpaidOrders(current_page) {
+    $orders_body.html(unpaidArray[current_page]);
+}
+
+// 根据页码显示相应的页数
+function showPaidOrders(current_page) {
+    $orders_body.html(paidArray[current_page]);
+}

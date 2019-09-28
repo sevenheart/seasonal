@@ -322,7 +322,7 @@
     font-size: 30px;
     cursor: pointer;
     user-select: none;
-    /*transition: background-color .5s;*/
+    transition: background-color .5s;
     color:#E5E5E5;
     background: #9999;
 }
@@ -340,7 +340,7 @@
     cursor: pointer;
     user-select: none;
     color:#E5E5E5;
-    /*transition: background-color .5s;*/
+    transition: background-color .5s;
     background: #9999;
 }
 

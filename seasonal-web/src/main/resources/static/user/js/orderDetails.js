@@ -38,7 +38,8 @@ function showDetails() {
     $.each(orderAndIndex[index].detailedCommodityForms, function (i, value) {
         let createTime = value.createTime;
         goodsHtml += '<tr>\n' +
-            '                <td class="movie-name">'+ value.composeGoods[0].composeGoodName +'</td>\n' +
+            '                <td class="movie-name">\n' +
+            '                   <a href="/main/view/detailGoods.html?id='+ value.composeGoods[0].id +'" target="_blank">'+ value.composeGoods[0].composeGoodName +'</a></td>\n' +
             '                <td class="showtime">'+ createTime.substr(0, 10) +'</td>\n' +
             '                <td class="cinema-name">'+ value.goodCount +'</td>\n' +
             '                <td>\n' +
