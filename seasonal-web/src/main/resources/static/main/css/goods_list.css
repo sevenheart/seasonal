@@ -58,7 +58,7 @@ a.grgp_op {
     float: right;
     margin-right: 10px;
     /*空心得-15*/
-    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -15px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat;
 }
 
 span.grgp_np_grgp_npri {
