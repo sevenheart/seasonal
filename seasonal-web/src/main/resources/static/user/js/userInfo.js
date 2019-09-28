@@ -13,26 +13,6 @@ $('.userinfo-box .user-money').text("我的id："+userId);
     }
 })*/
 
-/*查找待评论的数量*/
-$.post({
-    url:"/FindNoCommentGoods",
-    data:{"userId":userId},
-    dataType:"json",
-    success:function (data) {
-        //查询待评论
-        $('.userfn-ls .userfn-ul ').children("li").eq(2).children().append('<b class="num">'+data.data.length+'</b>');
-
-    }
-})
-var num = 18;
-//带付款个数
-//$('.userfn-ls .userfn-ul ').children("li").eq(1).children().append('<b class="num">'+num+'</b>');
-
-
-//通知标识
-//$('.userfn-ls .userfn-ul ').children("li").eq(4).children().append('<b class="num">'+num+'</b>');
-
-
 //推荐商品的图片地址
 
 $.post({
@@ -85,6 +65,27 @@ $.post({
         $('.recommend-list').append(html);
     }
 })
+/*查找待评论的数量*/
+$.post({
+    url:"/FindNoCommentGoods",
+    data:{"userId":userId},
+    dataType:"json",
+    success:function (data) {
+        //查询待评论
+        $('.userfn-ls .userfn-ul ').children("li").eq(2).children().append('<b class="num">'+data.data.length+'</b>');
+
+    }
+})
+var num = 18;
+//带付款个数
+//$('.userfn-ls .userfn-ul ').children("li").eq(1).children().append('<b class="num">'+num+'</b>');
+
+
+//通知标识
+//$('.userfn-ls .userfn-ul ').children("li").eq(4).children().append('<b class="num">'+num+'</b>');
+
+
+
 
 
 

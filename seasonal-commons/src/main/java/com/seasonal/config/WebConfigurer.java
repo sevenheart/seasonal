@@ -15,7 +15,7 @@ import java.util.List;
 
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
-    private static List<String> EXCLUDE_PATH = Arrays.asList("/activity/**","/bootstrap/**","/cart/**","/comment/**","/jquery/**","/main/**","/order/**","/user/**","/login/**","/js/**","/css/**","/index.html");
+    private static List<String> EXCLUDE_PATH = Arrays.asList("/activity/**","/bootstrap/**","/cart/**","/comment/**","/jquery/**","/main/**","/order/**","/login/**","/js/**","/css/**","/index.html");
 
     //由于在拦截器中注解无效，需要提前注入bean
     @Bean
@@ -32,7 +32,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截 除了 excludePathList方法中页面的 其他请求
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**");//.excludePathPatterns(EXCLUDE_PATH);
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(EXCLUDE_PATH);
     }
 
     @Override

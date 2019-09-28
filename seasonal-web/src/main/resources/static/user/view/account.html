@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/setting.css">
     <link rel="stylesheet" href="../css/container.css">
+    <link rel="stylesheet" href="../css/useraddress.css">
     <style>
 
     </style>
@@ -110,7 +111,7 @@
 
                         <ul class="link-ul">
                             <li>
-                                <a href="https://www.meituan.com/vouchers/#tab=available">未评价</a>
+                                <a href="/user/view/comment.html">未评价</a>
                             </li>
 
                         </ul>
@@ -123,7 +124,7 @@
                                 <a href="/user/view/account.html">账户设置</a>
                             </li>
                             <li>
-                                <a href="/user/view/account.html">地址管理</a>
+                                <a href="/user/view/useraddress.html">地址管理</a>
                             </li>
                         </ul>
                     </div>
@@ -154,8 +155,9 @@
                     </div>
 
                     <div class="field-value">
-                        <img id="userImg" src= "https://p0.meituan.net/mmc/89bec9d64cde38d441cf976f751c482e3788.png@120w_120h_1e_1c"
+                        <img  src= "https://p0.meituan.net/mmc/89bec9d64cde38d441cf976f751c482e3788.png@120w_120h_1e_1c"
                                                   alt="" class="head-img">
+
                     </div>
 
                     <div class="upload-container btn-upload">
@@ -205,7 +207,7 @@
 <div class="footer" style="margin-top: 0px;">
     <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
 </div>
-<div class="container">
+<div class="container"  >
     <div class="mask"></div>
     <div class="content">
         <div class="modal-header">
@@ -213,26 +215,34 @@
             <a class="close"><i class="iconfont1">&#xe602;</i></a>
         </div>
         <div class="modal-body">
-            头像：<button id="ipt-file" style="display: inline-block ">点击修改</button><input type="file" accept=
-                "image/*" name="" hidden >
+            <div style="margin-bottom:10px ">
+                <img class="head-img " style="width:120px;height: 120px;    border-radius:120px;" id="userImg" src="https://p0.meituan.net/mmc/89bec9d64cde38d441cf976f751c482e3788.png@120w_120h_1e_1c" alt="" class="head-img">
+                <input hidden type="file" name="multipartFile" id="bookimg"  accept="image/x-png,image/gif,image/jpeg,image/bmp">
+            </div>
             <div class="form-box clearfix">
+
                 <div class="form-section form-name">
                     <label class="input-label" for="J_addressNameInput">姓名</label>
                     <input class="input-text J_addressInput" type="text" id="J_addressNameInput" name="user_name"
-                           placeholder="收货人姓名">
+                           >
                 </div>
-                <div class="form-section form-phone">
-                    <label class="input-label" for="J_addressPhoneInput">手机号</label>
-                    <input class="input-text J_addressInput" type="text" id="J_addressPhoneInput" name="user_phone"
-                           placeholder="11位手机号">
-                    <p class="msg msg-error">请输入正确的手机号</p>
+                <div class="form-section form-phone form-section-active form-section-valid">
+                    <label class="input-label" for="J_addressPhoneInput">性别</label>
+                    <select class="input-text J_addressPhoneInput"  placeholder="请选择性别" style="height: auto" name="selection" id="J_addressPhoneInput"   name="userSex">
+                        <option value='0' >男</option>
+                        <option value='1'>女</option>
+                    </select>
                 </div>
-                <div class="form-section form-name">
-                    <label class="input-label" for="J_addressAddress">地址</label>
-                    <input class="input-text J_addressInput" type="text" id="J_addressAddress" name="user_name"
-                           placeholder="收货人姓名">
+
+                <div class="form-section form-zipcode">
+                    <label class="input-label" for="J_addressZipcodeInput">输入你的年龄</label>
+                    <input class="input-text J_addressInput" type="text" id="J_addressZipcodeInput" name="user_zipcode">
                 </div>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" id="J_editAddressSave">保存</a>
+            <a class="btn btn-gray ">取消</a>
         </div>
     </div>
 </div>
