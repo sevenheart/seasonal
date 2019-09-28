@@ -252,8 +252,13 @@
             </div>
             <div class="goods_advertisement">
                 <div class="goods_signal">
-                    <div class="goods_signal_title " >商品推荐</div>
-                    <div class="goods_signal_paddingtop commontdiv currentdiv">
+                    <div style="border-bottom: solid 2px #ddd" >
+                    <div class="goods_signal_title  " >商品推荐</div>
+                    <div class="goods_signal_title "  >商品评论</div>
+                    <div class="goods_signal_title " >商品介绍</div>
+                    </div>
+                    <div class="centerdiv">
+                    <div class="goods_signal_paddingtop  ">
 
                         <a href="detailGoods.html?id=25" class="goods">
                             <img  alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/4_1.jpg"/>
@@ -281,10 +286,11 @@
                             <span class="goods_price">￥22.00</span>
                         </a>
                     </div>
-                    <div class="goods_signal_title"  >商品评论</div>
-                    <div class="commenthtml commontdiv" style="text-align: left;"></div>
-                    <div class="goods_signal_title" >商品介绍</div>
-                    <div class="goods_signal_describe goods_signal commontdiv">
+
+                    <div class="commenthtml commontdiv " hidden style="text-align: left;"></div>
+
+                    <div class="goods_signal_describe goods_signal " hidden></div>
+                    </div>
                     </div>
                 </div>
 
@@ -310,10 +316,13 @@
         }
     )*/
 
-    $('.commontdiv').hide();
     $(".goods_signal_title").click(function () {
-        $('.commontdiv').hide();
-        $(this).next().show();
+        $(".goods_signal_title").css("border-bottom","#ddd")
+        $(this).css("border-bottom","#ddd solid 3px");
+        let num = $(this).index();
+        $(this).parent().parent().children(".centerdiv").children("div").hide();
+        $(this).parent().parent().children(".centerdiv").children("div").eq(num).show();
+
     })
 $('.commenthtml').load('../../comment/view/demo-show.html');
 

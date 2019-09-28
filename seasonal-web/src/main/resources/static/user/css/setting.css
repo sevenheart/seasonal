@@ -457,6 +457,21 @@
     color: #666666;
     line-height: 40px;
 }
+
+.page .setting-container .setting-content .item  .btn-headimg{
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 100px;
+    font-size: 14px;
+    color: #666666;
+    float:right;
+    height:40px;
+    width: 82px;
+    cursor: pointer;
+    margin:0 15px;
+    line-height: 40px;
+    text-align: center;
+}
 .page .setting-container .setting-content .item .btn-change{
     background: #FFFFFF;
     border: 1px solid #E5E5E5;

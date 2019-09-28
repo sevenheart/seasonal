@@ -256,6 +256,7 @@ li.goods_control_ul_li1 .add_goods{
     float: left;
 }
 .goods_signal_title{
+    display: inline-block;
     cursor: pointer;
     height: 34px;
     line-height: 34px;
@@ -298,7 +299,8 @@ li.goods_control_ul_li1 .add_goods{
 
 }
 .goods_signal{
-    text-align: center;
+    text-align: left;
+
 }
 .goods_signal_describe img{
     text-align: center;
