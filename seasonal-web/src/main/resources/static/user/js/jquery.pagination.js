@@ -9,13 +9,13 @@
  */
 jQuery.fn.pagination = function(maxentries, opts){
 	opts = jQuery.extend({
-		items_per_page:10,
-		num_display_entries:10,
+		items_per_page:5,
+		num_display_entries:5,
 		current_page:0,
 		num_edge_entries:0,
 		link_to:"#",
-		prev_text:"Prev",
-		next_text:"Next",
+		prev_text:"<",
+		next_text:">",
 		ellipse_text:"...",
 		prev_show_always:true,
 		next_show_always:true,
@@ -76,19 +76,23 @@ jQuery.fn.pagination = function(maxentries, opts){
 			var appendItem = function(page_id, appendopts){
 				page_id = page_id<0?0:(page_id<np?page_id:np-1); // 规范page id值
 				appendopts = jQuery.extend({text:page_id+1, classes:""}, appendopts||{});
-				if(page_id == current_page){
-					var lnk = jQuery("<span class='current'>"+(appendopts.text)+"</span>");
-				}else{
-					var lnk = jQuery("<a>"+(appendopts.text)+"</a>")
-						.bind("click", getClickHandler(page_id))
-						.attr('href', opts.link_to.replace(/__id__/,page_id));		
+				if(isNaN(appendopts.text)) {
+					if (page_id == current_page) {
+						var lnk = jQuery("<a>" + (appendopts.text) + "</a>");
+					} else {
+						var lnk = jQuery("<span class='btn-active'>" + (appendopts.text) + "</span>")
+							.bind("click", getClickHandler(page_id))
+							.attr('href', opts.link_to.replace(/__id__/, page_id));
+					}
+					if (appendopts.classes) {
+						lnk.addClass(appendopts.classes);
+					}
+					panel.append(lnk);
 				}
-				if(appendopts.classes){lnk.addClass(appendopts.classes);}
-				panel.append(lnk);
 			}
 			// 产生"Previous"-链接
 			if(opts.prev_text && (current_page > 0 || opts.prev_show_always)){
-				appendItem(current_page-1,{text:opts.prev_text, classes:"prev"});
+				appendItem(current_page-1,{text:opts.prev_text, classes:"left-arrow"});
 			}
 			// 产生起始点
 			if (interval[0] > 0 && opts.num_edge_entries > 0)
@@ -121,7 +125,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 			}
 			// 产生 "Next"-链接
 			if(opts.next_text && (current_page < np-1 || opts.next_show_always)){
-				appendItem(current_page+1,{text:opts.next_text, classes:"next"});
+				appendItem(current_page+1,{text:opts.next_text, classes:"right-arrow"});
 			}
 		}
 		
