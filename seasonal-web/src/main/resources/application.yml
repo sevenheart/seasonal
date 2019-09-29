@@ -23,13 +23,6 @@ spring:
   output:
     ansi:
       enabled: always
-  #    #热部署启动
-  #  thymeleaf:
-  #    cache: true
-  #    devtools:
-  #      restart:
-  #        enabled: true
-  #        additional-paths: src/main/java
   #配置MySQL
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -59,7 +52,13 @@ spring:
       password:
       uri: mongodb://39.105.184.0
 
-
+  application:
+    name: rabbitmq-demo
+  rabbitmq:
+    host: localhost
+    password: guest
+    port: 15672
+    username: guest
 
 #logging:
 #  file: E:/boot.log

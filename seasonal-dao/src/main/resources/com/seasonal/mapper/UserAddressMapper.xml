@@ -28,10 +28,16 @@
             <if test="userName!=null and userName!=''">
                 user_name,
             </if>
-            <if test="createTime!=null and createTime!=''">
+            <if test="postcode!=null and postcode!=''">
+                postcode,
+            </if>
+            <if test="addressTag!=null and addressTag!=''">
+                address_tag,
+            </if>
+            <if test="createTime!=null ">
                 create_time,
             </if>
-            <if test="updateTime!=null and updateTime!=''">
+            <if test="updateTime!=null">
                 update_time,
             </if>
         </trim>
@@ -59,10 +65,16 @@
             <if test="userName!=null and userName!=''">
                 #{userName},
             </if>
-            <if test="createTime!=null and createTime!=''">
+            <if test="postcode!=null and postcode!=''">
+                #{postcode},
+            </if>
+            <if test="addressTag!=null and addressTag!=''">
+                #{addressTag},
+            </if>
+            <if test="createTime!=null ">
                 #{createTime},
             </if>
-            <if test="updateTime!=null and updateTime!=''">
+            <if test="updateTime!=null ">
                 #{updateTime},
             </if>
         </trim>
@@ -79,8 +91,9 @@
         <set>
             <if test="userName!=null">
                 user_name=#{userName},
-            </if><if test="userPhone!=null">
-            user_phone=#{userPhone},
+            </if>
+            <if test="userPhone!=null">
+                user_phone=#{userPhone},
             </if>
             <if test="province!=null">
                 province=#{province},
@@ -93,6 +106,15 @@
             </if>
             <if test="address!=null">
                 address=#{address},
+            </if>
+            <if test="postcode!=null and postcode!=''">
+                postcode=#{postcode},
+            </if>
+            <if test="addressTag!=null and addressTag!=''">
+                address_tag=#{addressTag},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
             </if>
         </set>
         where id=#{id}

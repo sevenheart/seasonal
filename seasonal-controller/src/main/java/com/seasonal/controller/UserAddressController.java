@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * author:陆旭
  */
 @Controller
-@RequestMapping("address")
+@RequestMapping("/address")
 public class UserAddressController {
     private final UserAddressServer userAddressServer;
 
@@ -33,10 +34,11 @@ public class UserAddressController {
      * @param userAddress
      * @return
      */
-    @RequestMapping("insertuseraddress")
+    @RequestMapping(value = "InsertUserAddress")
     @ResponseBody
-    public ResultData insertUserAddress(UserAddress userAddress) {
-        System.out.println("地址信息是" + userAddress.getAddress());
+    public ResultData insertUserAddress(@RequestBody UserAddress userAddress) {
+        userAddress.setCreateTime(new Date(System.currentTimeMillis()));
+        userAddress.setUpdateTime(new Date(System.currentTimeMillis()));
         int flag = userAddressServer.insertUserAddress(userAddress);
         if (flag > 0) {
             return ResultUtil.success(0, "插入地址信息成功");
@@ -49,7 +51,7 @@ public class UserAddressController {
      *
      * @return
      */
-    @RequestMapping("selectalladdress")
+    @RequestMapping(value = "selectalladdress")
     @ResponseBody
     public ResultData findAllAddress(String userId) {
         List<UserAddress> userAddressesList = userAddressServer.findAllUserAdreess(userId);
@@ -64,7 +66,7 @@ public class UserAddressController {
         return ResultUtil.fail(1, "查询用户地址失败");
     }
 
-    @RequestMapping("deleteuseraddressByid")
+    @RequestMapping(value = "deleteuseraddressByid")
     @ResponseBody
     public ResultData deleteUserAddress(Long id) {
         int flag = userAddressServer.delteUserAddressById(id);
@@ -77,7 +79,9 @@ public class UserAddressController {
 
     @RequestMapping("updateuseraddress")
     @ResponseBody
-    public ResultData updateUserAddress(UserAddress userAddress) {
+    public ResultData updateUserAddress(@RequestBody UserAddress userAddress) {
+
+        userAddress.setUpdateTime(new Date(System.currentTimeMillis()));
         int flag = userAddressServer.updateUserAddressById(userAddress);
         if (flag <= 0) {
             return ResultUtil.fail(1, "修改信息失败");

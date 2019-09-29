@@ -1,12 +1,7 @@
-//点击重新加载数据选项卡效果
-$(".collections-box .orders-ul li").click(function () {
-    console.log("点击了");
-    $(this).parent("ul").children("li").removeClass("active");
-    $(this).addClass("active");
-    //在orders-body下追加div即可
-    let html = '';
-    $(".collections-box .orders-body").html(html);
-});
+var collectionsHtml = '';
+var collectionsCount = 0;
+var collectionArray = new Array();
+const $col_poi = $('.col-poi');
 
 //查询收藏信息，判断是否已收藏
 $.ajax({
@@ -18,7 +13,8 @@ $.ajax({
     success: function (data) {
         if (data.code === 200) {
             $.each(data.data, function (k, v) {//所有收藏商品的kv对(如专利分格：value)
-                $('.col-poi').append('<div class="col-item clearfix">' +
+                collectionsCount++;
+                collectionsHtml += '<div class="col-item clearfix">' +
                     '<div class="item-img">' +
                     '<img src="' + v.composeGood.composeGoodIcon +
                     '" class="image">' +
@@ -38,10 +34,22 @@ $.ajax({
                     '" class="link show-deal" target="_blank">进入商品</a>' +
                     '<a href="javascript:void(0);" value="' + v.goodId + '" class="link delete-collection">删除</a>' +
                     '</div>' +
-                    '</div>');
+                    '</div>';
+                if(collectionsCount % 5 === 0){
+                    collectionArray.push(collectionsHtml);
+                    collectionsHtml = '';
+                }
+            });
+            if(collectionsCount % 5 !== 0){
+                collectionArray.push(collectionsHtml);
+                collectionsHtml = '';
+            }
+            // 调用分页插件回调函数，显示全部订单
+            $("#Pagination").pagination(collectionsCount, {
+                callback: showAllCollections,
             });
         } else {
-            $('.col-poi').append('<div>' +
+            $col_poi.append('<div>' +
                 '<p class="no-collection-text">' + data.message + '</p>' +
                 '</div>');
         }
@@ -64,7 +72,7 @@ $(document).on('click', '.col-poi .btn-box .delete-collection', function () {
         success: function (data) {
             if (data.code === 200) {
                 if ($('.col-item').length === 1) {
-                    $('.col-poi').html('<div>' +
+                    $col_poi.html('<div>' +
                         '<p class="no-collection-text">您还没有收藏哟！</p>' +
                         '</div>');
                 } else {
@@ -77,7 +85,11 @@ $(document).on('click', '.col-poi .btn-box .delete-collection', function () {
     })
 });
 
-
+// 根据页码显示相应的页数
+function showAllCollections(current_page){
+    console.log('页数:'+current_page)
+    $col_poi.html(collectionArray[current_page]);
+}
 
 
 

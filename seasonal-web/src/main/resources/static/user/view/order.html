@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/orders.css">
+    <link rel="stylesheet" type="text/css" href="../css/pagination.css">
     <style>
         .orders-link-box .orders-ul li {
 
@@ -32,26 +33,26 @@
             <input type="button" name="" id="" class="search_button">
         </form>
         <div class="hd">
-            <a class="hd_m" href="../../user/view/personCenter.html">
+            <a class="hd_m" href="/user/view/userinfo.html">
                 <span id="hd_ms_i"></span>
                 <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
             </a>
-            <a class="hd_m" href="../../cart/view/myCarts.html">
+            <a class="hd_m" href="/cart/view/myCarts.html">
                 <span id="hd_mc_i"></span>
                 <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
             </a>
         </div>
-        <a href="../../index.html"><img alt=""
-                                        src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png"
-                                        id="logo"></a>
+        <a href="/index.html">
+            <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" id="logo">
+        </a>
         <div class="header_nav">
             <ul>
-                <li><a href="../../index.html" name="首 页">HOME</a></li>
-                <li><a href="../../activity/view/seckill.html" name="闪购促销">SALES</a>
+                <li><a href="/index.html" name="首 页">HOME</a></li>
+                <li><a href="/activity/view/seckill.html" name="闪购促销">SALES</a>
                 </li>
-                <li><a href="../../index.html" name="最新活动">ACTIVITY</a>
+                <li><a href="/index.html" name="最新活动">ACTIVITY</a>
                 </li>
-                <li><a href="../../index.html" name="申请试吃">TASTE</a>
+                <li><a href="/index.html" name="申请试吃">TASTE</a>
                 </li>
             </ul>
         </div>
@@ -149,6 +150,10 @@
                         </div>
                         <!--  //点击的时候orders下重新拼接-->
                     </div>
+                    <div id="Pagination" class="page-btn-box">
+                        <!--                        <a class="left-arrow iconfont icon-btn_left "></a>
+                                                <a class="right-arrow iconfont icon-btn_right btn-active"></a>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -163,5 +168,6 @@
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
+<script src="../js/jquery.pagination.js"></script>
 <script src="../js/orders.js"></script>
 </html>
