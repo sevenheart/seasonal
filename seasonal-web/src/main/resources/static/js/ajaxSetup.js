@@ -3,7 +3,6 @@ $.ajaxSetup({
     complete : function(xhr, status) {
         //拦截器实现超时跳转到登录页面
         // 通过xhr取得响应头
-        console.log("进入了ajaxSetup")
         var REDIRECT = xhr.getResponseHeader("REDIRECT");
         //如果响应头中包含 REDIRECT 则说明是拦截器返回的
         if (REDIRECT == "REDIRECT") {

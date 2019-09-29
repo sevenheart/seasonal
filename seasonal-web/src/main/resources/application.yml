@@ -10,6 +10,11 @@ spring:
   thymeleaf:
     cache: false
     enabled: false
+    http:
+      multipart:
+        enabled: true
+        max-file-size: 1MB
+        max-request-size: 3MB
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -41,11 +46,11 @@ spring:
   data:
     mongodb:
       database: seasonal
-      host: localhost
+      host: 39.105.184.0
       port: 27017
       username:
       password:
-      uri: mongodb://localhost
+      uri: mongodb://39.105.184.0
 
   application:
     name: rabbitmq-demo

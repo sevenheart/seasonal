@@ -1,5 +1,3 @@
-var total;
-
 //点击重新加载数据选项卡效果
 $(".collections-box .orders-ul li").click(function () {
     console.log("点击了");
@@ -18,7 +16,6 @@ $.ajax({
     data: {"userId": userId},
     async: false,
     success: function (data) {
-        total = data.length;
         if (data.code === 200) {
             $.each(data.data, function (k, v) {//所有收藏商品的kv对(如专利分格：value)
                 $('.col-poi').append('<div class="col-item clearfix">' +
@@ -48,14 +45,14 @@ $.ajax({
                 '<p class="no-collection-text">' + data.message + '</p>' +
                 '</div>');
         }
-
     }
 });
+
 
 //删除商品收藏的点击事件
 $(document).on('click', '.col-poi .btn-box .delete-collection', function () {
     var goodId = $(this).attr("value");
-    let col_item =$(this).parents('.btn-box').parents('.col-item');
+    let col_item = $(this).parents('.btn-box').parents('.col-item');
     console.log($('.col-item').length);
     //删除收藏信息
     $.ajax({
@@ -66,11 +63,11 @@ $(document).on('click', '.col-poi .btn-box .delete-collection', function () {
         async: false,
         success: function (data) {
             if (data.code === 200) {
-                if ($('.col-item').length === 1){
+                if ($('.col-item').length === 1) {
                     $('.col-poi').html('<div>' +
                         '<p class="no-collection-text">您还没有收藏哟！</p>' +
                         '</div>');
-                } else{
+                } else {
                     col_item.remove();
                 }
             } else {

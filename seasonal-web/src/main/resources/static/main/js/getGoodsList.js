@@ -22,7 +22,7 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '\t\t\t\t\t\t\t\t\t<span class="grgp_np_grgp_npri">\n' +
                     '\t\t\t\t\t\t\t\t\t\t￥' + v.composeGoodPrice + '.00\n' +
                     '\t\t\t\t\t\t\t\t\t</span>\n' +
-                    '                                <a href="javascript:void(0)" class="grgp_op" value="' + v.id + '"></a>\n' +
+                    '                                <a href="javascript:void(0)" class="grgp_op" id="col' + v.id + '" value="' + v.id + '"></a>\n' +
                     '                            </div>\n' +
                     '                            <div class="glc_rt_gds_des">\n' +
                     '                                <a href="detailGoods.html?id=' + v.id + '" title="' + v.composeGoodName + '">' + v.composeGoodName + '</a>\n' +
@@ -46,7 +46,27 @@ function ajax_test(id, orderName, currPage, likeName) {
                     '                        </div>\n' +
                     '                    </div>\n';
                 $(".goods_right_list").append(html);
+
+
+                //查询收藏信息，判断是否已收藏
+                $.ajax({
+                    url: "/selectCollection",
+                    type: "POST",
+                    dataType: "json",
+                    data: {"userId": userId, "goodId": v.id},
+                    async: false,
+                    success: function (data) {
+                        if (data.code === 100) {
+                            $('#col'+v.id).css('backgroundPosition', '0 0');
+                        }
+                        if (data.code === 200) {
+                            $('#col'+v.id).css('backgroundPosition', '0 -15px');
+                        }
+                    }
+                })
             });
+
+
             $(".add_goods").click(function () {
                 let num = $(this).parent().children("input").eq(0).val();
                 $(this).parent().children("input").eq(0).val(parseInt(num) + 1);
@@ -59,7 +79,8 @@ function ajax_test(id, orderName, currPage, likeName) {
             });
         }
 
-    });
+    })
+    ;
 }
 
 function getQueryVariable(variable) {
@@ -117,7 +138,7 @@ $("#sort_type_3").click(function () {
 function addGoodsToCart(obj, id) {
     let goodCount = $(obj).parents('li').siblings('li').children('input').val();
     let goodId = id;
-    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+    if (!(typeof userId === "undefined" || userId === null || userId === "")) {
         $.ajax({
             url: '/addCart',
             type: 'post',
@@ -126,7 +147,7 @@ function addGoodsToCart(obj, id) {
             success: function (data) {
                 if (data.code === 200) {
                     alert('添加入购物车成功');
-                }else if(data.code === 500){
+                } else if (data.code === 500) {
                     alert('添加入购物车失败,刷新后重试！');
                 }
             },
@@ -134,36 +155,50 @@ function addGoodsToCart(obj, id) {
                 alert('添加入购物车失败');
             }
         });
-    }else{
+    } else {
         alert('请先登录！');
     }
 }
 
 //点击收藏事件
-$(document).on('click','.grgp_op',function () {
-    console.log($(this).attr("value"));
+$(document).on('click', '.grgp_op', function () {
     var goodId = $(this).attr("value");
-    //查询收藏信息，判断是否已收藏
+    var $this = $(this);
+    // 查询收藏信息，判断是否已收藏
     $.ajax({
-        url:"/selectCollection",
-        type:"POST",
-        dataType:"json",
-        data:{"userId":userId,"goodId":goodId},
+        url: "/selectCollection",
+        type: "POST",
+        dataType: "json",
+        data: {"userId": userId, "goodId": goodId},
         async: false,
-        success:function (data) {
-            if (data.code === 100){
-                alert(data.message);
+        success: function (data) {
+            if (data.code === 100) {
+                //删除收藏信息
+                $.ajax({
+                    url: "/DeleteGoodCollection",
+                    type: "POST",
+                    dataType: "json",
+                    data: {"userId": userId, "goodId": goodId},
+                    async: false,
+                    success: function (data) {
+                        if (data.code === 200) {
+                            $this.css('backgroundPosition', '0 -15px');
+                        } else {
+                            alert("删除失败，请刷新重试！");
+                        }
+                    }
+                })
             } else {
                 //插入收藏信息
                 $.ajax({
-                    url:"/GoodCollection",
-                    type:"POST",
-                    dataType:"json",
-                    data:{"userId":userId,"goodId":goodId},
+                    url: "/GoodCollection",
+                    type: "POST",
+                    dataType: "json",
+                    data: {"userId": userId, "goodId": goodId},
                     async: false,
-                    success:function (data) {
-                        if (data.code === 200){
-                            alert("收藏成功");
+                    success: function (data) {
+                        if (data.code === 200) {
+                            $this.css('backgroundPosition', '0 0');
                         } else {
                             alert("收藏失败");
                         }
