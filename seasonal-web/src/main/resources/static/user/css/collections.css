@@ -165,7 +165,6 @@
 }
 
 .collections-container .col-item {
-    padding: 20px 0;
     border-top: 1px solid #E5E5E5;
 }
 
@@ -199,14 +198,9 @@
     color: #222222;
 }
 
-.collections-container .col-item {
-    padding: 20px 0;
-    border-top: 1px solid #E5E5E5;
-}
-
 .collections-container .col-item .item-img {
-    width: 128.4px;
-    height: 128.4px;
+    width: 123.4px;
+    height: 123.4px;
     float: left;
     background-image: url('//p0.meituan.net/travelcube/214b8411190e874781fe91dd3096236211567.png');
     background-size: cover;
@@ -215,7 +209,7 @@
 
 .collections-container .col-item .item-info {
     float: left;
-    padding: 13px 20px;
+    padding: 10px 20px;
 }
 
 .collections-container .col-item .item-info .poi-name {
@@ -475,4 +469,10 @@
     text-align: center;
     font-size: 14px;
     color: #666;
+}
+
+.pageInfo{
+    border-top: 1px solid #E5E5E5;
+    padding-top: 4px;
+    text-align: center;
 }
