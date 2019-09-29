@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/collections.css">
-    <style>
-    </style>
+    <!--分页样式-->
+    <link rel="stylesheet" type="text/css" href="../../css/page/easyhelper.min.css">
 </head>
 <body id="main">
 
@@ -133,20 +133,11 @@
                                 <li class="active">收藏的商品</li>
                             </ul></a>
                     </div>
-                    <div class="col-poi">
+                    <div class="col-poi content">
 
                     </div>
                 </div>
-                <div class="page-box page"style="display: block;">
-                    <nav class="mt-pagination">
-                        <ul class="clearfix">
-                            <li class="pagination-item select num-item">
-                                <a href="javascript:void(0);">1</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="page-box" style="display: none;"></div>
+                <div class="page pageInfo" id="page-2"></div>
             </div>
         </div>
     </div>
@@ -157,5 +148,12 @@
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
+<!--分页插件-->
+<script src="../../js/page/jquery.transit.min.js"></script>
+<script src="../../js/page/es6-shim.min.js"></script>
+<script src="../../js/page/easyhelper.min.js"></script>
+<!--分页引用模板，根据数据粘贴到其他js中使用，不建议直接引用-->
+<!--<script src="../../js/page/pageInfo.js"></script>-->
+
 <script src="../js/collections.js"></script>
 </html>

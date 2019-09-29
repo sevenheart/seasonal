@@ -13,9 +13,12 @@ Helper.ui.page("#page-2", {
 });
 //快捷跳转
 Helper.ui.page("#page-3", {
+    Total:20,
+    pageSize:3,
     showTotal: true,
     showTo: true,
     change: function ( i ) {
+        console.log("开始分页")
         createContent( i, 2 );
     }
 });
