@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/setting.css">
     <link rel="stylesheet" type="text/css" href="../css/useraddress.css">
     <link rel="stylesheet" type="text/css" href="../css/container.css">
+
     <style>
 
     </style>
@@ -66,7 +67,7 @@
                 <div class="orders-link-box">
                     <div class="link-group">
                         <p class="title"><a href=
-                                                    "https://www.meituan.com/account/userinfo/">我的美团</a></p>
+                                                    "https://www.meituan.com/account/userinfo/">我的果酷</a></p>
 
                         <p class="title"><a href="/orders/#status=0">我的订单</a></p>
 
@@ -140,29 +141,29 @@
                     <p class="address-title">收货地址</p>
                 </div>
                 <div style="width: 100%">
-                    <ul style="width: 100%;margin-bottom: 40px;display: inline-block">
-                        <li class="address-item address-item-new">
-                            <i class="iconfont">&#xe603</i>
-                            添加新地址
-                        </li>
-                        <li class="address-item">
-                            <dl>
-                                <dt>
-                                    <span class="tag">公司</span>
-                                    <em class="uname">郭倩铭</em>
-                                </dt>
-                                <dd class="utel">184****5899</dd>
-                                <dd class="uaddress">
-                                    江苏 苏州市 工业园区 苏州工业园区直属镇
-                                    <br>
-                                    科技产业园五期A1 (215028)
-                                </dd>
-                            </dl>
-                            <div class="actions">
-                                <a class="modify J_addressModify">修改</a>
-                                <a class="modify J_addressDel">删除</a>
-                            </div>
-                        </li>
+                    <ul id="user-address" style="width: 100%;margin-bottom: 40px;display: inline-block">
+                        <!--<li class="address-item address-item-new">-->
+                        <!--<i class="iconfont">&#xe603</i>-->
+                        <!--添加新地址-->
+                        <!--</li>-->
+                        <!--<li class="address-item">-->
+                        <!--<dl>-->
+                        <!--<dt>-->
+                        <!--<span class="tag">公司</span>-->
+                        <!--<em class="uname">郭倩铭</em>-->
+                        <!--</dt>-->
+                        <!--<dd class="utel">184****5899</dd>-->
+                        <!--<dd class="uaddress">-->
+                        <!--江苏 苏州市 工业园区 苏州工业园区直属镇-->
+                        <!--<br>-->
+                        <!--科技产业园五期A1 (215028)-->
+                        <!--</dd>-->
+                        <!--</dl>-->
+                        <!--<div class="actions">-->
+                        <!--<a class="modify J_addressModify">修改</a>-->
+                        <!--<a class="modify J_addressDel">删除</a>-->
+                        <!--</div>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -195,8 +196,8 @@
                 </div>
                 <div class="form-section form-four-address form-section-active">
                     <input id="J_selectAddressTrigger" class="input-text J_addressInput active" type="text"
-                           name="four_address" readonly="readonly" value="选择省 / 市 / 区 / 街道"
-                           placeholder="选择省 / 市 / 区 / 街道">
+                           name="four_address" readonly="readonly" value="选择省 / 市 / 区"
+                           placeholder="选择省 / 市 / 区">
                 </div>
                 <div class="form-section form-address-detail">
                     <label class="input-label" for="J_addressDetailInput">详细地址</label>
@@ -233,7 +234,7 @@
         </div>
         <div class="modal-footer">
             <a class="btn btn-primary" id="J_editAddressSave">保存</a>
-            <a class="btn btn-gray">取消</a>
+            <a class="btn btn-gray" id="J_editAddressCancel">取消</a>
         </div>
     </div>
 </div>
@@ -243,4 +244,5 @@
 <script src="../../js/login.js"></script>
 <script src="../js/account.js"></script>
 <script src="../js/container.js"></script>
+<script src="../js/postAddress.js"></script>
 </html>

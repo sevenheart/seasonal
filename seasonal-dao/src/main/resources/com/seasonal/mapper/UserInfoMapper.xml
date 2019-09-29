@@ -34,7 +34,7 @@
                 update_time=#{updateTime},
             </if>
         </set>
-        where id=#{id}
+        where user_id=#{userId}
     </update>
 
     <insert id="insertUserMessage" parameterType="user">
