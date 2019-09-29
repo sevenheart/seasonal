@@ -5,101 +5,138 @@
 <title>评论插件</title>
 <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css">
 <style>
-	.mytextarea {
-		width: 100%;
-		overflow: auto;
-		word-break: break-all;
-		height: 100px;
-		color: #000;
-		font-size: 1em;
-		resize: none;
-	}
-	.container{
-		width: 1000px;
-		margin-left: 0px;
-	}
-	.comment-list{
-		width: 900px;
-		margin: 20px auto;
-		clear: both;
-		padding-top: 20px;
-		background: #fff;
-		border: 1px solid #e5e5e5;
-		border-radius: 4px;
-		padding: 0 20px 40px;
-		color: #666;
+    @font-face {font-family: "iconfont";
+        src: url('../css/iconfont/iconfont.eot?t=1569654011227'); /* IE9 */
+        src: url('../css/iconfont/iconfont.eot?t=1569654011227#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAMsAAsAAAAABywAAALeAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqBZIFTATYCJAMQCwoABCAFhG0HSxtIBhEVlCdkH4np1gdZxhCaJKC0VcoIp3gTD/+/37d97j3vzx3TpALRk1jGE4mkq09jKnikNVaHLNrw0Hn/u5aloJhTkouyoIA4nfnJzi5nUgCyqJgPABypk3fuXtUpPLic/rS3B/mvzrLc1p4UjQkYWBrYnhgFEugASdAbxm4ieIC3CYxYdlRcvFxUhZoEFgXi4T1GUCuEpHSyTRg07EzxSqeVx+Ud5CX/fvxjjEbRVWDlFZoto7PfPX4+9zjsD92mCPFyDjj7qDiKJO42pu6gKhy6GhmfTqBpCksNrf5Y+N9LCwcWwr88qiKIAVA5Bo4ZkcoPjKJ+Yj6FnwuSD6hJ0HxR5hiumeRiYSjKpid4qQevk6tefMqo3o+oWvtcWLubUv32a2LNanjt4y85NYs7YTUXs/pGVi7XQhntkytYFa0E0nptvB3VGEcKxsbdjsffzy9ND9+sS03F8nAZz4t/EH7TdFJBHGm8HbXuc7rsaEPeQP8fPX58H72LDl68vP/yBdJPDxevcCLoL+rbepb+fi0cfaK59Ld/4/3+zedW//RfbTTBp+uU33qgv0jD1H6ZeLD434oHdmUsBebMUIZFiSdtTk4UjEArfzTHjO9L6OZv2xFaQexAMWQJqmYTTfIodEYdg4GGfgZGHJG7f9QszkPkMPZNaBCmnEIx4Q1UUz6iSX6DzoKfMDAVFUbciuATR23HPa9MDkSAjNt7sCI57BRZhZeorgDWYSU8L+VMDXBViWKDVl/O5oId+BJr1E5mFIJiyh02nKPdB1arAzu5wwyS0JqEcKbqdLTpSVrJYUNeLuAAIQAZ1q4HppA42FE6WPCqfL4CYDpYEbyjbiRYA3AqZXTMQEs/AM1V2QfVPcojqk6MkSBQGMU52GA5mgNYYcoBczZPMwMSQcs0IeGUSmf0o0NV2u01th8odJoAmzJK1MjotAPFzvCl/hTsPaBRTcTOepQe8LRDt0AIAAA=') format('woff2'),
+        url('../css/iconfont/iconfont.woff?t=1569654011227') format('woff'),
+        url('../css/iconfont/iconfont.ttf?t=1569654011227') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+        url('../css/iconfont/iconfont.svg?t=1569654011227#iconfont') format('svg'); /* iOS 4.1- */
+    }
+
+    .iconfont{
+        font-family: "iconfont" !important;
+        font-size: 16px;
+        font-style: normal;
+
+    }
+    .mytextarea {
+        width: 100%;
+        overflow: auto;
+        word-break: break-all;
+        height: 100px;
+        color: #000;
+        font-size: 1em;
+        resize: none;
+    }
+    .container{
+        width: 1000px;
+        margin-left: 0px;
+    }
+    .comment-list{
+        width: 900px;
+        margin: 20px auto;
+        clear: both;
+        padding-top: 20px;
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 0 20px 40px;
+        color: #666;
 
 
-	}
-	.comment-list .comment-info{
-		position: relative;
-		margin-bottom: 20px;
-		margin-bottom: 20px;
-		border-bottom: 1px solid #ccc;
-	}
-	.comment-list .comment-info header{
-		width: 10%;
-		position: absolute;
-	}
-	.comment-list .comment-info header img{
-		width: 50px;
-		border-radius: 50px;
-		height: 50px;
-		padding: 5px;
-	}
-	.comment-list .comment-info .comment-right{
-		padding:5px 0px 5px 11%; 
-	}
-	.comment-list .comment-info .comment-right h3{
-		margin: 5px 0px;
-	}
-	.comment-list .comment-info .comment-right .comment-content-header{
-		height: 25px;
-	}
-	.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
-		padding-right: 2em;
-		color: #aaa;
-	}
-	.comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
-		cursor: pointer;
-	}
-	.comment-list .comment-info .comment-right .reply-list {
-		border-left: 3px solid #ccc;
-		padding-left: 7px;
-	}
-	.comment-list .comment-info .comment-right .reply-list .reply{
-		border-bottom: 1px dashed #ccc;
-	}
-	.comment-list .comment-info .comment-right .reply-list .reply div span{
-		padding-left: 10px;
-	}
-	.comment-list .comment-info .comment-right .reply-list .reply p span{
-		padding-right: 2em;
-		color: #aaa;
-	}
+    }
+    .comment-list .comment-info{
+        position: relative;
+        margin-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+    }
+    .comment-list .comment-info header{
+        width: 10%;
+        position: absolute;
+    }
+    .comment-list .comment-info header img{
+        width: 50px;
+        border-radius: 50px;
+        height: 50px;
+        padding: 5px;
+    }
+    .comment-list .comment-info .comment-right{
+        padding:5px 0px 5px 11%;
+    }
+    .comment-list .comment-info .comment-right h3{
+        margin: 5px 0px;
+    }
+    .comment-list .comment-info .comment-right .comment-content-header{
+        height: 25px;
+    }
+    .comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span{
+        padding-right: 2em;
+        color: #aaa;
+    }
+    .comment-list .comment-info .comment-right .comment-content-header span,.comment-list .comment-info .comment-right .comment-content-footer span.reply-btn,.send,.reply-list-btn{
+        cursor: pointer;
+    }
+    .comment-list .comment-info .comment-right .reply-list {
+        border-left: 3px solid #ccc;
+        padding-left: 7px;
+    }
+    .comment-list .comment-info .comment-right .reply-list .reply{
+        border-bottom: 1px dashed #ccc;
+    }
+    .comment-list .comment-info .comment-right .reply-list .reply div span{
+        padding-left: 10px;
+    }
+    .comment-list .comment-info .comment-right .reply-list .reply p span{
+        padding-right: 2em;
+        color: #aaa;
+    }
 
-	.total{
-		font-size: 20px;
-		line-height: 28px;
-		font-weight: 800;
-	}
-	.total .sort {
-		cursor: pointer;
-		float: right;
-		font-size: 12px;
-		color: #999;
-	}
-	.total .sort .on {
-		color: #00c9b3;
-	}
-	.total .sort span {
-		font-size: 12px;
-		margin-left: 20px;
-	}
+    .total{
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 800;
+    }
+    .total .sort {
+        cursor: pointer;
+        float: right;
+        font-size: 12px;
+        color: #999;
+    }
+    .total .sort .on {
+        color: #00c9b3;
+    }
+    .total .sort span {
+        font-size: 12px;
+        margin-left: 20px;
+    }
 
-	{
+    /*分页按钮*/
+    .mt-pagination{
+        text-align: center;
+        margin-top: 40px;
+    }
+    .mt-pagination ul	{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .mt-pagination ul li{
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        float: left;
+        margin: 0 10px;
+        text-align: center;
+        font-size: 16px;
+        color: #999;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color .5s;
+    }
 
-	}
+
 </style>
 </head>
 <body>
@@ -108,14 +145,29 @@
 
 	<div class="total" >
 		<div class="sort"  >
-			<span class="on" >默认排序</span><span>时间排序</span>
-		</div>248条网友点评
+			<span class="on" id="order">默认排序</span><span id="orderbytime">时间排序</span>
+		</div>网友点评
 	</div>
-
 
 	<div class="comment-list">
+	<div class="commentdetail-list">
 
 	</div>
+	<div class="mt-pagination" >
+		<ul class="pagination clear" >
+			<li   ><span class="iconfont" >&#xe620;</span></li>
+
+			<li ><span class="active" >2</span></li>
+
+			<li ><span class="" >3</span></li>
+
+			<li ><span class="" >4</span></li>
+
+			<li ><span class="iconfont" >&#xe503;</span></li>
+		</ul>
+	</div>
+	</div>
+
 </div>
 
 <script type="text/javascript" src="/jquery/jquery-3.4.1.js"></script>
@@ -188,72 +240,76 @@
 
 	//返回每个回复体内容
 	function createReplyComment(response){
-		let replyEl = "<div class='reply'><div><a href='javascript:void(0)' class='replyname'>"+"评论人："+response.response_user_name+"</a>:<a href='javascript:void(0)'></a><span>"+response.response_content+"</span></div>"
+		let replyEl = "<div class='reply'><div><a href='javascript:void(0)' class='replyname'>"+response.response_user_name+"</a>:<a href='javascript:void(0)'></a><span>"+response.response_content+"</span></div>"
 				+ "<p><span>"+response.response_create_time+"</span><!-- <span class='reply-list-btn'>回复</span>--></p></div>";
 		return replyEl;
 	}
 
 	//点击回复
 	function replyClick(el){
-		console.log(el.attr("class"))
-		el.parent().parent().append("<div class='replybox'><textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea><span class='send'>发送</span></div>")
-				.find(".send").click(function(){
-			let response_content = $(this).prev().val();
-			/*var commentid =*/
-			if(response_content != ""){
-				let parentEl = $(this).parent().parent().parent().parent();
-				console.log(parentEl.attr("class"))
-				let obj = new Object();
-				//评论人姓名：获取当前元素的姓名
-				//商品评论评论人得id用来做通知。比对id确定是不是同一个用户在回复自己的评论
-				//obj.commentuserid=
-				//obj.response_user_id = el.parent().children(".commentuserid").html();
-				//通过全局获取姓名和id
-				//obj.response_user_name=el.parent().children(".commentuserid").html();
-				obj.commentid=el.parent().children(".commentid").html();
-				console.log("评论的id是"+el.parent().children(".commentid").html());
-				/*	if(el.parent().parent().hasClass("reply")){
+		if(userId===undefined){
+			alert("请登录后进行评论");
+		}else {
+			console.log(el.attr("class"))
+			el.parent().parent().append("<div class='replybox'><textarea cols='80' rows='50' placeholder='来说几句吧......' class='mytextarea' ></textarea><span class='send'>发送</span></div>")
+					.find(".send").click(function () {
+				let response_content = $(this).prev().val();
+				/*var commentid =*/
+				if (response_content != "") {
+					let parentEl = $(this).parent().parent().parent().parent();
+					console.log(parentEl.attr("class"))
+					let obj = new Object();
+					//评论人姓名：获取当前元素的姓名
+					//商品评论评论人得id用来做通知。比对id确定是不是同一个用户在回复自己的评论
+					//obj.commentuserid=
+					//obj.response_user_id = el.parent().children(".commentuserid").html();
+					//通过全局获取姓名和id
+					//obj.response_user_name=el.parent().children(".commentuserid").html();
+					obj.commentid = el.parent().children(".commentid").html();
+					console.log("评论的id是" + el.parent().children(".commentid").html());
+					/*	if(el.parent().parent().hasClass("reply")){
                         console.log("回复的回复1111");
                         obj.beReplyName = el.parent().parent().find("a:first").text();
                     }else{*/
-				console.log("回复2222");
-				obj.beReplyName=parentEl.find("h3").text();
-				obj.commentuserid=parentEl.find("h4").text();
-				console.log("comment的用户id是："+parentEl.find("h4").text());
-				/*}*/
-				obj.response_content=response_content;
-				obj.response_user_id=userId;
-				obj.response_user_name=userName;
-				obj.response_user_img=userImg;
-				obj.response_create_time = getNowDateFormat();
-				//先把回复插入数据库成功后再显示再前台
-				//只需要插入就完事了。
-				$.post({
-					url: "/UpserrtResponse",
-					data: obj,
-					dataType: "json",
-					success: function (data) {
-						console.log("回调成功了")
-						alert("评论成功");
-						let replyString = createReplyComment(obj);
-						//点击完发送后隐藏输入框
-						$(".replybox").remove();
-						parentEl.find(".reply-list").append(replyString);
-						windows.location.href="/user/view/comment.html";
-					},
-						error:function () {
+					console.log("回复2222");
+					obj.beReplyName = parentEl.find("h3").text();
+					obj.commentuserid = parentEl.find("h4").text();
+					console.log("comment的用户id是：" + parentEl.find("h4").text());
+					/*}*/
+					obj.response_content = response_content;
+					obj.response_user_id = userId;
+					obj.response_user_name = userName;
+					obj.response_user_img = userImg;
+					obj.response_create_time = getNowDateFormat();
+					//先把回复插入数据库成功后再显示再前台
+					//只需要插入就完事了。
+					$.post({
+						url: "/UpserrtResponse",
+						data: obj,
+						dataType: "json",
+						success: function (data) {
+							console.log("回调成功了")
+							alert("评论成功");
+							let replyString = createReplyComment(obj);
+							//点击完发送后隐藏输入框
+							$(".replybox").remove();
+							parentEl.find(".reply-list").append(replyString);
+							windows.location.href = "/user/view/comment.html";
+						},
+						error: function () {
 							alert("回复消息失败");
 							$(".replybox").remove();
 						}
-				})
+					})
 
 
-				//
-				/*.find(".reply-list-btn:last").click(function(){alert("不能回复自己");})*/;
-			}else{
-				alert("空内容");
-			}
-		});
+					//
+					/*.find(".reply-list-btn:last").click(function(){alert("不能回复自己");})*/;
+				} else {
+					alert("空内容");
+				}
+			});
+		}
 	}
 
 	function  addCommentList(options){
@@ -275,7 +331,7 @@
 
 				totalString = totalString+objString;
 			}
-			$(".comment-list").append(totalString);
+			$(".commentdetail-list").append(totalString);
 
 			/*.find(".reply-btn").click(function(){
 					console.log("电极的类名是"+$(this).attr("class"));
@@ -332,23 +388,81 @@
 		}
 		return (false);
 	}
+	
+	
+	/*分页功能*/
+	function splitPage(currentpage,arr) {
+		console.log("进来了")
+		console.log()
+		var splitarr = new Array();
+		var begin = (currentpage-1)*1;
+		var end = currentpage*1-1;
+		for(begin;begin<=end;begin++){
+			splitarr.push(arr[begin]);
+			console.log("每个"+arr[begin]);
+		}
+		JSON.stringify(splitarr);
+		addCommentList({data:splitarr,add:""});
+
+		
+	}
 </script>
 <script>
 	//初始化数据
 	var arr = [];
 	$.post({
 		url: "/findallbyid",
-		data: {id: getQueryVariable("id")},
+		data: {id: getQueryVariable("id"),"begin":1,"limit":3},
 		dataType: "json",
 		success: function (data) {
-			arr= data.data;
-			console.log(arr);
+			//总评论数量
+			arr = data.data;
 			//初始化评论
+			console.log(data.data);
+			/*allcommentnumber = Math.ceil(arr.length/1);
+			console.log("页数是"+allcommentnumber);
+			splitPage(1,arr)
+*/
 			addCommentList({data:arr,add:""});
-
-
+			$('#orderbytime').click(function () {
+				$(this).parent().children().removeClass("on");
+				$(this).addClass("on");
+				$.post({
+					url: "/FindAllOrderByTime",
+					data: {id: getQueryVariable("id"), "begin": 1, "limit": 3},
+					dataType: "json",
+					success: function (data) {
+						//总评论数量
+						arr = data.data;
+						//初始化评论
+						console.log(data.data);
+						addCommentList({data:arr,add:""});
+					}
+				})
+			})
+			$('#orderbytime').click(function () {
+				$(this).parent().children().removeClass("on");
+				$(this).addClass("on");
+				$.post({
+					url: "/findallbyid",
+					data: {id: getQueryVariable("id"), "begin": 1, "limit": 3},
+					dataType: "json",
+					success: function (data) {
+						//总评论数量
+						arr = data.data;
+						//初始化评论
+						console.log(data.data);
+						addCommentList({data:arr,add:""});
+					}
+				})
+			})
 		}
 	})
+
+
+
+	let allcommentnumber;
+
 
 </script>
 </body>
