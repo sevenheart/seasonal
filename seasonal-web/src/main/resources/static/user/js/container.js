@@ -2,10 +2,14 @@ let sheng = "";
 let shi = "";
 let qu = "";
 let addressData;
-
+let province = "";
+let city = "";
+let district = "";
 function focus($fothis) {
-    $fothis.parent("div").addClass("form-section-focus");
-    $fothis.parent("div").addClass("form-section-active");
+    if($fothis.val() === ""){
+        $fothis.parent("div").addClass("form-section-focus");
+        $fothis.parent("div").addClass("form-section-active");
+    }
 }
 
 function blur($blthis) {
@@ -98,6 +102,9 @@ $("#J_selectAddressTrigger").focus(function () {
                 $("#J_selectAddressTrigger").val(sheng + " " + shi + " " + qu);
                 $("#J_selectAddressTrigger").css("color", "black");
                 $(".select-address-wrapper").css("display", "none");
+                province = sheng;
+                city=shi;
+                district = qu;
                 sheng = "";
                 shi = "";
                 qu = "";
