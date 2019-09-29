@@ -13,23 +13,24 @@
 
     <link rel="stylesheet" type="text/css" href="../css/orders.css">
     <link rel="stylesheet" href="../../bootstrap/bootstrap.css">
-<style>
-    .commentclick{
-        font-size: 14px;
-        color: #666666;
-        font-weight: 500;
-        border: 1px solid #E5E5E5;
-        border-radius: 130px;
-        padding: 10px 25px;
-        position: relative;
-        top: -90px;
-        cursor: pointer;
-        text-decoration: none;
-        float: right;
-    }
+    <link rel="stylesheet" type="text/css" href="../css/pagination.css">
+    <style>
+        .commentclick {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 500;
+            border: 1px solid #E5E5E5;
+            border-radius: 130px;
+            padding: 10px 25px;
+            position: relative;
+            top: -90px;
+            cursor: pointer;
+            text-decoration: none;
+            float: right;
+        }
 
 
-</style>
+    </style>
 </head>
 <body id="main">
 
@@ -55,7 +56,9 @@
                 <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
             </a>
         </div>
-        <a href="../../index.html"><img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" id="logo"></a>
+        <a href="../../index.html"><img alt=""
+                                        src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png"
+                                        id="logo"></a>
         <div class="header_nav">
             <ul>
                 <li><a href="../../index.html" name="首 页">HOME</a></li>
@@ -153,32 +156,39 @@
                         </ul>
                     </div>
                     <div class="orders-body">
-                      <!--  //点击的时候orders下重新拼接-->
-                    <div class="btn-box"><a class="left-arrow iconfont icon-btn_left "></a><a
-                            class="right-arrow iconfont icon-btn_right btn-active"></a></div>
+                        <!--  //点击的时候orders下重新拼接-->
+                        <!--<div class="btn-box">
+                            <a class="left-arrow iconfont icon-btn_left "></a>
+                            <a class="right-arrow iconfont icon-btn_right btn-active"></a>
+                        </div>-->
+                    </div>
+                    <div id="Pagination" class="page-btn-box">
+
+                    </div>
                 </div>
             </div>
-        </div>
-           <!-- 评论模态框-->
+            <!-- 评论模态框-->
             <!--评论相关模态框-->
-            <div class="modal fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="commentmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                 &times;
                             </button>
-                            <h4 class="modal-title" >
+                            <h4 class="modal-title">
                                 发表评论
                             </h4>
                         </div>
-                        <div class="modal-body " >
+                        <div class="modal-body ">
                             <div class="commentbox">
-                                <textarea style="resize:none" cols="80" rows="50" placeholder="来说几句吧......" class="mytextarea" id="content"></textarea>
+                                <textarea style="resize:none" cols="80" rows="50" placeholder="来说几句吧......"
+                                          class="mytextarea" id="content"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-default" data-dismiss="modal">关闭
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
                             </button>
                             <button type="button" class="btn btn-primary" id="modal-confirm">确定</button>
                             <!--   <button type="button"  class="btn btn-primary">
@@ -202,5 +212,6 @@
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../bootstrap/bootstrap.min.js"></script>
 <script src="../../js/login.js"></script>
+<script src="../js/jquery.pagination.js"></script>
 <script src="../js/comment.js"></script>
 </html>
