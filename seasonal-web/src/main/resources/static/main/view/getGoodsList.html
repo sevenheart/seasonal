@@ -10,11 +10,48 @@
     <!--    外部模板样式-->
     <link rel='stylesheet' href='../../css/global.css' type='text/css'/>
     <link rel="stylesheet" href="../css/goods_list.css" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css">
     <style>
         #main_sub_nav {
             opacity: 1;
         }
+        /*分页按钮*/
+        .mt-pagination{
+            text-align: right;
+            margin-top: 40px;
+        }
+        .mt-pagination ul	{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .mt-pagination ul li{
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            margin: 0 10px;
+            text-align: center;
+            font-size: 16px;
+            color: #999;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color .5s;
+        }
+        .iconfont{
+            font-family: "iconfont" !important;
+            font-size: 16px;
+            font-style: normal;
+
+        }
+        @font-face {font-family: "iconfont";
+            src: url('../iconfont/iconfont.eot?t=1569654011227'); /* IE9 */
+            src: url('../iconfont/iconfont.eot?t=1569654011227#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAMsAAsAAAAABywAAALeAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqBZIFTATYCJAMQCwoABCAFhG0HSxtIBhEVlCdkH4np1gdZxhCaJKC0VcoIp3gTD/+/37d97j3vzx3TpALRk1jGE4mkq09jKnikNVaHLNrw0Hn/u5aloJhTkouyoIA4nfnJzi5nUgCyqJgPABypk3fuXtUpPLic/rS3B/mvzrLc1p4UjQkYWBrYnhgFEugASdAbxm4ieIC3CYxYdlRcvFxUhZoEFgXi4T1GUCuEpHSyTRg07EzxSqeVx+Ud5CX/fvxjjEbRVWDlFZoto7PfPX4+9zjsD92mCPFyDjj7qDiKJO42pu6gKhy6GhmfTqBpCksNrf5Y+N9LCwcWwr88qiKIAVA5Bo4ZkcoPjKJ+Yj6FnwuSD6hJ0HxR5hiumeRiYSjKpid4qQevk6tefMqo3o+oWvtcWLubUv32a2LNanjt4y85NYs7YTUXs/pGVi7XQhntkytYFa0E0nptvB3VGEcKxsbdjsffzy9ND9+sS03F8nAZz4t/EH7TdFJBHGm8HbXuc7rsaEPeQP8fPX58H72LDl68vP/yBdJPDxevcCLoL+rbepb+fi0cfaK59Ld/4/3+zedW//RfbTTBp+uU33qgv0jD1H6ZeLD434oHdmUsBebMUIZFiSdtTk4UjEArfzTHjO9L6OZv2xFaQexAMWQJqmYTTfIodEYdg4GGfgZGHJG7f9QszkPkMPZNaBCmnEIx4Q1UUz6iSX6DzoKfMDAVFUbciuATR23HPa9MDkSAjNt7sCI57BRZhZeorgDWYSU8L+VMDXBViWKDVl/O5oId+BJr1E5mFIJiyh02nKPdB1arAzu5wwyS0JqEcKbqdLTpSVrJYUNeLuAAIQAZ1q4HppA42FE6WPCqfL4CYDpYEbyjbiRYA3AqZXTMQEs/AM1V2QfVPcojqk6MkSBQGMU52GA5mgNYYcoBczZPMwMSQcs0IeGUSmf0o0NV2u01th8odJoAmzJK1MjotAPFzvCl/hTsPaBRTcTOepQe8LRDt0AIAAA=') format('woff2'),
+            url('../iconfont/iconfont.woff?t=1569654011227') format('woff'),
+            url('../iconfont/iconfont.ttf?t=1569654011227') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+            url('../iconfont/iconfont.svg?t=1569654011227#iconfont') format('svg'); /* iOS 4.1- */
+        }
+
     </style>
 </head>
 <body>
@@ -212,7 +249,7 @@
 
                 </div>
                 <div style="width: 980px;height: 55px">
-                    <ul id="pageGo" class="clear">
+                 <!--   <ul id="pageGo" class="clear">
                         <li class="pgo_li">共1页&nbsp;&nbsp;</li>
                         <li class="pgo_li">到第</li>
                         <li>&nbsp;
@@ -221,7 +258,15 @@
                         </li>
                         <li class="pgo_li">页</li>
                         <li class="pgo_li"><a id="pageGo_a" href="">确定</a></li>
-                    </ul>
+                    </ul>-->
+                    <div class="mt-pagination" >
+		<ul class="pagination clear" >
+			<li id="left"><span class="iconfont" >&#xe620;</span></li>
+			<li id="right"><span class="iconfont"  >&#xe503;</span></li>
+            <li ><span id="nowpage"></span></li>
+            <li><span  id="allpage"></span></li>
+		</ul>
+	</div>
                 </div>
             </div>
         </div>

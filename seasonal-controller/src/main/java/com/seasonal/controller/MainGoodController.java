@@ -3,6 +3,7 @@ package com.seasonal.controller;
 import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.ComposeGood;
 import com.seasonal.pojo.ComposeGoodCollection;
+import com.seasonal.pojo.ESComposeGood;
 import com.seasonal.service.DetailGoodService;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
@@ -10,6 +11,7 @@ import com.seasonal.pojo.SecKillRedis;
 import com.seasonal.redis.RedisUtil;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainGoodController {
@@ -42,7 +45,29 @@ public class MainGoodController {
     @ResponseBody
     public Object showMainGood() {
         System.out.println(mainService.mainGoodsInitialize());
+        System.out.println("初始化");
         return mainService.mainGoodsInitialize();
+    }
+    /*删除es中所有数据*/
+/*    @RequestMapping(value = "deleteesalldata")
+    @ResponseBody
+    public Object deletealldata() {
+        goodsListService.deleteEsAllData();
+       return null;
+    }*/
+    /*添加es中所有数据*/
+   /* @RequestMapping(value = "Addesdata")
+    @ResponseBody
+    public Object addEsDate() {
+        goodsListService.addEsAllData();
+        return null;
+    }*/
+    /*查看es中所有数据*/
+    @RequestMapping(value = "Seleteesdata")
+    @ResponseBody
+    public Object selctesdata() {
+        goodsListService.selectAllEsGoods();
+        return null;
     }
 
     @RequestMapping(value = "ShowGoodsList")
@@ -51,6 +76,24 @@ public class MainGoodController {
         likeName = "%" + likeName + "%";
         return goodsListService.showGoodsList((long) id, orderName, currPage, likeName);
     }
+
+    /**
+     * ElasticSearch完成搜索以及商品列表展示
+     * @param id   商品类别搜索，默认导航栏搜索
+     * @param orderName 排序类型三种
+     * @param currPage 希望显示的页
+     * @param likeName  模糊查询的内容
+     * @return
+     */
+    @RequestMapping(value = "ESShowGoodsList")
+    @ResponseBody
+    public Map<String,Object> esShowGoodsList(int id, String orderName, int currPage, String likeName){
+
+        System.out.println(id+orderName+currPage+likeName);
+        Map<String,Object> map = goodsListService.esShowGoodsList(id,orderName,currPage,likeName);
+        return  map;
+    }
+
 
     @RequestMapping(value = "ShowSecKillGood")
     @ResponseBody
@@ -94,7 +137,6 @@ public class MainGoodController {
         }
         return ResultUtil.fail("Redis中没有秒杀商品");
     }
-
     @RequestMapping(value = "ShowDetailGood")
     @ResponseBody
     public Object showDetailGood(Long id) {
@@ -133,7 +175,6 @@ public class MainGoodController {
      */
     @RequestMapping(value = "selectCollection")
     @ResponseBody
-    @Intercept
     public Object selectCollection(String userId,String goodId) {
         ComposeGoodCollection composeGoodCollection = goodsListService.selectCollection(userId,goodId);
         if (composeGoodCollection == null){

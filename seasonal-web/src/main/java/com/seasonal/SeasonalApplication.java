@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication/*(exclude = MongoAutoConfiguration.class)*/
 public class SeasonalApplication {
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(SeasonalApplication.class, args);
     }
 

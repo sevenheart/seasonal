@@ -7,7 +7,6 @@ import java.util.List;
 @Data
 public class ComposeGood {
     private Long id;
-
     private String composeGoodName;
     private Integer composeGoodPrice;
     private String composeGoodDescribe;
@@ -16,6 +15,8 @@ public class ComposeGood {
     private String composeGoodIcon;
     private Integer composeGoodWeight;
     private Integer commentNumber;
+    private Integer composeGoodSales;
+
 
     private List<ComposeGoodImg>  composeGoodImgs;
     private Classify classify;
