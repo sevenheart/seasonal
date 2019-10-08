@@ -2,6 +2,7 @@ package com.seasonal.pojo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -16,7 +17,8 @@ public class ComposeGood {
     private String composeGoodIcon;
     private Integer composeGoodWeight;
     private Integer commentNumber;
-
+    private Integer skillType;
+    private SecKillGood secKillGood;
     private List<ComposeGoodImg>  composeGoodImgs;
     private Classify classify;
 //    private Date createTime;

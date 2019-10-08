@@ -4,18 +4,17 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 
 
 @Data
 public class SecKillGood {
     private Long id;
-    private String secKillGoodName;
-    private String secKillGoodSales;
-    private BigDecimal secKillGoodOriginalPrice;
-    private BigDecimal secKillGoodPrice;
-    private String secKillGoodIcon;
-    private Integer secKillGoodStatus;
-    private Integer secKillGoodWeight;
+    private Long goodId;
+    private BigDecimal seckillPrice;
+    private String seckillTime;
+    private Integer seckillCount;
+    private ComposeGood composeGood;
     private Date createTime;
     private Date updateTime;
 }

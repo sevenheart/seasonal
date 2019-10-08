@@ -10,6 +10,10 @@
         <id column="id" property="id"/>
         <association property="classify" column="compose_good_type"
                      select="com.seasonal.mapper.ClassifyMapper.findClassifyByComposeGoodById"/>
+
+        <association property="secKillGood" column="id"
+                     select="com.seasonal.mapper.SecKillGoodMapper.findSkillGoodById"/>
+
         <collection property="composeGoodImgs" column="id"
                     select="com.seasonal.mapper.ComposeGoodImgMapper.findComposeGoodImgByComposeGoodIdAndType"/>
     </resultMap>
