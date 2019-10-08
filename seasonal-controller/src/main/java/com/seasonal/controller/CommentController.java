@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -59,8 +58,8 @@ public class CommentController {
      */
     @RequestMapping("findallbyid")
     @ResponseBody
-    public ResultData findAllComments(String id){
-        List<JSONObject>  commentslist = commentService.findAllComments(id);
+    public ResultData findAllComments(String id,int begin,int limit){
+        List<JSONObject>  commentslist = commentService.findAllComments(id,begin,limit);
         ResultData resultData = new ResultData();
         if (null == commentslist || commentslist.size() == 0){
             resultData.setCode(3);
@@ -74,6 +73,36 @@ public class CommentController {
         return resultData;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("FindAllOrderByTime")
+    @ResponseBody
+    public  ResultData findAllOrderByTime(String id,int begin,int limit){
+        List<JSONObject>  commentslist = commentService.findAllOrderByTime(id,begin,limit);
+        ResultData resultData = new ResultData();
+        if (null == commentslist || commentslist.size() == 0){
+            resultData.setCode(3);
+            resultData.setMessage("查不到数据");
+
+        }else {
+            resultData.setCode(0);
+            resultData.setData(commentslist);
+            System.out.println("查到数据了");
+        }
+        return resultData;
+    }
+
+    @RequestMapping("FindAllCommentCount")
+    @ResponseBody
+    public ResultData findAllCommentsCount(String id){
+        ResultData resultData = new ResultData();
+        int count =  commentService.findAllComments(id);
+        resultData.setData(count);
+        return  resultData;
+    }
 
 
     /**
