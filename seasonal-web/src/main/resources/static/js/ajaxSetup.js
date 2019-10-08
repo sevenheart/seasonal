@@ -12,7 +12,6 @@ $.ajaxSetup({
                 win = win.top;
             }
             //重新跳转到 login.html
-            console.log("重定向地址：" + xhr.getResponseHeader("contentpath"));
             win.location.href = xhr.getResponseHeader("contentpath");
         }
     }

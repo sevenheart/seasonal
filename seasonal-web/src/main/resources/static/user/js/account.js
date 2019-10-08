@@ -17,7 +17,6 @@ function accountInit(){
             //$('#J_addressZipcodeInput').val(data.data[0].userAge);
             $('#userSex').text(Number(data.data[0])===0?"男":"女");
             Number(data.data[0])===0 ? document.getElementById('J_addressPhoneInput')[0].selected=true:document.getElementById('J_addressPhoneInput')[1].selected=true
-
             }
             else{
                 alert(data.message);
@@ -72,11 +71,13 @@ $('.btn-gray').click(function () {
 //模态框确定按钮
 //修改用户的信息
 $('.btn-primary').click(function () {
-    if($('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120){
+    if($('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120||$('#J_addressZipcodeInput').val()===""){
         alert("请输入合法的年龄！");
         return;
     }else if($('#bookimg')[0].files[0].size>3145728){
       alert("文件超出了限制大小请重新上传！");
+    }else if($('#J_addressNameInput').val()===""||$('#J_addressNameInput').val().length>11){
+        alert("请输入合法的用户名");
     } else{
         let fd = new FormData();
         fd.append("oldlocation",userImg);

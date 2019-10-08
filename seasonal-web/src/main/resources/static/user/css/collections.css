@@ -164,6 +164,10 @@
     color: #222222;
 }
 
+.collections-container .col-item {
+    border-top: 1px solid #E5E5E5;
+}
+
 .collections-container .col-item .item-img {
     width: 160px;
     height: 90px;

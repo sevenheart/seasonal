@@ -140,7 +140,6 @@ public class MainGoodController {
      */
     @RequestMapping(value = "selectCollection")
     @ResponseBody
-    @Intercept
     public Object selectCollection(String userId,String goodId) {
         ComposeGoodCollection composeGoodCollection = goodsListService.selectCollection(userId,goodId);
         if (composeGoodCollection == null){

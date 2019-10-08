@@ -52,21 +52,14 @@ spring:
       password:
       uri: mongodb://39.105.184.0
 
-  application:
-    name: seasonal
-  rabbitmq:
-    publisher-confirms: true
-    host: localhost
-    password: guest
-    port: 5672
-    username: guest
-    listener:
-      # 并发消费者的初始化值
-      concurrency: 10
-      # 并发消费者的最大值
-      max-concurrency: 20
-      # 每个消费者每次监听时可拉取处理的消息数量
-      prefetch: 5
+#  application:
+#    name: rabbitmq-demo
+#  rabbitmq:
+#    host: localhost
+#    password: guest
+#    port: 15672
+#    username: guest
+
 #logging:
 #  file: E:/boot.log
 #  level:
@@ -85,5 +78,22 @@ mybatis:
   #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
 
 
+  application:
+    name: seasonal
+    rabbitmq:
+      # 对发布者来说，消息能收到回调
+      #  //消息发送到 Broker 后触发回调，确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
+      publisher-confirms: true
+      host: localhost
+      listener:
+        # 并发消费者的初始化值
+        concurrency: 10
+        # 并发消费者的最大值
+        max-concurrency: 20
+        # 每个消费者每次监听时可拉取处理的消息数量
+        prefetch: 5
+      port: 5672
+      username: guest
+      password: guest
 
 

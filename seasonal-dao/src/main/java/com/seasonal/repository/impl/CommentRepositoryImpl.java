@@ -7,6 +7,7 @@ import com.seasonal.pojo.Responses;
 import com.seasonal.repository.CommentRepository;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,20 +26,40 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Autowired
     MongoTemplate mongoTemplate;
     @Override
-    public List<JSONObject> findAllComments(String id) {
+    public List<JSONObject> findAllComments(String id, int begin,int limit ) {
         Query query = new Query();
-        Criteria criteria = Criteria.where("comment_goods_id").is(id);
-        query.addCriteria(criteria);
-//      List<Comment> comments = mongoTemplate.find(query,Comment.class);
+       // Criteria criteria = Criteria.where("comment_goods_id").is(id);
+        query./*skip(begin).limit(limit).*/with(new Sort(new Sort.Order(Sort.Direction.DESC,"comment_create_time")));
+        // query.addCriteria(criteria);
+        //  List<Comment> comments = mongoTemplate.find(query,Comment.class);
         List<JSONObject> comments = mongoTemplate.find(query,JSONObject.class,"bootComment");
-        for (JSONObject comment:comments) {
-
-            System.out.println(comment.toString());
-
+        for(JSONObject comment:comments) {
+            System.out.println("到的是"+comment.toString());
         }
         return comments;
     }
 
+    @Override
+    public List<JSONObject> findAllOrderByTime(String id, int begin, int limit) {
+        Query query = new Query();
+        // Criteria criteria = Criteria.where("comment_goods_id").is(id);
+        query.skip(begin).limit(limit).with(new Sort(new Sort.Order(Sort.Direction.DESC,"comment_create_time")));
+        // query.addCriteria(criteria);
+        //  List<Comment> comments = mongoTemplate.find(query,Comment.class);
+        List<JSONObject> comments = mongoTemplate.find(query,JSONObject.class,"bootComment");
+        for(JSONObject comment:comments) {
+            System.out.println("到的是"+comment.toString());
+        }
+        return comments;
+    }
+
+    @Override
+    public List<Comment> findAllComments(String id) {
+        Query query = new Query();
+        Criteria criteria = Criteria.where("comment_goods_id").is(id);
+        query.addCriteria(criteria);
+        return mongoTemplate.find(query,Comment.class);
+    }
 
 
     @Override

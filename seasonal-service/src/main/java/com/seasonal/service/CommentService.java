@@ -11,7 +11,18 @@ public interface CommentService {
      * 查询所有评论
      * @return
      */
-    List<JSONObject>  findAllComments(String id);
+    List<JSONObject> findAllComments(String id, int begin, int limit);
+
+    /**
+     * 排序根据时间
+     */
+    List<JSONObject> findAllOrderByTime(String id, int begin, int limit);
+    /**
+     * 根据商品id查评论数量
+     * @param id
+     * @return
+     */
+    int findAllComments(String id);
 
     /**
      * 根据商品id查找它的评论信息

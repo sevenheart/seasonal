@@ -1,12 +1,10 @@
 package com.seasonal.config;
 
 import com.seasonal.dataconverter.DateConverter;
-import com.seasonal.filter.LoginInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.seasonal.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
