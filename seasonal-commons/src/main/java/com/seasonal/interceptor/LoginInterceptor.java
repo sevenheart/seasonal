@@ -1,4 +1,4 @@
-package com.seasonal.filter;
+package com.seasonal.interceptor;
 
 import com.seasonal.annotation.Intercept;
 import org.springframework.stereotype.Component;
