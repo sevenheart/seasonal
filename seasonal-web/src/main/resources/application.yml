@@ -26,12 +26,9 @@ spring:
   #配置MySQL
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-      #49.235.249.18
+    url: jdbc:mysql://49.235.249.18:3306/seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: 123456
-    #username: root
-     # password: Guo_19980502
+    password: Guo_19980502
     driverClassName: com.mysql.cj.jdbc.Driver
   data:
     #配置mongodb
@@ -59,14 +56,13 @@ spring:
     # 连接池最大连接数（使用负值表示没有限制）
 
 
-  #39.105.184.0
-  application:
-    name: rabbitmq-demo
-  rabbitmq:
-    host: localhost
-    password: guest
-    port: 15672
-    username: guest
+#  application:
+#    name: rabbitmq-demo
+#  rabbitmq:
+#    host: localhost
+#    password: guest
+#    port: 15672
+#    username: guest
 
 #logging:
 #  file: E:/boot.log
@@ -75,10 +71,10 @@ spring:
 #      seasonal: debug
 
 logging:
-  file: E:/boot.log
   level:
     com:
       seasonal: debug
+  config: classpath:logback-spring.xml
 mybatis:
   type-aliases-package: com.seasonal.pojo
   configuration:
@@ -86,5 +82,22 @@ mybatis:
   #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
 
 
+  application:
+    name: seasonal
+    rabbitmq:
+      # 对发布者来说，消息能收到回调
+      #  //消息发送到 Broker 后触发回调，确认消息是否到达 Broker 服务器，也就是只确认是否正确到达 Exchange 中
+      publisher-confirms: true
+      host: localhost
+      listener:
+        # 并发消费者的初始化值
+        concurrency: 10
+        # 并发消费者的最大值
+        max-concurrency: 20
+        # 每个消费者每次监听时可拉取处理的消息数量
+        prefetch: 5
+      port: 5672
+      username: guest
+      password: guest
 
 

@@ -126,6 +126,7 @@ let likeName;
 if (getQueryVariable("classifyId")) {
     classifyId = getQueryVariable("classifyId");
 } else {
+    console.log("类型是0")
     classifyId = "0";
 }
 if (getQueryVariable("currPage")) {
@@ -151,15 +152,18 @@ $(".sort_ul_li").click(function () {
 });
 $("#sort_type_1").click(function () {
     currPage = 1;
-    ajax_test(classifyId, "id", currPage, likeName);
+    orderName="id";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 $("#sort_type_2").click(function () {
     currPage = 1;
-    ajax_test(classifyId, "composeGoodPrice", currPage, likeName);
+    orderName="composeGoodPrice";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 $("#sort_type_3").click(function () {
     currPage = 1;
-    ajax_test(classifyId, "composeGoodSales", currPage, likeName);
+    orderName="composeGoodSales";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 
 function addGoodsToCart(obj, id) {

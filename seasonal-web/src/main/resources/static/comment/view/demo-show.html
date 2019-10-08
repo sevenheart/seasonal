@@ -377,22 +377,7 @@
 	}
 	
 	
-	/*分页功能*/
-	function splitPage(currentpage,arr) {
-		console.log("进来了")
-		console.log()
-		var splitarr = new Array();
-		var begin = (currentpage-1)*1;
-		var end = currentpage*1-1;
-		for(begin;begin<=end;begin++){
-			splitarr.push(arr[begin]);
-			console.log("每个"+arr[begin]);
-		}
-		JSON.stringify(splitarr);
-		addCommentList({data:splitarr,add:""});
 
-		
-	}
 </script>
 <script>
 	//初始化数据

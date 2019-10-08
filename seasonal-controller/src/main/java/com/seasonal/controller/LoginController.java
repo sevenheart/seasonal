@@ -4,6 +4,8 @@ import com.seasonal.pojo.LoginFrom;
 import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
 import com.seasonal.service.UserInfoServer;
+import com.seasonal.service.sender.RegisterCodeSender;
+import com.seasonal.service.sender.UserActionLogSender;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,11 +23,15 @@ public class LoginController {
 
     private final LoginService loginService;
     private final UserInfoServer userInfoServer;
+    private final RegisterCodeSender registerCodeSender;
+    private final UserActionLogSender userActionLogSender;
 
     @Autowired
-    public LoginController(LoginService loginService, UserInfoServer userInfoServer) {
+    public LoginController(LoginService loginService, UserInfoServer userInfoServer, RegisterCodeSender registerCodeSender, UserActionLogSender userActionLogSender) {
         this.loginService = loginService;
         this.userInfoServer = userInfoServer;
+        this.userActionLogSender = userActionLogSender;
+        this.registerCodeSender = registerCodeSender;
     }
 
     //查找账号
@@ -49,6 +55,7 @@ public class LoginController {
         if (loginFrom != null){
             if (credential.equals(loginFrom.getCredential())){
                 session.setAttribute("userId", loginFrom.getUserId());
+                userActionLogSender.sendMessageForCode(loginFrom);
                 return ResultUtil.success(loginFrom);
             } else {
                 return ResultUtil.fail(100,"密码错误");
@@ -142,8 +149,8 @@ public class LoginController {
     @ResponseBody
     public Object registrationInsert(String identifier, String credential, String verifyCode, HttpSession session) {//存储用户注册信息
         String code = (String) session.getAttribute("code");//获取验证码session
-        System.out.println("Controller->verifyCode:" + verifyCode);
-        System.out.println("Controller->code:" + code);
+//        System.out.println("Controller->verifyCode:" + verifyCode);
+//        System.out.println("Controller->code:" + code);
         if (code == null || code == "") {//如果验证码的session不存在，则是验证码已过期，
             System.out.println("验证码已过期，请重新发送");
             return ResultUtil.fail(404,"验证码已过期，请重新发送");
@@ -153,6 +160,8 @@ public class LoginController {
                 System.out.println("注册成功");
                 session.setAttribute("userId", userId);
             }
+            LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
+            registerCodeSender.sendMessageForCode(loginFrom);
             return ResultUtil.success(200,"注册成功");
         } else {
             System.out.println("验证码错误，请重新输入");

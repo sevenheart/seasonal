@@ -89,6 +89,7 @@ public class GoodsListServiceImpl implements GoodsListService {
     public Map<String,Object> esShowGoodsList(int id, String orderName, int currPage, String likeName) {
         // 构建查询条件
             NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+
             //不是按照分类查找的
             // 添加基本分词查询
             if(id==0) {
@@ -107,8 +108,8 @@ public class GoodsListServiceImpl implements GoodsListService {
                 //根据商品种类查
                 queryBuilder.withQuery(QueryBuilders.termQuery("composeGoodType",id));
             }
-            //添加排序条件
-            queryBuilder.withSort(new FieldSortBuilder(orderName));
+        //添加排序条件
+        queryBuilder.withSort(new FieldSortBuilder(orderName));
             System.out.println("传入的页数是"+currPage);
             if(currPage-1<0) currPage=1;
             // 设置分页属性：

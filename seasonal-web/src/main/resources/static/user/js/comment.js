@@ -102,14 +102,11 @@ function showcommetstates(data) {
     })
     /*点模态框的确定按钮后存储评论信息*/
     $('#modal-confirm').click(function () {
-        console.log("点击了")
         let contents = $('#content').val()
-        alert("点击" + contents)
         mongocomment.comment_content = contents;
         if (contents === null || contents == "") {
             alert("不能输入空字符串！");
         } else {
-            console.log("点击了确定评论按钮");
             $.post({
                 url: "/upsertcomment",
                 data: mongocomment,
