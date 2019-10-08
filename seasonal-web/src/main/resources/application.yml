@@ -53,13 +53,20 @@ spring:
       uri: mongodb://39.105.184.0
 
   application:
-    name: rabbitmq-demo
+    name: seasonal
   rabbitmq:
+    publisher-confirms: true
     host: localhost
     password: guest
-    port: 15672
+    port: 5672
     username: guest
-
+    listener:
+      # 并发消费者的初始化值
+      concurrency: 10
+      # 并发消费者的最大值
+      max-concurrency: 20
+      # 每个消费者每次监听时可拉取处理的消息数量
+      prefetch: 5
 #logging:
 #  file: E:/boot.log
 #  level:
@@ -67,10 +74,10 @@ spring:
 #      seasonal: debug
 
 logging:
-  file: E:/boot.log
   level:
     com:
       seasonal: debug
+  config: classpath:logback-spring.xml
 mybatis:
   type-aliases-package: com.seasonal.pojo
   configuration:

@@ -8,6 +8,7 @@ import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
 import com.seasonal.pojo.SecKillRedis;
 import com.seasonal.redis.RedisUtil;
+import com.seasonal.service.sender.UserActionLogSender;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,15 @@ public class MainGoodController {
 
     private final DetailGoodService detailGoodService;
 
+    private final UserActionLogSender userActionLogSender;
+
     @Autowired
-    public MainGoodController(MainService mainService, GoodsListService goodsListService, RedisUtil redisUtil, DetailGoodService detailGoodService) {
+    public MainGoodController(MainService mainService, GoodsListService goodsListService, RedisUtil redisUtil, DetailGoodService detailGoodService, UserActionLogSender userActionLogSender) {
         this.mainService = mainService;
         this.goodsListService = goodsListService;
         this.redisUtil = redisUtil;
         this.detailGoodService = detailGoodService;
+        this.userActionLogSender = userActionLogSender;
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
@@ -99,6 +103,9 @@ public class MainGoodController {
     @ResponseBody
     public Object showDetailGood(Long id) {
         System.out.println(id);
+        ComposeGood composeGood = new ComposeGood();
+        composeGood = detailGoodService.findComposeGoodById(id);
+        userActionLogSender.sendBrowseForCode(composeGood);
         return detailGoodService.findComposeGoodById(id);
     }
 
