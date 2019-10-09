@@ -6,10 +6,9 @@ import com.seasonal.pojo.ComposeGoodCollection;
 import com.seasonal.service.DetailGoodService;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
-import com.seasonal.pojo.SecKillRedis;
 import com.seasonal.redis.RedisUtil;
+import com.seasonal.service.sender.UserActionLogSender;
 import com.seasonal.service.SecKillService;
-import com.seasonal.service.impl.SeckillServiceImpl;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -29,22 +27,20 @@ public class MainGoodController {
     private final GoodsListService goodsListService;
     private final DetailGoodService detailGoodService;
     private final SecKillService seckillService;
-
-
-    private String seckTime = "";
+    private final UserActionLogSender userActionLogSender;
 
     @Autowired
-    public MainGoodController(MainService mainService, GoodsListService goodsListService,SecKillService seckillService,DetailGoodService detailGoodService) {
+    public MainGoodController(MainService mainService, GoodsListService goodsListService, SecKillService seckillService, RedisUtil redisUtil, DetailGoodService detailGoodService, UserActionLogSender userActionLogSender) {
         this.mainService = mainService;
         this.goodsListService = goodsListService;
         this.detailGoodService = detailGoodService;
         this.seckillService = seckillService;
+        this.userActionLogSender = userActionLogSender;
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
     @ResponseBody
     public Object showMainGood() {
-        System.out.println(mainService.mainGoodsInitialize());
         return mainService.mainGoodsInitialize();
     }
 
@@ -73,9 +69,7 @@ public class MainGoodController {
                 return 0;
             }
         }
-
     }
-
 
     /**
      * 根据当前时间的小时数获取秒杀的商品时间
@@ -126,6 +120,8 @@ public class MainGoodController {
     @RequestMapping(value = "ShowDetailGood")
     @ResponseBody
     public Object showDetailGood(Long id) {
+        ComposeGood composeGood = detailGoodService.findComposeGoodById(id);
+        userActionLogSender.sendBrowseForCode(composeGood);
         return detailGoodService.findComposeGoodById(id);
     }
 
@@ -137,13 +133,10 @@ public class MainGoodController {
     @RequestMapping(value = "FindUpGoodsByNumber")
     @ResponseBody
     public ResultData findUpGoodsByNumber() {
-        System.out.println("进入了推荐商品");
         ResultData resultData = new ResultData();
         List<ComposeGood> list = detailGoodService.showGoodsBySales();
-        System.out.println(list.size());
         list = list.subList(0, 3);
         if (list.size() > 0) {
-            System.out.println(list.toString());
             resultData.setCode(200);
             resultData.setData(list);
             resultData.setMessage("推荐商品成功！");
@@ -162,7 +155,6 @@ public class MainGoodController {
      */
     @RequestMapping(value = "selectCollection")
     @ResponseBody
-    @Intercept
     public Object selectCollection(String userId, String goodId) {
         ComposeGoodCollection composeGoodCollection = goodsListService.selectCollection(userId, goodId);
         if (composeGoodCollection == null) {
@@ -201,7 +193,6 @@ public class MainGoodController {
     @Intercept
     public Object selectAllCollectionById(String userId) {
         List<ComposeGoodCollection> composeGoodCollections = goodsListService.selectAllCollectionById(userId);
-        composeGoodCollections.forEach(System.out::println);
         if (composeGoodCollections != null && composeGoodCollections.size() > 0) {
             return ResultUtil.success(composeGoodCollections);
         } else {

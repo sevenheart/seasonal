@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../main/css/main.css" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/collections.css">
+    <link rel="stylesheet" type="text/css" href="../css/pagination.css">
     <style>
     </style>
 </head>
@@ -29,7 +30,7 @@
             <input type="button" name="" id="" class="search_button">
         </form>
         <div class="hd">
-            <a class="hd_m" href="../../user/view/personCenter.html">
+            <a class="hd_m" href="../../user/view/userinfo.html">
                 <span id="hd_ms_i"></span>
                 <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
             </a>
@@ -60,21 +61,21 @@
             <div style="float:left">
                 <div class="orders-link-box">
                     <div class="link-group">
-                        <p class="title"><a href="/user/view/userinfo.html">我的美团</a></p>
+                        <p class="title"><a href="userinfo.html">我的美团</a></p>
 
-                        <p class="title"><a href="/user/view/order.html">我的订单</a></p>
+                        <p class="title"><a href="order.html">我的订单</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="/user/view/order.html">全部订单</a>
+                                <a href="order.html">全部订单</a>
                             </li>
 
                             <li>
-                                <a href="/user/view/order.html">待付款</a>
+                                <a href="order.html">待付款</a>
                             </li>
 
                             <li>
-                                <a href="/user/view/order.html">已完成</a>
+                                <a href="order.html">已完成</a>
                             </li>
 
                         </ul>
@@ -92,34 +93,34 @@
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href="/user/view/collections.html">个人收藏</a></p>
+                        <p class="title"><a href="collections.html">个人收藏</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="/user/view/collections.html">收藏商品</a>
+                                <a href="collections.html">收藏商品</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href="/user/view/comment.html">评价管理</a></p>
+                        <p class="title"><a href="comment.html">评价管理</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href=" /user/view/comment.html">未评价</a>
+                                <a href="comment.html">未评价</a>
                             </li>
 
                         </ul>
                     </div>
                     <div class="link-group">
-                        <p class="title"><a href=" /user/view/account.html">个人信息</a></p>
+                        <p class="title"><a href="account.html">个人信息</a></p>
 
                         <ul class="link-ul">
                             <li>
-                                <a href="/user/view/account.html">账户设置</a>
+                                <a href="account.html">账户设置</a>
                             </li>
                             <li>
-                                <a href="/user/view/account.html">地址管理</a>
+                                <a href="useraddress.html">地址管理</a>
                             </li>
                         </ul>
                     </div>
@@ -137,25 +138,19 @@
 
                     </div>
                 </div>
-                <div class="page-box page"style="display: block;">
-                    <nav class="mt-pagination">
-                        <ul class="clearfix">
-                            <li class="pagination-item select num-item">
-                                <a href="javascript:void(0);">1</a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div id="Pagination" class="page-btn-box">
+
                 </div>
-                <div class="page-box" style="display: none;"></div>
             </div>
         </div>
     </div>
 </div>
-<div class="footer" style="margin-top: 0px;">
+<div class="footer" style="margin-top: 0;">
     <img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
 </div>
 </body>
 <script src=../../jquery/jquery-3.4.1.js></script>
 <script src="../../js/login.js"></script>
+<script src="../js/jquery.pagination.js"></script>
 <script src="../js/collections.js"></script>
 </html>

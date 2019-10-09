@@ -1,21 +1,17 @@
 package com.seasonal.service.impl;
 
 
-import com.seasonal.mapper.CartFormMapper;
 import com.seasonal.mapper.ComposeGoodMapper;
 import com.seasonal.mapper.DetailedCommodityFormMapper;
-import com.seasonal.mapper.OrderFormMapper;
 import com.seasonal.pojo.Comment;
 import com.seasonal.pojo.Responses;
 import com.seasonal.repository.CommentRepository;
 import com.seasonal.service.CommentService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,8 +32,26 @@ public class CommentServiceImpl implements CommentService {
         mongoTemplate = (MongoTemplate) ac.getBean("mongoTemplate");
    }*/
     @Override
-    public List<JSONObject>  findAllComments(String id) {
-        return commentRepository.findAllComments(id);
+    public List<JSONObject> findAllComments(String id, int begin, int limit) {
+
+        List<JSONObject> a =commentRepository.findAllComments(id,begin,limit);
+        return a ;
+    }
+
+    @Override
+    public List<JSONObject> findAllOrderByTime(String id, int begin, int limit) {
+        List<JSONObject> a =commentRepository.findAllOrderByTime(id,begin,limit);
+        return a ;
+
+    }
+
+    @Override
+    public int findAllComments(String id) {
+     //   commentRepository.findAllComments(id)
+        /*long size = commentRepository.count();
+        int count = Integer.valueOf(String.valueOf(size));*/
+        return 1;
+
     }
 
     @Override
@@ -48,7 +62,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Responses> findAllResponses() {
-        return commentRepository.findAllResponses();
+       // commentRepository.findAllResponses();
+        List<Responses> a =new ArrayList<>();
+        return a;
+
     }
     /*
     * 1.插入comment
@@ -72,9 +89,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int addResponse( Responses responses) {
+        //commentRepository.addResponse(responses);
 
-
-        return commentRepository.addResponse(responses);
+        return 1;
     }
 
 
