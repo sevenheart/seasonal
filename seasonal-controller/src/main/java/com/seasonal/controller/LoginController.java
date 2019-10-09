@@ -4,7 +4,7 @@ import com.seasonal.pojo.LoginFrom;
 import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
 import com.seasonal.service.UserInfoServer;
-import com.seasonal.service.sender.RegisterCodeSender;
+import com.seasonal.sender.RegisterCodeSender;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
