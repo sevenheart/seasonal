@@ -20,6 +20,13 @@ public interface ComposeGoodMapper {
     List<ComposeGood> findAllComposeGoodByClassifyIdForPage(Long classifyId, PageInfoResult pageInfoResult, String likeName);
 
     /**
+     * 查询所有的商品信息然后放到es中。
+     * @return
+     */
+    List<ComposeGood> findAllComposeGood();
+
+
+    /**
      * 根据id查询商品详细信息
      *
      * @param id id

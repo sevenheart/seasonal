@@ -2,10 +2,11 @@ package com.seasonal.mapper;
 
 import com.seasonal.pojo.ComposeGood;
 import com.seasonal.pojo.ComposeGoodCollection;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.util.List;
-
+@Repository
 public interface ComposeGoodCollectionMapper {
     /**
      * 查找用户是否已收藏

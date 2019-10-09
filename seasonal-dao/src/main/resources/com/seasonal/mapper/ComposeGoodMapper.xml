@@ -35,7 +35,9 @@
     <select id="findComposeGoodByID" resultMap="cspc1">
         select * from compose_good where id=#{id}
     </select>
-
+<select id="findAllComposeGood" resultType="composeGood">
+    select * from compose_good limit 100
+</select>
     <!--根据销量查询组合商品的信息-->
     <select id="findUpGoodsByNumber" resultType="composeGood">
         select * from compose_good order by compose_good_sales DESC

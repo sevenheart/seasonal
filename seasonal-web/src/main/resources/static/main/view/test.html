@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+sdfa
+</body>
+<script src="../../jquery/jquery-3.4.1.js"></script>
+<script>
+    $.post({
+        url: '/ESShowGoodsList',
+        type: 'post',
+        dataType: 'json',
+        data: {'id': 0, 'orderName': "id", 'currPage': 5,'likeName':"三"},
+        success: function (data) {
+            console.log("成功")
+            console.log(data)
+            console.log(data["resultlist"])
+            console.log(data.resultlist);
+            console.log(data["resultlist"].content)
+            console.log(JSON.stringify(data["resultlist"].content))
+            var ma = JSON.stringify(data["resultlist"].content)
+            console.log(JSON.parse(ma))
+            var a = JSON.parse(ma);
+            console.log(a[0])
+        }
+    })
+</script>
+</html>

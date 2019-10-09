@@ -1,13 +1,20 @@
-function ajax_test(id, orderName, currPage, likeName) {
+let way="/ESShowGoodsList";
+function ajax_test(id, orderName, currentPage, likeName) {
     $.ajax({
-        url: "/ShowGoodsList", //json文件位置
+        url: way, //json文件位置
         type: "POST", //请求方式为get
         dataType: "json", //返回数据格式为json
-        data: "currPage=" + currPage + "&id=" + id + "&likeName=" + likeName + "&orderName=" + orderName,
+        data: "currPage=" + currentPage + "&id=" + id + "&likeName=" + likeName + "&orderName=" + orderName,
         async: false,
         success: function (data) { //请求成功完成后要执行的方法
+            currentPage = Number.parseInt(data['currentpage'])+1;
+            console.log(data);
+            var ma = JSON.stringify(data["resultlist"].content)
+            console.log(JSON.parse(ma))
+            var a = JSON.parse(ma);
+            console.log(data)
             $(".goods_right_list").html("");
-            $.each(data, function (k, v) {
+            $.each(a, function (k, v) {
                 let html;
                 html = '' +
                     '                    <div class="goods_block_main">\n' +
@@ -64,9 +71,9 @@ function ajax_test(id, orderName, currPage, likeName) {
                         }
                     }
                 })
+
+
             });
-
-
             $(".add_goods").click(function () {
                 let num = $(this).parent().children("input").eq(0).val();
                 $(this).parent().children("input").eq(0).val(parseInt(num) + 1);
@@ -77,12 +84,29 @@ function ajax_test(id, orderName, currPage, likeName) {
                     $(this).parent().children("input").eq(0).val(parseInt(num) - 1);
                 }
             });
+            //页数信息展示
+            $('#nowpage').text("第"+currentPage+"页");
+            $('#allpage').text("共"+data['allpage']+"页");
+            //让当前页等于最大页
+            if(currPage>data['allpage']) {currPage=data['allpage']};
+            //让当前页等于第一页
+            if (currPage<=0) {currPage = 1};
+            //$(".mt-pagination ul").html(html);
+
         }
 
-    })
-    ;
+    });
 }
-
+$("#left").click(function () {
+    console.log("第"+currPage+"页")
+    currPage--;
+    ajax_test(classifyId, orderName, currPage, likeName);
+})
+$("#right").click(function () {
+    console.log("第"+currPage+"页")
+    currPage++;
+    ajax_test(classifyId, orderName, currPage, likeName);
+})
 function getQueryVariable(variable) {
     let query = window.location.search.substring(1);
     let vars = query.split("&");
@@ -102,6 +126,7 @@ let likeName;
 if (getQueryVariable("classifyId")) {
     classifyId = getQueryVariable("classifyId");
 } else {
+    console.log("类型是0")
     classifyId = "0";
 }
 if (getQueryVariable("currPage")) {
@@ -126,13 +151,19 @@ $(".sort_ul_li").click(function () {
 
 });
 $("#sort_type_1").click(function () {
-    ajax_test(classifyId, "id", currPage, likeName);
+    currPage = 1;
+    orderName="id";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 $("#sort_type_2").click(function () {
-    ajax_test(classifyId, "compose_good_price", currPage, likeName);
+    currPage = 1;
+    orderName="composeGoodPrice";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 $("#sort_type_3").click(function () {
-    ajax_test(classifyId, "compose_good_sales", currPage, likeName);
+    currPage = 1;
+    orderName="composeGoodSales";
+    ajax_test(classifyId, orderName, currPage, likeName);
 });
 
 function addGoodsToCart(obj, id) {

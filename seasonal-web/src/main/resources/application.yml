@@ -33,7 +33,7 @@ spring:
   #配置Redis
   redis:
     database: 0
-    timeout:
+    timeout: 10000
     # Redis服务器地址
     host: 127.0.0.1
     # Redis服务器连接端口
@@ -48,6 +48,9 @@ spring:
       database: seasonal
       host: 49.235.249.18
       port: 27017
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
 
 #  application:
 #    name: rabbitmq-demo
@@ -67,8 +70,6 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
-
-
   application:
     name: seasonal
     rabbitmq:

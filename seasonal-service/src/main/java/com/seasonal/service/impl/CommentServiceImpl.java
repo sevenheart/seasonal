@@ -86,11 +86,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
-
     @Override
     public int addResponse( Responses responses) {
-        //commentRepository.addResponse(responses);
-
+        commentRepository.addResponse(responses);
         return 1;
     }
 
