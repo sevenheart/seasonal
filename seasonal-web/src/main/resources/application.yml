@@ -26,14 +26,14 @@ spring:
   #配置MySQL
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://49.235./seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://49.235.249.18:3306/seasonal?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: 123456
+    password: Guo_19980502
     driverClassName: com.mysql.cj.jdbc.Driver
   #配置Redis
   redis:
     database: 0
-    timeout:
+    timeout: 10000
     # Redis服务器地址
     host: 127.0.0.1
     # Redis服务器连接端口
@@ -46,11 +46,11 @@ spring:
   data:
     mongodb:
       database: seasonal
-      host: 39.105.184.0
+      host: 49.235.249.18
       port: 27017
-      username:
-      password:
-      uri: mongodb://39.105.184.0
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
 
 #  application:
 #    name: rabbitmq-demo
@@ -71,13 +71,12 @@ logging:
   level:
     com:
       seasonal: debug
+  config: classpath:logback-spring.xml
 mybatis:
   type-aliases-package: com.seasonal.pojo
   configuration:
     map-underscore-to-camel-case: true
   #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
-
-
   application:
     name: seasonal
     rabbitmq:

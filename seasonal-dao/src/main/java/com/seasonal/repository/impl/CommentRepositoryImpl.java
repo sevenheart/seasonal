@@ -28,9 +28,9 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public List<JSONObject> findAllComments(String id, int begin,int limit ) {
         Query query = new Query();
-       // Criteria criteria = Criteria.where("comment_goods_id").is(id);
+        Criteria criteria = Criteria.where("comment_goods_id").is(id);
         query./*skip(begin).limit(limit).*/with(new Sort(new Sort.Order(Sort.Direction.DESC,"comment_create_time")));
-        // query.addCriteria(criteria);
+        query.addCriteria(criteria);
         //  List<Comment> comments = mongoTemplate.find(query,Comment.class);
         List<JSONObject> comments = mongoTemplate.find(query,JSONObject.class,"bootComment");
         for(JSONObject comment:comments) {
@@ -42,9 +42,9 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public List<JSONObject> findAllOrderByTime(String id, int begin, int limit) {
         Query query = new Query();
-        // Criteria criteria = Criteria.where("comment_goods_id").is(id);
-        query.skip(begin).limit(limit).with(new Sort(new Sort.Order(Sort.Direction.DESC,"comment_create_time")));
-        // query.addCriteria(criteria);
+        Criteria criteria = Criteria.where("comment_goods_id").is(id);
+        query./*skip(begin).limit(limit).*/with(new Sort(new Sort.Order(Sort.Direction.DESC,"comment_create_time")));
+        query.addCriteria(criteria);
         //  List<Comment> comments = mongoTemplate.find(query,Comment.class);
         List<JSONObject> comments = mongoTemplate.find(query,JSONObject.class,"bootComment");
         for(JSONObject comment:comments) {

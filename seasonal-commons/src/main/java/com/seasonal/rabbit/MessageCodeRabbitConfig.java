@@ -38,10 +38,4 @@ public class MessageCodeRabbitConfig {
                 .with(RabbitMqEnum.QueueKey.MESSAGE_CODE_DIRECT.getCode());
     }
 
-
-
-
-
-
-
 }

@@ -5,21 +5,8 @@
 <title>评论插件</title>
 <link rel="stylesheet" type="text/css" href="/bootstrap/bootstrap.css">
 <style>
-    @font-face {font-family: "iconfont";
-        src: url('../css/iconfont/iconfont.eot?t=1569654011227'); /* IE9 */
-        src: url('../css/iconfont/iconfont.eot?t=1569654011227#iefix') format('embedded-opentype'), /* IE6-IE8 */
-        url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAMsAAsAAAAABywAAALeAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqBZIFTATYCJAMQCwoABCAFhG0HSxtIBhEVlCdkH4np1gdZxhCaJKC0VcoIp3gTD/+/37d97j3vzx3TpALRk1jGE4mkq09jKnikNVaHLNrw0Hn/u5aloJhTkouyoIA4nfnJzi5nUgCyqJgPABypk3fuXtUpPLic/rS3B/mvzrLc1p4UjQkYWBrYnhgFEugASdAbxm4ieIC3CYxYdlRcvFxUhZoEFgXi4T1GUCuEpHSyTRg07EzxSqeVx+Ud5CX/fvxjjEbRVWDlFZoto7PfPX4+9zjsD92mCPFyDjj7qDiKJO42pu6gKhy6GhmfTqBpCksNrf5Y+N9LCwcWwr88qiKIAVA5Bo4ZkcoPjKJ+Yj6FnwuSD6hJ0HxR5hiumeRiYSjKpid4qQevk6tefMqo3o+oWvtcWLubUv32a2LNanjt4y85NYs7YTUXs/pGVi7XQhntkytYFa0E0nptvB3VGEcKxsbdjsffzy9ND9+sS03F8nAZz4t/EH7TdFJBHGm8HbXuc7rsaEPeQP8fPX58H72LDl68vP/yBdJPDxevcCLoL+rbepb+fi0cfaK59Ld/4/3+zedW//RfbTTBp+uU33qgv0jD1H6ZeLD434oHdmUsBebMUIZFiSdtTk4UjEArfzTHjO9L6OZv2xFaQexAMWQJqmYTTfIodEYdg4GGfgZGHJG7f9QszkPkMPZNaBCmnEIx4Q1UUz6iSX6DzoKfMDAVFUbciuATR23HPa9MDkSAjNt7sCI57BRZhZeorgDWYSU8L+VMDXBViWKDVl/O5oId+BJr1E5mFIJiyh02nKPdB1arAzu5wwyS0JqEcKbqdLTpSVrJYUNeLuAAIQAZ1q4HppA42FE6WPCqfL4CYDpYEbyjbiRYA3AqZXTMQEs/AM1V2QfVPcojqk6MkSBQGMU52GA5mgNYYcoBczZPMwMSQcs0IeGUSmf0o0NV2u01th8odJoAmzJK1MjotAPFzvCl/hTsPaBRTcTOepQe8LRDt0AIAAA=') format('woff2'),
-        url('../css/iconfont/iconfont.woff?t=1569654011227') format('woff'),
-        url('../css/iconfont/iconfont.ttf?t=1569654011227') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-        url('../css/iconfont/iconfont.svg?t=1569654011227#iconfont') format('svg'); /* iOS 4.1- */
-    }
 
-    .iconfont{
-        font-family: "iconfont" !important;
-        font-size: 16px;
-        font-style: normal;
 
-    }
     .mytextarea {
         width: 100%;
         overflow: auto;
@@ -153,7 +140,7 @@
 	<div class="commentdetail-list">
 
 	</div>
-	<div class="mt-pagination" >
+<!--	<div class="mt-pagination" >
 		<ul class="pagination clear" >
 			<li   ><span class="iconfont" >&#xe620;</span></li>
 
@@ -165,7 +152,7 @@
 
 			<li ><span class="iconfont" >&#xe503;</span></li>
 		</ul>
-	</div>
+	</div>-->
 	</div>
 
 </div>
@@ -331,7 +318,7 @@
 
 				totalString = totalString+objString;
 			}
-			$(".commentdetail-list").append(totalString);
+			$(".commentdetail-list").html(totalString);
 
 			/*.find(".reply-btn").click(function(){
 					console.log("电极的类名是"+$(this).attr("class"));
@@ -390,22 +377,7 @@
 	}
 	
 	
-	/*分页功能*/
-	function splitPage(currentpage,arr) {
-		console.log("进来了")
-		console.log()
-		var splitarr = new Array();
-		var begin = (currentpage-1)*1;
-		var end = currentpage*1-1;
-		for(begin;begin<=end;begin++){
-			splitarr.push(arr[begin]);
-			console.log("每个"+arr[begin]);
-		}
-		JSON.stringify(splitarr);
-		addCommentList({data:splitarr,add:""});
 
-		
-	}
 </script>
 <script>
 	//初始化数据
@@ -424,6 +396,7 @@
 			splitPage(1,arr)
 */
 			addCommentList({data:arr,add:""});
+			/*按照时间排序*/
 			$('#orderbytime').click(function () {
 				$(this).parent().children().removeClass("on");
 				$(this).addClass("on");
@@ -439,8 +412,9 @@
 						addCommentList({data:arr,add:""});
 					}
 				})
-			})
-			$('#orderbytime').click(function () {
+			});
+			/*默认排序*/
+			$('#order').click(function () {
 				$(this).parent().children().removeClass("on");
 				$(this).addClass("on");
 				$.post({
@@ -458,11 +432,8 @@
 			})
 		}
 	})
-
-
-
 	let allcommentnumber;
-
+	window.load
 
 </script>
 </body>
