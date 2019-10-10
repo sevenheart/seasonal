@@ -10,7 +10,7 @@ $.ajax({
     dataType: "json",
     async: false,
     success: function (data) {
-        console.log(data);
+        //console.log(data);
         if (data.code === 200) {
             userId = data.data[0].userId;
             userName = data.data[0].userName;

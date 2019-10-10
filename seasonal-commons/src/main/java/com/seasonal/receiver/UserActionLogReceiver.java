@@ -39,14 +39,7 @@ public class UserActionLogReceiver {
 
     @RabbitHandler
     public void browseMessage(Map<String, ComposeGood> browseRecord, Message message) {
-
-/*        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + "---------");
-        LOGGER.info(browseRecord.keySet() + "浏览了" + browseRecord.values().toString());
+        LOGGER.info(message.getMessageProperties().getReceivedRoutingKey() + " -- " + browseRecord.keySet() + "浏览了" + browseRecord.values().toString());
         browseFile(browseRecord);
     }
 
