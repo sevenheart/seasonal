@@ -74,11 +74,16 @@ $('.btn-gray').click(function () {
 //模态框确定按钮
 //修改用户的信息
 $('.btn-primary').click(function () {
-    if ($('#J_addressZipcodeInput').val() < 0 || $('#J_addressZipcodeInput').val() > 120) {
+    console.log("文件时"+$('#bookimg')[0].files[0]);
+    if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
         alert("请输入合法的年龄！");
         return;
-    } else if ($('#bookimg')[0].files[0].size > 3145728) {
-        alert("文件超出了限制大小请重新上传！");
+    }
+    if($('#bookimg')[0].files[0]!=undefined){
+        if ($('#bookimg')[0].files[0].size > 3145728) {
+            alert("文件超出了限制大小请重新上传！");
+            return;
+        }
     } else {
         let fd = new FormData();
         fd.append("oldlocation", userImg);
