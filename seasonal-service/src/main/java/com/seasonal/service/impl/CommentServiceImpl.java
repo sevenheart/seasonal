@@ -75,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int commentAndUpdate(Comment comment) {
         int update = detailedCommodityFormMapper.updateCommentStates(comment.getComment_goods_id(),comment.getOrderId(),comment.getComment_id());
-        //commentRepository.insertComment(comment);
+        commentRepository.insertComment(comment);
         int flag = composeGoodMapper.addCommentNumber(comment.getComment_goods_id());
         if (update > 0 && flag > 0){
             System.out.println("修改评论状态成功！！插入评论不知道成功没有！！");
@@ -86,11 +86,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
 
-
     @Override
     public int addResponse( Responses responses) {
-        //commentRepository.addResponse(responses);
-
+        commentRepository.addResponse(responses);
         return 1;
     }
 

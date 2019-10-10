@@ -3,10 +3,12 @@ package com.seasonal.service;
 import com.seasonal.pojo.ComposeGood;
 
 import com.seasonal.pojo.ComposeGoodCollection;
+import com.seasonal.pojo.ESComposeGood;
 import com.seasonal.pojo.SecKillRedis;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsListService {
     /**
@@ -17,10 +19,31 @@ public interface GoodsListService {
     List<ComposeGood> showGoodsList(Long id, String orderName, int currPage, String likeName);
 
     /**
-     * 根据时间获取秒杀key
-     * @param secKillTime 小时数
-     * @return key
+     * 查所有es中的数据
+     * @return
      */
+    Iterable<ESComposeGood> selectAllEsGoods();
+
+    /*删除es中的所有数据*/
+     boolean deleteEsAllData();
+     /*es添加数据*/
+    boolean addEsAllData();
+
+    /**
+     * ElasticSearch完成搜索以及商品列表展示
+     * @param id   商品类别搜索，默认导航栏搜索
+     * @param orderName 排序类型三种
+     * @param currPage 希望显示的页
+     * @param likeName  模糊查询的内容
+     * @return
+     */
+    Map<String,Object> esShowGoodsList(int id, String orderName, int currPage, String likeName);
+
+        /**
+         * 根据时间获取秒杀key
+         * @param secKillTime 小时数
+         * @return key
+         */
     SecKillRedis findSecKillKeyByTime(String secKillTime);
 
     /**

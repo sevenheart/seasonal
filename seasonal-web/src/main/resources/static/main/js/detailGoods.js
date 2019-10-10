@@ -24,8 +24,14 @@ function ajax_test(id) {
             $cname.attr("href", "getGoodsList.html?classifyId=" + data.classify.id);
             $gname.text(data.classify.generalities.generalitiesName);
             $gname.attr("href", "getGoodsList.html?classifyId=" + data.classify.generalities.id);
-            $(".goods_describe_name").text(data.composeGoodName);
-            $("#goods_describe_pc").text("￥" + data.composeGoodPrice + ".00");
+            $("#good_name").text(data.composeGoodName);
+            if (data.skillType === 1) {
+                $("#goods_describe_pc").text("￥" + data.secKillGood.seckillPrice + ".00");
+                $("#ckill_good_price_t").text("￥" + data.composeGoodPrice + ".00");
+                $("#seckill_font").text("该商品正在秒杀！");
+            } else {
+                $("#goods_describe_pc").text("￥" + data.composeGoodPrice + ".00");
+            }
             $(".goods_describe_ds").html("<li>净重：" + data.composeGoodWeight + "g/杯</li><li>服务：由果酷负责发货，并提供售后服务。</li>");
             let index = 0;
             $.each(data.composeGoodImgs, function (k, v) {
@@ -119,7 +125,7 @@ $('.goods_describe_option li').click(function () {
 $('.goods_describe_option span').click(function () {
     let goodCount = $('#good_count').val();
     let goodId = getQueryVariable("id");
-    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+    if (!(typeof userId === "undefined" || userId === null || userId === "")) {
         $.ajax({
             url: '/addCart',
             type: 'post',
@@ -128,7 +134,7 @@ $('.goods_describe_option span').click(function () {
             success: function (data) {
                 if (data.code === 200) {
                     alert('添加入购物车成功');
-                }else if(data.code === 500){
+                } else if (data.code === 500) {
                     alert('添加入购物车失败,刷新后重试！');
                 }
             },
@@ -136,7 +142,7 @@ $('.goods_describe_option span').click(function () {
                 alert('添加入购物车失败');
             }
         });
-    }else{
+    } else {
         alert('请先登录！');
     }
 });
@@ -145,7 +151,7 @@ $('.goods_describe_option span').click(function () {
 $('.goods_describe_option').find('li').eq(0).click(function () {
     let goodCount = $('#good_count').val();
     let goodId = getQueryVariable("id");
-    if(!(typeof userId === "undefined" || userId === null || userId === "")) {
+    if (!(typeof userId === "undefined" || userId === null || userId === "")) {
         $.ajax({
             url: '/addCart',
             type: 'post',
@@ -154,7 +160,7 @@ $('.goods_describe_option').find('li').eq(0).click(function () {
             success: function (data) {
                 if (data.code === 200) {
                     window.open("/cart/view/myCarts.html");
-                }else if(data.code === 500){
+                } else if (data.code === 500) {
                     alert('购买失败,请刷新后重试！');
                 }
             },
@@ -162,7 +168,7 @@ $('.goods_describe_option').find('li').eq(0).click(function () {
                 alert('购买失败,请刷新后重试！');
             }
         });
-    }else{
+    } else {
         alert('请先登录！');
     }
 });
