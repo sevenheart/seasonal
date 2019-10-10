@@ -19,8 +19,6 @@ $.post({
     url:"/FindUpGoodsByNumber",
     dataType: "json",
     success: function (data) {
-        alert(data.message);
-        console.log(data)
         let html='';
         $.each(data.data,function (i,content) {
 

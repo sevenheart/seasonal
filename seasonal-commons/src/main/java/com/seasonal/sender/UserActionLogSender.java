@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class UserActionLogSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback{
+public class UserActionLogSender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
 
     private RabbitTemplate rabbitTemplate;
 

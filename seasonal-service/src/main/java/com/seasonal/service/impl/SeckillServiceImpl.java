@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class SeckillServiceImpl implements SecKillService {
 
@@ -20,5 +21,10 @@ public class SeckillServiceImpl implements SecKillService {
     @Override
     public List<SecKillGood> findAllSecKillGood(String time) {
         return secKillGoodMapper.findAllSecKillGood(time);
+    }
+
+    @Override
+    public SecKillGood findPriceById(Long id) {
+        return secKillGoodMapper.findSkillGoodById(id);
     }
 }
