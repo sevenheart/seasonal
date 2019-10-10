@@ -93,7 +93,7 @@ public class MainGoodController {
     @RequestMapping(value = "ShowDetailGood")
     @ResponseBody
     public Object showDetailGood(Long id, String userId) {
-        System.out.println(id);
+        //System.out.println(id);
         ComposeGood composeGood = detailGoodService.findComposeGoodById(id);
         Map<String, ComposeGood> browseRecord = new HashMap<>();
         browseRecord.put(userId, composeGood);

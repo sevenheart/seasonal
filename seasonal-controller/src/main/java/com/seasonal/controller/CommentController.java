@@ -44,9 +44,7 @@ public class CommentController {
         //生成一个随机的commentid
         //随机生成一个commentid
         String comment_id = UUID.randomUUID()+ String.valueOf((int)Math.random()*10+10000);
-        System.out.println("生成的评论id是"+comment_id);
         comment1.setComment_id(comment_id);
-        System.out.println(comment1.toString());
         commentService.commentAndUpdate(comment1);
 //        ResultData resultData = ResultUtil.success(200,"查询成功了");
         return ResultUtil.success(200,"评论成功");
@@ -90,7 +88,6 @@ public class CommentController {
         }else {
             resultData.setCode(0);
             resultData.setData(commentslist);
-            System.out.println("查到数据了");
         }
         return resultData;
     }
@@ -114,7 +111,6 @@ public class CommentController {
     @ResponseBody
     public ResultData upsertResponse(Responses responses){
         String time = responses.getResponse_create_time();
-        System.out.println( responses.toString());
         Responses response = responses;
 //        response.setId("02");
         // response.setResponse_user_img("http://tupiandizhi.com");
@@ -137,7 +133,6 @@ public class CommentController {
     @RequestMapping("FindNoCommentGoods")
     @ResponseBody
     public ResultData findAllNoCommentGoodsByUserId(String userId){
-        System.out.println("用户的额userid是"+userId);
         //查到未评论的商品信息包括商品的详细信息
         List<DetailedCommodityForm> list = detailGoodService.findNoCommentGoodsByUserId(userId);
         ResultData resultData = new ResultData();
