@@ -23,14 +23,7 @@ public class MessageCodeReceiver {
     // , Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag
     @RabbitHandler
     public void welecomeMessage(LoginFrom loginFrom) {
-//        try {
-//            Thread.sleep(15000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        LOGGER.info("注册 -info---" + loginFrom.getUserId());
-        LOGGER.debug("注册 --debug--" + loginFrom.getUserId());
-        LOGGER.error("注册 -error---" + loginFrom.getUserId());
+        LOGGER.info("用户:" + loginFrom.getUserId() + " 注册成功");
     }
 
 }

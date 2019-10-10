@@ -43,8 +43,8 @@ public class UserDetailInfoController {
     @Intercept
     public ResultData findUserById(String id) {
         List<User> userList = userInfoServer.findUserById(id);
-        System.out.println("id" + id);
-        System.out.println("userList" + userList);
+        //System.out.println("id" + id);
+        //System.out.println("userList" + userList);
         if (userList == null || userList.size() == 0) {
             return ResultUtil.fail(2, "未查到该用户");
         }
@@ -63,16 +63,16 @@ public class UserDetailInfoController {
         if (null != multipartFile) {
             if(oldlocation!=null){
                 //删除云的图片
-                 String[] name = oldlocation.split("/");
+                String[] name = oldlocation.split("/");
                 //名字还是原来的
                 newName =  name[name.length-1];
                 TencentUploadUtil.deleteFile("img/user/"+newName);
             }else{
-                System.out.println("获取到图片了" + user.getId());
+                //System.out.println("获取到图片了" + user.getId());
                 //获取上传的文件的文件名
-                 oldName = multipartFile.getOriginalFilename();
+                oldName = multipartFile.getOriginalFilename();
                 //通过UUID随机生成一个新的文件名
-                 newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
+                newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
             }
 
             File file = new File("E:\\" + newName);
@@ -81,10 +81,9 @@ public class UserDetailInfoController {
             //这里将图片上传到云然后保存地址
             TencentUploadUtil.uploadFile("img/user/" + newName + "", file);
             file.delete();
-            System.out.println(file.getAbsolutePath());
+            //System.out.println(file.getAbsolutePath());
             user.setUserImg(TencentUploadUtil.imgUrl + "/img/user/" + newName);
-            System.out.println("图片地址是" + user.getUserImg());
-
+            //System.out.println("图片地址是" + user.getUserImg());
         }
         //修改操作的返回值，小于等于0
         int flag = userInfoServer.updateUserInfo(user);
