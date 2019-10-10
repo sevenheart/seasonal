@@ -23,9 +23,10 @@ function lastIp() {
                 if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
-                } else {
-                    ipsearch(data.data.loginIp);
                 }
+                // else {
+                //     ipsearch(data.data.loginIp);
+                // }
             }
         })
     }
@@ -63,9 +64,10 @@ $(document).on('blur', '.pass-form-normal .pass-text-input-userName', function (
                 if (data.code === 100) {
                     pass_generalError_error.text('');
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
-                } else {
-                    ipsearch(data.data.loginIp);
                 }
+                // else {
+                //     ipsearch(data.data.loginIp);
+                // }
             }
         })
     }
@@ -141,23 +143,24 @@ $(document).on('keydown', '.pass-form-normal', function (event) {
 //账号登录判断
 function login(identifier, credential, flag, check) {
     var pass_generalError_error = $('.pass-form-normal .pass-generalErrorWrapper .pass-generalError-error');
-    let j_login = $('#j-login');
-    let sms = $('#sms');
-    let nowCity = personAddress.addressComponent.city;
+    // let j_login = $('#j-login');
+    // let sms = $('#sms');
+    // let nowCity = personAddress.addressComponent.city;
     //判断异地登录
-    console.log("beforeCity:" + beforeCity);
-    if (beforeCity === null || beforeCity === '' || beforeCity === undefined) {
-        pass_generalError_error.text('');
-        pass_generalError_error.append("这个手机号还未注册，请先注册");
-    } else if (nowCity !== beforeCity) {
-        alert("异地登录，请使用短信登录");
-        j_login.css('display', 'none');
-        j_login.css('visibility', 'hidden');
-        sms.css('display', 'block');
-        sms.css('visibility', 'visible');
-        $('.pass-sms-link-back').css('visibility', 'hidden');
-        flag = false
-    } else {
+    // if (beforeCity === null || beforeCity === '' || beforeCity === undefined) {
+    //     pass_generalError_error.text('');
+    //     pass_generalError_error.append("这个手机号还未注册，请先注册");
+    // }
+    // else if (nowCity !== beforeCity) {
+    //     alert("异地登录，请使用短信登录");
+    //     j_login.css('display', 'none');
+    //     j_login.css('visibility', 'hidden');
+    //     sms.css('display', 'block');
+    //     sms.css('visibility', 'visible');
+    //     $('.pass-sms-link-back').css('visibility', 'hidden');
+    //     flag = false
+    // }
+    // else {
         //登录信息查找比对
         $.ajax({
             url: "/login",
@@ -181,8 +184,8 @@ function login(identifier, credential, flag, check) {
                     pass_generalError_error.append("这个手机号还未注册，请先注册");
                 }
             }
-        })
-    }
+        });
+    // }
     return flag;
 }
 
@@ -242,9 +245,9 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                                 //调用倒计时方法
                                 sendCode();
                                 if (data.code === 200) {
-                                    alert("发送成功！");
+                                    // alert("验证码发送成功！");
                                 } else if (data.message === "0" && data.code === 100) {
-                                    alert("发送失败！");
+                                    alert("验证码发送失败！");
                                 } else {
                                     time = parseInt(data.message);
                                     alert("您请求验证码太过频繁，请计时结束在重新获取！");
@@ -335,19 +338,19 @@ $(document).on('keydown', '#smsForm', function (event) {
 
 
 //判断是否异地登录
-function ipsearch(ip) {
-    AMap.plugin('AMap.CitySearch', function () {
-        var citysearch = new AMap.CitySearch();
-        citysearch.getCityByIp(ip, function (status, result) {
-            if (status === 'complete') {
-                beforeCity = result.city;
-                console.log("beforeCity:" + beforeCity);
-            } else {
-                console.log(result);
-            }
-        })
-    })
-}
+// function ipsearch(ip) {
+//     AMap.plugin('AMap.CitySearch', function () {
+//         var citysearch = new AMap.CitySearch();
+//         citysearch.getCityByIp(ip, function (status, result) {
+//             if (status === 'complete') {
+//                 beforeCity = result.city;
+//                 console.log("beforeCity:" + beforeCity);
+//             } else {
+//                 console.log(result);
+//             }
+//         })
+//     })
+// }
 
 //修改登录数据
 function updatelogin(identifier) {
@@ -357,11 +360,8 @@ function updatelogin(identifier) {
         type: "post",
         data: {"identifier": identifier},
         async: false,
-        success: function (data) {
-            console.log("跳转成功")
-        },
         error: function (data) {
-            console.log("跳转失败")
+            alert("修改登录信息失败！")
         }
     })
 }
