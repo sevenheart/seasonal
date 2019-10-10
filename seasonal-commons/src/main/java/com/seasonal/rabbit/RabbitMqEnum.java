@@ -10,7 +10,8 @@ public class RabbitMqEnum {
     public enum QueueName {
         REGISTER_MESSAGE_CODE_QUEUE("registerMessageCodeQueue", "注册欢迎短信队列"),
         USER_ACTIVE_LOG_QUEUE("userActiveLogQueue", "用户行为日志队列"),
-        SECKILL_QUEUE("seckillQueue", "秒杀队列");
+        SECKILL_QUEUE("seckillQueue", "秒杀队列"),
+        MYSQLBINLOG_QUERY("mysqlbinlog", "读取mysql行为队列");
 
         private String code;
         private String name;
@@ -64,8 +65,8 @@ public class RabbitMqEnum {
     public enum QueueKey {
         MESSAGE_CODE_DIRECT("messageCode", "注册欢迎短信队列"),
         USER_ACTIVE_LOGS_TOPIC("action.log.#", "用户行为日志"),
-        GOOD_SECKILL_TOPIC("good.seckill.#", "商品秒杀");
-
+        GOOD_SECKILL_TOPIC("good.seckill.#", "商品秒杀"),
+        MYSQLBINLOG_DIRECT("mysqlbinroutkey", "mysql行为");
         private String code;
         private String name;
 

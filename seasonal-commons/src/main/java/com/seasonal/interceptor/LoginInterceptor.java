@@ -18,7 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//你请求的目标必须是方法
+        //你请求的目标必须是方法
         HttpSession session = request.getSession();
         //拦截的是方法
         if (handler instanceof HandlerMethod) {

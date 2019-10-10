@@ -5,6 +5,7 @@ import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
 import com.seasonal.service.UserInfoServer;
 import com.seasonal.sender.RegisterCodeSender;
+import com.seasonal.sender.UserActionLogSender;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,11 +24,13 @@ public class LoginController {
     private final LoginService loginService;
     private final UserInfoServer userInfoServer;
     private final RegisterCodeSender registerCodeSender;
+    private final UserActionLogSender userActionLogSender;
 
     @Autowired
-    public LoginController(LoginService loginService, UserInfoServer userInfoServer, RegisterCodeSender registerCodeSender) {
+    public LoginController(LoginService loginService, UserInfoServer userInfoServer, RegisterCodeSender registerCodeSender, UserActionLogSender userActionLogSender) {
         this.loginService = loginService;
         this.userInfoServer = userInfoServer;
+        this.userActionLogSender = userActionLogSender;
         this.registerCodeSender = registerCodeSender;
     }
 
@@ -51,6 +54,7 @@ public class LoginController {
         if (loginFrom != null){
             if (credential.equals(loginFrom.getCredential())){
                 session.setAttribute("userId", loginFrom.getUserId());
+                userActionLogSender.sendMessageForCode(loginFrom.getUserId());
                 return ResultUtil.success(loginFrom);
             } else {
                 return ResultUtil.fail(100,"密码错误");

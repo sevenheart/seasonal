@@ -17,7 +17,7 @@ const $comments_body =  $('.orders-box .orders-body');
 
 
 //评论模态框commentmodal
-$('#commentmodal').modal("hidden");
+$('#commentmodal').modal("hide");
 $('#commentmodal').on('show.bs.modal', function (event) {
 });
 
@@ -66,7 +66,7 @@ function showcommetstates(data) {
                 test = '';
             }
         });
-        if(commetsCount % 5 === 0){
+        if(commetsCount % 5 !== 0){
             commentArray.push(test);
             test = '';
         }
@@ -112,8 +112,9 @@ function showcommetstates(data) {
                 data: mongocomment,
                 dataType: "json",
                 success: function (data) {
-                    alert(data.message);
-                    $('#commentmodal').modal("hide")
+                    alert("评论成功");
+                    $('#commentmodal').modal("hide");
+                    window.location.href="/user/view/comment.html";
                 }
             })
         }
