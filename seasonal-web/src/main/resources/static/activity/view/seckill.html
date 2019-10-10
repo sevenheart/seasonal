@@ -26,7 +26,19 @@
                 <input type="text" class="search" placeholder="搜索">
                 <input type="button" class="search_button">
             </form>
-            <a href="../../index.html"><img alt="" src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" id="logo"></a>
+            <a href="../../index.html"><img alt=""
+                                            src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png"
+                                            id="logo"></a>
+            <div class="hd">
+                <a class="hd_m" href="../../user/view/userinfo.html">
+                    <span id="hd_ms_i"></span>
+                    <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
+                </a>
+                <a class="hd_m" href="../../cart/view/myCarts.html">
+                    <span id="hd_mc_i"></span>
+                    <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
+                </a>
+            </div>
             <div class="header_nav">
                 <ul>
                     <li><a href="../../index.html" name="首 页">HOME</a></li>
@@ -206,7 +218,8 @@
                 <div class="topinfo">
                     <div class="ckill_time">
                         <span>本轮秒杀倒计时</span>
-                        <span>24:00:00</span>
+                        <span id="tishi" style="display: none"></span>
+                        <span id="come_time" style="display: block"></span>
                         <!--<span>本轮开始时间</span>-->
                         <!--<span>12:00：00</span>-->
                     </div>
@@ -222,24 +235,26 @@
             <div class="product_box_wrap">
                 <!-- 抢购列表 -->
                 <div class="product_box">
-                    <div class="ckill_good">
-                        <a href="#"><img src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/1_1.jpg"
-                                         style="width: 100%;height: 250px;border-radius: 15px;" alt="三分果盒：超级精选"/></a>
-                        <span class="ckill_good_name"><a href="#">三分果盒：超级精选</a></span>
-                        <span class="ckill_good_price">秒杀价：￥20.00&nbsp&nbsp</span>
-                        <span class="ckill_good_price_t">￥35.00</span>
-                        <span class="ckill_good_count">还剩：20个</span>
-                        <span class="ckill_good_shopping" ckid="1"><i></i>立即购买</span>
-                    </div>
-                    <div class="ckill_good">
-                        <a href="#"><img src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/1_1.jpg"
-                                         style="width: 100%;height: 250px;border-radius: 15px;" alt="三分果盒：超级精选"/></a>
-                        <span class="ckill_good_name"><a href="#">三分果盒：超级精选</a></span>
-                        <span class="ckill_good_price">秒杀价：￥20.00&nbsp&nbsp</span>
-                        <span class="ckill_good_price_t">￥35.00</span>
-                        <span class="ckill_good_count">一共：100个</span>
-                        <span class=""></span>
-                    </div>
+                    <!--<div class="ckill_good">-->
+                    <!--<a href="#"><img-->
+                    <!--src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/1_1.jpg"-->
+                    <!--style="width: 100%;height: 250px;border-radius: 15px;" alt="三分果盒：超级精选"/></a>-->
+                    <!--<span class="ckill_good_name"><a href="#">三分果盒：超级精选</a></span>-->
+                    <!--<span class="ckill_good_price">秒杀价：￥20.00&nbsp&nbsp</span>-->
+                    <!--<span class="ckill_good_price_t">￥35.00</span>-->
+                    <!--<span class="ckill_good_count">还剩：20个</span>-->
+                    <!--<span class="ckill_good_shopping" ckid="1"><i></i>立即购买</span>-->
+                    <!--</div>-->
+                    <!--<div class="ckill_good">-->
+                    <!--<a href="#"><img-->
+                    <!--src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/good/icon_logo/1_1.jpg"-->
+                    <!--style="width: 100%;height: 250px;border-radius: 15px;" alt="三分果盒：超级精选"/></a>-->
+                    <!--<span class="ckill_good_name"><a href="#">三分果盒：超级精选</a></span>-->
+                    <!--<span class="ckill_good_price">秒杀价：￥20.00&nbsp&nbsp</span>-->
+                    <!--<span class="ckill_good_price_t">￥35.00</span>-->
+                    <!--<span class="ckill_good_count">一共：100个</span>-->
+                    <!--<span class=""></span>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

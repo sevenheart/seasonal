@@ -3,9 +3,7 @@ package com.seasonal.service.listenthread;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.Event;
 import com.seasonal.service.sender.UpdateSqlSender;
-import com.seasonal.service.sender.UserActionLogSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -48,9 +46,7 @@ public class ListenerBinLogThread extends Thread{
                                     insert>0 ? 1:0;
                     //加入id
                     if(type==1 ){
-                        System.out.println("是插入需要拼接id");
                         if(!"".equals(longId)){
-                            System.out.println("longid不是空的");
                             //拼接
                             data=longId+data;
                             //
@@ -72,7 +68,6 @@ public class ListenerBinLogThread extends Thread{
                             System.out.println("是插入插入id是"+event.getData().toString());
                             longId = event.getData().toString().replace("IntVarEventData{type=2, value=","");
                             longId = longId.replace("}","");
-                            System.out.println("longid是"+longId);
                         }else {
                             database = 0;
                         }
@@ -91,7 +86,6 @@ public class ListenerBinLogThread extends Thread{
         try {
             client.connect();
         } catch (IOException e) {
-            System.out.println("dsjfaskd");
             e.printStackTrace();
         }
     }

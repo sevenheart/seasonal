@@ -93,7 +93,6 @@ public class CartFormController {
         orderForm.setDeliveryWay((Integer) orderData.get("deliveryWay"));
         //订单配送地址
         orderForm.setDeliveryAddress(orderData.get("deliveryAddress").toString());
-        System.out.println(orderForm.getDeliveryAddress());
         //配送费
         orderForm.setDeliveryMoney(new BigDecimal(orderData.get("deliveryMoney").toString()));
         //订单总金额

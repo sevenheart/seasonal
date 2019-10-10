@@ -4,8 +4,8 @@ import com.seasonal.pojo.LoginFrom;
 import com.seasonal.pojo.User;
 import com.seasonal.service.LoginService;
 import com.seasonal.service.UserInfoServer;
-import com.seasonal.service.sender.RegisterCodeSender;
-import com.seasonal.service.sender.UserActionLogSender;
+import com.seasonal.sender.RegisterCodeSender;
+import com.seasonal.sender.UserActionLogSender;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,7 +55,7 @@ public class LoginController {
         if (loginFrom != null){
             if (credential.equals(loginFrom.getCredential())){
                 session.setAttribute("userId", loginFrom.getUserId());
-                userActionLogSender.sendMessageForCode(loginFrom);
+                userActionLogSender.sendMessageForCode(loginFrom.getUserId());
                 return ResultUtil.success(loginFrom);
             } else {
                 return ResultUtil.fail(100,"密码错误");

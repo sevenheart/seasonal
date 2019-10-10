@@ -1,4 +1,4 @@
-package com.seasonal.filter;
+package com.seasonal.interceptor;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -17,9 +17,10 @@ public class LogUserActionFilter extends Filter<ILoggingEvent> {
     public FilterReply decide(ILoggingEvent event) {
         if (event.getLevel() == Level.INFO) {
             if (event.getMessage().contains(flag)) {
+                System.out.println("我过滤了");
                 return FilterReply.ACCEPT;
             } else {
-
+                System.out.println("我也他娘过滤了");
                 return FilterReply.DENY;
             }
 

@@ -7,6 +7,8 @@ server:
     key-alias: www.strin.xyz
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   thymeleaf:
     cache: false
     enabled: false
@@ -30,19 +32,6 @@ spring:
     username: root
     password: Guo_19980502
     driverClassName: com.mysql.cj.jdbc.Driver
-  data:
-    #配置mongodb
-    mongodb:
-      database: seasonal
-      host: 127.0.0.1
-      port: 27017
-      username:
-      password:
-      uri: mongodb://127.0.0.1
-    #配置elasticsearch
-    elasticsearch:
-      cluster-name: my-application
-      cluster-nodes: 127.0.0.1:9300
   #配置Redis
   redis:
     database: 0
@@ -55,6 +44,15 @@ spring:
     password:
     # 连接池最大连接数（使用负值表示没有限制）
 
+  #配置mongodb
+  data:
+    mongodb:
+      database: seasonal
+      host: 49.235.249.18
+      port: 27017
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 127.0.0.1:9300
 
 #  application:
 #    name: rabbitmq-demo
@@ -63,12 +61,6 @@ spring:
 #    password: guest
 #    port: 15672
 #    username: guest
-
-#logging:
-#  file: E:/boot.log
-#  level:
-#    com:
-#      seasonal: debug
 
 logging:
   level:
@@ -80,8 +72,6 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
   #路径,在webapp文件夹下新建文件夹WEB-INF,在往下建文件夹jsp
-
-
   application:
     name: seasonal
     rabbitmq:

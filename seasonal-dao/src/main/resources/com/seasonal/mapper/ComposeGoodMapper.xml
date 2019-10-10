@@ -10,6 +10,10 @@
         <id column="id" property="id"/>
         <association property="classify" column="compose_good_type"
                      select="com.seasonal.mapper.ClassifyMapper.findClassifyByComposeGoodById"/>
+
+        <association property="secKillGood" column="id"
+                     select="com.seasonal.mapper.SecKillGoodMapper.findSkillGoodById"/>
+
         <collection property="composeGoodImgs" column="id"
                     select="com.seasonal.mapper.ComposeGoodImgMapper.findComposeGoodImgByComposeGoodIdAndType"/>
     </resultMap>
@@ -33,16 +37,20 @@
     <select id="findComposeGoodByID" resultMap="cspc1">
         select * from compose_good where id=#{id}
     </select>
-<select id="findAllComposeGood" resultType="composeGood">
+    <select id="findAllComposeGood" resultType="composeGood">
     select * from compose_good limit 100
-</select>
+    </select>
     <!--根据销量查询组合商品的信息-->
     <select id="findUpGoodsByNumber" resultType="composeGood">
         select * from compose_good order by compose_good_sales DESC
     </select>
     <!--修改评论数量-->
     <update id="addCommentNumber" parameterType="String">
-        update  compose_good set comment_number = comment_number+1 where id=#{goodId};
+        update  compose_good set comment_number = comment_number+1 where id=#{goodId}
+    </update>
+
+    <update id="updateGoodSkillType" parameterType="Long">
+        update compose_good set skill_type = #{skillType} where id = #{id}
     </update>
 
 </mapper>

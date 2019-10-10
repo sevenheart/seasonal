@@ -1,4 +1,4 @@
-package com.seasonal.service.sender;
+package com.seasonal.sender;
 
 import com.seasonal.pojo.LoginFrom;
 import com.seasonal.rabbit.RabbitMqEnum;

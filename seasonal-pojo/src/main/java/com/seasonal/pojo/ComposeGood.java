@@ -16,6 +16,8 @@ public class ComposeGood implements Serializable {
     private String composeGoodIcon;
     private Integer composeGoodWeight;
     private Integer commentNumber;
+    private Integer skillType;
+    private SecKillGood secKillGood;
     private Integer composeGoodSales;
 
 
