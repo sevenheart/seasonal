@@ -1,7 +1,6 @@
 package com.seasonal.receiver;
 
 import com.seasonal.pojo.ComposeGood;
-import com.seasonal.pojo.LoginFrom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -9,7 +8,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.Map;
 
@@ -21,20 +19,7 @@ public class UserActionLogReceiver {
     // , Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag
     @RabbitHandler
     public void welecomeMessage(String userId, Message message) {
-
-/*        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + "---------");
-        System.out.println("welecomeMessage +++++++++");
-        LOGGER.info("sample -info---" + userId);
-        LOGGER.debug("sample --debug--" + userId);
-        LOGGER.error("sample -error---" + userId);
-
-        System.out.println("欢迎" + userId);
+        LOGGER.info(message.getMessageProperties().getReceivedRoutingKey() + " -- 用户:" + userId + "登录成功");
     }
 
     @RabbitHandler
