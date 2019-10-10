@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.ComposeGoodCollectionMapper">
+    <resultMap id="cgc" type="com.seasonal.pojo.ComposeGoodCollection">
+        <id column="id" property="id"/>
+        <result column="good_id" property="goodId"></result>
+        <association property="composeGood" column="good_id" select="getComposeCollection"/>
+    </resultMap>
+<!--    更加用户id和商品id查询是否已收藏-->
+    <select id="selectCollection" resultMap="cgc">
+        select * from compose_good_collection where user_id=#{userId} and good_id=#{goodId}
+    </select>
+<!--    根据用户id查询已收藏商品的id-->
+    <select id="selectAllCollectionById" resultMap="cgc">
+        select good_id from compose_good_collection where user_id=#{userId}
+    </select>
+<!--    根据商品id查询商品详情-->
+    <select id="getComposeCollection" resultType="com.seasonal.pojo.ComposeGood">
+        select * from compose_good where id=#{goodId}
+    </select>
+<!--    添加收藏-->
+    <insert id="goodCollection">
+        insert into compose_good_collection(user_id,good_id,collection_time) values(#{userId},#{goodId},#{currentTime})
+    </insert>
+<!--    删除收藏-->
+    <delete id="deleteGoodCollection">
+        delete from compose_good_collection where user_id=#{userId} and good_id=#{goodId}
+    </delete>
+</mapper>

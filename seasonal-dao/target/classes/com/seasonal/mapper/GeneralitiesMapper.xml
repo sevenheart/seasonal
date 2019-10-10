@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.GeneralitiesMapper">
+    <resultMap id="pg" type="com.seasonal.pojo.Generalities">
+        <id column="id" property="id"/>
+        <collection property="classify" column="id"
+                    select="com.seasonal.mapper.ClassifyMapper.findAllByGeneralitiesId"/>
+    </resultMap>
+    <resultMap id="pg1" type="com.seasonal.pojo.Generalities">
+        <id column="id" property="id"/>
+    </resultMap>
+
+    <select id="findAllGeneralities" resultMap="pg">
+          select * from generalities
+    </select>
+    <select id="findGeneralitiesByClassifyId" resultMap="pg1">
+        select * from generalities where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.ComposeGoodMapper">
+    <resultMap id="cspc" type="com.seasonal.pojo.ComposeGood">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="cspc1" type="com.seasonal.pojo.ComposeGood">
+        <id column="id" property="id"/>
+        <association property="classify" column="compose_good_type"
+                     select="com.seasonal.mapper.ClassifyMapper.findClassifyByComposeGoodById"/>
+
+        <association property="secKillGood" column="id"
+                     select="com.seasonal.mapper.SecKillGoodMapper.findSkillGoodById"/>
+
+        <collection property="composeGoodImgs" column="id"
+                    select="com.seasonal.mapper.ComposeGoodImgMapper.findComposeGoodImgByComposeGoodIdAndType"/>
+    </resultMap>
+    <select id="findMainComposeGoodByClassifyId" resultMap="cspc">
+        select * from compose_good where compose_good_type = #{classifyId} and compose_good_status=1 order by compose_good_sales DESC limit 0,6
+    </select>
+    <select id="findAllComposeGoodByClassifyIdForPage" resultMap="cspc">
+        select *
+        from compose_good
+        where compose_good_status=1
+        <if test="classifyId != 0 ">
+            and compose_good_type = #{classifyId}
+        </if>
+        and compose_good_name like #{likeName}
+        order by ${pageInfoResult.orderName} DESC
+        limit #{pageInfoResult.keyPage},#{pageInfoResult.pageSize}
+    </select>
+    <select id="eSfindComposeGoodByID" resultType="composeGood">
+        select * from compose_good where id=#{id}
+    </select>
+    <select id="findComposeGoodByID" resultMap="cspc1">
+        select * from compose_good where id=#{id}
+    </select>
+    <select id="findAllComposeGood" resultType="composeGood">
+    select * from compose_good limit 100
+    </select>
+    <!--根据销量查询组合商品的信息-->
+    <select id="findUpGoodsByNumber" resultType="composeGood">
+        select * from compose_good order by compose_good_sales DESC
+    </select>
+    <!--修改评论数量-->
+    <update id="addCommentNumber" parameterType="String">
+        update  compose_good set comment_number = comment_number+1 where id=#{goodId}
+    </update>
+
+    <update id="updateGoodSkillType" parameterType="Long">
+        update compose_good set skill_type = #{skillType} where id = #{id}
+    </update>
+
+</mapper>

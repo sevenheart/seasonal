@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/icon.ico"/>
+    <title>果酷❤订单页</title>
+    <link rel="stylesheet" type="text/css" href="../css/order_header.css">
+    <link rel="stylesheet" type="text/css" href="../css/order_footer.css">
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../bootstrap/bootstrap.css">
+</head>
+<body>
+<div class="app">
+    <div id="header" class="mtgroup-header-container">
+        <header class="com-header">
+            <div class="login_bar">
+                <ul>
+
+                </ul>
+            </div>
+            <hr style="width: 100%;display: inline-block;margin-top: 1px;">
+            <div class="header-content clearfix">
+                <div class="header-title-module">
+                    <div class="header-title"><a href="../../index.html"><img
+                            src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/s_03.png" alt="果酷"></a>
+                    </div>
+                </div>
+                <div class="hd" style="width: 250px">
+                    <a class="hd_m" href="../../user/view/userinfo.html">
+                        <span id="hd_ms_i"></span>
+                        <span id="hd_ms_txt" class="hd_ms_a">我的果酷</span>
+                    </a>
+                    <a class="hd_m" href="../../cart/view/myCarts.html">
+                        <span id="hd_mc_i"></span>
+                        <span id="hd_mc_txt" class="hd_ms_a">我的购物车</span>
+                    </a>
+                </div>
+
+            </div>
+        </header>
+    </div>
+    <div id="body" class="container clear-fix">
+        <div class="right right-widen">
+            <div class="order clear-fix"><span class="block-left"><div class="order-name"
+                                                                       id="order-id"></div></span><span
+                    class="block-right"><div class="amount">应付金额 ¥ <span class="amount-price"
+                                                                         id="order-money"></span></div></span>
+            </div>
+            <div class="payment-container">
+                <div class="payment payment-0">
+                    <div class="payment-type">
+                        <ul class="payment-menu">
+                            <li class="payment-tab payment-tab-0" data-target="0">支付宝/微信</li>
+                        </ul>
+                        <div class="payment-list payment-list-0">
+                            <ul class="clear-fix">
+                                <!--<li>-->
+                                <!--<input type="radio" name="thirdpart_pay" id="thirdpart_pay_wxqrpay">-->
+                                <!--<label class="payment-icon" for="thirdpart_pay_wxqrpay">-->
+                                <!--<img src="https://p1.meituan.net/pay/pc_wxqrpay.png" alt="微信">-->
+                                <!--</label>-->
+                                <!--<span class="payment-weak-tip" style="visibility:visible;"></span>-->
+                                <!--</li>-->
+                                <li>
+                                    <input type="radio" name="thirdpart_pay" id="thirdpart_pay_alipay" checked>
+                                    <label class="payment-icon" for="thirdpart_pay_alipay">
+                                        <img src="https://p0.meituan.net/pay/alipaypcnew.png" alt="支付宝">
+                                    </label>
+                                    <span class="payment-weak-tip" style="visibility:hidden;"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="payment-submit-area clear-fix">
+                        <div class="amount">支付 ¥ <span class="amount-price" id="order-zhifu"></span></div>
+                        <div class="payment-submit">
+                            <form target="_blank" name=alipayment action=/PayMoney method=post>
+                                <input id="WIDout_trade_no" name="WIDout_trade_no" hidden/>
+                                <input id="WIDtotal_amount" name="WIDtotal_amount" hidden/>
+                                <button class="btn" type="submit" data-toggle="modal" data-target="#myModal"
+                                        id="goShop">去付款
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%">
+        <img alt="" style="width: 100%"
+             src="https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/main/foot_logo.jpg"/>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        支付完成
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    请在支付完成后点击下方的已完成支付！
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="guanbi()" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" onclick="oncl()" class="btn btn-primary">
+                        已完成支付
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+
+</body>
+<script src="../../jquery/jquery-3.4.1.js"></script>
+<script src=../../js/ajaxSetup.js></script>
+<script type="text/javascript" src="../../js/login.js"></script>
+<script src="../js/orderUnpaid.js"></script>
+<script src="../../bootstrap/bootstrap.min.js"></script>
+<script>
+
+
+    $("#goShop").click(function () {
+    });
+    $('#myModal').modal("hide");
+
+
+    function guanbi() {
+        window.location.reload();
+    }
+
+    function oncl() {
+        $.ajax({
+            url: "/order/FindOrderPassword",
+            type: "post",
+            data: {"orderId": orderId, "userId": userId},
+            dataType: "json",
+            success: function (data) {
+                if (data.code === 200) {
+                    $(".modal-body").html('<span>自取账号:</span>' + data.data.getAccount + '<br><span>自取密码:</span>' + data.data.getPassword);
+                } else {
+                    $(".modal-body").text(data.message);
+                }
+            }
+        });
+    }
+</script>
+</html>

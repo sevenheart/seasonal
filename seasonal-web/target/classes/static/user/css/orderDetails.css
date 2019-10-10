@@ -1,0 +1,256 @@
+.header-placeholder {
+    height: 122px;
+}
+
+div {
+    display: block;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.order-container {
+    margin-top: 40px;
+}
+
+.status-box.finished {
+    padding-top: 40px;
+    background-color: #f4fff8;
+    background-image: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/order/paidSuccess.png");
+}
+
+.status-box {
+    height: 110px;
+    padding-left: 85px;
+    padding-top: 28px;
+    margin-bottom: 40px;
+    background-repeat: no-repeat;
+    background-position: 30px;
+    box-sizing: border-box;
+}
+
+.status-box.finished .title {
+    color: #26ce61;
+}
+
+.status-box .desc {
+    font-size: 14px;
+    color: #999;
+}
+
+.status-box .title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+p {
+    margin: 0;
+    line-height: normal;
+}
+
+.order-note {
+    margin-bottom: 8px;
+}
+
+.order-note .order-id {
+    font-size: 16px;
+    color: #333;
+}
+
+.order-note .contact {
+    font-size: 12px;
+    color: #666;
+    float: right;
+}
+
+.order-note .contact i {
+    color: #f03d37;
+    font-style: normal;
+}
+
+.order-table {
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-spacing: 0;
+    margin-bottom: 60px;
+}
+
+.order-table thead {
+    background-color: #f7f7f7;
+}
+
+.order-table thead th {
+    font-size: 16px;
+    color: #333;
+    width: 25%;
+    padding: 14px 0;
+    font-weight: 400;
+}
+
+.order-table .movie-name {
+    font-size: 16px;
+}
+
+.order-table td {
+    text-align: center;
+    padding: 20px 0;
+    color: #333;
+}
+
+.order-table .showtime {
+    font-size: 14px;
+    color: #f03d37;
+}
+
+.order-table .cinema-name {
+    font-size: 14px;
+}
+
+.order-table .hall {
+    display: inline-block;
+    font-size: 14px;
+    color: #424242;
+    font-weight: 700;
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+.order-table .seats {
+    display: inline-block;
+    text-align: left;
+}
+
+.order-table .seats span {
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.order-table .seats i {
+    font-size: 16px;
+    font-style: normal;
+    margin: 0 2px;
+}
+
+.order-table .seats span.border {
+    border-left: 1px solid #e5e5e5;
+    padding-left: 5px;
+}
+
+.order-bottom {
+    margin-top: -20px;
+}
+
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table;
+}
+
+.cinema-info {
+    display: inline-block;
+    color: #333;
+}
+
+.cinema-info .name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cinema-info .address, .cinema-info .phone {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.price-box {
+    font-size: 14px;
+    color: #333;
+    float: right;
+    margin-top: 35px;
+}
+
+.price-box {
+    font-size: 14px;
+    color: #333;
+    float: right;
+    margin-top: 35px;
+}
+
+.price-box .price {
+    font-size: 36px;
+    color: #f03d37;
+    font-weight: 700;
+}
+
+.price-box .price:before {
+    content: "\FFE5";
+    font-size: 24px;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.modal-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0,0,0,.4);
+}
+
+.modal-container .modal {
+    width: 460px;
+    height: 155px;
+    padding: 30px 0;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.modal-container .icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/order/paidWarn.png") no-repeat;
+}
+
+.modal-container .tip {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 26px;
+    margin-top: 12px;
+}
+
+.modal-container .ok-btn {
+    color: #fff;
+    background-color: #f03d37;
+    box-shadow: 0 2px 10px -2px #f03d37;
+}
+
+.modal-container .btn {
+    border-radius: 100px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+    width: 260px;
+    padding: 0;
+    cursor: default;
+}
+
+.btn {
+    display: inline-block;
+    padding: 2px 15px;
+    line-height: 25px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #df2d2d;
+}

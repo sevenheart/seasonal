@@ -1,0 +1,167 @@
+.seckill_main {
+    width: 100%;
+    background-image: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/killing_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: -100px;
+    text-align: center;
+    position: relative;
+    background-color: #eeeeee;
+    min-width: 1500px;
+}
+
+.clock {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+    width: 36px;
+    height: 36px;
+    margin-top: 10px;
+    background-image: url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/clock.png);
+    background-repeat: no-repeat;
+    background-size: 35px;
+}
+
+.topinfo {
+    padding-top: 120px;
+}
+
+.text {
+    height: 36px;
+    line-height: 36px;
+    margin-top: -50px;
+    color: #FFFFFF;
+    font: 36px "Microsoft YaHei", Helvetica Neue, tahoma, Arial, Verdana, "Hiragino Sans GB", "\5b8b\4f53";
+}
+
+.inner_wrap {
+    background-image: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/skill/killing_bg2.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 80%;
+    height: auto;
+    position: relative;
+    margin: 40px auto;
+}
+
+.tabs {
+    position: relative;
+    display: table;
+    max-width: 760px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    margin: 42px auto 0;
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.iconfont {
+}
+
+.tabs {
+    background-color: rgba(255, 255, 255, .15);
+    color: white;
+}
+
+.tabs .item {
+    display: table-cell;
+    width: 378px;
+    height: 50px;
+    line-height: 50px;
+    padding-top: 15px;
+    cursor: pointer;
+    float: left;
+    font: 20px "Microsoft YaHei", Helvetica Neue, tahoma, Arial, Verdana, "Hiragino Sans GB", "\5b8b\4f53";
+}
+
+.cur {
+    background-color: #fff;
+    color: #ff6805;
+}
+
+.product_box_wrap {
+    width: 95%;
+    margin: 30px auto 0;
+    height: 1500px;
+}
+
+.ckill_good {
+    background-color: white;
+    width: 23%;
+    height: 400px;
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+    border-radius: 15px;
+}
+
+
+.ckill_good_name {
+    font-size: 20px;
+    display: inline-block;
+    margin-top: 3px;
+}
+
+.ckill_good_price {
+    font-size: 20px;
+    color: #e51e13;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.topinfo span {
+    color: red;
+    display: block;
+    width: 400px;
+    height: 50px;
+    line-height: 50px;
+    font: 36px "Microsoft YaHei", Helvetica Neue, tahoma, Arial, Verdana, "Hiragino Sans GB", "\5b8b\4f53";
+
+}
+
+.ckill_good_price_t {
+    font-size: 10px;
+    color: #bebebf;
+    text-decoration: line-through
+}
+
+.ckill_time {
+    padding-top: 20px;
+}
+
+.ckill_good_count {
+    display: block;
+    margin-top: 3px;
+    font-size: 20px;
+    color: #e51e13;
+}
+
+.ckill_good_shopping:hover {
+    background-color: #e51e13;
+    color: white;
+}
+
+.ckill_good_shopping:hover i {
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -56px;
+}
+
+.ckill_good_shopping {
+    width: 96px;
+    height: 26px;
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    line-height: 26px;
+    border: solid 1px #e51e13;
+    color: #e51e13;
+    margin: 10px auto 0;
+    cursor: pointer;
+
+}
+
+.ckill_good_shopping i {
+    width: 30px;
+    height: 23px;
+    display: block;
+    float: left;
+    background: url("https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/index/inner.png") no-repeat 0 -32px;
+}

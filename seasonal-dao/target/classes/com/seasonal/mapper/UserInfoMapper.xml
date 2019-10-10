@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seasonal.mapper.UserInfoMapper">
+    <select id="findUserById" resultType="user">
+       select * from user where user_id=#{id}
+    </select>
+    <!--取消了id和creattime的修改，他们不必修改-->
+    <update id="updateUserInfo" parameterType="user">
+        update user
+        <set>
+         <!--   <if test="userId!=null">
+                user_id=#{userId},
+            </if>-->
+            <if test="userName!=null">
+                user_name=#{userName},
+            </if><if test="userImg!=null">
+            user_img=#{userImg},
+            </if>
+            <if test="isVip!=null">
+                is_vip=#{isVip},
+            </if>
+            <if test="userAge!=null">
+                user_age=#{userAge},
+            </if>
+            <if test="userSex!=null">
+                user_sex=#{userSex},
+            </if>
+            <if test="userType!=null">
+                user_type=#{userType},
+            </if>
+            <if test="updateTime!=null">
+                update_time=#{updateTime},
+            </if>
+        </set>
+        where user_id=#{userId}
+    </update>
+
+    <insert id="insertUserMessage" parameterType="user">
+        insert into user(user_id,user_name,is_vip,user_sex,user_type,create_time,update_time) values (#{userId},#{userName},0,1,'年轻人',#{currentTime},#{currentTime})
+    </insert>
+
+</mapper>
