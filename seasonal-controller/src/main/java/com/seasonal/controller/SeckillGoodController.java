@@ -1,37 +1,35 @@
 package com.seasonal.controller;
 
-import com.seasonal.json.JsonUtils;
 import com.seasonal.pojo.DetailedCommodityForm;
 import com.seasonal.pojo.OrderForm;
 import com.seasonal.pojo.SecKillGood;
+import com.seasonal.pojo.SeckillOrder;
 import com.seasonal.randompass.RandomAccountPassword;
 import com.seasonal.redis.RedisUtil;
+import com.seasonal.sender.SeckillSender;
 import com.seasonal.service.SecKillService;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
-import net.sf.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class SeckillGoodController {
 
     private final SecKillService seckillService;
     private final RedisUtil redisUtil;
+    private final SeckillSender seckillSender;
 
-    public SeckillGoodController(SecKillService secKillService, RedisUtil redisUtil) {
+    public SeckillGoodController(SecKillService secKillService, RedisUtil redisUtil, SeckillSender seckillSender) {
         this.seckillService = secKillService;
         this.redisUtil = redisUtil;
+        this.seckillSender = seckillSender;
     }
 
 
@@ -117,6 +115,10 @@ public class SeckillGoodController {
         detailedCommodityForm.setUserId(orderForm.getOrderUserId());
         detailedCommodityForm.setCommodityMoney(secKillGood.getSeckillPrice());
 
+        SeckillOrder seckillOrder = new SeckillOrder();
+        seckillOrder.setDetailedCommodityForml(detailedCommodityForm);
+        seckillOrder.setOrderForm(orderForm);
+        seckillSender.sendSeckillOrderForCode(seckillOrder);
 
         return ResultUtil.success(1);
     }

@@ -1,4 +1,4 @@
-package com.seasonal.service.receiver;
+package com.seasonal.receiver;
 
 import com.seasonal.pojo.LoginFrom;
 import org.slf4j.Logger;

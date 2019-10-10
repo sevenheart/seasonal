@@ -6,9 +6,7 @@ import com.seasonal.pojo.ComposeGoodCollection;
 import com.seasonal.service.DetailGoodService;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
-import com.seasonal.redis.RedisUtil;
-import com.seasonal.service.sender.UserActionLogSender;
-import com.seasonal.service.SecKillService;
+import com.seasonal.sender.UserActionLogSender;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MainGoodController {
@@ -91,26 +90,15 @@ public class MainGoodController {
     }
 
 
-//    /**
-//     * 根据Key获取Redis中的秒杀信息
-//     *
-//     * @param key 集合对应的key
-//     * @return 秒杀数据集合
-//     */
-//    private Object secKillGoodsList(String key) {
-//        redisUtil.setHash();
-//        if (redisUtil.get(key) != null) {
-//            return ResultUtil.success(redisUtil.get(key));
-//        }
-//        return ResultUtil.fail("Redis中没有秒杀商品");
-//    }
-
     @RequestMapping(value = "ShowDetailGood")
     @ResponseBody
-    public Object showDetailGood(Long id) {
+    public Object showDetailGood(Long id, String userId) {
+        System.out.println(id);
         ComposeGood composeGood = detailGoodService.findComposeGoodById(id);
-        userActionLogSender.sendBrowseForCode(composeGood);
-        return detailGoodService.findComposeGoodById(id);
+        Map<String, ComposeGood> browseRecord = new HashMap<>();
+        browseRecord.put(userId, composeGood);
+        userActionLogSender.sendBrowseForCode(browseRecord);
+        return composeGood;
     }
 
     /**

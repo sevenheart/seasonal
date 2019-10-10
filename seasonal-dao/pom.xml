@@ -13,7 +13,7 @@
     <artifactId>seasonal-dao</artifactId>
     <dependencies>
         <dependency>
-            <artifactId>seasonal-pojo</artifactId>
+            <artifactId>seasonal-commons</artifactId>
             <groupId>com.strin</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
