@@ -66,7 +66,6 @@ public class LoginServiceImpl implements LoginService {
     public String getIpNow() {
         //获取当前ip地址
         String loginIpNow = getIp.publicip();
-        System.out.println("现在的IP地址是：" + loginIpNow);
         return loginIpNow;
     }
 
@@ -77,7 +76,7 @@ public class LoginServiceImpl implements LoginService {
         shortMessageVerification.setNewcode();
         //获取
         String code = Integer.toString(shortMessageVerification.getNewcode());
-        System.out.println("发送的验证码为：" + code);
+//        System.out.println("发送的验证码为：" + code);
 
         SendSmsResponse sendSmsResponse = null;
 
@@ -87,11 +86,11 @@ public class LoginServiceImpl implements LoginService {
         } catch (ClientException e) {
             e.printStackTrace();
         }
-        System.out.println("短信接口返回的数据----------------");
-        System.out.println("Code=" + sendSmsResponse.getCode());
-        System.out.println("Message=" + sendSmsResponse.getMessage());
-        System.out.println("RequestId=" + sendSmsResponse.getRequestId());
-        System.out.println("BizId=" + sendSmsResponse.getBizId());
+//        System.out.println("短信接口返回的数据----------------");
+//        System.out.println("Code=" + sendSmsResponse.getCode());
+//        System.out.println("Message=" + sendSmsResponse.getMessage());
+//        System.out.println("RequestId=" + sendSmsResponse.getRequestId());
+//        System.out.println("BizId=" + sendSmsResponse.getBizId());
         return code;
     }
 
@@ -104,7 +103,6 @@ public class LoginServiceImpl implements LoginService {
         String retStrFormatNowDate = sdFormatter.format(currentTime).replace("-","").substring(2);
         //生成用户ID
         String userId = retStrFormatNowDate + UUID.randomUUID().toString().replace("-","").substring(27);
-        System.out.println(userId);
         //生成用户昵称
         String userName = UUID.randomUUID().toString().replace("-","").substring(24);
         //用户注册方式

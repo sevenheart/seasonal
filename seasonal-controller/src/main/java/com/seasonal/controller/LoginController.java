@@ -36,7 +36,6 @@ public class LoginController {
     @ResponseBody
     public Object registrationPhone(String identifier) {//验证账号是否已存在
         LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
-        System.out.println(loginFrom);
         if (loginFrom == null) {
             return ResultUtil.fail("该账号可用");
         } else {
@@ -79,7 +78,6 @@ public class LoginController {
     @RequestMapping(value = "shortMessageSend")
     @ResponseBody
     public Object shortMessageSend(String identifier, HttpSession session) {
-        System.out.println("shortMessageSend:" + identifier);
         //初始化可获取验证码的倒计时
         String time = "0";
         //获取当前时间
@@ -90,7 +88,6 @@ public class LoginController {
             //String code = loginService.sendShortMessage(identifier);//发送验证码
             String code = "1234";
             if (code != null || code == "") {//判断验证码是否发送成功，并返回值到后台
-                System.out.println("code:" + code);
                 session.setAttribute("code", code);//发送验证码后，保存到session
                 session.setAttribute("identifier",identifier);//获取验证码的手机号，用于匹配验证码
                 session.setAttribute("nowTimeCode", nowTime);//获取验证码时间保存到session
@@ -108,15 +105,12 @@ public class LoginController {
                 return ResultUtil.success(200, "发送成功");//发送成功的返回值
             }
         } else {
-            System.out.println("类型异常：" + session.getAttribute("nowTimeCode"));
             long lastTime = (long) session.getAttribute("nowTimeCode");//获取上一次获取验证码的时间
-            System.out.println("nowTime:" + nowTime + ",lastTime:" + lastTime);
             int D_value = (int) (nowTime - lastTime);//两次获取时间相比较,大于60s，则可以重新获取验证码
             if (D_value >= 60) {
                 //String code = loginService.sendShortMessage(identifier);//发送验证码
                 String code = "1234";
                 if (code != null || code == "") {//判断验证码是否发送成功，并返回值到后台
-                    System.out.println("code:" + code);
                     session.setAttribute("code", code);//发送验证码后，保存到session
                     session.setAttribute("identifier",identifier);//获取验证码的手机号，用于匹配验证码
                     session.setAttribute("nowTimeCode", nowTime);//获取验证码时间保存到session
@@ -145,22 +139,17 @@ public class LoginController {
     @ResponseBody
     public Object registrationInsert(String identifier, String credential, String verifyCode, HttpSession session) {//存储用户注册信息
         String code = (String) session.getAttribute("code");//获取验证码session
-//        System.out.println("Controller->verifyCode:" + verifyCode);
-//        System.out.println("Controller->code:" + code);
         if (code == null || code == "") {//如果验证码的session不存在，则是验证码已过期，
-            System.out.println("验证码已过期，请重新发送");
             return ResultUtil.fail(404,"验证码已过期，请重新发送");
         } else if (code.equals(verifyCode)) {//判断输入验证码是否正确
             String userId = loginService.insertUserMessage(identifier, credential);
             if (userId != null) {
-                System.out.println("注册成功");
                 session.setAttribute("userId", userId);
             }
             LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
             registerCodeSender.sendMessageForCode(loginFrom);
             return ResultUtil.success(200,"注册成功");
         } else {
-            System.out.println("验证码错误，请重新输入");
             return ResultUtil.fail(100,"验证码错误，请重新输入");
         }
     }
@@ -171,7 +160,6 @@ public class LoginController {
     public Object smsLogin(String identifier, String smsVerifyCode, HttpSession session) {
         String code = (String) session.getAttribute("code");
         String phone = (String) session.getAttribute("identifier");
-        System.out.println("phone=" + phone + ",identifier:" + identifier);
         if (code == null || code == "") {
             return ResultUtil.fail(404,"验证码已过期，请重新发送");
         } else if (code.equals(smsVerifyCode)) {
@@ -181,13 +169,11 @@ public class LoginController {
                 LoginFrom loginFrom = loginService.findRegistrationPhone(identifier);
                 String userId = loginFrom.getUserId();
                 if (userId != null) {
-                    System.out.println("登录成功");
                     session.setAttribute("userId", userId);
                 }
                 return ResultUtil.success(200,"注册成功");
             }
         } else {
-            System.out.println("验证码错误，请重新输入");
             return ResultUtil.fail(100,"验证码错误，请重新输入");
         }
     }

@@ -3,16 +3,13 @@ package com.seasonal.controller;
 import com.seasonal.annotation.Intercept;
 import com.seasonal.pojo.ComposeGood;
 import com.seasonal.pojo.ComposeGoodCollection;
-import com.seasonal.pojo.ESComposeGood;
 import com.seasonal.service.DetailGoodService;
 import com.seasonal.service.GoodsListService;
 import com.seasonal.service.MainService;
 import com.seasonal.redis.RedisUtil;
-import com.seasonal.service.sender.UserActionLogSender;
 import com.seasonal.service.SecKillService;
 import com.seasonal.vo.ResultData;
 import com.seasonal.vo.ResultUtil;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +27,13 @@ public class MainGoodController {
     private final GoodsListService goodsListService;
     private final DetailGoodService detailGoodService;
     private final SecKillService seckillService;
-    private final UserActionLogSender userActionLogSender;
 
     @Autowired
-    public MainGoodController(MainService mainService, GoodsListService goodsListService, SecKillService seckillService, RedisUtil redisUtil, DetailGoodService detailGoodService, UserActionLogSender userActionLogSender) {
+    public MainGoodController(MainService mainService, GoodsListService goodsListService, SecKillService seckillService, RedisUtil redisUtil, DetailGoodService detailGoodService) {
         this.mainService = mainService;
         this.goodsListService = goodsListService;
         this.detailGoodService = detailGoodService;
         this.seckillService = seckillService;
-        this.userActionLogSender = userActionLogSender;
     }
 
     @RequestMapping(value = "MainGoodsRefresh")
@@ -163,7 +158,6 @@ public class MainGoodController {
     @ResponseBody
     public Object showDetailGood(Long id) {
         ComposeGood composeGood = detailGoodService.findComposeGoodById(id);
-        userActionLogSender.sendBrowseForCode(composeGood);
         return detailGoodService.findComposeGoodById(id);
     }
 

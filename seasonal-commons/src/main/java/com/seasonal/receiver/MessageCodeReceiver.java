@@ -31,7 +31,6 @@ public class MessageCodeReceiver {
         LOGGER.info("注册 -info---" + loginFrom.getUserId());
         LOGGER.debug("注册 --debug--" + loginFrom.getUserId());
         LOGGER.error("注册 -error---" + loginFrom.getUserId());
-        System.out.println("欢迎" + loginFrom.getUserId());
     }
 
 }

@@ -13,7 +13,6 @@ public class MessageCodeRabbitConfig {
      */
     @Bean
     public Queue registerMessageCodeQueue() {
-        System.out.println("------registerMessageCodeQueue------");
         return new Queue(RabbitMqEnum.QueueName.REGISTER_MESSAGE_CODE_QUEUE.getCode(), false);
     }
 
