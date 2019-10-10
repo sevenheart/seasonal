@@ -27,4 +27,9 @@ public class SeckillServiceImpl implements SecKillService {
     public SecKillGood findPriceById(Long id) {
         return secKillGoodMapper.findSkillGoodById(id);
     }
+
+    @Override
+    public int updateSeckillGoodCount(Long id) {
+        return secKillGoodMapper.updateSeckillGoodCount(id);
+    }
 }

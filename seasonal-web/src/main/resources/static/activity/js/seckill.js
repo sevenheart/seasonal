@@ -4,8 +4,6 @@ var seconds;
 var ctime;
 
 function seckill() {
-    $(".comming-item").removeClass("cur");
-    $(this).addClass("cur");
     $(".product_box").html("");
     $.ajax({
         url: "/ShowSecKillGood", //json文件位置
@@ -58,6 +56,9 @@ function seckill() {
                     async: false,
                     success: function (data) {
                         console.log(data);
+                        if (data.code === 200) {
+                            window.open().location = '../../order/view/orderUnpaid.html?orderId=' + data.data;
+                        }
                     }
                 });
 
@@ -68,6 +69,8 @@ function seckill() {
 
 //当前秒杀点击事件
 $(".selling-item").click(function () {
+    $(".comming-item").removeClass("cur");
+    $(this).addClass("cur");
     seckill();
 });
 //下一轮秒杀点击事件
