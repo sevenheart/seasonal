@@ -17,7 +17,7 @@ const $comments_body =  $('.orders-box .orders-body');
 
 
 //评论模态框commentmodal
-$('#commentmodal').modal("hidden");
+$('#commentmodal').modal("hide");
 $('#commentmodal').on('show.bs.modal', function (event) {
 });
 

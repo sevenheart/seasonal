@@ -108,6 +108,7 @@ $(".comming-item").click(function () {
                 $(".ckill_time").children("span").eq(0).html("下一轮开启时间");
                 $("#tishi").css("display", "block");
                 $("#tishi").html(v.seckillTime);
+                $("#come_time").css("display", "none");
             });
             $(".product_box").html(html);
         }

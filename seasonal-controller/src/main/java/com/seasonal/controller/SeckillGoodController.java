@@ -96,7 +96,7 @@ public class SeckillGoodController {
             num = Integer.parseInt(String.valueOf(redisUtil.get(String.valueOf(orderForm.getGoodId()))));
             if (num != null && num > 0) {
                 num--;
-                redisUtil.set(String.valueOf(orderForm.getGoodId()), num);
+                redisUtil.set(String.valueOf(orderForm.getGoodId()), String.valueOf(num));
             } else {
                 return ResultUtil.fail(orderForm.getGoodId() + "商品数量不够");
             }

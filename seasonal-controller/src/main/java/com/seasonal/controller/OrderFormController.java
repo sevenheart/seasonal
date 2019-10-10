@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.List;
 
 @Controller
@@ -18,7 +19,7 @@ public class OrderFormController {
     private final OrderFormService orderFormService;
 
     @Autowired
-    public OrderFormController( OrderFormService orderFormService) {
+    public OrderFormController(OrderFormService orderFormService) {
         this.orderFormService = orderFormService;
     }
 
@@ -44,16 +45,12 @@ public class OrderFormController {
 
     @RequestMapping("FindAllorderFormById")
     @ResponseBody
-    public Object findAllOrderFormByUserId(String userId){
+    public Object findAllOrderFormByUserId(String userId) {
         List<OrderForm> orderForms = orderFormService.findAllOrderFormByUserId(userId);
-        if(orderForms != null && orderForms.size() > 0 ){
-            System.out.println("结果是");
-            for (OrderForm x:orderForms) {
-                System.out.println(x.toString());
-            }
+        if (orderForms != null && orderForms.size() > 0) {
             //查找成功
             return ResultUtil.success(orderForms);
-        }else {
+        } else {
             //查找失败
             return ResultUtil.fail(100, "不存在记录或查找失败！");
         }

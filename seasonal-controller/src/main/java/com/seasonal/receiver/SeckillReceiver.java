@@ -38,7 +38,7 @@ public class SeckillReceiver {
          */
         if (orderFormService.insertOrderForm(seckillOrder.getOrderForm(), detailedCommodityForms) != 0) {
             System.out.println("插入秒杀订单成功");
-            secKillService.updateSeckillGoodCount((long) seckillOrder.getOrderForm().getGoodId());
+
         } else {
             System.out.println("插入秒杀订单失败");
         }
