@@ -15,7 +15,7 @@ public class ErrorCustomlizer {
      *
      * @return
      */
-    @Bean
+   // @Bean
     public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
         return (container -> {
             ErrorPage error401Page = new ErrorPage(HttpStatus.UNAUTHORIZED, "/index.html");

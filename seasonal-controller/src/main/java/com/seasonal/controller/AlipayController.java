@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -32,6 +34,7 @@ public class AlipayController {
 
     //支付
     @RequestMapping ( value="PayMoney")
+    @ResponseBody
     public String pay(String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody , Model model, HttpServletResponse response) throws UnsupportedEncodingException {
        //
       //  String WIDout_trade_no="" String WIDtotal_amount, String WIDsubject, String WIDbody ,
@@ -91,7 +94,7 @@ public class AlipayController {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        return "pay";
+        return result;
     }
     //交易查询
     @RequestMapping(value = "querypay")
