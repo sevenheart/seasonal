@@ -34,10 +34,10 @@ public class AlipayController {
 
     //支付
     @RequestMapping ( value="PayMoney")
+    @ResponseBody
     public String pay(String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody , Model model, HttpServletResponse response) throws UnsupportedEncodingException {
        //
       //  String WIDout_trade_no="" String WIDtotal_amount, String WIDsubject, String WIDbody ,
-        System.out.println("aaaaaaaaa");
         if(WIDsubject == null){
             WIDsubject = WIDout_trade_no;
         }
@@ -94,7 +94,7 @@ public class AlipayController {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        return "pay";
+        return result;
     }
     //交易查询
     @RequestMapping(value = "querypay")

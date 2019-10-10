@@ -27,7 +27,9 @@
         order by ${pageInfoResult.orderName} DESC
         limit #{pageInfoResult.keyPage},#{pageInfoResult.pageSize}
     </select>
-
+    <select id="eSfindComposeGoodByID" resultType="composeGood">
+        select * from compose_good where id=#{id}
+    </select>
     <select id="findComposeGoodByID" resultMap="cspc1">
         select * from compose_good where id=#{id}
     </select>

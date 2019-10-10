@@ -25,7 +25,6 @@ public class RabbitConfig {
 
     @Autowired
     private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigurer;
-
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RabbitTemplate rabbitTemplate(){
@@ -37,7 +36,6 @@ public class RabbitConfig {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         // 如果exchange根据自身类型和消息routeKey无法找到一个符合条件的queue，那么会调用basic.return方法将消息返还给生产者。false：出现上述情形broker会直接将消息扔掉
         rabbitTemplate.setMandatory(true);
-
         return rabbitTemplate;
     }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface ComposeGoodMapper {
 
+    ComposeGood eSfindComposeGoodByID(Integer id);
+
     /**
      * 根据小类id 和分页排序信息查询 和模糊查找
      *
