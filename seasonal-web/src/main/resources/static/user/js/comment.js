@@ -13,7 +13,7 @@ let mongocomment;
 
 var commentArray = new Array();
 
-const $comments_body =  $('.orders-box .orders-body');
+const $comments_body = $('.orders-box .orders-body');
 
 
 //评论模态框commentmodal
@@ -25,7 +25,7 @@ $('#commentmodal').on('show.bs.modal', function (event) {
 function showcommetstates(data) {
     let test = ' ';
     let commetsCount = 0;
-    if (data.code === 200) {
+    if (data.code === 200 && data.data != '') {
         $.each(data.data, function (index, content) {
             commetsCount++;
             test += '  <div class="order-item clearfix">\n' +
@@ -33,7 +33,7 @@ function showcommetstates(data) {
                 '                                <a data-toggle="modal" data-target="#commentmodal"  data-index="' + index + '" href="" class="link"\n' +
                 '                                   target="_blank">\n' +
                 '                                    <div ><img src=' + content.composeGoods[0].composeGoodIcon + '\n' +
-                '                                              class="image"></div></a>\n' +
+                '                                              class="image" alt=""></div></a>\n' +
                 '                            </div>\n' +
                 '\n' +
                 '                            <div class="order-info info-box">\n' +
@@ -59,7 +59,7 @@ function showcommetstates(data) {
                 '<div class="order-btn" >\n' +
                 '                <a data-toggle="modal" data-target="#commentmodal" data-index="' + index + '" class=\n' +
                 '                "link show-deal commentclick" target="_blank" >评价</a>\n' +
-                '                </div>'
+                '                </div>';
 
             if(commetsCount % 5 === 0){
                 commentArray.push(test);
@@ -75,7 +75,7 @@ function showcommetstates(data) {
             callback: showAllComments,
         });
     } else {
-        test += '<div><p class="no-order-text">没有未评论的信息</p></div>'
+        test += '<div><p class="no-order-text">没有未评论的信息</p></div>';
         $comments_body.html(test);
     }
 
@@ -83,7 +83,6 @@ function showcommetstates(data) {
     //评论按钮点击事件
     $('.commentclick').click(function () {
         let outindex = Number($(this).attr("data-index"));
-        console.log(data.data[outindex])
         let time = getNowDateFormat();
         //商品id
         //用户头像昵称id
@@ -99,10 +98,10 @@ function showcommetstates(data) {
             "comment_content": "", "comment_create_time": time
         }
 
-    })
+    });
     /*点模态框的确定按钮后存储评论信息*/
     $('#modal-confirm').click(function () {
-        let contents = $('#content').val()
+        let contents = $('#content').val();
         mongocomment.comment_content = contents;
         if (contents === null || contents == "") {
             alert("不能输入空字符串！");
@@ -116,7 +115,7 @@ function showcommetstates(data) {
                     $('#commentmodal').modal("hide");
                     window.location.href="/user/view/comment.html";
                 }
-            })
+            });
         }
 
 
@@ -149,7 +148,6 @@ function filterNum(num) {
 
 // 根据页码显示相应的页数
 function showAllComments(current_page){
-    console.log('页数:'+current_page);
     $comments_body.html(commentArray[current_page]);
 }
 
