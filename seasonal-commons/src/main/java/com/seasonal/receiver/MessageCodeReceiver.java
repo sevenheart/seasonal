@@ -28,10 +28,9 @@ public class MessageCodeReceiver {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        LOGGER.info("sample -info---" + loginFrom.getUserId());
-        LOGGER.debug("sample --debug--" + loginFrom.getUserId());
-        LOGGER.error("sample -error---" + loginFrom.getUserId());
-        System.out.println("欢迎" + loginFrom.getUserId());
+        LOGGER.info("注册 -info---" + loginFrom.getUserId());
+        LOGGER.debug("注册 --debug--" + loginFrom.getUserId());
+        LOGGER.error("注册 -error---" + loginFrom.getUserId());
     }
 
 }

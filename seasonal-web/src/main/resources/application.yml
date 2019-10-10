@@ -62,7 +62,14 @@ spring:
 #    port: 15672
 #    username: guest
 
+#logging:
+#  file: E:/boot.log
+#  level:
+#    com:
+#      seasonal: debug
+
 logging:
+  file: E:/boot.log
   level:
     com:
       seasonal: debug

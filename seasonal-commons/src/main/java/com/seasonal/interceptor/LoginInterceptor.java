@@ -22,15 +22,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         //拦截的是方法
         if (handler instanceof HandlerMethod) {
+            //获取拦截方法的路径
             HandlerMethod handlerMethod = (HandlerMethod) handler;
-            System.out.println("handler:" + handlerMethod);
+            //获取拦截方法的注解
             Object intercept = handlerMethod.getMethodAnnotation(Intercept.class);
             if (intercept == null) {//没有这个注解
                 return true;
             } else {//有注解
                 Object obj = session.getAttribute("userId");
                 if (obj == null) {//没有登录
-                    System.out.println("有注解未登录");
                     redirect(request, response);
                     return false;
                 } else { //登录了
@@ -40,7 +40,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
             Object obj = session.getAttribute("userId");
             if (obj == null) {//没有登录
-                System.out.println("无注解未登录");
                 redirect(request, response);
                 return false;
             } else { //登录了
@@ -67,13 +66,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             //告诉ajax我是重定向
             response.setHeader("REDIRECT", "REDIRECT");
-//            System.out.println("REDIRECT：" + response.getHeader("REDIRECT"));
             //告诉ajax我重定向的路径CONTENTPATH
-//            System.out.println("true：" + basePath + "/login/view/login.html");
             response.setHeader("contentpath", basePath + "/login/view/login.html");
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         } else {
-//            System.out.println("false：" + basePath + "/login/view/login.html");
             response.sendRedirect(basePath + "/login/view/login.html");
         }
     }

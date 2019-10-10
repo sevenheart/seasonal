@@ -26,11 +26,7 @@ public class RegisterCodeSender implements RabbitTemplate.ConfirmCallback,Rabbit
     }
 
     public void sendMessageForCode(LoginFrom loginFrom) {
-
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-
-        System.out.println("sendMessageForCode:" + correlationData);
-
         // 将电话号码，经directExchange交换机并发送到routing_key为messageCode的队列中
         this.rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.DIRECT_EXCHANGE.getCode(),
                 RabbitMqEnum.QueueKey.MESSAGE_CODE_DIRECT.getCode(), loginFrom, correlationData);
@@ -39,20 +35,17 @@ public class RegisterCodeSender implements RabbitTemplate.ConfirmCallback,Rabbit
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         if (ack) {
-            System.out.println("消息成功消费:" + correlationData);
             log.info("(start)生产者消息确认=========================");
             log.info("correlationData:[{}]", correlationData);
             log.info("ack:[{}]", ack);
             log.info("cause:[{}]", cause);
             log.info("(end)生产者消息确认=========================");
         } else {
-            System.out.println("消息消费失败:" + cause);
             log.info("消息可能未到达rabbitmq服务器");
         }
     }
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        System.out.println("失败处理");
     }
 }

@@ -46,7 +46,6 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                 data: {"identifier": phone},
                 async: true,
                 success: function (data) {
-                    console.log(data)
                     if (data.code === 200) {
                         //返回200,号码已存在，不可注册
                         html = '<div id="phone-span-div"></div>';
@@ -201,9 +200,9 @@ $(document).on('click', '.pass-button-verifyCodeSend', function () {
                 //调用倒计时方法
                 sendCode();
                 if (data.code === 200) {
-                    alert("发送成功！");
+                    // alert("验证码发送成功！");
                 } else if (data.message === "0" && data.code === 100) {
-                    alert("发送失败！");
+                    alert("验证码发送失败！");
                 } else {
                     time = parseInt(data.message);
                     alert("您请求验证码太过频繁，请计时结束在重新获取！");
