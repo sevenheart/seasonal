@@ -89,8 +89,8 @@ public class LoginController {
         SimpleDateFormat sdFormatter = new SimpleDateFormat("HH-mm-ss");
         long nowTime = Integer.parseInt(sdFormatter.format(currentTime).replace("-", ""));
         if (session.getAttribute("nowTimeCode") == null) {//判断上次获取验证码时间是否为空，若不为空，获取lastTime
-            //String code = loginService.sendShortMessage(identifier);//发送验证码
-            String code = "1234";
+            String code = loginService.sendShortMessage(identifier);//发送验证码
+//            String code = "1234";
             if (code != null || code == "") {//判断验证码是否发送成功，并返回值到后台
                 session.setAttribute("code", code);//发送验证码后，保存到session
                 session.setAttribute("identifier",identifier);//获取验证码的手机号，用于匹配验证码

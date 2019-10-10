@@ -197,7 +197,10 @@ function comeTime() {
         var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
         seconds = Math.round(leave3 / 1000);
     } else {
-
+        $(".ckill_time").children("span").eq(0).html("今天的秒杀已经结束请等待下一天的秒杀活动！");
+        $("#tishi").css("display", "block");
+        $("#tishi").html("");
+        $("#come_time").css("display", "none");
     }
     ctime = "";
 
