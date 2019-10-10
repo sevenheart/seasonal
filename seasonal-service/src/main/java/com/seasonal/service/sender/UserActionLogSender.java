@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-public class UserActionLogSender implements RabbitTemplate.ConfirmCallback,RabbitTemplate.ReturnCallback{
+public class UserActionLogSender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
 
     private RabbitTemplate rabbitTemplate;
 
@@ -30,7 +30,7 @@ public class UserActionLogSender implements RabbitTemplate.ConfirmCallback,Rabbi
 
         // 将电话号码，经directExchange交换机并发送到routing_key为messageCode的队列中
         this.rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.TOPIC_EXCHANGE.getCode(),
-                "action.log." + new Date() , loginFrom, correlationData);
+                "action.log." + new Date(), loginFrom, correlationData);
     }
 
     public void sendBrowseForCode(ComposeGood composeGood) {
@@ -39,7 +39,7 @@ public class UserActionLogSender implements RabbitTemplate.ConfirmCallback,Rabbi
 
         // 将电话号码，经directExchange交换机并发送到routing_key为messageCode的队列中
         this.rabbitTemplate.convertAndSend(RabbitMqEnum.Exchange.TOPIC_EXCHANGE.getCode(),
-                "action.log." + new Date() , composeGood, correlationData);
+                "action.log." + new Date(), composeGood, correlationData);
     }
 
 
@@ -50,8 +50,6 @@ public class UserActionLogSender implements RabbitTemplate.ConfirmCallback,Rabbi
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-
-
         System.out.println("info----" + correlationData);
         System.out.println("info----" + cause);
     }

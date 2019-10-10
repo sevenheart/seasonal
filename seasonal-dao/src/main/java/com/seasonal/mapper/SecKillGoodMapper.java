@@ -21,5 +21,5 @@ public interface SecKillGoodMapper {
      * @param id 商品id
      * @return 秒杀价格
      */
-    Integer findSkillGoodById(Long id);
+    SecKillGood findSkillGoodById(Long id);
 }

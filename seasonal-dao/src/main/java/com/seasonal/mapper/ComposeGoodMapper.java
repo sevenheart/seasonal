@@ -47,4 +47,12 @@ public interface ComposeGoodMapper {
      * @return
      */
     int addCommentNumber(String goodId);
+
+
+    /**
+     * 根据商品id改变商品的是否处在秒杀状态
+     * @param id 商品id
+     * @return 修改个数
+     */
+    int updateGoodSkillType(Long id,Integer skillType);
 }

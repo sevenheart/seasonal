@@ -185,4 +185,10 @@ public class GoodsListServiceImpl implements GoodsListService {
         int num = composeGoodCollectionMapper.deleteGoodCollection(userId,goodId);
         return num;
     }
+
+    @Override
+    public int updateGoodSkillType(Long id,Integer skillType) {
+        int update = composeGoodMapper.updateGoodSkillType(id,skillType);
+        return update;
+    }
 }

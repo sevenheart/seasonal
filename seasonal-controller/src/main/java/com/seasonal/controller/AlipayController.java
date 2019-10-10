@@ -35,7 +35,6 @@ public class AlipayController {
     public String pay(String WIDout_trade_no, String WIDtotal_amount, String WIDsubject, String WIDbody , Model model, HttpServletResponse response) throws UnsupportedEncodingException {
        //
       //  String WIDout_trade_no="" String WIDtotal_amount, String WIDsubject, String WIDbody ,
-        System.out.println("aaaaaaaaa");
         if(WIDsubject == null){
             WIDsubject = WIDout_trade_no;
         }
