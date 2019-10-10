@@ -85,10 +85,7 @@ public class AlipayController {
         }
 
         //输出
-
-
         model.addAttribute("user",result);
-        System.out.println("bbb");
        /* try {
             response.sendRedirect("/alipay/pay.jsp");
         } catch (IOException e) {
@@ -118,7 +115,7 @@ public class AlipayController {
         String result = alipayClient.execute(alipayRequest).getBody();
 
         //输出
-        System.out.println(result);
+        //System.out.println(result);
 
         return  "";
     }
@@ -182,18 +179,16 @@ public class AlipayController {
                 //付款完成后，支付宝系统发送该交易状态通知
             }*/
 
-            System.out.println("验证成功！！支付成功了");
+            //System.out.println("验证成功！！支付成功了");
             orderInfoSave(out_trade_no1,trade_no1);
-            System.out.println("修改订单状态成功");
+            //System.out.println("修改订单状态成功");
         }else {//验证失败
-            System.out.println("验证失败！！支付失败了");
+            //System.out.println("验证失败！！支付失败了");
 
             //调试用，写文本函数记录程序运行情况是否正常
             //String sWord = AlipaySignature.getSignCheckContentV1(params);
             //AlipayConfig.logResult(sWord);
         }
-
-        System.out.println("反正进来了");
 
         return  "redirect:/order/view/orderCome.html";
     }
@@ -218,7 +213,7 @@ public class AlipayController {
         //修改订单信息为已支付
         //两个步骤成功返回true，反之返回false
          boolean statue = orderInfoFormService.paySuccess(orderInfoForm);
-            System.out.println("返回结果时"+statue);
+         //System.out.println("返回结果时"+statue);
          return ResultUtil.success(ResultEnum.SUCCESS);
     }
 

@@ -26,7 +26,7 @@ public class OrderFormController {
     @ResponseBody
     @Intercept
     public Object findOrderFormById(String orderId) {
-        System.out.println("支付");
+        //System.out.println("支付");
         return ResultUtil.success(orderFormService.findOrderFormByOrderId(orderId));
     }
 
@@ -47,10 +47,10 @@ public class OrderFormController {
     public Object findAllOrderFormByUserId(String userId){
         List<OrderForm> orderForms = orderFormService.findAllOrderFormByUserId(userId);
         if(orderForms != null && orderForms.size() > 0 ){
-            System.out.println("结果是");
-            for (OrderForm x:orderForms) {
+            //System.out.println("结果是");
+            /*for (OrderForm x:orderForms) {
                 System.out.println(x.toString());
-            }
+            }*/
             //查找成功
             return ResultUtil.success(orderForms);
         }else {
