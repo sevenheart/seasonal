@@ -39,7 +39,7 @@ $.ajax({
         }
     },
     error: function (data) {
-        alert("获取自动登录信息失败！")
+        alert("获取自动登录信息失败！");
     }
 });
 
@@ -50,6 +50,7 @@ $(document).on('click', '.cancellation', function () {
         type: "post",
         dataType: "text",
         success: function (data) {
+            alert("您已成功退出！");
             var storage = window.localStorage;
             storage.clear();
             window.location.reload();
