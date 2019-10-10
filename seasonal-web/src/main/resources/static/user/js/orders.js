@@ -139,26 +139,27 @@ $(".orders-box .orders-ul li").click(function () {
             });
         }
     }else if(labelName === '待付款'){
-        if(unpaidArray.length === 0){
+        if(unpaidArray.length === 0) {
             unpaidHtml = '<div>\n' +
                 '                            <p class="no-order-text">您暂时还没有订单</p>\n' +
                 '                        </div>';
-        }else{
-            $("#Pagination").pagination(unpaidCount, {
-                callback: showUnpaidOrders,
-            });
+            unpaidArray.push(unpaidHtml);
+            unpaidHtml = '';
         }
+        $("#Pagination").pagination(unpaidCount, {
+            callback: showUnpaidOrders,
+        });
     }else if(labelName === '已付款'){
         if(paidArray.length === 0){
             paidHtml = '<div>\n' +
                 '                            <p class="no-order-text">您暂时还没有订单</p>\n' +
                 '                        </div>';
-        }else{
-            $("#Pagination").pagination(paidCount, {
-                callback: showPaidOrders,
-            });
+            paidArray.push(paidHtml);
+            paidHtml = '';
         }
-
+        $("#Pagination").pagination(paidCount, {
+            callback: showPaidOrders,
+        });
     }
 });
 
