@@ -15,7 +15,7 @@ function ajax_test(id) {
         url: "/ShowDetailGood", //json文件位置
         type: "POST", //请求方式为get
         dataType: "json", //返回数据格式为json
-        data: {"id": id},
+        data: {"id": id, "userId": userId},
         async: false,
         success: function (data) {
             const $cname = $("#classify_name");
