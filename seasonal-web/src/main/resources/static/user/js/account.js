@@ -75,6 +75,7 @@ $('.btn-gray').click(function () {
 //修改用户的信息
 $('.btn-primary').click(function () {
     console.log("文件时"+$('#bookimg')[0].files[0]);
+    console.log("性别是"+document.getElementById('J_addressPhoneInput').value)
     if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
         alert("请输入合法的年龄！");
         return;
