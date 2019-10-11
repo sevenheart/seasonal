@@ -2,13 +2,14 @@ package com.seasonal.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import java.sql.Date;
 import java.util.List;
 
 @Data
-public class OrderForm {
+public class OrderForm implements Serializable {
     private Long id;
     private String orderId;
     private String orderUserId;

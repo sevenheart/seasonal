@@ -17,9 +17,7 @@ if(orderAndIndex.length === 0) {
         async: false,
         dataType: "json",
         success: function (data) {
-            console.log(data);
             if (data.code === 100) {
-                console.log("查询失败！");
                 //alert("没有订单信息！");
             } else if (data.code === 200) {
                 $.each(data.data, function (i, value) {

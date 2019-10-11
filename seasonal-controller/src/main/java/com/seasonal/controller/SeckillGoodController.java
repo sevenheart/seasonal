@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -92,10 +93,10 @@ public class SeckillGoodController {
         SecKillGood secKillGood = seckillService.findPriceById((long) orderForm.getGoodId());
         Integer num;
         synchronized (RedisUtil.class) {
-            num = (Integer) redisUtil.get(String.valueOf(orderForm.getGoodId()));
+            num = Integer.parseInt(String.valueOf(redisUtil.get(String.valueOf(orderForm.getGoodId()))));
             if (num != null && num > 0) {
                 num--;
-                redisUtil.set(String.valueOf(orderForm.getGoodId()), num);
+                redisUtil.set(String.valueOf(orderForm.getGoodId()), String.valueOf(num));
             } else {
                 return ResultUtil.fail(orderForm.getGoodId() + "商品数量不够");
             }
@@ -107,6 +108,8 @@ public class SeckillGoodController {
         orderForm.setDeliveryMoney(new BigDecimal(0));
         orderForm.setGetPassword(RandomAccountPassword.genRandomNum(6));
         orderForm.setGetAccount(RandomAccountPassword.genRandomNum(6));
+        orderForm.setUpdateTime(new Date(System.currentTimeMillis()));
+        orderForm.setCreateTime(new Date(System.currentTimeMillis()));
 
         DetailedCommodityForm detailedCommodityForm = new DetailedCommodityForm();
         detailedCommodityForm.setOrderId(orderForm.getOrderId());
@@ -114,12 +117,15 @@ public class SeckillGoodController {
         detailedCommodityForm.setGoodCount(1);
         detailedCommodityForm.setUserId(orderForm.getOrderUserId());
         detailedCommodityForm.setCommodityMoney(secKillGood.getSeckillPrice());
+        detailedCommodityForm.setCreateTime(new Date(System.currentTimeMillis()));
+        detailedCommodityForm.setUpdateTime(new Date(System.currentTimeMillis()));
+
 
         SeckillOrder seckillOrder = new SeckillOrder();
         seckillOrder.setDetailedCommodityForml(detailedCommodityForm);
         seckillOrder.setOrderForm(orderForm);
         seckillSender.sendSeckillOrderForCode(seckillOrder);
 
-        return ResultUtil.success(1);
+        return ResultUtil.success(orderForm.getOrderId());
     }
 }

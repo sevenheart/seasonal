@@ -26,12 +26,12 @@ if (!(typeof userId == "undefined" || userId == null || userId == "")) {
                         '                        <input type="checkbox" name="goods" value="' + value.goodId + '">\n' +
                         '                    </li>\n' +
                         '                    <li class="co-img">\n' +
-                        '                        <a href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
+                        '                        <a href="/main/view/detailGoods.html?id=' + value.goodId + '" target="_blank">\n' +
                         '                            <img src="' + value.composeGood.composeGoodIcon + '" width="100" height="100" alt="">\n' +
                         '                        </a>\n' +
                         '                    </li>\n' +
                         '                    <li class="co-name">\n' +
-                        '                        <a id="good_name' + i + '" href="http://localhost:8080/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
+                        '                        <a id="good_name' + i + '" href="/main/view/detailGoods.html?id=' + value.goodId + '" title="' + value.composeGood.composeGoodName + '" class="hover-a" target="_blank">' + value.composeGood.composeGoodName + '</a>\n' +
                         '                    </li>\n' +
                         '                    <li class="co-dj" id="">' + value.composeGood.composeGoodPrice + '</li>\n' +
                         '                    <li class="co-sl">\n' +
