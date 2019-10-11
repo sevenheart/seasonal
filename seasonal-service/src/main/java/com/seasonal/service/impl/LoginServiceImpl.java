@@ -6,6 +6,7 @@ import com.seasonal.ip.GetIp;
 import com.seasonal.mapper.LoginFromMapper;
 import com.seasonal.mapper.UserInfoMapper;
 import com.seasonal.pojo.LoginFrom;
+import com.seasonal.randompass.RandomAccountPassword;
 import com.seasonal.redis.RedisUtil;
 import com.seasonal.service.LoginService;
 import com.seasonal.verification.ShortMessageVerification;
@@ -18,6 +19,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -102,7 +104,7 @@ public class LoginServiceImpl implements LoginService {
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
         String retStrFormatNowDate = sdFormatter.format(currentTime).replace("-","").substring(2);
         //生成用户ID
-        String userId = retStrFormatNowDate + UUID.randomUUID().toString().replace("-","").substring(27);
+        String userId = retStrFormatNowDate + RandomAccountPassword.genRandomNum(5);
         //生成用户昵称
         String userName = UUID.randomUUID().toString().replace("-","").substring(24);
         //用户注册方式

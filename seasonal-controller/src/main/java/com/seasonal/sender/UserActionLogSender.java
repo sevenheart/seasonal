@@ -46,19 +46,11 @@ public class UserActionLogSender implements RabbitTemplate.ConfirmCallback, Rabb
 
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        /*try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
 
-
-        //System.out.println("info----" + correlationData);
-        //System.out.println("info----" + cause);
     }
 
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        System.out.println("info----233" + routingKey);
+
     }
 }

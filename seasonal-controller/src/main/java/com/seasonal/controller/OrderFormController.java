@@ -27,7 +27,7 @@ public class OrderFormController {
     @ResponseBody
     @Intercept
     public Object findOrderFormById(String orderId) {
-        System.out.println("支付");
+        //System.out.println("支付");
         return ResultUtil.success(orderFormService.findOrderFormByOrderId(orderId));
     }
 
