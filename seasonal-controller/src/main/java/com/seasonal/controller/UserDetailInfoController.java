@@ -62,7 +62,6 @@ public class UserDetailInfoController {
         String newName;
         if (null != multipartFile) {
             if(oldlocation!=null){
-                System.out.println("删除云路径");
                 //删除云的图片
                 String[] name = oldlocation.split("/");
                 //名字还是原来的
@@ -72,7 +71,6 @@ public class UserDetailInfoController {
 
                 //获取上传的文件的文件名
                 oldName = multipartFile.getOriginalFilename();
-                System.out.println("新图片名时"+oldName);
                 //通过UUID随机生成一个新的文件名
                 newName = UUID.randomUUID() + oldName.substring(oldName.lastIndexOf("."));
             }
@@ -83,11 +81,8 @@ public class UserDetailInfoController {
             //这里将图片上传到云然后保存地址
             TencentUploadUtil.uploadFile("img/user/" + newName + "", file);
             file.delete();
-
             user.setUserImg(TencentUploadUtil.imgUrl + "/img/user/" + newName);
-            System.out.println("图片地址是" + user.getUserImg());
-        }else {
-            System.out.println("未获取图片");
+
         }
         //修改操作的返回值，小于等于0
         int flag = userInfoServer.updateUserInfo(user);

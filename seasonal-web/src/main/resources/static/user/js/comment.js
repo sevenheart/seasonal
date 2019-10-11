@@ -21,6 +21,7 @@ $('#commentmodal').modal("hide");
 $('#commentmodal').on('show.bs.modal', function (event) {
 });
 
+
 //展示未评论的商品信息
 function showcommetstates(data) {
     let test = ' ';

@@ -15,7 +15,7 @@ function accountInit() {
                 // $('#J_addressNameInput').val(userName);
                 $('#userAge').text(data.data[0].userAge);
                 //$('#J_addressZipcodeInput').val(data.data[0].userAge);
-                $('#userSex').text(Number(data.data[0]) === 0 ? "男" : "女");
+                $('#userSex').text(Number(data.data[0].userSex) === 0 ? "男" : "女");
                 Number(data.data[0]) === 0 ? document.getElementById('J_addressPhoneInput')[0].selected = true : document.getElementById('J_addressPhoneInput')[1].selected = true
 
             } else {
@@ -69,12 +69,12 @@ $(".btn-change").click(function () {
 //模态框取消按钮
 $('.btn-gray').click(function () {
     $(".container").css("display", "none");
-    console.log("摩天狂的值是" + document.getElementById('J_addressPhoneInput').value)
 })
 //模态框确定按钮
 //修改用户的信息
 $('.btn-primary').click(function () {
     console.log("文件时"+$('#bookimg')[0].files[0]);
+    console.log("性别是"+document.getElementById('J_addressPhoneInput').value)
     if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
         alert("请输入合法的年龄！");
         return;
