@@ -4,8 +4,6 @@ var seconds;
 var ctime;
 
 function seckill() {
-    $(".comming-item").removeClass("cur");
-    $(this).addClass("cur");
     $(".product_box").html("");
     $.ajax({
         url: "/ShowSecKillGood", //json文件位置
@@ -58,6 +56,9 @@ function seckill() {
                     async: false,
                     success: function (data) {
                         console.log(data);
+                        if (data.code === 200) {
+                            window.open().location = '../../order/view/orderUnpaid.html?orderId=' + data.data;
+                        }
                     }
                 });
 
@@ -68,6 +69,8 @@ function seckill() {
 
 //当前秒杀点击事件
 $(".selling-item").click(function () {
+    $(".comming-item").removeClass("cur");
+    $(this).addClass("cur");
     seckill();
 });
 //下一轮秒杀点击事件
@@ -105,6 +108,7 @@ $(".comming-item").click(function () {
                 $(".ckill_time").children("span").eq(0).html("下一轮开启时间");
                 $("#tishi").css("display", "block");
                 $("#tishi").html(v.seckillTime);
+                $("#come_time").css("display", "none");
             });
             $(".product_box").html(html);
         }
@@ -193,7 +197,10 @@ function comeTime() {
         var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
         seconds = Math.round(leave3 / 1000);
     } else {
-
+        $(".ckill_time").children("span").eq(0).html("今天的秒杀已经结束请等待下一天的秒杀活动！");
+        $("#tishi").css("display", "block");
+        $("#tishi").html("");
+        $("#come_time").css("display", "none");
     }
     ctime = "";
 

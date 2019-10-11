@@ -6,6 +6,7 @@ import com.seasonal.mapper.OrderFormMapper;
 import com.seasonal.pojo.DetailedCommodityForm;
 import com.seasonal.pojo.OrderForm;
 import com.seasonal.service.OrderFormService;
+import com.seasonal.service.SecKillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +19,15 @@ public class OrderFormServiceImpl implements OrderFormService {
     private final OrderFormMapper orderFormMapper;
     private final DetailedCommodityFormMapper detailedCommodityFormMapper;
     private final CartFormMapper cartFormMapper;
+    private final SecKillService secKillService;
 
     @Autowired
-    public OrderFormServiceImpl(CartFormMapper cartFormMapper, OrderFormMapper orderFormMapper, DetailedCommodityFormMapper detailedCommodityFormMapper) {
+    public OrderFormServiceImpl(SecKillService secKillService, CartFormMapper cartFormMapper, OrderFormMapper orderFormMapper, DetailedCommodityFormMapper detailedCommodityFormMapper) {
         this.cartFormMapper = cartFormMapper;
         this.orderFormMapper = orderFormMapper;
         this.detailedCommodityFormMapper = detailedCommodityFormMapper;
+
+        this.secKillService = secKillService;
     }
 
     @Override
@@ -33,6 +37,9 @@ public class OrderFormServiceImpl implements OrderFormService {
         for (DetailedCommodityForm detailed : detailedCommodityForms) {
             cartFormMapper.deleteGoodsOfCart(orderForm.getOrderUserId(), detailed.getGoodId());
             detailedCommodityFormMapper.insertDetailCommodityForm(detailed);
+        }
+        if (orderForm.getGoodId() != null) {
+            secKillService.updateSeckillGoodCount((long) orderForm.getGoodId());
         }
         return 1;
     }

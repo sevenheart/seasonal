@@ -84,7 +84,6 @@ public class MainGoodController {
     @ResponseBody
     public Map<String, Object> esShowGoodsList(int id, String orderName, int currPage, String likeName) {
 
-        System.out.println(id + orderName + currPage + likeName);
         Map<String, Object> map = goodsListService.esShowGoodsList(id, orderName, currPage, likeName);
         return map;
     }
@@ -93,7 +92,6 @@ public class MainGoodController {
     @RequestMapping(value = "ShowDetailGood")
     @ResponseBody
     public Object showDetailGood(Long id, String userId) {
-        //System.out.println(id);
         ComposeGood composeGood = detailGoodService.findComposeGoodById(id);
         Map<String, ComposeGood> browseRecord = new HashMap<>();
         browseRecord.put(userId, composeGood);

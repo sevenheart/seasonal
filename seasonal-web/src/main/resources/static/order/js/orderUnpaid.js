@@ -6,12 +6,14 @@ function getQueryVariable(variable) {
         if (pair[0] === variable) {
             return pair[1];
         }
-    }    return (false);
+    }
+    return (false);
 }
 
 
 let orderId;
 let money;
+var a;
 $.ajax({
     url: "/order/FindOrderFormById",
     type: "get",
@@ -19,17 +21,54 @@ $.ajax({
     data: {"orderId": getQueryVariable("orderId")},
     async: false,
     success: function (data) {
-        if(data.data.orderStatus ===1){
-            $(location).attr('href', "../view/orderCome.html");
-        }else{
-            orderId = data.data.detailedCommodityForms[0].orderId;
-            money = data.data.orderMoney;
-            $("#order-id").text("订单ID:" + orderId);
-            $("#order-money").text(data.data.orderMoney);
-            $("#order-zhifu").text(data.data.orderMoney);
-            //陆旭加了两个input赋值
-            $('#WIDtotal_amount').val(money);
-            $('#WIDout_trade_no').val(orderId);
+        console.log(data);
+        if (data.data != null) {
+            clearInterval(a);
+            if (data.data.orderStatus === 1) {
+                $(location).attr('href', "../view/orderCome.html");
+            } else {
+                orderId = data.data.detailedCommodityForms[0].orderId;
+                money = data.data.orderMoney;
+                $("#order-id").text("订单ID:" + orderId);
+                $("#order-money").text(data.data.orderMoney);
+                $("#order-zhifu").text(data.data.orderMoney);
+                //陆旭加了两个input赋值
+                $('#WIDtotal_amount').val(money);
+                $('#WIDout_trade_no').val(orderId);
+            }
+        } else {
+            a = window.setInterval("timelyFun()", 500);
         }
     }
 });
+
+
+function timelyFun() {
+    $.ajax({
+        url: "/order/FindOrderFormById",
+        type: "get",
+        dataType: "json",
+        data: {"orderId": getQueryVariable("orderId")},
+        async: false,
+        success: function (data) {
+            console.log(data);
+            if (data.data != null) {
+                clearInterval(a);
+                if (data.data.orderStatus === 1) {
+                    $(location).attr('href', "../view/orderCome.html");
+                } else {
+                    orderId = data.data.detailedCommodityForms[0].orderId;
+                    money = data.data.orderMoney;
+                    $("#order-id").text("订单ID:" + orderId);
+                    $("#order-money").text(data.data.orderMoney);
+                    $("#order-zhifu").text(data.data.orderMoney);
+                    //陆旭加了两个input赋值
+                    $('#WIDtotal_amount').val(money);
+                    $('#WIDout_trade_no').val(orderId);
+                }
+            }
+        }
+    });
+
+}
+

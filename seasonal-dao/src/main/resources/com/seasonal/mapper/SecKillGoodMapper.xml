@@ -18,5 +18,9 @@
     <select id="findSkillGoodById" resultType="SecKillGood">
         SELECT seckill_price FROM `sec_kill_good` WHERE good_id=#{id}
     </select>
+    <update id="updateSeckillGoodCount" parameterType="Long">
+       update sec_kill_good set seckill_count=seckill_count-1 where good_id=#{id}
+    </update>
+
 
 </mapper>

@@ -22,4 +22,13 @@ public interface SecKillGoodMapper {
      * @return 秒杀价格
      */
     SecKillGood findSkillGoodById(Long id);
+
+
+    /**
+     * 根据商品id 自减商品数量
+     *
+     * @param id 商品id
+     * @return 受影响行数
+     */
+    int updateSeckillGoodCount(Long id);
 }
