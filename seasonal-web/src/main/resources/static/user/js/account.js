@@ -74,12 +74,13 @@ $('.btn-gray').click(function () {
 //模态框确定按钮
 //修改用户的信息
 $('.btn-primary').click(function () {
-    console.log("文件时"+$('#bookimg')[0].files[0]);    if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
+    console.log("文件时"+$('#bookimg')[0].files[0]);
+    if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
         alert("请输入合法的年龄！");
         return;
-    }else if ($('#bookimg')[0].files[0]!=undefined){
+    }else if ($('#bookimg')[0].files[0] != undefined){
 
-        if ($('#bookimg')[0].files[0].size > 3145728) {
+        if ($('#bookimg')[0].files[0].size > 1048576) {
             alert("文件超出了限制大小请重新上传！");
             return;
         }
@@ -95,7 +96,6 @@ $('.btn-primary').click(function () {
         else {
             fd.append("userName", $('#J_addressNameInput').val());
         }
-        fd.append("userName", $('#J_addressNameInput').val());
         fd.append("userSex", document.getElementById('J_addressPhoneInput').value);
         fd.append("userAge", $('#J_addressZipcodeInput').val());
         fd.append("multipartFile", $('#bookimg')[0].files[0]);
@@ -107,15 +107,12 @@ $('.btn-primary').click(function () {
             contentType: false,
             success: function (data) {
                 alert(data.message);
+                console.log(data)
                 window.location.href = "/user/view/account.html"
             }
 
-        })
-
-
-
-
-})
+        });
+});
 
 /*模态框*/
 /*$(".btn-change").click(function () {

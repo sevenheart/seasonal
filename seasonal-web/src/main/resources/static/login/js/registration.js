@@ -1,4 +1,5 @@
 //手机号
+var phoneFlag = false;
 $(document).on('click', '.pass-text-input-phone', function () {
     let phone_span = $('#phone-span');
     phone_span.text('');
@@ -76,6 +77,7 @@ $(document).on('blur', '.pass-text-input-phone', function () {
                         phone_span_div.css('height', '16px');
                         phone_span_div.css('line-height', '14px');
                         phone_span_div.css('padding-left', '20px');
+                        phoneFlag = true;
                     }
                 }
             })
@@ -261,7 +263,7 @@ $(document).on('submit', '#form', function () {
             success: function (data) {
                 if (data.code === 200) {
                     //注册成功
-                    // flag = true;
+                    flag = true;
                 } else if (data.code === 404) {
                     //注册失败，验证码已过期
                     flag = false;
@@ -278,12 +280,11 @@ $(document).on('submit', '#form', function () {
             }
         })
     }
-    return false;
+    return flag;
 });
 
 function messageError(identifier, credential, verifyCode, isAgree) {//判断表单数据
     //判断手机号是否为空
-    var flag = false;
     if (identifier === null || identifier === '') {
         html = '<div id="phone-span-div"></div>';
         $('#phone-span').html(html);
@@ -313,36 +314,6 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
         phone_span_div.css('height', '16px');
         phone_span_div.css('line-height', '14px');
         phone_span_div.css('padding-left', '20px');
-    } else {
-        //格式正确，查找数据库，判断手机号是否已注册
-        $.ajax({
-            url: "/registrationPhone",
-            type: "post",
-            dataType: "json",
-            data: {"identifier": identifier},
-            async: true,
-            success: function (data) {
-                if (data.code === 200) {
-                    //返回200,号码已存在，不可注册
-                    html = '<div id="phone-span-div"></div>';
-                    phone_span.html(html);
-                    let phone_span_div = $('#phone-span-div');
-                    phone_span_div.append("此号码已注册");
-                    phone_span_div.css('background', 'url(https://seasonal-1300148510.cos.ap-shanghai.myqcloud.com/img/registration/err_small.png) 0 0 no-repeat');
-                    phone_span_div.css('float', 'left');
-                    phone_span_div.css('position', 'relative');
-                    phone_span_div.css('width', '250px');
-                    phone_span_div.css('top', '12px');
-                    phone_span_div.css('color', '#fc4343');
-                    phone_span_div.css('height', '16px');
-                    phone_span_div.css('line-height', '14px');
-                    phone_span_div.css('padding-left', '20px');
-                } else {
-                    flag = true;
-                    alert("号码没重复")
-                }
-            }
-        });
     }
     //判断密码是否为空
     if (credential === null || credential === '') {
@@ -391,7 +362,7 @@ function messageError(identifier, credential, verifyCode, isAgree) {//判断表�
     if ((identifier !== null && identifier !== '' && (/^1(3|4|5|6|7|8|9)\d{9}$/.test(identifier))) &&
         (credential !== null && credential !== '' && (/^\S{8,14}$/.test(credential))) &&
         (verifyCode !== null && verifyCode !== '') &&
-        isAgree === true && flag === true) {
+        isAgree === true && phoneFlag === true) {
         return true;
     }
     return false;
