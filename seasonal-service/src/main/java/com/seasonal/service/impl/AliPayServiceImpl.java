@@ -1,5 +1,6 @@
 package com.seasonal.service.impl;
 
+import com.seasonal.mapper.DetailedCommodityFormMapper;
 import com.seasonal.mapper.OrderFormMapper;
 import com.seasonal.mapper.OrderInfoFormMapper;
 import com.seasonal.pojo.OrderInfoForm;
@@ -12,10 +13,12 @@ public class AliPayServiceImpl implements AliPayService {
 
     private final OrderInfoFormMapper orderInfoFormMapper;
     private final OrderFormMapper orderFormMapper;
+    private final DetailedCommodityFormMapper detailedCommodityFormMapper;
     @Autowired
-    public AliPayServiceImpl(OrderInfoFormMapper orderInfoFormMapper,OrderFormMapper orderFormMapper){
+    public AliPayServiceImpl(OrderInfoFormMapper orderInfoFormMapper,OrderFormMapper orderFormMapper,DetailedCommodityFormMapper detailedCommodityFormMapper){
         this.orderInfoFormMapper = orderInfoFormMapper;
         this.orderFormMapper = orderFormMapper;
+        this.detailedCommodityFormMapper =detailedCommodityFormMapper;
     }
 
 
@@ -33,7 +36,9 @@ public class AliPayServiceImpl implements AliPayService {
         int insert = orderInfoFormMapper.insertOrderInfo(orderInfoForm);
         //2.修改订单信息为已支付
 
-        int update = orderFormMapper.updateOrderState(orderInfoForm.getUserOrderId());
+        int update = detailedCommodityFormMapper.updateCommentStatesToNocomment(orderInfoForm.getUserOrderId());
+
+        System.out.println(update+"d"+orderInfoForm.getUserOrderId());
        //2.插入订单信息(需要订单信息)
         //int orderform = orderFormMapper.insertOrderForm();
         //3.插入订单的详细信息。（需要详细信息list）

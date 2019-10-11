@@ -29,7 +29,10 @@ public interface DetailedCommodityFormMapper {
      * @return
      */
     int updateCommentStates (String goodId,String orderId,String commentId);
-
+    /*修改详细商品信息为已支付未评论\
+    *根据订单id
+    * */
+    int updateCommentStatesToNocomment(String orderId);
 
     /**
      * 根据用户id查找未评论的订单中的详细信息以及商品详细信息

@@ -213,7 +213,6 @@ public class AlipayController {
         //修改订单信息为已支付
         //两个步骤成功返回true，反之返回false
          boolean statue = orderInfoFormService.paySuccess(orderInfoForm);
-         //System.out.println("返回结果时"+statue);
          return ResultUtil.success(ResultEnum.SUCCESS);
     }
 

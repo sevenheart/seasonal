@@ -16,7 +16,7 @@
     </select>
     <!--根据用户id查找未评论的订单详细信息-->
     <select id="findNoCommentGoodsByUserId" resultMap="cspd">
-       select * from detailed_commodity_form where user_id=#{userId} and iscomment=0;
+       select * from detailed_commodity_form where user_id=#{userId} and iscomment=1;
     </select>
     <!--插入订单详细信息-->
     <insert id="insertDetailCommodityForm" parameterType="detailedCommodityForm">
@@ -38,9 +38,6 @@
             <if test="userId!=null and userId!=''">
                 user_id,
             </if>
-
-
-
             <if test="1!=0">
                 good_type,
             </if>
@@ -84,6 +81,9 @@
         )
     </insert>
     <update id="updateCommentStates" parameterType="String">
-        update  detailed_commodity_form set iscomment = 1,comment_id = #{commentId}  where good_id = #{goodId} and order_id = #{orderId}
+        update  detailed_commodity_form set iscomment = 2,comment_id = #{commentId}  where good_id = #{goodId} and order_id = #{orderId}
+    </update>
+    <update id="updateCommentStatesToNocomment" parameterType="String">
+        update  detailed_commodity_form set iscomment =1 where  order_id = #{orderId}
     </update>
 </mapper>
