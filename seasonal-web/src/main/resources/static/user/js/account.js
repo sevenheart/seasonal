@@ -79,7 +79,7 @@ $('.btn-primary').click(function () {
     if (isNaN($('#J_addressZipcodeInput').val())|| $('#J_addressZipcodeInput').val()<0||$('#J_addressZipcodeInput').val()>120) {
         alert("请输入合法的年龄！");
         return;
-    }else if ($('#bookimg')[0].files[0]!=undefined){
+    }else if ($('#bookimg')[0].files[0] != undefined){
 
         if ($('#bookimg')[0].files[0].size > 1048576) {
             alert("文件超出了限制大小请重新上传！");
@@ -112,12 +112,8 @@ $('.btn-primary').click(function () {
                 window.location.href = "/user/view/account.html"
             }
 
-        })
-
-
-
-
-})
+        });
+});
 
 /*模态框*/
 /*$(".btn-change").click(function () {
